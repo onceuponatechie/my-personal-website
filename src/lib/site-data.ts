@@ -244,3 +244,122 @@ export const BOOKS: Book[] = [
     cover: devDiaryImg,
   },
 ];
+
+/* ---------- Research Vault ---------- */
+
+export type VaultCategory =
+  | "Report"
+  | "Case study"
+  | "Insight brief"
+  | "Trend watch"
+  | "Teardown";
+
+export type VaultEntry = {
+  slug: string;
+  title: string;
+  category: VaultCategory;
+  readTime: string;
+  /** "Free", "Free download", etc. */
+  access: string;
+  tags: string[];
+  summary: string;
+  /** Email-gated download. */
+  gated?: boolean;
+  /** Flagship piece, surfaced at the top. */
+  featured?: boolean;
+};
+
+/** Filter labels shown as tabs, mapped to a category (or all). */
+export const VAULT_FILTERS: { label: string; category: VaultCategory | "All" }[] = [
+  { label: "All", category: "All" },
+  { label: "Reports", category: "Report" },
+  { label: "Case studies", category: "Case study" },
+  { label: "Insight briefs", category: "Insight brief" },
+  { label: "Trend watches", category: "Trend watch" },
+  { label: "Teardowns", category: "Teardown" },
+];
+
+export const VAULT: VaultEntry[] = [
+  {
+    slug: "african-creator-economy-report-2026",
+    title: "The African Creator Economy Report — what's really working in 2026",
+    category: "Report",
+    readTime: "Flagship report · 2026",
+    access: "Free download",
+    tags: ["Creator economy", "Africa"],
+    summary:
+      "6 in 10 African creators earn less than $100/month. This report asks why — and what the ones earning more are actually doing differently.",
+    featured: true,
+  },
+  {
+    slug: "paystack-onboarding-teardown",
+    title: "How Paystack onboards its users — a UX research teardown",
+    category: "Case study",
+    readTime: "5 min read",
+    access: "Free",
+    tags: ["Fintech", "UX research"],
+    summary:
+      "A frame-by-frame look at how Paystack turns a nervous first-time user into a confident one — and the three moments that do the heavy lifting.",
+  },
+  {
+    slug: "african-startup-funding-2026",
+    title: "African startup funding — what the 2026 rebound means for founders",
+    category: "Trend watch",
+    readTime: "4 min read",
+    access: "Free",
+    tags: ["Startups", "Africa"],
+    summary:
+      "After two slow years, the cheques are coming back. Here's where the money is moving, and what it quietly expects of you in return.",
+  },
+  {
+    slug: "claude-ai-research-tool-teardown",
+    title: "Claude AI as a research tool — a power user teardown",
+    category: "Teardown",
+    readTime: "6 min read",
+    access: "Free",
+    tags: ["AI", "Research tools"],
+    summary:
+      "How I actually use Claude for product research — the prompts, the guardrails, and the places it still needs a human in the loop.",
+  },
+  {
+    slug: "woman-who-builds-in-nigeria",
+    title: "On being a woman who builds things in Nigeria",
+    category: "Insight brief",
+    readTime: "4 min read",
+    access: "Free",
+    tags: ["Girl boss", "Founders"],
+    summary:
+      "A short, honest brief on the particular friction — and the particular advantage — of building software as a woman in Lagos.",
+  },
+  {
+    slug: "are-african-founders-building-right",
+    title: "Are African founders building the right things? A validation study",
+    category: "Report",
+    readTime: "12 min read",
+    access: "Free download",
+    tags: ["Startups", "Validation"],
+    summary:
+      "I interviewed 40 founders about how they decide what to build. Most are guessing well — but a few have a system. This is the system.",
+    gated: true,
+  },
+  {
+    slug: "digital-product-income-study",
+    title: "Digital product income — who's earning, what they sell, how",
+    category: "Report",
+    readTime: "10 min read",
+    access: "Free download",
+    tags: ["Creator economy", "Income"],
+    summary:
+      "Templates, courses, communities, briefs — a breakdown of what digital products actually earn, and the price points that convert.",
+    gated: true,
+  },
+];
+
+export function getVaultEntry(slug: string) {
+  return VAULT.find((v) => v.slug === slug);
+}
+
+/** Up to `n` other vault entries to suggest after reading one. */
+export function relatedVault(slug: string, n = 2) {
+  return VAULT.filter((v) => v.slug !== slug && !v.featured).slice(0, n);
+}
