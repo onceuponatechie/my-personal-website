@@ -126,7 +126,7 @@ export function FromTheDesk() {
               transition={{ duration: 0.8, ease: EASE }}
               className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
             >
-              From the <CurvedUnderline className="italic">Desk</CurvedUnderline>
+              from the <CurvedUnderline className="italic">desk</CurvedUnderline>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
