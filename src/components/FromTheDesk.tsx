@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { STORIES } from "@/lib/site-data";
+import { CurvedUnderline } from "@/components/CurvedUnderline";
 
 const inline4 = "/assets/inline-4.jpg";
 
@@ -106,7 +107,7 @@ export function FromTheDesk() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
               className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
             >
-              From the <span className="italic">Desk</span>
+              From the <CurvedUnderline className="italic">Desk</CurvedUnderline>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 14 }}

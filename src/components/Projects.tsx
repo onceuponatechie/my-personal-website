@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PROJECTS, type Project } from "@/lib/site-data";
+import { CurvedUnderline } from "@/components/CurvedUnderline";
 
 function ProjectCard({
   p,
@@ -104,7 +105,7 @@ export function Projects() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
           className="font-display text-[clamp(2.75rem,6vw,4.75rem)] italic leading-none tracking-tight text-ink"
         >
-          projects
+          <CurvedUnderline>projects</CurvedUnderline>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 14 }}
