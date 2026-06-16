@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { FAQS } from "@/lib/site-data";
+import { CurvedUnderline } from "@/components/CurvedUnderline";
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
@@ -19,7 +20,7 @@ export function FAQ() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-center font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] tracking-tight text-ink"
         >
-          Your questions, <span className="italic">answered</span>
+          Your questions, <CurvedUnderline className="italic">answered</CurvedUnderline>
         </motion.h2>
 
         <motion.ul

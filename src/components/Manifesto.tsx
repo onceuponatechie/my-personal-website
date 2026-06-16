@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { InlineMedia } from "@/components/InlineMedia";
+import { wordRevealRange } from "@/lib/motion";
 
 const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
@@ -47,9 +48,8 @@ function Reveal({
   total: number;
   children: React.ReactNode;
 }) {
-  const start = index / total;
-  const end = Math.min(1, (index + 2.5) / total);
-  const opacity = useTransform(progress, [start, end], [0.18, 1]);
+  const [start, end] = wordRevealRange(index, total, { spread: 3.5 });
+  const opacity = useTransform(progress, [start, end], [0.16, 1]);
   return (
     <motion.span style={{ opacity }} className="text-ink">
       {children}
@@ -61,7 +61,8 @@ export function Manifesto() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "start 0.2"],
+    // Calmer, balanced sweep across a longer scroll distance.
+    offset: ["start 0.85", "center 0.4"],
   });
 
   return (

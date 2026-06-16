@@ -38,7 +38,13 @@
   --color-sage: var(--sage);
   --color-sage-soft: var(--sage-soft);
   --color-butter: var(--butter);
+  --color-butter-soft: var(--butter-soft);
+  --color-lavender: var(--lavender);
+  --color-lavender-soft: var(--lavender-soft);
   --color-ink: var(--ink);
+
+  /* Shared motion tokens (design system) */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
@@ -73,6 +79,10 @@
 
   /* butter yellow for smiley */
   --butter: oklch(0.88 0.13 92);
+  --butter-soft: oklch(0.93 0.07 92);
+  /* soft lavender accent */
+  --lavender: oklch(0.74 0.09 300);
+  --lavender-soft: oklch(0.91 0.045 300);
   /* deep ink for cards */
   --ink: oklch(0.22 0.005 260);
 }

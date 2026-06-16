@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ArrowUpRight, Twitter, Instagram, Linkedin, Github } from "lucide-react";
+import { EASE, wordRevealRange } from "@/lib/motion";
 
 const COLUMNS = [
   {
@@ -35,17 +36,20 @@ const SOCIAL_ICONS = [
 function RevealWord({
   text,
   progress,
-  start,
-  end,
+  index,
+  total,
 }: {
   text: string;
   progress: MotionValue<number>;
-  start: number;
-  end: number;
+  index: number;
+  total: number;
 }) {
-  const color = useTransform(progress, [start, end], ["rgba(255,255,255,0.22)", "rgba(255,255,255,1)"]);
+  const [start, end] = wordRevealRange(index, total, { spread: 2.5 });
+  // Reveal as brightness only — every word resolves to solid white.
+  const opacity = useTransform(progress, [start, end], [0.16, 1]);
+  const y = useTransform(progress, [start, end], [8, 0]);
   return (
-    <motion.span style={{ color }} className="inline-block">
+    <motion.span style={{ opacity, y }} className="inline-block text-white">
       {text}
     </motion.span>
   );
@@ -55,7 +59,8 @@ export function Footer() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.9", "end 0.6"],
+    // Wider range = a calmer, more balanced reveal as the footer scrolls up.
+    offset: ["start 0.95", "center 0.55"],
   });
 
   const words = ["Let's", "build", "an", "Experience."];
@@ -81,23 +86,19 @@ export function Footer() {
         {/* Top: scroll-reveal headline + CTA */}
         <div className="relative px-8 pb-16 pt-24 sm:px-16 sm:pb-20 sm:pt-32">
           <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
-            <p className="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.98] tracking-tight">
-              {words.map((w, i) => {
-                const start = i / (words.length + 1);
-                const end = (i + 1.5) / (words.length + 1);
-                return (
-                  <span key={i}>
-                    <RevealWord text={w} progress={scrollYProgress} start={start} end={end} />{" "}
-                  </span>
-                );
-              })}
+            <p className="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.98] tracking-tight text-white">
+              {words.map((w, i) => (
+                <span key={i}>
+                  <RevealWord text={w} progress={scrollYProgress} index={i} total={words.length} />{" "}
+                </span>
+              ))}
             </p>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+              transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
             >
               <Link
                 href="/contact"
