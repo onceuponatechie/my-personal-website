@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, LineChart, Lock, Sparkles } from "lucide-react";
+import { ArrowUpRight, ArrowRight, LineChart, Lock, Sparkles, Mail } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 import { VAULT, VAULT_FILTERS, type VaultEntry } from "@/lib/site-data";
@@ -130,32 +130,80 @@ function GatedCard({ entry }: { entry: VaultEntry }) {
   );
 }
 
-/* ---------- Subscribe bar ---------- */
+/* ---------- Newsletter ---------- */
 
-function SubscribeBar() {
+function Newsletter() {
+  const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
+    <motion.section
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, ease: EASE }}
-      className="flex flex-col items-start justify-between gap-5 rounded-[28px] bg-sage-soft p-7 sm:flex-row sm:items-center sm:p-8"
+      transition={{ duration: 0.8, ease: EASE }}
+      className="relative mx-auto max-w-4xl overflow-hidden rounded-[44px] bg-ink p-10 text-white sm:p-14"
     >
-      <div>
-        <p className="font-display text-[20px] leading-tight text-ink">New research, every two weeks</p>
-        <p className="mt-1.5 max-w-[52ch] text-[13px] leading-[1.6] text-ink/65">
-          Reports, briefs, and teardowns — delivered to your inbox before they hit the Vault.
-        </p>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 -top-24 h-[320px] w-[320px] rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
+      />
+      <div className="relative grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
+        <div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-white/70">
+            <Sparkles className="size-3.5" strokeWidth={2} /> The Vault Letter
+          </span>
+          <h3 className="mt-5 font-display text-[clamp(2rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight">
+            Make sharper product <span className="italic">bets,</span> every Sunday.
+          </h3>
+          <p className="mt-4 max-w-[42ch] text-[14px] leading-[1.65] text-white/65">
+            One data-backed pattern you can act on Monday — what&apos;s actually working in the African
+            creator economy, why it matters, and how to use it. Under 400 words. No fluff, no Mondays.
+          </p>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (email) setSent(true);
+          }}
+          className="rounded-[28px] bg-white/[0.06] p-2 ring-1 ring-white/10 backdrop-blur"
+        >
+          {sent ? (
+            <div className="flex items-center gap-3 px-5 py-5 text-[14px] text-white/85">
+              <span className="grid size-9 place-items-center rounded-full bg-sage text-white">
+                <Mail className="size-4" strokeWidth={2} />
+              </span>
+              You&apos;re in. The next letter lands Sunday.
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@studio.com"
+                className="min-w-0 flex-1 bg-transparent px-5 py-4 text-[14px] text-white placeholder:text-white/40 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sage py-3 pl-5 pr-2 text-[13px] font-medium text-white transition hover:brightness-110"
+              >
+                Get the letter
+                <span className="grid size-7 place-items-center rounded-full bg-white text-ink">
+                  <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
+                </span>
+              </button>
+            </div>
+          )}
+          <p className="mt-2 px-5 pb-2 text-[11px] text-white/40">
+            Join the builders already reading it. Unsubscribe in one click.
+          </p>
+        </form>
       </div>
-      <button
-        onClick={() => setSent(true)}
-        className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
-      >
-        {sent ? "You're in ✶" : "Subscribe free"}
-        {!sent && <Sparkles className="size-3.5" strokeWidth={2} />}
-      </button>
-    </motion.div>
+    </motion.section>
   );
 }
 
@@ -263,7 +311,7 @@ export function VaultView() {
           <p className="py-10 text-center text-[14px] text-ink/50">Nothing here yet — check back soon.</p>
         )}
 
-        <SubscribeBar />
+        <Newsletter />
       </div>
 
       <Footer />
