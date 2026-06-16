@@ -8,12 +8,12 @@ import { PROJECTS, type Project } from "@/lib/site-data";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
 import { EASE } from "@/lib/motion";
 
-/* Shared card body — used by both the desktop stack and the mobile list. */
+/* Card body — compact on mobile so it fits the screen, full on desktop. */
 function ProjectArticle({ p }: { p: Project }) {
   return (
-    <article className="group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[44px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:grid-cols-2">
+    <article className="group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:grid-cols-2 md:rounded-[44px]">
       <div className="p-3 md:p-4">
-        <div className="overflow-hidden rounded-[32px]">
+        <div className="overflow-hidden rounded-[24px] md:rounded-[32px]">
           <motion.img
             src={p.image}
             alt={p.title}
@@ -22,20 +22,20 @@ function ProjectArticle({ p }: { p: Project }) {
             height={960}
             whileHover={{ scale: 1.04 }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="aspect-[4/3] h-full w-full object-cover"
+            className="aspect-[16/10] h-full w-full object-cover md:aspect-[4/3]"
           />
         </div>
       </div>
-      <div className="flex flex-col justify-center gap-5 p-8 md:p-12">
-        <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/45">
+      <div className="flex flex-col justify-center gap-3.5 p-6 md:gap-5 md:p-12">
+        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-ink/45 md:text-[12px]">
           <span>{p.year}</span>
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{p.role}</span>
         </div>
-        <h3 className="font-display text-[clamp(1.9rem,3vw,2.6rem)] leading-[1.02] tracking-tight text-ink">
+        <h3 className="font-display text-[clamp(1.7rem,3vw,2.6rem)] leading-[1.04] tracking-tight text-ink">
           {p.title}
         </h3>
-        <p className="max-w-[44ch] text-[14px] leading-[1.65] text-ink/65">{p.description}</p>
+        <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65">{p.description}</p>
         <div className="flex flex-wrap gap-2">
           {p.tags.map((t) => (
             <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[12px] text-ink/70">
@@ -43,7 +43,7 @@ function ProjectArticle({ p }: { p: Project }) {
             </span>
           ))}
         </div>
-        <div className="mt-3 flex items-center gap-5">
+        <div className="mt-1 flex items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
             className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white shadow-sm transition hover:brightness-105"
@@ -66,7 +66,7 @@ function ProjectArticle({ p }: { p: Project }) {
   );
 }
 
-/* Desktop only: sticky card that scales/lifts as the stack scrolls. */
+/* Sticky card that scales/lifts as the next one stacks over it. */
 function ProjectCardSticky({
   p,
   index,
@@ -87,7 +87,9 @@ function ProjectCardSticky({
   const y = useTransform(progress, [start, end], [0, isLast ? 0 : -24]);
 
   return (
-    <div className="sticky top-24 flex h-screen items-start justify-center">
+    // Each card gets a full viewport of scroll and is pinned near the top, so
+    // it reads completely (buttons included) before the next stacks on top.
+    <div className="sticky top-20 flex min-h-screen items-start justify-center pt-2 md:top-24">
       <motion.div style={{ scale, y, zIndex: index + 1 }} className="w-full max-w-6xl">
         <ProjectArticle p={p} />
       </motion.div>
@@ -140,28 +142,10 @@ export function Projects() {
         </motion.div>
       </div>
 
-      {/* Desktop: sticky scroll-stack */}
-      <div className="hidden md:block">
-        <div ref={ref} className="relative" style={{ height: `${PROJECTS.length * 100}vh` }}>
-          {PROJECTS.map((p, i) => (
-            <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile: plain vertical stack so each card (and its buttons) is fully
-          visible before the next one appears. */}
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 md:hidden">
-        {PROJECTS.map((p) => (
-          <motion.div
-            key={p.slug}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.7, ease: EASE }}
-          >
-            <ProjectArticle p={p} />
-          </motion.div>
+      {/* Sticky scroll-stack — same behaviour on mobile and desktop */}
+      <div ref={ref} className="relative" style={{ height: `${PROJECTS.length * 100}vh` }}>
+        {PROJECTS.map((p, i) => (
+          <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
         ))}
       </div>
     </section>
