@@ -81,8 +81,8 @@
   --butter: oklch(0.88 0.13 92);
   --butter-soft: oklch(0.93 0.07 92);
   /* soft lavender accent */
-  --lavender: oklch(0.74 0.09 300);
-  --lavender-soft: oklch(0.91 0.045 300);
+  --lavender: #e09ff1;
+  --lavender-soft: #f3ddfb;
   /* deep ink for cards */
   --ink: oklch(0.22 0.005 260);
 }
