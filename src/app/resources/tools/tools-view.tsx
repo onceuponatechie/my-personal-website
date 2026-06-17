@@ -1,45 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
-import { TOOLS } from "@/lib/site-data";
+import { toolsByCategory, type Tool } from "@/lib/site-data";
+import { EASE } from "@/lib/motion";
+
+function ToolCard({ t }: { t: Tool }) {
+  return (
+    <motion.article
+      variants={{
+        hidden: { opacity: 0, y: 18 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
+      }}
+      className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-card p-3 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
+    >
+      <div className="overflow-hidden rounded-[20px]">
+        <img
+          src={t.cover}
+          alt={t.name}
+          loading="lazy"
+          className="aspect-[5/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[11px] uppercase tracking-[0.18em] text-ink/45">{t.kind}</p>
+        <h3 className="mt-2 font-display text-[22px] leading-tight text-ink">{t.name}</h3>
+        <p className="mt-2 text-[13px] leading-[1.55] text-ink/60">{t.blurb}</p>
+        <div className="mt-auto flex items-center justify-between pt-5">
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
+            <Download className="size-3.5" strokeWidth={2} /> Free download
+          </span>
+          <span className="grid size-9 place-items-center rounded-full bg-ink text-white transition group-hover:scale-105">
+            <ArrowUpRight className="size-4" strokeWidth={2.2} />
+          </span>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export function ToolsView() {
+  const groups = toolsByCategory();
+
   return (
     <PageShell
       eyebrow="Resources · Free"
-      title={<>Tools & <span className="italic">Templates</span></>}
-      intro="A growing shelf of files I actually use. Free to download, free to remix — just don't resell them as-is."
+      title={<>tools & <span className="italic">templates</span></>}
+      intro="A growing shelf of files I actually use, grouped by how you'd use them. Free to download, free to remix — just don't resell them as-is."
     >
-      <motion.div
-        className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2"
-        initial="hidden"
-        animate="show"
-        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }}
-      >
-        {TOOLS.map((t) => (
-          <motion.article
-            key={t.slug}
-            variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } } }}
-            className="group overflow-hidden rounded-[32px] bg-card p-3 ring-1 ring-black/5 transition hover:-translate-y-1"
-          >
-            <div className="overflow-hidden rounded-[24px]">
-              <img src={t.cover} alt={t.name} className="aspect-[5/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <div className="mx-auto max-w-5xl space-y-16">
+        {groups.map((g) => (
+          <section key={g.category}>
+            <div className="mb-6 flex items-center gap-4">
+              <h2 className="font-display text-[24px] italic leading-none text-ink">{g.category}</h2>
+              <span className="h-px flex-1 bg-ink/10" />
+              <span className="text-[12px] text-ink/45">{g.tools.length} files</span>
             </div>
-            <div className="flex items-end justify-between p-5">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-ink/45">{t.kind}</p>
-                <h3 className="mt-2 font-display text-[22px] leading-tight text-ink">{t.name}</h3>
-                <p className="mt-2 max-w-[36ch] text-[13px] leading-[1.55] text-ink/60">{t.blurb}</p>
-              </div>
-              <span className="grid size-10 place-items-center rounded-full bg-ink text-white">
-                <ArrowUpRight className="size-4" strokeWidth={2.2} />
-              </span>
-            </div>
-          </motion.article>
+            <motion.div
+              className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-8%" }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+            >
+              {g.tools.map((t) => (
+                <ToolCard key={t.slug} t={t} />
+              ))}
+            </motion.div>
+          </section>
         ))}
-      </motion.div>
+      </div>
     </PageShell>
   );
 }

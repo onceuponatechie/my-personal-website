@@ -128,16 +128,32 @@ export type Tool = {
   slug: string;
   name: string;
   kind: string;
+  category: string;
   blurb: string;
   cover: string;
 };
 
 export const TOOLS: Tool[] = [
-  { slug: "founder-os", name: "Founder OS", kind: "Notion template", blurb: "A weekly operating system for solo founders.", cover: project1 },
-  { slug: "design-review-kit", name: "Design Review Kit", kind: "Figma file", blurb: "Run gentle, useful design reviews in 30 min.", cover: project2 },
-  { slug: "launch-checklist", name: "Launch Checklist", kind: "PDF · Notion", blurb: "Every box I tick before pressing publish.", cover: project3 },
-  { slug: "brand-voice-canvas", name: "Brand Voice Canvas", kind: "Workshop", blurb: "Find your brand voice in a single afternoon.", cover: project4 },
+  { slug: "founder-os", name: "Founder OS", kind: "Notion template", category: "Notion systems", blurb: "A weekly operating system for solo founders.", cover: project1 },
+  { slug: "sprint-planner", name: "Sprint Planner", kind: "Notion template", category: "Notion systems", blurb: "Plan a shaped, six-week bet without the ceremony.", cover: project4 },
+  { slug: "design-review-kit", name: "Design Review Kit", kind: "Figma file", category: "Design files", blurb: "Run gentle, useful design reviews in 30 min.", cover: project2 },
+  { slug: "brand-voice-canvas", name: "Brand Voice Canvas", kind: "Figma file", category: "Design files", blurb: "Find your brand voice in a single afternoon.", cover: project4 },
+  { slug: "launch-checklist", name: "Launch Checklist", kind: "PDF · Notion", category: "Guides & checklists", blurb: "Every box I tick before pressing publish.", cover: project3 },
+  { slug: "research-interview-guide", name: "Research Interview Guide", kind: "PDF", category: "Guides & checklists", blurb: "The questions that get honest answers from users.", cover: project1 },
 ];
+
+export function toolsByCategory() {
+  const groups: { category: string; tools: Tool[] }[] = [];
+  for (const t of TOOLS) {
+    let g = groups.find((x) => x.category === t.category);
+    if (!g) {
+      g = { category: t.category, tools: [] };
+      groups.push(g);
+    }
+    g.tools.push(t);
+  }
+  return groups;
+}
 
 export type ResearchEntry = {
   slug: string;
