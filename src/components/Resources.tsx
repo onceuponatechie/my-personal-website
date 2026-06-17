@@ -98,7 +98,7 @@ function BookNotes({ className = "" }: { className?: string }) {
   return (
     <motion.article
       variants={cardVariants}
-      className={`${R} ${className} relative flex flex-col overflow-hidden bg-ink text-white`}
+      className={`${R} ${className} group relative flex flex-col overflow-hidden bg-ink text-white`}
     >
       <div className="relative p-2 pb-0">
         <motion.img
@@ -146,22 +146,20 @@ function BookNotes({ className = "" }: { className?: string }) {
         </motion.p>
 
         <motion.div variants={textChild} className="mt-5 w-fit">
-          <Link
-            href="/resources/books"
-            className="inline-flex items-center gap-2 rounded-full bg-sage-soft px-5 py-2.5 text-[13px] font-medium text-ink transition hover:brightness-95"
-          >
+          <span className="inline-flex items-center gap-2 rounded-full bg-sage-soft px-5 py-2.5 text-[13px] font-medium text-ink transition group-hover:brightness-95">
             Open Book Hub
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
-          </Link>
+          </span>
         </motion.div>
       </motion.div>
+      <Link href="/resources/books" aria-label="Open Book Hub" className="absolute inset-0 z-20" />
     </motion.article>
   );
 }
 
 function ToolsTemplates({ className = "" }: { className?: string }) {
   return (
-    <motion.article variants={cardVariants} className={`${R} ${className} relative overflow-hidden bg-card p-6`}>
+    <motion.article variants={cardVariants} className={`${R} ${className} group relative overflow-hidden bg-card p-6`}>
       <svg
         viewBox="0 0 320 260"
         className="pointer-events-none absolute inset-0 h-full w-full"
@@ -217,24 +215,22 @@ function ToolsTemplates({ className = "" }: { className?: string }) {
             </div>
             <div className="mt-2 text-[12px] text-ink/65">Ready to use</div>
           </div>
-          <a
-            href="#tools"
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white"
-          >
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white">
             Explore
-            <span className="grid size-6 place-items-center rounded-full bg-white text-ink">
+            <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition group-hover:translate-x-0.5">
               <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
             </span>
-          </a>
+          </span>
         </div>
       </div>
+      <Link href="/resources/tools" aria-label="Explore Tools & Templates" className="absolute inset-0 z-20" />
     </motion.article>
   );
 }
 
 function ResearchVault({ className = "" }: { className?: string }) {
   return (
-    <motion.article variants={cardVariants} className={`${R} ${className} relative overflow-hidden bg-sage-soft`}>
+    <motion.article variants={cardVariants} className={`${R} ${className} group relative overflow-hidden bg-sage-soft`}>
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
         <div className="p-2 pr-0 md:w-[44%] md:shrink-0">
           <motion.img
@@ -263,18 +259,18 @@ function ResearchVault({ className = "" }: { className?: string }) {
           <motion.p variants={textChild} className="mt-4 max-w-[30ch] text-[13px] leading-[1.55] text-ink/70">
             Discover deep dives into human behaviour and insights. Reports, patterns, and all that you need.
           </motion.p>
-          <motion.a
+          <motion.span
             variants={textChild}
-            href="#vault"
             className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white"
           >
             Explore
-            <span className="grid size-6 place-items-center rounded-full bg-white text-ink">
+            <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition group-hover:translate-x-0.5">
               <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
             </span>
-          </motion.a>
+          </motion.span>
         </motion.div>
       </div>
+      <Link href="/resources/vault" aria-label="Explore Research Vault" className="absolute inset-0 z-20" />
     </motion.article>
   );
 }
