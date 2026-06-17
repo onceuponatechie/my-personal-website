@@ -8,6 +8,7 @@ const bookNotesImg = "/assets/book-notes.jpg";
 const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
 const inline3 = "/assets/inline-3.jpg";
+const inline4 = "/assets/inline-4.jpg";
 
 export type Project = {
   slug: string;
@@ -84,6 +85,7 @@ export const PROJECTS: Project[] = [
 export type Story = {
   slug: string;
   title: string;
+  category: string;
   excerpt: string;
   body: string;
   date: string;
@@ -95,6 +97,7 @@ export const STORIES: Story[] = [
   {
     slug: "raw-journal-of-my-product-process",
     title: "The raw journal of my product process",
+    category: "Process",
     excerpt:
       "You'd want to know my product process, but I too want to find out as I write this.",
     body: "Most days, the process is small: an idea, a sketch, a quick chat with a user, a Loom for the team. The shape of it only becomes a process in hindsight. Here's the raw version — the dead ends, the half-built screens, and the rare afternoons where everything clicks.",
@@ -105,6 +108,7 @@ export const STORIES: Story[] = [
   {
     slug: "designing-quiet-software",
     title: "Designing quiet software in a loud world",
+    category: "Design",
     excerpt:
       "The best tools fade. They wait for your intent and disappear once you've used them.",
     body: "Quiet software is not minimal software. It's software that respects the room. It earns attention with a single, well-placed cue instead of demanding it with notifications, badges, and red dots. Here's how I think about restraint as a design value.",
@@ -115,6 +119,7 @@ export const STORIES: Story[] = [
   {
     slug: "a-letter-to-junior-designers",
     title: "A letter to junior designers shipping their first feature",
+    category: "Craft",
     excerpt:
       "Your first feature will not be your best. That's the point.",
     body: "You will overthink the spacing. You will under-think the empty state. A senior will leave a comment that stings for an hour. Ship it anyway — your taste is built in the gap between the version you imagined and the version that went live.",
@@ -122,7 +127,51 @@ export const STORIES: Story[] = [
     read: "5 min read",
     cover: inline3,
   },
+  {
+    slug: "the-stack-i-reach-for",
+    title: "The stack I reach for (and the one I quietly dropped)",
+    category: "Process",
+    excerpt:
+      "Tools are a tax on attention. Here's the small set that earned a permanent place.",
+    body: "Every tool you add is a tax — a tab, a login, a place to check. Over a year I cut my stack in half and shipped more. Here's what survived the cull, what didn't, and the one rule I use before adopting anything new.",
+    date: "March 30, 2026",
+    read: "5 min read",
+    cover: inline2,
+  },
+  {
+    slug: "designing-the-empty-state",
+    title: "The empty state is the most important screen you'll design",
+    category: "Design",
+    excerpt:
+      "It's the first thing every user sees — and the easiest one to forget.",
+    body: "Empty states are where trust is won or lost. They set expectations, teach the product, and decide whether someone takes the first action at all. Here's how I treat the empty state as the front door, not an afterthought.",
+    date: "February 18, 2026",
+    read: "5 min read",
+    cover: inline4,
+  },
+  {
+    slug: "taste-is-built-in-the-gap",
+    title: "Taste is built in the gap",
+    category: "Craft",
+    excerpt:
+      "Between the version you imagined and the one that shipped — that's where it grows.",
+    body: "Nobody starts with taste. It's the residue of a thousand small comparisons between what you pictured and what you made. This is a short piece on closing that gap on purpose, and why discomfort is the point.",
+    date: "January 24, 2026",
+    read: "4 min read",
+    cover: researchImg,
+  },
 ];
+
+export function storiesByCategory() {
+  const map = new Map<string, Story[]>();
+  for (const s of STORIES) {
+    if (!map.has(s.category)) map.set(s.category, []);
+    map.get(s.category)!.push(s);
+  }
+  return map;
+}
+
+export const STORY_CATEGORIES = Array.from(new Set(STORIES.map((s) => s.category)));
 
 export type Tool = {
   slug: string;
