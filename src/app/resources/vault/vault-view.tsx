@@ -69,7 +69,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
         </div>
         <div
           aria-hidden
-          className="hidden w-40 flex-col gap-3 rounded-[22px] bg-sage-soft p-5 md:flex"
+          className="flex w-full flex-col gap-3 rounded-[22px] bg-sage-soft p-5 md:w-40"
         >
           <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
             <LineChart className="size-3.5" strokeWidth={2} /> Inside
@@ -288,13 +288,13 @@ export function VaultView() {
               <span className="block">Vault</span>
             </motion.h1>
 
-            {/* Floating tile — decorative, large screens only */}
+            {/* Floating tile — decorative, kept on the right at every size. */}
             <motion.div
               aria-hidden
               initial={{ opacity: 0, y: 24, rotate: -6 }}
               animate={{ opacity: 1, y: 0, rotate: -4 }}
               transition={{ delay: 0.25, duration: 0.9, ease: EASE }}
-              className="pointer-events-none absolute right-[4%] top-1/2 hidden h-48 w-40 -translate-y-1/2 lg:block"
+              className="pointer-events-none absolute right-0 top-1/2 h-32 w-24 -translate-y-1/2 sm:right-[4%] sm:h-44 sm:w-36 lg:h-48 lg:w-40"
             >
               <div className="relative h-full w-full overflow-hidden rounded-[26px] shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10">
                 <img src={researchImg} alt="" className="h-full w-full object-cover" />

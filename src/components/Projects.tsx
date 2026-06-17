@@ -12,17 +12,21 @@ import { EASE } from "@/lib/motion";
 function ProjectArticle({ p }: { p: Project }) {
   return (
     <article className="group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:grid-cols-2 md:rounded-[44px]">
+      {/* Whole-card link — lets you click anywhere on the active card. */}
+      <Link
+        href={`/projects/${p.slug}`}
+        aria-label={`View ${p.title} case study`}
+        className="absolute inset-0 z-10"
+      />
       <div className="p-3 md:p-4">
         <div className="overflow-hidden rounded-[24px] md:rounded-[32px]">
-          <motion.img
+          <img
             src={p.image}
             alt={p.title}
             loading="lazy"
             width={1280}
             height={960}
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="aspect-[16/10] h-full w-full object-cover md:aspect-[4/3]"
+            className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] md:aspect-[4/3]"
           />
         </div>
       </div>
@@ -43,7 +47,7 @@ function ProjectArticle({ p }: { p: Project }) {
             </span>
           ))}
         </div>
-        <div className="mt-1 flex items-center gap-5 md:mt-3">
+        <div className="relative z-20 mt-1 flex w-fit items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
             className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white shadow-sm transition hover:brightness-105"
