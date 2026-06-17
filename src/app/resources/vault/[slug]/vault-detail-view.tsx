@@ -6,21 +6,42 @@ import { ArrowLeft, ArrowUpRight, ArrowRight, Lock, Sparkles } from "lucide-reac
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 import type { VaultEntry } from "@/lib/site-data";
+import type { VaultBlock } from "@/lib/vault-content";
+import { VaultContent } from "./vault-content";
 import { EASE } from "@/lib/motion";
 
 export function VaultDetailView({
   entry,
   related,
+  content,
 }: {
   entry: VaultEntry;
   related: VaultEntry[];
+  content: VaultBlock[];
 }) {
+  // Gated pieces show a short teaser, then the email gate.
+  const teaser = entry.gated ? content.slice(0, 3) : content;
+  const hasBody = content.length > 0;
+
   return (
     <main className="min-h-screen bg-background pt-6">
       <Navbar />
 
-      <article className="px-4 pt-16 pb-20 sm:px-6">
-        <div className="mx-auto max-w-2xl">
+      {/* ---------- Editorial header ---------- */}
+      <header className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
+        {/* soft gradient wash, echoing the homepage */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-40 right-0 h-[520px] w-[520px] rounded-full opacity-50 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 72%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-40 top-20 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
+        />
+
+        <div className="relative mx-auto max-w-3xl">
           <Link
             href="/resources/vault"
             className="inline-flex items-center gap-1.5 text-[13px] text-ink/60 transition hover:text-ink"
@@ -34,15 +55,16 @@ export function VaultDetailView({
             transition={{ duration: 0.7, ease: EASE }}
             className="mt-8"
           >
-            <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/45">
-              <span>{entry.category}</span>
-              <span className="size-1 rounded-full bg-ink/30" />
+            <div className="flex flex-wrap items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/45">
+              <span className="rounded-full bg-card px-3 py-1 ring-1 ring-black/5">{entry.category}</span>
               <span>{entry.readTime}</span>
+              <span className="size-1 rounded-full bg-ink/30" />
+              <span>{entry.access}</span>
             </div>
-            <h1 className="mt-4 font-display text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] tracking-tight text-ink">
+            <h1 className="mt-5 font-display text-[clamp(2.1rem,5.5vw,3.6rem)] leading-[1.04] tracking-tight text-ink">
               {entry.title}
             </h1>
-            <p className="mt-5 text-[17px] leading-[1.65] text-ink/70">{entry.summary}</p>
+            <p className="mt-5 max-w-[60ch] text-[17px] leading-[1.65] text-ink/70">{entry.summary}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {entry.tags.map((t) => (
                 <span key={t} className="rounded-full border border-ink/15 px-3 py-1 text-[12px] text-ink/65">
@@ -51,15 +73,37 @@ export function VaultDetailView({
               ))}
             </div>
           </motion.div>
+        </div>
+      </header>
 
-          {entry.gated ? (
-            <div className="mt-12 rounded-[28px] border border-dashed border-ink/15 bg-card p-8 text-center">
+      {/* ---------- Body ---------- */}
+      <article className="px-4 pb-20 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          {hasBody ? (
+            <VaultContent blocks={teaser} />
+          ) : (
+            // Fallback for any entry without structured content yet.
+            <div className="space-y-6 text-[16px] leading-[1.85] text-ink/75">
+              <p>{entry.summary}</p>
+              <p>
+                This is the kind of piece the Vault is built for — a single, data-backed idea, written to
+                change one decision you&apos;ll make this quarter.
+              </p>
+            </div>
+          )}
+
+          {/* Email gate for gated reports */}
+          {entry.gated && (
+            <div className="mt-12 overflow-hidden rounded-[28px] border border-dashed border-ink/15 bg-card p-8 text-center">
               <div className="mx-auto grid size-12 place-items-center rounded-full bg-sage-soft text-ink">
                 <Lock className="size-5" strokeWidth={1.8} />
               </div>
-              <h2 className="mt-5 font-display text-[24px] text-ink">Read the full report</h2>
-              <p className="mx-auto mt-2 max-w-[40ch] text-[14px] text-ink/60">
-                It&apos;s free — drop your email and the PDF lands in your inbox.
+              <h2 className="mt-5 font-display text-[26px] tracking-tight text-ink">
+                Read the full report
+              </h2>
+              <p className="mx-auto mt-2 max-w-[42ch] text-[14px] leading-[1.6] text-ink/60">
+                The charts, the method, and the full breakdown are in the PDF. It&apos;s free — drop your
+                email and it lands in your inbox.
               </p>
               <form
                 onSubmit={(e) => e.preventDefault()}
@@ -80,24 +124,11 @@ export function VaultDetailView({
                 </button>
               </form>
             </div>
-          ) : (
-            <div className="prose prose-neutral mt-10 max-w-none text-[16px] leading-[1.85] text-ink/75">
-              <p>{entry.summary}</p>
-              <p>
-                This is the kind of piece the Vault is built for — a single, data-backed idea, written to
-                change one decision you&apos;ll make this quarter. The full version walks through the method,
-                the numbers, and the three takeaways worth stealing.
-              </p>
-              <p>
-                I write these between builds, so they stay grounded in practice rather than theory. If a line
-                here lands, the footnotes and raw data are always a reply away.
-              </p>
-            </div>
           )}
         </div>
       </article>
 
-      {/* Lead somewhere next */}
+      {/* ---------- Lead somewhere next ---------- */}
       <section className="px-4 pb-24 sm:px-6">
         <div className="mx-auto max-w-4xl space-y-10">
           {related.length > 0 && (
