@@ -9,6 +9,18 @@ import { Footer } from "@/components/Footer";
 import { VAULT, VAULT_FILTERS, type VaultEntry } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
+const researchImg = "/assets/research-vault.jpg";
+
+function HeroChip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full bg-card/80 px-3.5 py-1.5 text-[12px] text-ink/70 ring-1 ring-black/5 backdrop-blur ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
+
 function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="rounded-full border border-ink/15 px-3 py-1 text-[12px] text-ink/65">
@@ -57,9 +69,25 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
         </div>
         <div
           aria-hidden
-          className="hidden size-32 place-items-center rounded-[20px] bg-sage-soft text-ink/70 md:grid"
+          className="hidden w-40 flex-col gap-3 rounded-[22px] bg-sage-soft p-5 md:flex"
         >
-          <LineChart className="size-12" strokeWidth={1.5} />
+          <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+            <LineChart className="size-3.5" strokeWidth={2} /> Inside
+          </div>
+          <div className="flex h-16 items-end gap-2">
+            {[42, 70, 28, 88, 54].map((h, i) => (
+              <motion.span
+                key={i}
+                initial={{ height: 0 }}
+                whileInView={{ height: `${h}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: EASE, delay: i * 0.07 }}
+                className="w-3 rounded-full bg-ink/70"
+                style={{ minHeight: 6 }}
+              />
+            ))}
+          </div>
+          <div className="text-[11px] leading-[1.4] text-ink/55">Charts, a persona &amp; the data.</div>
         </div>
       </div>
     </motion.article>
@@ -223,28 +251,93 @@ export function VaultView() {
     <main className="min-h-screen bg-background pt-6">
       <Navbar />
 
-      <section className="px-4 pt-20 pb-12 sm:px-6 sm:pt-24">
-        <div className="mx-auto max-w-5xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
+      <section className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
+        {/* soft gradient washes, echoing the homepage palette */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-28 -top-32 h-[540px] w-[540px] rounded-full opacity-55 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 72%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-36 top-24 h-[480px] w-[480px] rounded-full opacity-55 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
+        />
+
+        <div className="relative mx-auto max-w-6xl">
+          {/* floating chips */}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="font-display text-[clamp(2.5rem,6vw,4rem)] leading-[1.02] tracking-tight text-ink"
+            className="flex flex-wrap items-center justify-between gap-3"
           >
-            Research Vault
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
-            className="mt-5 max-w-[60ch] text-[15px] leading-[1.7] text-ink/65"
-          >
-            Original research, product teardowns, trend watches, and insight briefs. Everything here is
-            backed by data, grounded in practice, and written to make you think — not just scroll.
-          </motion.p>
+            <HeroChip>Original research</HeroChip>
+            <HeroChip className="hidden sm:inline-flex">Backed by data · built to make you think</HeroChip>
+          </motion.div>
+
+          {/* Oversized wordmark with an overlapping glass tile */}
+          <div className="relative mt-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: EASE }}
+              className="font-display text-[clamp(3.25rem,13vw,9rem)] leading-[0.9] tracking-[-0.02em] text-ink"
+            >
+              <span className="block">Research</span>
+              <span className="block">Vault</span>
+            </motion.h1>
+
+            {/* Floating tile — decorative, large screens only */}
+            <motion.div
+              aria-hidden
+              initial={{ opacity: 0, y: 24, rotate: -6 }}
+              animate={{ opacity: 1, y: 0, rotate: -4 }}
+              transition={{ delay: 0.25, duration: 0.9, ease: EASE }}
+              className="pointer-events-none absolute right-[4%] top-1/2 hidden h-48 w-40 -translate-y-1/2 lg:block"
+            >
+              <div className="relative h-full w-full overflow-hidden rounded-[26px] shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10">
+                <img src={researchImg} alt="" className="h-full w-full object-cover" />
+                <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[11px] font-medium text-ink backdrop-blur">
+                  Insights
+                </span>
+                <span className="absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-white/90 text-ink backdrop-blur">
+                  <ArrowUpRight className="size-4" strokeWidth={2.2} />
+                </span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Supporting line + quick stats */}
+          <div className="mt-8 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
+              className="max-w-[52ch] text-[15px] leading-[1.7] text-ink/65"
+            >
+              Product teardowns, trend watches, and insight briefs. Everything here is backed by data,
+              grounded in practice, and written to make you think — not just scroll.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: EASE }}
+              className="flex shrink-0 gap-7"
+            >
+              <div>
+                <div className="font-display text-[28px] leading-none tracking-tight text-ink">{VAULT.length}</div>
+                <div className="mt-1.5 text-[12px] text-ink/50">Live pieces</div>
+              </div>
+              <div>
+                <div className="font-display text-[28px] leading-none tracking-tight text-ink">100%</div>
+                <div className="mt-1.5 text-[12px] text-ink/50">Free to read</div>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Filters */}
-          <div className="mt-9 flex flex-wrap gap-2.5">
+          <div className="mt-10 flex flex-wrap gap-2.5">
             {VAULT_FILTERS.map((f, i) => (
               <button
                 key={f.label}
