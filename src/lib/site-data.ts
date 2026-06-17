@@ -171,14 +171,25 @@ export const SOCIALS = [
   { label: "GitHub", href: "https://github.com" },
 ];
 
+export type BookAccent = "sage" | "lavender" | "butter";
+
 export type Book = {
   slug: string;
   title: string;
   author: string;
   category: string;
   rating: number;
+  year: string;
+  /** Per-book accent used to theme its cover + detail page. */
+  accent: BookAccent;
   takeaway: string;
   note: string;
+  /** The handful of ideas worth stealing. */
+  ideas: string[];
+  /** One line worth remembering. */
+  quote: string;
+  /** Who should read it. */
+  forWho: string;
   cover: string;
 };
 
@@ -189,8 +200,17 @@ export const BOOKS: Book[] = [
     author: "James Clear",
     category: "Behaviour",
     rating: 5,
+    year: "2018",
+    accent: "sage",
     takeaway: "Systems beat goals. Identity beats motivation.",
-    note: "The chapter on environment design alone is worth the price. I rewired three small rituals after reading and they still hold a year in.",
+    note: "The chapter on environment design alone is worth the price. I rewired three small rituals after reading and they still hold a year in. What stays with me isn't the tactics — it's the reframe: you don't change by deciding to, you change by becoming the kind of person the habit belongs to.",
+    ideas: [
+      "Make it obvious, easy, and satisfying — design the environment, not the willpower.",
+      "Every action is a small vote for the person you're becoming.",
+      "Aim for 1% better, not a dramatic overhaul you can't sustain.",
+    ],
+    quote: "You do not rise to the level of your goals. You fall to the level of your systems.",
+    forWho: "Anyone trying to change a behaviour that motivation alone keeps failing to fix.",
     cover: bookNotesImg,
   },
   {
@@ -199,8 +219,17 @@ export const BOOKS: Book[] = [
     author: "Nir Eyal",
     category: "Product",
     rating: 4,
+    year: "2014",
+    accent: "lavender",
     takeaway: "Trigger, action, variable reward, investment — in that order.",
-    note: "The model is tidy, the ethics chapter is necessary. Read with the Indistractable follow-up to keep yourself honest.",
+    note: "The model is tidy, the ethics chapter is necessary. Read with the Indistractable follow-up to keep yourself honest. It's the clearest map I know for why some products quietly become a reflex — and a reminder that the same mechanics can be used kindly or cruelly.",
+    ideas: [
+      "The Hook: trigger → action → variable reward → investment, then loop.",
+      "Variable rewards are the engine; predictability kills the pull.",
+      "Stored value — data, content, followers — makes the next loop easier to start.",
+    ],
+    quote: "Habits are formed when the mind stops actively deliberating over the next action.",
+    forWho: "Product builders who want engagement they can also defend ethically.",
     cover: inline2,
   },
   {
@@ -209,8 +238,17 @@ export const BOOKS: Book[] = [
     author: "Eric Ries",
     category: "Building",
     rating: 4,
+    year: "2011",
+    accent: "butter",
     takeaway: "Measure what changes your next decision. Nothing else.",
-    note: "A bit dated, still the best primer on build-measure-learn. The pivot taxonomy saved me two months on my last project.",
+    note: "A bit dated, still the best primer on build-measure-learn. The pivot taxonomy saved me two months on my last project. Skim the war stories, sit with the loop — the discipline of validated learning is the part that actually transfers to your own work.",
+    ideas: [
+      "Build–measure–learn: optimise the whole loop, not any single step.",
+      "Validated learning beats vanity metrics, every single time.",
+      "A pivot is a change in strategy — not a failure of nerve.",
+    ],
+    quote: "The only way to win is to learn faster than anyone else.",
+    forWho: "Founders shipping into uncertainty who keep mistaking motion for progress.",
     cover: inline1,
   },
   {
@@ -219,8 +257,17 @@ export const BOOKS: Book[] = [
     author: "Ryan Singer",
     category: "Process",
     rating: 5,
+    year: "2019",
+    accent: "sage",
     takeaway: "Fixed time, variable scope. Bet on shaped work.",
-    note: "Reads like a love letter to focus. Even if you don't adopt the full system, the appetite/scope language is a gift.",
+    note: "Reads like a love letter to focus. Even if you don't adopt the full system, the appetite/scope language is a gift. It gave my team a shared vocabulary for saying \"this is a six-week bet, not a forever project\" — and that one sentence changed how we plan.",
+    ideas: [
+      "Fixed time, variable scope — bet six weeks, then ship what's shaped.",
+      "Shape work at the right altitude: concrete enough to bet on, loose enough to design.",
+      "Hand teams the problem and the appetite, not a spec to follow.",
+    ],
+    quote: "Set the appetite first, then design a solution to fit the time.",
+    forWho: "Teams drowning in endless backlogs and sprints that never quite end.",
     cover: inline3,
   },
   {
@@ -229,8 +276,17 @@ export const BOOKS: Book[] = [
     author: "Rob Fitzpatrick",
     category: "Research",
     rating: 5,
+    year: "2013",
+    accent: "lavender",
     takeaway: "Ask about their life, not your idea.",
-    note: "I keep this on the desk. Every founder I share it with comes back two weeks later with cleaner interview notes.",
+    note: "I keep this on the desk. Every founder I share it with comes back two weeks later with cleaner interview notes. It's barely a hundred pages and it quietly fixes the most expensive mistake in early research: asking questions that only ever return polite, useless yeses.",
+    ideas: [
+      "Talk about their life, not your idea — opinions are worthless, facts aren't.",
+      "Ask about the past and the specific, never the hypothetical future.",
+      "Commitment and advancement — not compliments — tell you it's real.",
+    ],
+    quote: "People will lie to you if they think it's what you want to hear.",
+    forWho: "Anyone running customer interviews who keeps leaving the room falsely encouraged.",
     cover: researchImg,
   },
   {
@@ -239,11 +295,33 @@ export const BOOKS: Book[] = [
     author: "Austin Kleon",
     category: "Storytelling",
     rating: 4,
+    year: "2014",
+    accent: "butter",
     takeaway: "Working in public is a compounding asset.",
-    note: "Short, generous, and a kick in the pants for anyone hoarding drafts. Reread it whenever the journal goes quiet.",
+    note: "Short, generous, and a kick in the pants for anyone hoarding drafts. Reread it whenever the journal goes quiet. The whole book is permission — to share the messy middle, to teach what you just learned, to let people find you through the trail you leave.",
+    ideas: [
+      "Document the process; share the scraps, not just the finished masterpiece.",
+      "Working in public turns your work into a discoverable, compounding asset.",
+      "Give credit and stay generous — a network grows by what you give away.",
+    ],
+    quote: "Share something small every day.",
+    forWho: "Makers hoarding drafts who'd grow far faster building in the open.",
     cover: devDiaryImg,
   },
 ];
+
+export function getBook(slug: string) {
+  return BOOKS.find((b) => b.slug === slug);
+}
+
+/** Up to `n` other books — same category first, then fill from the shelf. */
+export function relatedBooks(slug: string, n = 3) {
+  const current = BOOKS.find((b) => b.slug === slug);
+  const others = BOOKS.filter((b) => b.slug !== slug);
+  const sameCat = current ? others.filter((b) => b.category === current.category) : [];
+  const rest = others.filter((b) => !sameCat.includes(b));
+  return [...sameCat, ...rest].slice(0, n);
+}
 
 /* ---------- Research Vault ---------- */
 
