@@ -95,6 +95,13 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    /* Inter set tighter — -3% tracking (per Figma). */
+    letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
+  }
+  /* The serif display face stays gentle; explicit tracking-* utilities
+     still win thanks to :where()'s zero specificity. */
+  :where(.font-display) {
+    letter-spacing: -0.01em;
   }
 }
