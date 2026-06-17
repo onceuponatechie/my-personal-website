@@ -68,12 +68,13 @@ export function ContactView() {
                 <Field label="What's the project?" id="project">
                   <textarea id="project" required rows={5} className={inputCls + " resize-none"} placeholder="A short paragraph is plenty. Links welcome." />
                 </Field>
-                <Field label="Budget (optional)" id="budget">
-                  <select id="budget" className={inputCls}>
-                    <option>Just exploring</option>
-                    <option>$5k — $15k</option>
-                    <option>$15k — $40k</option>
-                    <option>$40k+</option>
+                <Field label="Timeline" id="timeline">
+                  <select id="timeline" className={inputCls}>
+                    <option>Just exploring for now</option>
+                    <option>Ready to start right away</option>
+                    <option>Within the next month</option>
+                    <option>Sometime this quarter</option>
+                    <option>Not sure yet — let&apos;s talk</option>
                   </select>
                 </Field>
                 <button
