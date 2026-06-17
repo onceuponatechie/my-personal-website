@@ -363,3 +363,66 @@ export function getVaultEntry(slug: string) {
 export function relatedVault(slug: string, n = 2) {
   return VAULT.filter((v) => v.slug !== slug && !v.featured).slice(0, n);
 }
+
+/* ---------- Book Notes helpers ---------- */
+
+export function getBook(slug: string) {
+  return BOOKS.find((b) => b.slug === slug);
+}
+
+/** Other books, preferring the same category first. */
+export function relatedBooks(slug: string, n = 3) {
+  const current = getBook(slug);
+  const others = BOOKS.filter((b) => b.slug !== slug);
+  const sameCat = others.filter((b) => b.category === current?.category);
+  const rest = others.filter((b) => b.category !== current?.category);
+  return [...sameCat, ...rest].slice(0, n);
+}
+
+/** Books grouped by category, in first-seen order. */
+export function booksByCategory() {
+  const groups: { category: string; books: Book[] }[] = [];
+  for (const b of BOOKS) {
+    let g = groups.find((x) => x.category === b.category);
+    if (!g) {
+      g = { category: b.category, books: [] };
+      groups.push(g);
+    }
+    g.books.push(b);
+  }
+  return groups;
+}
+
+/** A few things worth underlining per book — keeps each note structured, not a wall of text. */
+export const BOOK_HIGHLIGHTS: Record<string, string[]> = {
+  "atomic-habits": [
+    "Design the environment, not the willpower.",
+    "Habits are votes for the person you want to become.",
+    "Make it obvious, attractive, easy, and satisfying.",
+  ],
+  hooked: [
+    "Trigger → action → variable reward → investment.",
+    "Variable rewards are what keep people coming back.",
+    "Read the ethics chapter before you ship anything.",
+  ],
+  "the-lean-startup": [
+    "Only measure what changes your next decision.",
+    "Build → measure → learn, as fast as honesty allows.",
+    "The pivot taxonomy is the practical core.",
+  ],
+  "shape-up": [
+    "Fixed time, variable scope. Bet on shaped work.",
+    "Appetite, not estimate, sets the boundary.",
+    "Give teams the whole problem, not tickets.",
+  ],
+  "the-mom-test": [
+    "Ask about their life, not your idea.",
+    "Talk about specifics in the past, not hypotheticals.",
+    "Compliments are noise; commitments are signal.",
+  ],
+  "show-your-work": [
+    "Working in public compounds over time.",
+    "Share the process, not just the polished result.",
+    "Document, don't create — lower the bar to post.",
+  ],
+};
