@@ -5,14 +5,74 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, ArrowRight, Lock, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
-import type { VaultEntry } from "@/lib/site-data";
+import type { VaultEntry, VaultDetail } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
+
+const BAR_COLORS = ["bg-sage", "bg-lavender", "bg-butter", "bg-sage-soft"];
+
+function StatBand({ stats }: { stats: NonNullable<VaultDetail["stats"]> }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-3">
+      {stats.map((s, i) => (
+        <motion.div
+          key={s.label}
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.08, duration: 0.5, ease: EASE }}
+          className="rounded-[20px] bg-card p-6 ring-1 ring-black/5"
+        >
+          <div className="font-display text-[clamp(2rem,4vw,2.75rem)] leading-none text-ink">{s.value}</div>
+          <div className="mt-2 text-[13px] leading-[1.4] text-ink/55">{s.label}</div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function BarChart({ data, caption }: { data: NonNullable<VaultDetail["chart"]>; caption?: string }) {
+  const max = Math.max(...data.map((d) => d.value));
+  return (
+    <figure className="rounded-[24px] bg-card p-6 ring-1 ring-black/5 sm:p-8">
+      <div className="flex items-end gap-3 sm:gap-5">
+        {data.map((d, i) => (
+          <div key={d.label} className="flex flex-1 flex-col items-center gap-3">
+            <span className="text-[13px] font-medium text-ink/70">{d.value}%</span>
+            <div className="flex h-40 w-full items-end">
+              <motion.div
+                initial={{ height: 0 }}
+                whileInView={{ height: `${(d.value / max) * 100}%` }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: EASE }}
+                className={`w-full rounded-t-xl ${BAR_COLORS[i % BAR_COLORS.length]}`}
+              />
+            </div>
+            <span className="text-center text-[11px] leading-tight text-ink/55">{d.label}</span>
+          </div>
+        ))}
+      </div>
+      {caption && (
+        <figcaption className="mt-6 border-t border-ink/10 pt-4 text-[12px] text-ink/45">{caption}</figcaption>
+      )}
+    </figure>
+  );
+}
+
+function PullQuote({ children }: { children: React.ReactNode }) {
+  return (
+    <blockquote className="border-l-2 border-lavender pl-6 font-display text-[clamp(1.4rem,3vw,2rem)] italic leading-[1.3] text-ink">
+      &quot;{children}&quot;
+    </blockquote>
+  );
+}
 
 export function VaultDetailView({
   entry,
+  detail,
   related,
 }: {
   entry: VaultEntry;
+  detail: VaultDetail;
   related: VaultEntry[];
 }) {
   return (
@@ -51,20 +111,26 @@ export function VaultDetailView({
               ))}
             </div>
           </motion.div>
+        </div>
+
+        {/* Researched body — visuals break up the text */}
+        <div className="mx-auto mt-12 max-w-2xl space-y-12">
+          {detail.stats && <StatBand stats={detail.stats} />}
+
+          {detail.pullQuote && <PullQuote>{detail.pullQuote}</PullQuote>}
+
+          {detail.chart && <BarChart data={detail.chart} caption={detail.chartCaption} />}
 
           {entry.gated ? (
-            <div className="mt-12 rounded-[28px] border border-dashed border-ink/15 bg-card p-8 text-center">
+            <div className="rounded-[28px] border border-dashed border-ink/15 bg-card p-8 text-center">
               <div className="mx-auto grid size-12 place-items-center rounded-full bg-sage-soft text-ink">
                 <Lock className="size-5" strokeWidth={1.8} />
               </div>
               <h2 className="mt-5 font-display text-[24px] text-ink">Read the full report</h2>
               <p className="mx-auto mt-2 max-w-[40ch] text-[14px] text-ink/60">
-                It&apos;s free — drop your email and the PDF lands in your inbox.
+                It&apos;s free — drop your email and the full PDF, charts and all, lands in your inbox.
               </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="mx-auto mt-6 flex max-w-md flex-col gap-2 sm:flex-row"
-              >
+              <form onSubmit={(e) => e.preventDefault()} className="mx-auto mt-6 flex max-w-md flex-col gap-2 sm:flex-row">
                 <input
                   type="email"
                   required
@@ -81,17 +147,13 @@ export function VaultDetailView({
               </form>
             </div>
           ) : (
-            <div className="prose prose-neutral mt-10 max-w-none text-[16px] leading-[1.85] text-ink/75">
-              <p>{entry.summary}</p>
-              <p>
-                This is the kind of piece the Vault is built for — a single, data-backed idea, written to
-                change one decision you&apos;ll make this quarter. The full version walks through the method,
-                the numbers, and the three takeaways worth stealing.
-              </p>
-              <p>
-                I write these between builds, so they stay grounded in practice rather than theory. If a line
-                here lands, the footnotes and raw data are always a reply away.
-              </p>
+            <div className="space-y-5 text-[16px] leading-[1.85] text-ink/75">
+              {(detail.body ?? [
+                "This is the kind of piece the Vault is built for — a single, data-backed idea, written to change one decision you'll make this quarter.",
+                "I write these between builds, so they stay grounded in practice rather than theory. If a line here lands, the footnotes and raw data are always a reply away.",
+              ]).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
             </div>
           )}
         </div>
@@ -107,12 +169,8 @@ export function VaultDetailView({
                 {related.map((r) => (
                   <Link key={r.slug} href={`/resources/vault/${r.slug}`} className="group block h-full">
                     <article className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10">
-                      <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">
-                        {r.category}
-                      </p>
-                      <h3 className="mt-3 font-display text-[19px] leading-[1.2] tracking-tight text-ink">
-                        {r.title}
-                      </h3>
+                      <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{r.category}</p>
+                      <h3 className="mt-3 font-display text-[19px] leading-[1.2] tracking-tight text-ink">{r.title}</h3>
                       <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-medium text-ink">
                         Read it
                         <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -124,7 +182,6 @@ export function VaultDetailView({
             </div>
           )}
 
-          {/* Grab a resource */}
           <div className="flex flex-col items-start justify-between gap-5 rounded-[28px] bg-ink p-8 text-white sm:flex-row sm:items-center">
             <div>
               <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/55">

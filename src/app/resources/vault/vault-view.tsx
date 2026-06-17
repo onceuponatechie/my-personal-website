@@ -57,7 +57,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
         </div>
         <div
           aria-hidden
-          className="hidden size-32 place-items-center rounded-[20px] bg-sage-soft text-ink/70 md:grid"
+          className="hidden size-36 place-items-center rounded-[24px] bg-gradient-to-br from-lavender-soft to-sage-soft text-ink/70 ring-1 ring-black/5 md:grid"
         >
           <LineChart className="size-12" strokeWidth={1.5} />
         </div>

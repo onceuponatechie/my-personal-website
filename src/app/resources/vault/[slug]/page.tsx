@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { VAULT, getVaultEntry, relatedVault } from "@/lib/site-data";
+import { VAULT, getVaultEntry, getVaultDetail, relatedVault } from "@/lib/site-data";
 import { VaultDetailView } from "./vault-detail-view";
 
 export function generateStaticParams() {
@@ -29,5 +29,5 @@ export default async function VaultDetailPage({
   const { slug } = await params;
   const entry = getVaultEntry(slug);
   if (!entry) notFound();
-  return <VaultDetailView entry={entry} related={relatedVault(slug)} />;
+  return <VaultDetailView entry={entry} detail={getVaultDetail(slug)} related={relatedVault(slug)} />;
 }

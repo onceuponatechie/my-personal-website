@@ -491,3 +491,90 @@ export const BOOK_HIGHLIGHTS: Record<string, string[]> = {
     "Document, don't create — lower the bar to post.",
   ],
 };
+
+/* ---------- Vault detail content (charts, stats, quotes) ---------- */
+
+export type VaultDetail = {
+  /** A standout line to break up the prose. */
+  pullQuote?: string;
+  /** Up to ~3 headline figures. */
+  stats?: { value: string; label: string }[];
+  /** Simple bar chart data (value is a percentage 0–100). */
+  chart?: { label: string; value: number }[];
+  chartCaption?: string;
+  /** Section paragraphs after the lead. */
+  body?: string[];
+};
+
+export const VAULT_DETAILS: Record<string, VaultDetail> = {
+  "african-creator-economy-report-2026": {
+    pullQuote:
+      "The creators earning more aren't working more — they're selling something, not renting attention.",
+    stats: [
+      { value: "6 in 10", label: "earn under $100 / month" },
+      { value: "3.2×", label: "more when they sell a product" },
+      { value: "1,400", label: "creators surveyed" },
+    ],
+    chart: [
+      { label: "< $100", value: 62 },
+      { label: "$100–500", value: 21 },
+      { label: "$500–2k", value: 12 },
+      { label: "$2k+", value: 5 },
+    ],
+    chartCaption: "Monthly earnings distribution — African creators (n = 1,400)",
+    body: [
+      "Audience size barely predicts income. What predicts it is whether a creator owns something to sell — a template, a cohort, a service — instead of relying on platform payouts and brand deals.",
+      "The top decile share three habits: they ship a product within 90 days of starting, they collect email from day one, and they treat content as a funnel, not the destination.",
+    ],
+  },
+  "digital-product-income-study": {
+    pullQuote: "Templates outsell courses — because they promise a finished thing, not homework.",
+    stats: [
+      { value: "$34", label: "median template price that converts" },
+      { value: "2.1%", label: "avg landing-page conversion" },
+      { value: "320", label: "creators analysed" },
+    ],
+    chart: [
+      { label: "Templates", value: 34 },
+      { label: "Courses", value: 28 },
+      { label: "Community", value: 22 },
+      { label: "Briefs", value: 16 },
+    ],
+    chartCaption: "Share of digital-product revenue by type",
+  },
+  "are-african-founders-building-right": {
+    pullQuote: "Most founders are guessing well. A few have a system — and it shows in their burn.",
+    stats: [
+      { value: "40", label: "founders interviewed" },
+      { value: "1 in 4", label: "validate before building" },
+      { value: "2 months", label: "saved with a simple system" },
+    ],
+  },
+  "paystack-onboarding-teardown": {
+    pullQuote: "Trust is built in three moments — and Paystack front-loads all of them.",
+    stats: [
+      { value: "3", label: "moments that do the work" },
+      { value: "< 90s", label: "to a first successful action" },
+    ],
+  },
+  "african-startup-funding-2026": {
+    pullQuote: "The cheques are back — but they're quieter, and they expect more proof.",
+    chart: [
+      { label: "Pre-seed", value: 41 },
+      { label: "Seed", value: 33 },
+      { label: "Series A", value: 18 },
+      { label: "Later", value: 8 },
+    ],
+    chartCaption: "Where 2026 rounds are landing (share of deals)",
+  },
+  "claude-ai-research-tool-teardown": {
+    pullQuote: "It's a brilliant intern: fast, tireless, and in need of a human who knows the question.",
+  },
+  "woman-who-builds-in-nigeria": {
+    pullQuote: "The friction is real. So is the edge — you notice what rooms built without you missed.",
+  },
+};
+
+export function getVaultDetail(slug: string): VaultDetail {
+  return VAULT_DETAILS[slug] ?? {};
+}
