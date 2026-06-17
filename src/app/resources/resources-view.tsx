@@ -4,34 +4,41 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
+import { EASE } from "@/lib/motion";
 
-const SECTIONS = [
+const DESTINATIONS = [
   {
     href: "/resources/books",
-    eyebrow: "New",
+    eyebrow: "Notes",
     title: "Book Hub",
-    blurb: "Notes from the books shaping how I research, build, and tell stories.",
-    bg: "bg-ink text-white",
-    count: "14",
-    accent: "text-white",
+    blurb: "Honest highlights from the books shaping how I research, build, and tell stories.",
+    image: "/assets/book-notes.jpg",
+    bg: "bg-ink",
+    fg: "text-white",
+    sub: "text-white/65",
+    chip: "bg-sage-soft text-ink",
   },
   {
     href: "/resources/tools",
     eyebrow: "Free",
     title: "Tools & Templates",
-    blurb: "Notion systems, Figma files, and ready-to-use checklists.",
-    bg: "bg-card",
-    count: "20+",
-    accent: "text-ink",
+    blurb: "Notion systems, Figma files, and ready-to-use checklists I actually reach for.",
+    image: "/assets/project-1.jpg",
+    bg: "bg-sage-soft",
+    fg: "text-ink",
+    sub: "text-ink/65",
+    chip: "bg-ink text-white",
   },
   {
     href: "/resources/vault",
-    eyebrow: "Members",
+    eyebrow: "Research",
     title: "Research Vault",
-    blurb: "Deep dives into human behaviour, patterns, and product research.",
-    bg: "bg-sage-soft",
-    count: "12",
-    accent: "text-ink",
+    blurb: "Reports, teardowns, and trend watches — data-backed and made to think with.",
+    image: "/assets/research-vault.jpg",
+    bg: "bg-card",
+    fg: "text-ink",
+    sub: "text-ink/65",
+    chip: "bg-ink text-white",
   },
 ];
 
@@ -40,35 +47,53 @@ export function ResourcesView() {
     <PageShell
       eyebrow="Take what helps"
       title={<><span className="italic">resources</span> & rituals</>}
-      intro="Free things first. The kind of files I wish I had when I started — none of them are perfect, all of them are useful."
+      intro="Free things first. The kind of files and notes I wish I had when I started — none of them perfect, all of them useful."
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
-        {SECTIONS.map((s, i) => (
+      <motion.div
+        className="mx-auto grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-3"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-8%" }}
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+      >
+        {DESTINATIONS.map((d) => (
           <motion.div
-            key={s.href}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+            key={d.href}
+            variants={{
+              hidden: { opacity: 0, y: 24 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+            }}
           >
-            <Link
-              href={s.href}
-              className={`group flex h-full flex-col justify-between rounded-[36px] p-8 ring-1 ring-black/5 transition hover:-translate-y-1 ${s.bg}`}
-            >
-              <div>
-                <p className={`text-[11px] uppercase tracking-[0.22em] ${s.accent} opacity-60`}>{s.eyebrow}</p>
-                <h3 className={`mt-4 font-display text-[32px] leading-[1.02] tracking-tight ${s.accent}`}>{s.title}</h3>
-                <p className={`mt-3 max-w-[34ch] text-[14px] leading-[1.6] ${s.accent} opacity-70`}>{s.blurb}</p>
-              </div>
-              <div className="mt-12 flex items-end justify-between">
-                <span className={`font-display text-[56px] leading-none ${s.accent} opacity-90`}>{s.count}</span>
-                <span className={`grid size-12 place-items-center rounded-full transition group-hover:scale-105 ${s.accent === "text-white" ? "bg-white text-ink" : "bg-ink text-white"}`}>
-                  <ArrowUpRight className="size-5" strokeWidth={2.2} />
-                </span>
-              </div>
+            <Link href={d.href} className="group block h-full">
+              <article
+                className={`flex h-full flex-col overflow-hidden rounded-[36px] p-3 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10 ${d.bg}`}
+              >
+                <div className="overflow-hidden rounded-[28px]">
+                  <img
+                    src={d.image}
+                    alt={d.title}
+                    loading="lazy"
+                    className="aspect-[5/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className={`text-[11px] uppercase tracking-[0.22em] ${d.sub}`}>{d.eyebrow}</p>
+                  <h3 className={`mt-3 font-display text-[28px] leading-[1.02] tracking-tight ${d.fg}`}>
+                    {d.title}
+                  </h3>
+                  <p className={`mt-3 text-[14px] leading-[1.6] ${d.sub}`}>{d.blurb}</p>
+                  <span
+                    className={`mt-6 inline-flex w-fit items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium ${d.chip}`}
+                  >
+                    Explore
+                    <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
+                  </span>
+                </div>
+              </article>
             </Link>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </PageShell>
   );
 }
