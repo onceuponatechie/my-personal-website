@@ -99,12 +99,6 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
-  /* Form controls don't inherit letter-spacing in most UA stylesheets, so
-     the -3% Inter tracking has to be pulled through them explicitly. This
-     makes the tightening truly site-wide (buttons, inputs, selects). */
-  button, input, select, textarea, optgroup {
-    letter-spacing: inherit;
-  }
   /* The serif display face stays gentle; explicit tracking-* utilities
      still win thanks to :where()'s zero specificity. */
   :where(.font-display) {
