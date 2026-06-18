@@ -68,13 +68,13 @@ export function ContactView() {
                 <Field label="What's the project?" id="project">
                   <textarea id="project" required rows={5} className={inputCls + " resize-none"} placeholder="A short paragraph is plenty. Links welcome." />
                 </Field>
-                <Field label="What kind of build?" id="build">
-                  <select id="build" className={inputCls}>
-                    <option>A calm 0→1 build</option>
-                    <option>A redesign or rescue</option>
-                    <option>One focused feature or flow</option>
-                    <option>Not sure yet — let&apos;s talk</option>
-                  </select>
+                <Field label="A link to your world (optional)" id="link">
+                  <input
+                    id="link"
+                    type="text"
+                    className={inputCls}
+                    placeholder="Website, deck, or wherever you live online"
+                  />
                 </Field>
                 <button
                   type="submit"
@@ -99,7 +99,7 @@ export function ContactView() {
             <div className="rounded-[28px] bg-ink p-6 text-white">
               <p className="font-display text-[22px] leading-tight">A small note —</p>
               <p className="mt-2 text-[13px] leading-[1.6] text-white/70">
-                I'm slow to start and fast to finish. If your timeline is &lt; 2 weeks, I'm probably not the right fit. If it's a long, careful build, you've found me.
+                I read every message myself, usually with a coffee in hand. I only keep a few projects on the bench at once, so I&apos;m honest fast about fit — and if we&apos;re not right for each other, I&apos;ll gladly point you toward someone who is.
               </p>
             </div>
           </motion.aside>

@@ -28,7 +28,7 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className={`transition hover:text-foreground ${
+              className={`editorial-underline transition hover:text-foreground ${
                 pathname === l.href ? "text-foreground" : ""
               }`}
             >

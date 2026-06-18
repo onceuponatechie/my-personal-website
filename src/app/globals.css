@@ -99,9 +99,40 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
+  /* Form controls don't inherit letter-spacing in most UA stylesheets, so
+     the -3% Inter tracking has to be pulled through them explicitly. This
+     makes the tightening truly site-wide (buttons, inputs, selects). */
+  button, input, select, textarea, optgroup {
+    letter-spacing: inherit;
+  }
   /* The serif display face stays gentle; explicit tracking-* utilities
      still win thanks to :where()'s zero specificity. */
   :where(.font-display) {
     letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  /* Editorial link — a hairline underline that wipes in from the left on
+     hover/focus. On touch devices (no hover) it rests visible and thickens
+     on press, so the interaction is never dead on mobile. */
+  .editorial-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    transition: background-size 0.45s var(--ease-editorial);
+  }
+  .editorial-underline:hover,
+  .editorial-underline:focus-visible {
+    background-size: 100% 1.5px;
+  }
+  @media (hover: none) {
+    .editorial-underline {
+      background-size: 100% 1.5px;
+    }
+    .editorial-underline:active {
+      background-size: 100% 2.5px;
+    }
   }
 }
