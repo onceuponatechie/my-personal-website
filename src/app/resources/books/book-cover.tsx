@@ -34,7 +34,7 @@ export function BookCover({
       <img
         src={book.cover}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.3s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/cover:scale-[1.06]"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.3s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/cover:scale-[1.06] group-active/cover:scale-[1.06]"
       />
       {/* legibility gradient */}
       <div
@@ -46,7 +46,7 @@ export function BookCover({
       />
       {/* accent wash */}
       <div
-        className="absolute inset-0 opacity-60 mix-blend-soft-light transition-opacity duration-700 group-hover/cover:opacity-90"
+        className="absolute inset-0 opacity-60 mix-blend-soft-light transition-opacity duration-700 group-hover/cover:opacity-90 group-active/cover:opacity-90"
         style={{
           background: `radial-gradient(130% 80% at 18% 4%, ${accentColor[book.accent]} 0%, transparent 58%)`,
         }}
@@ -55,7 +55,7 @@ export function BookCover({
       <div className="absolute inset-y-0 left-0 w-2.5 bg-gradient-to-r from-white/35 to-transparent" />
       <div className="absolute inset-y-0 left-[10px] w-px bg-white/25" />
       {/* sheen on hover */}
-      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-[1.1s] ease-out group-hover/cover:translate-x-full" />
+      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-[1.1s] ease-out group-hover/cover:translate-x-full group-active/cover:translate-x-full" />
       {/* typeset title */}
       <div className="absolute inset-x-0 bottom-0 p-3.5">
         <p className="text-[9px] uppercase tracking-[0.24em] text-white/70">{book.author}</p>

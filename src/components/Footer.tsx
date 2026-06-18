@@ -44,9 +44,11 @@ function RevealWord({
   index: number;
   total: number;
 }) {
-  const [start, end] = wordRevealRange(index, total, { spread: 2.5 });
+  // Even, slightly overlapping windows so the four words cascade and all
+  // resolve to white well before the headline leaves view.
+  const [start, end] = wordRevealRange(index, total, { spread: 1.5, settle: 0.78 });
   // Reveal as brightness only — every word resolves to solid white.
-  const opacity = useTransform(progress, [start, end], [0.16, 1]);
+  const opacity = useTransform(progress, [start, end], [0.2, 1]);
   const y = useTransform(progress, [start, end], [8, 0]);
   return (
     <motion.span style={{ opacity, y }} className="inline-block text-white">
@@ -56,11 +58,13 @@ function RevealWord({
 }
 
 export function Footer() {
-  const ref = useRef<HTMLDivElement>(null);
+  // The reveal is tied to the headline itself — not the whole (very tall)
+  // footer — so the timing tracks the words actually entering the viewport,
+  // start to finish, instead of completing only when the box's center does.
+  const ref = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    // Wider range = a calmer, more balanced reveal as the footer scrolls up.
-    offset: ["start 0.95", "center 0.55"],
+    offset: ["start 0.85", "start 0.35"],
   });
 
   const words = ["Let's", "build", "an", "Experience."];
@@ -68,7 +72,6 @@ export function Footer() {
   return (
     <footer className="px-4 pb-6 sm:px-6">
       <div
-        ref={ref}
         className="relative mx-auto overflow-hidden rounded-[44px] bg-ink text-white"
       >
         {/* Soft sage glow */}
@@ -86,7 +89,7 @@ export function Footer() {
         {/* Top: scroll-reveal headline + CTA */}
         <div className="relative px-8 pb-16 pt-24 sm:px-16 sm:pb-20 sm:pt-32">
           <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
-            <p className="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.98] tracking-tight text-white">
+            <p ref={ref} className="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.98] tracking-tight text-white">
               {words.map((w, i) => (
                 <span key={i}>
                   <RevealWord text={w} progress={scrollYProgress} index={i} total={words.length} />{" "}
@@ -145,7 +148,10 @@ export function Footer() {
               <ul className="mt-5 space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-[14px] text-white/80 transition hover:text-white">
+                    <Link
+                      href={l.href}
+                      className="editorial-underline text-[14px] text-white/80 transition hover:text-white"
+                    >
                       {l.label}
                     </Link>
                   </li>
@@ -156,7 +162,10 @@ export function Footer() {
 
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">Say hi</p>
-            <a href="mailto:hello@essy.dev" className="mt-5 block text-[14px] text-white/85 transition hover:text-white">
+            <a
+              href="mailto:hello@essy.dev"
+              className="editorial-underline mt-5 inline-block text-[14px] text-white/85 transition hover:text-white"
+            >
               hello@essy.dev
             </a>
             <Link

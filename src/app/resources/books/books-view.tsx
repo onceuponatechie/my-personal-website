@@ -120,7 +120,7 @@ function ShelfCard({ book }: { book: Book }) {
       }}
     >
       <Link href={`/resources/books/${book.slug}`} className="group block">
-        <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
+        <motion.div whileHover={{ y: -6 }} whileTap={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
           <BookCover book={book} />
         </motion.div>
         <div className="mt-3 px-0.5">

@@ -88,6 +88,7 @@ export type Story = {
   body: string;
   date: string;
   read: string;
+  category: string;
   cover: string;
 };
 
@@ -100,6 +101,7 @@ export const STORIES: Story[] = [
     body: "Most days, the process is small: an idea, a sketch, a quick chat with a user, a Loom for the team. The shape of it only becomes a process in hindsight. Here's the raw version — the dead ends, the half-built screens, and the rare afternoons where everything clicks.",
     date: "June 6, 2026",
     read: "4 min read",
+    category: "Process",
     cover: devDiaryImg,
   },
   {
@@ -110,6 +112,7 @@ export const STORIES: Story[] = [
     body: "Quiet software is not minimal software. It's software that respects the room. It earns attention with a single, well-placed cue instead of demanding it with notifications, badges, and red dots. Here's how I think about restraint as a design value.",
     date: "May 22, 2026",
     read: "6 min read",
+    category: "Craft",
     cover: inline1,
   },
   {
@@ -120,6 +123,7 @@ export const STORIES: Story[] = [
     body: "You will overthink the spacing. You will under-think the empty state. A senior will leave a comment that stings for an hour. Ship it anyway — your taste is built in the gap between the version you imagined and the version that went live.",
     date: "April 14, 2026",
     read: "5 min read",
+    category: "Career",
     cover: inline3,
   },
 ];

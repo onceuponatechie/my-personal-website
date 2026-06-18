@@ -26,7 +26,7 @@ function ProjectArticle({ p }: { p: Project }) {
             loading="lazy"
             width={1280}
             height={960}
-            className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] md:aspect-[4/3]"
+            className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[1.04] md:aspect-[4/3]"
           />
         </div>
       </div>
