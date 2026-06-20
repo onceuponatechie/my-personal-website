@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  ArrowRight,
   BookOpen,
   Brain,
   Boxes,
@@ -17,6 +16,11 @@ import {
   Star,
   Sparkles,
   Quote,
+  Check,
+  Send,
+  Target,
+  Shapes,
+  MousePointer2,
   type LucideIcon,
 } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
@@ -44,19 +48,10 @@ const CATEGORY_ICON: Record<string, LucideIcon> = {
   Process: Workflow,
   Research: Microscope,
   Storytelling: Feather,
+  Usability: MousePointer2,
+  Design: Shapes,
+  Focus: Target,
 };
-
-/* ---------- small parts ---------- */
-
-function StarRow({ n }: { n: number }) {
-  return (
-    <div className="flex items-center gap-0.5 text-butter">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="size-3.5" fill={i < n ? "currentColor" : "none"} strokeWidth={1.6} />
-      ))}
-    </div>
-  );
-}
 
 /* ---------- feature (hero) card ---------- */
 
@@ -79,8 +74,8 @@ function FeatureCard({ book, kicker, delay = 0 }: { book: Book; kicker: string; 
           style={{ background: `radial-gradient(closest-side, ${accentVar[book.accent]} 0%, transparent 70%)` }}
         />
         <div className="relative z-10 flex max-w-[58%] flex-col">
-          <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70 ring-1 ring-black/5 backdrop-blur">
-            <Sparkles className="size-3" strokeWidth={2} /> {kicker}
+          <span className="inline-flex w-fit shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70 ring-1 ring-black/5 backdrop-blur">
+            <Sparkles className="size-3 shrink-0" strokeWidth={2} /> {kicker}
           </span>
           <h3 className="mt-4 font-display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.05] tracking-tight text-ink">
             {book.title}
@@ -111,53 +106,146 @@ function FeatureCard({ book, kicker, delay = 0 }: { book: Book; kicker: string; 
 
 /* ---------- shelf poster ---------- */
 
-function ShelfCard({ book }: { book: Book }) {
+// Staggered portrait ratios drive the masonry's varied heights.
+const SHELF_RATIOS = ["2 / 3", "3 / 4", "2 / 2.6", "3 / 4.4", "2 / 3.2"];
+
+function ShelfCard({ book, ratio }: { book: Book; ratio: string }) {
   return (
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 22 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
+      className="mb-5 break-inside-avoid"
     >
       <Link href={`/resources/books/${book.slug}`} className="group block">
         <motion.div whileHover={{ y: -6 }} whileTap={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
-          <BookCover book={book} />
+          <BookCover book={book} ratio={ratio} />
         </motion.div>
-        <div className="mt-3 px-0.5">
-          <div className="flex items-center justify-between gap-2">
-            <span
-              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/70"
-              style={{ background: accentSoft[book.accent] }}
-            >
-              {book.category}
-            </span>
-            <span className="text-[11px] text-ink/45">{book.year}</span>
-          </div>
-          <div className="mt-2 flex items-center justify-between gap-2">
-            <StarRow n={book.rating} />
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-ink/60 opacity-0 transition group-hover:opacity-100">
-              Open <ArrowRight className="size-3" strokeWidth={2.2} />
-            </span>
-          </div>
+        <div className="mt-2.5 flex items-center justify-between gap-2 px-0.5">
+          <span className="truncate text-[11px] uppercase tracking-[0.14em] text-ink/45">{book.category}</span>
+          <span className="flex items-center gap-1 text-[11px] text-ink/45">
+            <Star className="size-3 text-butter" fill="currentColor" strokeWidth={0} />
+            {book.rating}.0
+          </span>
         </div>
       </Link>
     </motion.div>
   );
 }
 
+/* ---------- recommend a book (inline, mocked) ---------- */
+
+function RecommendForm() {
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [reason, setReason] = useState("");
+  const [sent, setSent] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!title.trim()) return;
+    // MOCK ONLY — no email is sent yet. The recommendation is just logged so
+    // the flow works end-to-end; swap this for an API call when ready.
+    console.log("[book recommendation]", { title: title.trim(), reason: reason.trim() });
+    setSent(true);
+  }
+
+  if (sent) {
+    return (
+      <div className="relative mt-7 flex w-full max-w-md flex-col items-center">
+        <div className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 text-[13px] text-white ring-1 ring-white/15">
+          <span className="grid size-6 place-items-center rounded-full bg-sage text-white">
+            <Check className="size-3.5" strokeWidth={2.6} />
+          </span>
+          Thank you — <span className="font-medium">{title.trim()}</span> is on my list.
+        </div>
+        <button
+          onClick={() => {
+            setSent(false);
+            setTitle("");
+            setReason("");
+          }}
+          className="mt-3 text-[12px] text-white/55 transition hover:text-white"
+        >
+          Recommend another
+        </button>
+      </div>
+    );
+  }
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-medium text-ink transition hover:bg-white/90"
+      >
+        Recommend a book
+        <ArrowUpRight className="size-4" strokeWidth={2.2} />
+      </button>
+    );
+  }
+
+  return (
+    <motion.form
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: EASE }}
+      onSubmit={handleSubmit}
+      className="relative mt-7 w-full max-w-md space-y-3 text-left"
+    >
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+        autoFocus
+        placeholder="Book title"
+        className="w-full rounded-2xl bg-white/10 px-4 py-3 text-[14px] text-white placeholder:text-white/40 outline-none ring-1 ring-white/15 transition focus:ring-white/40"
+      />
+      <textarea
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}
+        rows={3}
+        placeholder="Why should it be on the shelf? (optional)"
+        className="w-full resize-none rounded-2xl bg-white/10 px-4 py-3 text-[14px] text-white placeholder:text-white/40 outline-none ring-1 ring-white/15 transition focus:ring-white/40"
+      />
+      <div className="flex items-center justify-center gap-3">
+        <button
+          type="submit"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-medium text-ink transition hover:bg-white/90"
+        >
+          Send recommendation
+          <Send className="size-3.5" strokeWidth={2.2} />
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="text-[12px] text-white/55 transition hover:text-white"
+        >
+          Cancel
+        </button>
+      </div>
+    </motion.form>
+  );
+}
+
 /* ---------- page ---------- */
 
+const FEATURED_SLUGS = ["atomic-habits", "the-mom-test"];
+
 export function BooksView() {
+  const nightstand = getBook("atomic-habits")!;
+  const recommended = getBook("the-mom-test")!;
+
+  // Everything except the two feature cards lives in the masonry below.
+  const shelfBooks = useMemo(() => BOOKS.filter((b) => !FEATURED_SLUGS.includes(b.slug)), []);
   const categories = useMemo(
-    () => ["All", ...Array.from(new Set(BOOKS.map((b) => b.category)))],
-    []
+    () => ["All", ...Array.from(new Set(shelfBooks.map((b) => b.category)))],
+    [shelfBooks]
   );
   const [active, setActive] = useState("All");
 
-  const shelf = active === "All" ? BOOKS : BOOKS.filter((b) => b.category === active);
-
-  const nightstand = getBook("atomic-habits")!;
-  const recommended = getBook("the-mom-test")!;
+  const shelf = active === "All" ? shelfBooks : shelfBooks.filter((b) => b.category === active);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background pt-6">
@@ -249,18 +337,18 @@ export function BooksView() {
         </div>
       </section>
 
-      {/* ---------- the shelf ---------- */}
+      {/* ---------- the shelf (masonry) ---------- */}
       <section className="relative px-4 pt-8 pb-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <motion.div
             key={active}
             initial="hidden"
             animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.04 } } }}
-            className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } }}
+            className="columns-2 gap-5 sm:columns-3 lg:columns-4 xl:columns-5"
           >
-            {shelf.map((b) => (
-              <ShelfCard key={b.slug} book={b} />
+            {shelf.map((b, i) => (
+              <ShelfCard key={b.slug} book={b} ratio={SHELF_RATIOS[i % SHELF_RATIOS.length]} />
             ))}
           </motion.div>
         </div>
@@ -290,13 +378,7 @@ export function BooksView() {
             Send it my way. If it earns a spot on the shelf, it&apos;ll get its own page here — notes,
             quotes, and all.
           </p>
-          <Link
-            href="/contact"
-            className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-medium text-ink transition hover:bg-white/90"
-          >
-            Recommend a book
-            <ArrowUpRight className="size-4" strokeWidth={2.2} />
-          </Link>
+          <RecommendForm />
         </motion.div>
       </section>
 

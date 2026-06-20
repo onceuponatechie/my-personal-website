@@ -8,6 +8,7 @@ const bookNotesImg = "/assets/book-notes.jpg";
 const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
 const inline3 = "/assets/inline-3.jpg";
+const inline4 = "/assets/inline-4.jpg";
 
 export type Project = {
   slug: string;
@@ -125,6 +126,39 @@ export const STORIES: Story[] = [
     read: "5 min read",
     category: "Career",
     cover: inline3,
+  },
+  {
+    slug: "the-myth-of-the-perfect-roadmap",
+    title: "The myth of the perfect roadmap",
+    excerpt:
+      "A roadmap is a guess wearing a suit. Treat it like one and it gets a lot more useful.",
+    body: "We dress our guesses in dates and call them commitments. The teams I admire hold the roadmap loosely — clear on direction, honest about the fog past the next quarter. Here's how I keep one without lying to myself.",
+    date: "March 30, 2026",
+    read: "5 min read",
+    category: "Process",
+    cover: project2,
+  },
+  {
+    slug: "notes-on-naming-things",
+    title: "Notes on naming things",
+    excerpt:
+      "Naming is design. The right word does half the onboarding before anyone clicks.",
+    body: "A good name is a tiny act of empathy — it tells someone what a thing is before they have to find out the hard way. I've thrown away more good features behind bad names than I'd like to admit. A short field guide to naming with care.",
+    date: "March 8, 2026",
+    read: "4 min read",
+    category: "Craft",
+    cover: project4,
+  },
+  {
+    slug: "a-year-of-journaling",
+    title: "What a year of journaling taught me",
+    excerpt:
+      "365 entries later, the point was never the entries. It was noticing.",
+    body: "I started journaling to remember; I kept going because it made me pay attention. The pages are mostly mundane — and that's exactly where the patterns hid. What a year of small, honest notes changed about how I work.",
+    date: "February 12, 2026",
+    read: "6 min read",
+    category: "Reflections",
+    cover: inline2,
   },
 ];
 
@@ -311,6 +345,101 @@ export const BOOKS: Book[] = [
     quote: "Share something small every day.",
     forWho: "Makers hoarding drafts who'd grow far faster building in the open.",
     cover: devDiaryImg,
+  },
+  {
+    slug: "dont-make-me-think",
+    title: "Don't Make Me Think",
+    author: "Steve Krug",
+    category: "Usability",
+    rating: 5,
+    year: "2000",
+    accent: "sage",
+    takeaway: "If it needs explaining, it's already broken.",
+    note: "The book that quietly rewired how I look at every screen. It's old, the examples are dated, and none of that matters — the core law (don't make people think about the obvious) has never once let me down.",
+    ideas: [
+      "Self-evident beats clever — clarity is the whole job.",
+      "Users satisfice: they grab the first reasonable option, not the best one.",
+      "Test with a few people, early and often — it's cheaper than arguing.",
+    ],
+    quote: "Don't make me think — make it obvious.",
+    forWho: "Anyone shipping interfaces who keeps mistaking clever for clear.",
+    cover: inline4,
+  },
+  {
+    slug: "thinking-fast-and-slow",
+    title: "Thinking, Fast and Slow",
+    author: "Daniel Kahneman",
+    category: "Behaviour",
+    rating: 4,
+    year: "2011",
+    accent: "lavender",
+    takeaway: "Two systems run your mind — and one of them is lazy.",
+    note: "Dense, occasionally a slog, and worth every page. It gave me language for the biases I kept tripping over in research — anchoring, availability, the planning fallacy — and a humbling reminder that I'm not the rational narrator I think I am.",
+    ideas: [
+      "System 1 is fast and intuitive; System 2 is slow and effortful — and easily tired.",
+      "We answer an easier question than the one we were asked, without noticing.",
+      "What you see is all there is — we build confident stories from thin evidence.",
+    ],
+    quote: "Nothing in life is as important as you think it is while you are thinking about it.",
+    forWho: "Researchers and builders who want to catch their own bias in the act.",
+    cover: project1,
+  },
+  {
+    slug: "the-design-of-everyday-things",
+    title: "The Design of Everyday Things",
+    author: "Don Norman",
+    category: "Design",
+    rating: 5,
+    year: "1988",
+    accent: "butter",
+    takeaway: "When a door confuses you, blame the design — not yourself.",
+    note: "The origin story for half the vocabulary our field uses daily: affordances, signifiers, mapping, feedback. Once you've read it you can't un-see bad design, and you start quietly fixing the small frictions everywhere you look.",
+    ideas: [
+      "Affordances and signifiers tell people what's possible and how.",
+      "Good mapping makes the right action feel obvious.",
+      "Design for error — people will make them, so make them recoverable.",
+    ],
+    quote: "It is not your fault. It is the fault of the design.",
+    forWho: "Designers who want the first-principles roots beneath the trends.",
+    cover: project3,
+  },
+  {
+    slug: "deep-work",
+    title: "Deep Work",
+    author: "Cal Newport",
+    category: "Focus",
+    rating: 4,
+    year: "2016",
+    accent: "lavender",
+    takeaway: "Depth is the rare skill, and rarity is the whole advantage.",
+    note: "A little preachy in places, but it named the thing I'd been losing to notifications and open tabs. The chapter on scheduling every minute felt extreme until I tried it — and got a full afternoon of real thinking back.",
+    ideas: [
+      "Deep work is the ability to focus without distraction on a hard thing.",
+      "Treat attention as a finite resource and ruthlessly protect the block.",
+      "Boredom tolerance is trainable — and required for depth.",
+    ],
+    quote: "Clarity about what matters provides clarity about what does not.",
+    forWho: "Makers whose best work keeps dying by a thousand small interruptions.",
+    cover: inline2,
+  },
+  {
+    slug: "building-a-storybrand",
+    title: "Building a StoryBrand",
+    author: "Donald Miller",
+    category: "Storytelling",
+    rating: 4,
+    year: "2017",
+    accent: "butter",
+    takeaway: "The customer is the hero. You're just the guide.",
+    note: "A formula book, and it knows it — but the formula works. It fixed the most common mistake I see on landing pages: making the brand the hero instead of the person reading. Position yourself as the guide and the copy almost writes itself.",
+    ideas: [
+      "Cast the customer as the hero and your product as the guide.",
+      "A confused mind says no — clarity sells, cleverness doesn't.",
+      "Spell out the stakes: what they gain, and what they avoid.",
+    ],
+    quote: "If you confuse, you'll lose.",
+    forWho: "Founders whose pages list features but never name the customer's problem.",
+    cover: project4,
   },
 ];
 

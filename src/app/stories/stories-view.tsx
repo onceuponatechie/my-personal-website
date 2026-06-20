@@ -20,39 +20,44 @@ function StoryCard({ story }: { story: Story }) {
     >
       <Link
         href={`/stories/${story.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-[28px] bg-card p-3 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
+        className="group flex flex-col overflow-hidden rounded-[60px] bg-card p-3 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
       >
         {/* image + editorial overlay */}
-        <div className="relative overflow-hidden rounded-[22px]">
+        <div className="relative overflow-hidden rounded-[48px]">
           <img
             src={story.cover}
             alt={story.title}
-            className="aspect-[4/3] w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-active:scale-[1.06]"
+            className="aspect-[16/10] w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-active:scale-[1.06]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100" />
-          <span className="absolute left-3 top-3 rounded-full bg-card/85 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink/70 ring-1 ring-black/5 backdrop-blur">
-            {story.category}
-          </span>
           <span className="absolute bottom-3 right-3 grid size-9 translate-y-2 place-items-center rounded-full bg-card text-ink opacity-0 shadow-sm transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-active:translate-y-0 group-active:opacity-100">
             <ArrowUpRight className="size-4" strokeWidth={2.2} />
           </span>
         </div>
 
-        {/* content */}
-        <div className="flex flex-1 flex-col px-3 pb-2 pt-4">
+        {/* content — category, then date + read, then title */}
+        <div className="flex flex-col gap-2 px-5 pb-5 pt-5">
+          <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink/45">
+            {story.category}
+          </span>
           <div className="flex items-center gap-2.5 text-[12px] text-ink/50">
             <span>{story.date}</span>
             <span className="size-1 rounded-full bg-ink/30" />
             <span>{story.read}</span>
           </div>
-          <h3 className="mt-2.5 font-display text-[21px] leading-[1.15] tracking-tight text-ink">
+          <h3 className="font-display text-[20px] leading-[1.15] tracking-tight text-ink">
             {story.title}
           </h3>
-          <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{story.excerpt}</p>
-          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-medium text-ink">
-            Read story
-            <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1" strokeWidth={2.2} />
-          </span>
+          {/* excerpt + link — revealed only on hover (or tap, on mobile) */}
+          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-rows-[1fr] group-hover:opacity-100 group-active:grid-rows-[1fr] group-active:opacity-100">
+            <div className="overflow-hidden">
+              <p className="line-clamp-2 pt-1 text-[13px] leading-[1.55] text-ink/60">{story.excerpt}</p>
+              <span className="mt-2.5 inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
+                Read story
+                <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1" strokeWidth={2.2} />
+              </span>
+            </div>
+          </div>
         </div>
       </Link>
     </motion.li>
@@ -161,7 +166,7 @@ export function StoriesView() {
       {shown.length > 0 && (
         <motion.ul
           key={active}
-          className="mx-auto mt-7 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mx-auto mt-7 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5"
           initial="hidden"
           animate="show"
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}
