@@ -63,6 +63,12 @@ export function RoundCursor() {
 
   const size = hovering ? 25 : 20;
 
+  // A glossy sphere: a tight white specular highlight up-and-left over a
+  // radial body shade. Default is black; hovering swaps the body to lavender.
+  const body = hovering
+    ? "radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 22%), radial-gradient(circle at 60% 64%, #b06fd0 0%, var(--lavender) 45%, #7b3fa0 100%)"
+    : "radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 20%), radial-gradient(circle at 60% 64%, #3a3a3a 0%, #131313 45%, #000 100%)";
+
   return (
     <div
       ref={wrapRef}
@@ -77,7 +83,9 @@ export function RoundCursor() {
           height: size,
           marginLeft: -size / 2,
           marginTop: -size / 2,
-          backgroundColor: hovering ? "var(--lavender)" : "var(--butter)",
+          background: body,
+          boxShadow:
+            "0 4px 10px rgba(0,0,0,0.35), inset 0 -1px 3px rgba(0,0,0,0.45), inset 0 1px 2px rgba(255,255,255,0.25)",
         }}
       />
     </div>
