@@ -12,7 +12,7 @@ const SECTIONS = [
     title: "Book Hub",
     blurb: "Notes from the books shaping how I research, build, and tell stories.",
     bg: "bg-ink text-white",
-    count: "14",
+    count: "12",
     accent: "text-white",
   },
   {

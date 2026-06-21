@@ -17,19 +17,22 @@ export function BookCover({
   book,
   className = "",
   size = "sm",
+  ratioClass = "aspect-[2/3]",
 }: {
   book: Book;
   className?: string;
   size?: "sm" | "lg";
+  /** Override the cover aspect ratio — used to build a masonry shelf. */
+  ratioClass?: string;
 }) {
   const titleCls =
     size === "lg"
       ? "font-display text-[clamp(1.4rem,2.2vw,1.9rem)] leading-[1.02]"
-      : "font-display text-[15px] leading-[1.05]";
+      : "font-display text-[14px] leading-[1.05]";
 
   return (
     <div
-      className={`group/cover relative aspect-[2/3] w-full overflow-hidden rounded-[14px] shadow-[0_24px_50px_-22px_rgba(18,18,40,0.6)] ring-1 ring-black/10 ${className}`}
+      className={`group/cover relative ${ratioClass} w-full overflow-hidden rounded-[12px] shadow-[0_20px_44px_-22px_rgba(18,18,40,0.6)] ring-1 ring-black/10 ${className}`}
     >
       <img
         src={book.cover}

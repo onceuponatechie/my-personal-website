@@ -18,6 +18,14 @@ const TAG_COLORS: Record<string, string> = {
   Notes: "text-[oklch(0.55_0.16_240)]",
 };
 
+// Each card's arrow button warms into its category colour on hover.
+const TAG_BTN: Record<string, string> = {
+  Design: "bg-[oklch(0.62_0.16_300)]",
+  Building: "bg-[oklch(0.66_0.18_45)]",
+  Story: "bg-sage",
+  Notes: "bg-[oklch(0.58_0.16_240)]",
+};
+
 // Build desk entries from STORIES + one synthetic.
 const DESK = [
   { ...STORIES[0], tag: "Notes" },
@@ -52,16 +60,16 @@ function DeskCard({ s }: { s: (typeof DESK)[number] }) {
     >
       <div
         ref={ref}
-        className={`flex h-full flex-col overflow-hidden rounded-[28px] bg-card p-3 ring-1 transition duration-500 ${
+        className={`flex h-full flex-col overflow-hidden rounded-[24px] bg-card p-2.5 ring-1 transition duration-500 ${
           active ? "-translate-y-1 ring-black/10 shadow-[0_24px_50px_-30px_rgba(0,0,0,0.35)]" : "ring-black/5"
         }`}
       >
-        <div className="relative overflow-hidden rounded-[20px]">
+        <div className="relative overflow-hidden rounded-[18px]">
           <img
             src={s.cover}
             alt={s.title}
             loading="lazy"
-            className={`aspect-[5/4] w-full object-cover transition-transform duration-700 ${active ? "scale-[1.06]" : "scale-100"}`}
+            className={`aspect-[16/10] w-full object-cover transition-transform duration-700 ${active ? "scale-[1.06]" : "scale-100"}`}
           />
           <AnimatePresence>
             {active && (
@@ -70,7 +78,7 @@ function DeskCard({ s }: { s: (typeof DESK)[number] }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 12 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="absolute inset-x-3 bottom-3 rounded-2xl bg-ink/85 px-4 py-3 text-[13px] leading-[1.5] text-white backdrop-blur"
+                className="absolute inset-x-2.5 bottom-2.5 rounded-2xl bg-ink/85 px-4 py-3 text-[13px] leading-[1.5] text-white backdrop-blur"
               >
                 {s.excerpt}
               </motion.div>
@@ -78,20 +86,21 @@ function DeskCard({ s }: { s: (typeof DESK)[number] }) {
           </AnimatePresence>
         </div>
 
-        <div className="flex flex-1 flex-col p-4 pt-5">
+        {/* Category → date · read → title, kept tight so the card stays short. */}
+        <div className="flex flex-1 flex-col px-3 pb-2 pt-3.5">
           <span className={`text-[12px] font-medium ${TAG_COLORS[s.tag] ?? "text-ink/70"}`}>{s.tag}</span>
-          <h3 className="mt-2 line-clamp-2 font-display text-[20px] leading-[1.15] tracking-tight text-ink">
-            {s.title}
-          </h3>
-          <div className="mt-auto flex items-center justify-between pt-5">
-            <div className="flex items-center gap-2 whitespace-nowrap text-[12px] text-ink/55">
-              <span>{s.date}</span>
-              <span className="size-1 rounded-full bg-ink/30" />
-              <span>{s.read}</span>
-            </div>
+          <div className="mt-1.5 flex items-center gap-2 whitespace-nowrap text-[11px] text-ink/50">
+            <span>{s.date}</span>
+            <span className="size-1 rounded-full bg-ink/30" />
+            <span>{s.read}</span>
+          </div>
+          <div className="mt-1.5 flex items-start justify-between gap-3">
+            <h3 className="line-clamp-2 font-display text-[19px] leading-[1.15] tracking-tight text-ink">
+              {s.title}
+            </h3>
             <span
-              className={`grid size-9 shrink-0 place-items-center rounded-full bg-ink text-white transition duration-500 ${
-                active ? "scale-105 rotate-45" : ""
+              className={`mt-0.5 grid size-9 shrink-0 place-items-center rounded-full text-white transition-all duration-500 ${
+                active ? `scale-105 rotate-45 ${TAG_BTN[s.tag] ?? "bg-ink"}` : "bg-ink"
               }`}
             >
               <ArrowUpRight className="size-4" strokeWidth={2.2} />

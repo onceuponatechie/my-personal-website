@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -14,22 +14,21 @@ import {
   Microscope,
   Feather,
   Workflow,
+  MessageCircle,
+  Heart,
   Star,
   Sparkles,
   Quote,
+  X,
+  Send,
   type LucideIcon,
 } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
-import { BOOKS, getBook, type Book } from "@/lib/site-data";
+import { BOOKS, type Book } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 import { BookCover } from "./book-cover";
 
-const accentVar: Record<Book["accent"], string> = {
-  sage: "var(--sage)",
-  lavender: "var(--lavender)",
-  butter: "var(--butter)",
-};
 const accentSoft: Record<Book["accent"], string> = {
   sage: "var(--sage-soft)",
   lavender: "var(--lavender-soft)",
@@ -44,7 +43,19 @@ const CATEGORY_ICON: Record<string, LucideIcon> = {
   Process: Workflow,
   Research: Microscope,
   Storytelling: Feather,
+  Communication: MessageCircle,
+  Faith: Heart,
 };
+
+/* Varied cover ratios so the shelf reads as a true masonry, not a uniform grid. */
+const MASONRY_RATIOS = [
+  "aspect-[2/3]",
+  "aspect-[3/4]",
+  "aspect-[4/5]",
+  "aspect-[2/3]",
+  "aspect-[3/5]",
+  "aspect-[3/4]",
+];
 
 /* ---------- small parts ---------- */
 
@@ -52,89 +63,74 @@ function StarRow({ n }: { n: number }) {
   return (
     <div className="flex items-center gap-0.5 text-butter">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="size-3.5" fill={i < n ? "currentColor" : "none"} strokeWidth={1.6} />
+        <Star key={i} className="size-3" fill={i < n ? "currentColor" : "none"} strokeWidth={1.6} />
       ))}
     </div>
   );
 }
 
-/* ---------- feature (hero) card ---------- */
+/* ---------- hero: five closed books that fan out together ---------- */
 
-function FeatureCard({ book, kicker, delay = 0 }: { book: Book; kicker: string; delay?: number }) {
+function HeroFan({ books }: { books: Book[] }) {
+  const n = books.length;
+  const mid = (n - 1) / 2;
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 26 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.8, ease: EASE }}
-    >
-      <Link
-        href={`/resources/books/${book.slug}`}
-        className="group relative flex min-h-[230px] items-stretch overflow-hidden rounded-[30px] p-7 ring-1 ring-black/5 sm:min-h-[260px] sm:p-9"
-        style={{ background: `linear-gradient(135deg, ${accentSoft[book.accent]} 0%, var(--card) 70%)` }}
-      >
-        {/* ambient glow */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-16 -top-20 size-64 rounded-full opacity-50 blur-3xl transition-opacity duration-700 group-hover:opacity-80"
-          style={{ background: `radial-gradient(closest-side, ${accentVar[book.accent]} 0%, transparent 70%)` }}
-        />
-        <div className="relative z-10 flex max-w-[58%] flex-col">
-          <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70 ring-1 ring-black/5 backdrop-blur">
-            <Sparkles className="size-3" strokeWidth={2} /> {kicker}
-          </span>
-          <h3 className="mt-4 font-display text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.05] tracking-tight text-ink">
-            {book.title}
-          </h3>
-          <p className="mt-1 text-[13px] text-ink/55">by {book.author}</p>
-          <p className="mt-4 line-clamp-2 max-w-[34ch] text-[13px] leading-[1.6] text-ink/70">
-            {book.takeaway}
-          </p>
-          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-medium text-ink">
-            Read the notes
-            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
-          </span>
-        </div>
-
-        {/* floating cover */}
-        <motion.div
-          initial={{ rotate: 5, y: 10 }}
-          animate={{ rotate: 4, y: 0 }}
-          transition={{ delay: delay + 0.15, duration: 0.9, ease: EASE }}
-          className="pointer-events-none absolute -bottom-6 right-5 w-[34%] max-w-[160px] transition-transform duration-700 group-hover:-translate-y-1.5 group-hover:rotate-[2deg] sm:right-8"
-        >
-          <BookCover book={book} />
-        </motion.div>
-      </Link>
-    </motion.div>
+    <div className="group relative mx-auto h-[280px] w-[260px] sm:h-[340px] sm:w-[320px]">
+      {books.map((b, i) => {
+        const offset = i - mid; // -2 … 2
+        const angle = offset * 13;
+        const x = offset * 48;
+        const y = Math.abs(offset) * 16;
+        return (
+          <motion.div
+            key={b.slug}
+            // Start as a closed stack, then fan out together on load.
+            initial={{ rotate: 0, x: 0, y: 0, opacity: 0 }}
+            animate={{ rotate: angle, x, y, opacity: 1 }}
+            transition={{ delay: 0.25 + i * 0.09, duration: 1, ease: EASE }}
+            whileHover={{ y: y - 22, scale: 1.05, zIndex: 50 }}
+            style={{ transformOrigin: "bottom center", zIndex: 10 - Math.abs(offset) }}
+            className="absolute inset-x-0 bottom-0 mx-auto w-[140px] drop-shadow-xl sm:w-[160px]"
+          >
+            <Link href={`/resources/books/${b.slug}`} aria-label={b.title} className="block">
+              <BookCover book={b} />
+            </Link>
+          </motion.div>
+        );
+      })}
+    </div>
   );
 }
 
-/* ---------- shelf poster ---------- */
+/* ---------- shelf poster (masonry tile) ---------- */
 
-function ShelfCard({ book }: { book: Book }) {
+function ShelfCard({ book, index }: { book: Book; index: number }) {
+  const ratio = MASONRY_RATIOS[index % MASONRY_RATIOS.length];
   return (
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 22 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
+      className="mb-4 break-inside-avoid"
     >
       <Link href={`/resources/books/${book.slug}`} className="group block">
-        <motion.div whileHover={{ y: -6 }} whileTap={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
-          <BookCover book={book} />
+        <motion.div whileHover={{ y: -6, rotate: -0.6 }} whileTap={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
+          <BookCover book={book} ratioClass={ratio} />
         </motion.div>
-        <div className="mt-3 px-0.5">
+        <div className="mt-2.5 px-0.5">
           <div className="flex items-center justify-between gap-2">
             <span
-              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/70"
+              className="rounded-full px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.14em] text-ink/70"
               style={{ background: accentSoft[book.accent] }}
             >
               {book.category}
             </span>
-            <span className="text-[11px] text-ink/45">{book.year}</span>
-          </div>
-          <div className="mt-2 flex items-center justify-between gap-2">
             <StarRow n={book.rating} />
+          </div>
+          <h3 className="mt-1.5 line-clamp-1 font-display text-[15px] leading-tight text-ink">{book.title}</h3>
+          <div className="mt-0.5 flex items-center justify-between gap-2">
+            <span className="text-[11px] text-ink/45">{book.author}</span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-ink/60 opacity-0 transition group-hover:opacity-100">
               Open <ArrowRight className="size-3" strokeWidth={2.2} />
             </span>
@@ -145,6 +141,111 @@ function ShelfCard({ book }: { book: Book }) {
   );
 }
 
+/* ---------- recommend-a-book modal (mock email) ---------- */
+
+function RecommendModal({ onClose }: { onClose: () => void }) {
+  const [sent, setSent] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-[60] grid place-items-center bg-ink/45 p-4 backdrop-blur-sm"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.45, ease: EASE }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md overflow-hidden rounded-[28px] bg-card p-7 ring-1 ring-black/10 shadow-[0_40px_80px_-30px_rgba(18,18,40,0.5)] sm:p-8"
+      >
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-4 top-4 grid size-9 place-items-center rounded-full bg-foreground/5 text-ink/60 transition hover:bg-foreground/10 hover:text-ink"
+        >
+          <X className="size-4" strokeWidth={2} />
+        </button>
+
+        {sent ? (
+          <div className="flex flex-col items-center py-8 text-center">
+            <div className="grid size-14 place-items-center rounded-full bg-sage-soft text-ink">
+              <Send className="size-5" strokeWidth={1.8} />
+            </div>
+            <h3 className="mt-5 font-display text-[26px] leading-tight text-ink">On its way to my inbox.</h3>
+            <p className="mt-2 max-w-[32ch] text-[13px] leading-[1.6] text-ink/60">
+              Thanks for the recommendation — if it earns a spot on the shelf, it&apos;ll get its own page here.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-lavender-soft px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70">
+              <Sparkles className="size-3" strokeWidth={2} /> Recommend a book
+            </span>
+            <h3 className="mt-4 font-display text-[26px] leading-tight text-ink">
+              What should I read next?
+            </h3>
+            <p className="mt-2 text-[13px] leading-[1.6] text-ink/60">
+              Drop the title and why it stuck with you. It lands straight in my inbox — no detour.
+            </p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                // Mock send — wired to surface a real email service later.
+                setSent(true);
+              }}
+              className="mt-5 space-y-4"
+            >
+              <label className="block">
+                <span className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+                  Book title
+                </span>
+                <input required className={inputCls} placeholder="e.g. The Mom Test" />
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+                  Why this one?
+                </span>
+                <textarea
+                  required
+                  rows={3}
+                  className={inputCls + " resize-none"}
+                  placeholder="A line or two on what it changed for you."
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+                  Your email <span className="lowercase tracking-normal text-ink/35">(optional)</span>
+                </span>
+                <input type="email" className={inputCls} placeholder="so I can say thank you" />
+              </label>
+              <button
+                type="submit"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-105"
+              >
+                Send recommendation
+                <Send className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+              </button>
+            </form>
+          </>
+        )}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const inputCls =
+  "w-full rounded-2xl border border-black/10 bg-white px-4 py-2.5 text-[14px] text-ink placeholder:text-ink/35 outline-none transition focus:border-sage focus:ring-2 focus:ring-sage/30";
+
 /* ---------- page ---------- */
 
 export function BooksView() {
@@ -153,11 +254,10 @@ export function BooksView() {
     []
   );
   const [active, setActive] = useState("All");
+  const [recommendOpen, setRecommendOpen] = useState(false);
 
+  const heroBooks = useMemo(() => BOOKS.slice(0, 5), []);
   const shelf = active === "All" ? BOOKS : BOOKS.filter((b) => b.category === active);
-
-  const nightstand = getBook("atomic-habits")!;
-  const recommended = getBook("the-mom-test")!;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background pt-6">
@@ -175,49 +275,75 @@ export function BooksView() {
 
       <Navbar />
 
-      {/* ---------- header ---------- */}
-      <section className="relative px-4 pt-16 pb-10 sm:px-6 sm:pt-20">
+      {/* ---------- hero: header copy + fanned books ---------- */}
+      <section className="relative px-4 pt-16 pb-8 sm:px-6 sm:pt-20">
         <div className="mx-auto max-w-6xl">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="text-[12px] uppercase tracking-[0.22em] text-ink/50"
-          >
-            Resources · The Reading Room
-          </motion.p>
-          <div className="mt-3 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <motion.h1
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08, duration: 0.8, ease: EASE }}
-              className="font-display text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.95] tracking-tight text-ink"
-            >
-              The <span className="italic">Book</span> Hub
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7, ease: EASE }}
-              className="max-w-[42ch] text-[14px] leading-[1.7] text-ink/65"
-            >
-              A living shelf of notes from the books that shaped how I research, build, and tell product
-              stories. Pull one down — every cover opens to its own page.
-            </motion.p>
+          <div className="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: EASE }}
+                className="text-[12px] uppercase tracking-[0.22em] text-ink/50"
+              >
+                Resources · The Reading Room
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08, duration: 0.8, ease: EASE }}
+                className="mt-3 font-display text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.95] tracking-tight text-ink"
+              >
+                The <span className="italic">Book</span> Hub
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7, ease: EASE }}
+                className="mt-5 max-w-[44ch] text-[14px] leading-[1.7] text-ink/65"
+              >
+                A living shelf of books I didn&apos;t just read — I built with them. Pull one down and you&apos;ll find
+                the framework, the friction, and what actually happened when I tried it.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.32, duration: 0.7, ease: EASE }}
+                className="mt-7 flex flex-wrap items-center gap-3"
+              >
+                <a
+                  href="#shelf"
+                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+                >
+                  Browse the shelf
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
+                </a>
+                <button
+                  onClick={() => setRecommendOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[13px] font-medium text-ink transition hover:bg-ink hover:text-white"
+                >
+                  Recommend a book
+                </button>
+              </motion.div>
+            </div>
+
+            {/* fanned hero books */}
+            <div className="relative">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
+                style={{ background: "radial-gradient(closest-side, var(--butter-soft) 0%, transparent 70%)" }}
+              />
+              <div className="relative pt-4 pb-2">
+                <HeroFan books={heroBooks} />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ---------- feature cards ---------- */}
-      <section className="relative px-4 sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-2">
-          <FeatureCard book={nightstand} kicker="On the nightstand" />
-          <FeatureCard book={recommended} kicker="Most recommended" delay={0.1} />
-        </div>
-      </section>
-
       {/* ---------- category pills ---------- */}
-      <section className="relative px-4 pt-12 sm:px-6">
+      <section id="shelf" className="relative scroll-mt-24 px-4 pt-10 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-wrap gap-2.5">
             {categories.map((cat) => {
@@ -249,18 +375,18 @@ export function BooksView() {
         </div>
       </section>
 
-      {/* ---------- the shelf ---------- */}
+      {/* ---------- the shelf (masonry) ---------- */}
       <section className="relative px-4 pt-8 pb-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <motion.div
             key={active}
             initial="hidden"
             animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.04 } } }}
-            className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } }}
+            className="columns-2 gap-4 sm:columns-3 lg:columns-4"
           >
-            {shelf.map((b) => (
-              <ShelfCard key={b.slug} book={b} />
+            {shelf.map((b, i) => (
+              <ShelfCard key={b.slug} book={b} index={i} />
             ))}
           </motion.div>
         </div>
@@ -287,18 +413,22 @@ export function BooksView() {
             Got a book I should read?
           </h3>
           <p className="relative mt-3 max-w-[42ch] text-[14px] leading-[1.65] text-white/70">
-            Send it my way. If it earns a spot on the shelf, it&apos;ll get its own page here — notes,
-            quotes, and all.
+            Send it my way — title and a line on why. It lands straight in my inbox, and if it earns a spot on the
+            shelf, it&apos;ll get its own page here.
           </p>
-          <Link
-            href="/contact"
+          <button
+            onClick={() => setRecommendOpen(true)}
             className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-medium text-ink transition hover:bg-white/90"
           >
             Recommend a book
             <ArrowUpRight className="size-4" strokeWidth={2.2} />
-          </Link>
+          </button>
         </motion.div>
       </section>
+
+      <AnimatePresence>
+        {recommendOpen && <RecommendModal onClose={() => setRecommendOpen(false)} />}
+      </AnimatePresence>
 
       <Footer />
     </main>
