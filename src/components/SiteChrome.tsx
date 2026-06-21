@@ -29,7 +29,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-4 z-40 mx-auto w-full max-w-3xl px-4">
-      <nav className="flex items-center justify-between rounded-full border border-black/5 bg-card/90 px-3 py-2.5 pl-5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md sm:px-5">
+      <nav className="flex items-center justify-between rounded-full border border-black/5 bg-card/90 py-2 pl-5 pr-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md sm:pl-6">
         <Link href="/" className="font-display text-[18px] tracking-tight text-foreground sm:text-[19px]">
           Once Upon a Techie
         </Link>
@@ -97,7 +97,7 @@ export function Navbar() {
           </button>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-full bg-sage px-4 py-2 text-[13px] font-medium text-white shadow-sm transition hover:brightness-105"
+            className="inline-flex items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:brightness-105"
           >
             Build With Me
           </Link>

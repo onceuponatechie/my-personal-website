@@ -66,7 +66,7 @@ export function Manifesto() {
   });
 
   return (
-    <section ref={ref} className="px-4 py-40 sm:py-52">
+    <section ref={ref} className="px-4 pt-12 pb-28 sm:pt-16 sm:pb-40">
       <div className="mx-auto max-w-4xl">
         <p className="text-center font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.3] tracking-tight">
           {SEGMENTS.map((p, i) => (

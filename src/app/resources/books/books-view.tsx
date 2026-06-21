@@ -47,14 +47,15 @@ const CATEGORY_ICON: Record<string, LucideIcon> = {
   Faith: Heart,
 };
 
-/* Varied cover ratios so the shelf reads as a true masonry, not a uniform grid. */
+/* Varied cover ratios so the shelf reads as a true masonry, not a uniform grid.
+   Kept on the shorter side so no single cover dominates the column. */
 const MASONRY_RATIOS = [
-  "aspect-[2/3]",
   "aspect-[3/4]",
   "aspect-[4/5]",
   "aspect-[2/3]",
-  "aspect-[3/5]",
   "aspect-[3/4]",
+  "aspect-[5/7]",
+  "aspect-[4/5]",
 ];
 
 /* ---------- small parts ---------- */
@@ -84,13 +85,24 @@ function HeroFan({ books }: { books: Book[] }) {
         return (
           <motion.div
             key={b.slug}
-            // Start as a closed stack, then fan out together on load.
-            initial={{ rotate: 0, x: 0, y: 0, opacity: 0 }}
-            animate={{ rotate: angle, x, y, opacity: 1 }}
-            transition={{ delay: 0.25 + i * 0.09, duration: 1, ease: EASE }}
+            // Start as a closed stack, then fan out together — and re-fan every
+            // time the hero scrolls back into view, not just on first load.
+            variants={{
+              closed: { rotate: 0, x: 0, y: 0, opacity: 0 },
+              open: {
+                rotate: angle,
+                x,
+                y,
+                opacity: 1,
+                transition: { delay: 0.15 + i * 0.09, duration: 0.9, ease: EASE },
+              },
+            }}
+            initial="closed"
+            whileInView="open"
+            viewport={{ once: false, amount: 0.4 }}
             whileHover={{ y: y - 22, scale: 1.05, zIndex: 50 }}
             style={{ transformOrigin: "bottom center", zIndex: 10 - Math.abs(offset) }}
-            className="absolute inset-x-0 bottom-0 mx-auto w-[140px] drop-shadow-xl sm:w-[160px]"
+            className="absolute inset-x-0 bottom-0 mx-auto w-[136px] drop-shadow-xl sm:w-[152px]"
           >
             <Link href={`/resources/books/${b.slug}`} aria-label={b.title} className="block">
               <BookCover book={b} />
@@ -112,7 +124,7 @@ function ShelfCard({ book, index }: { book: Book; index: number }) {
         hidden: { opacity: 0, y: 22 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
-      className="mb-4 break-inside-avoid"
+      className="mb-3 break-inside-avoid sm:mb-4"
     >
       <Link href={`/resources/books/${book.slug}`} className="group block">
         <motion.div whileHover={{ y: -6, rotate: -0.6 }} whileTap={{ y: -6 }} transition={{ duration: 0.4, ease: EASE }}>
@@ -381,9 +393,10 @@ export function BooksView() {
           <motion.div
             key={active}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.1 }}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } }}
-            className="columns-2 gap-4 sm:columns-3 lg:columns-4"
+            className="columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4 xl:columns-5"
           >
             {shelf.map((b, i) => (
               <ShelfCard key={b.slug} book={b} index={i} />
