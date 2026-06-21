@@ -92,11 +92,30 @@ function ProjectCardSticky({
 
   return (
     // Each card gets a full viewport of scroll and is pinned near the top, so
-    // it reads completely (buttons included) before the next stacks on top.
-    <div className="sticky top-20 flex min-h-screen items-start justify-center pt-2 md:top-24">
+    // it reads completely before the next stacks on top. The "explore all"
+    // CTA lives inside the LAST slot, pinned just under the final card — so it
+    // hugs the stack instead of floating a viewport away near the next section.
+    <div className="sticky top-20 flex min-h-screen flex-col items-center justify-start pt-2 md:top-24">
       <motion.div style={{ scale, y, zIndex: index + 1 }} className="w-full max-w-6xl">
         <ProjectArticle p={p} />
       </motion.div>
+      {isLast && (
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="mt-8 md:mt-10"
+        >
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-card px-6 py-3 text-[14px] font-medium text-ink shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)] transition hover:bg-ink hover:text-white"
+          >
+            Explore all projects
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
+          </Link>
+        </motion.div>
+      )}
     </div>
   );
 }
@@ -131,30 +150,13 @@ export function Projects() {
         </motion.p>
       </div>
 
-      {/* Sticky scroll-stack — same behaviour on mobile and desktop */}
+      {/* Sticky scroll-stack — same behaviour on mobile and desktop. The CTA
+          rides inside the final card's slot (see ProjectCardSticky). */}
       <div ref={ref} className="relative" style={{ height: `${PROJECTS.length * 100}vh` }}>
         {PROJECTS.map((p, i) => (
           <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
         ))}
       </div>
-
-      {/* Explore-all sits after the full stack — it reads as the end of the
-          section once you've scrolled through every card, on mobile and desktop. */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="mt-16 flex justify-center"
-      >
-        <Link
-          href="/projects"
-          className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
-        >
-          Explore all projects
-          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
-        </Link>
-      </motion.div>
     </section>
   );
 }

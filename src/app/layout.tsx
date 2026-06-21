@@ -18,7 +18,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Once Upon a Techie — Products, people, and the stories that connect them",
+  title: "Essy Udeme — Products, people, and the stories that connect them",
   description:
     "Creator, builder, and storyteller. Explore products, journals, research, and ready-to-use templates.",
 };
