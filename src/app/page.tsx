@@ -5,15 +5,15 @@ import { Resources } from "@/components/Resources";
 import { Manifesto } from "@/components/Manifesto";
 import { Projects } from "@/components/Projects";
 import { FromTheDesk } from "@/components/FromTheDesk";
-import { FAQ } from "@/components/FAQ";
+import { GotQuestions } from "@/components/GotQuestions";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Once Upon a Techie — Products, people, and the stories that connect them",
+  title: "Essy Udeme — Products, people, and the stories that connect them",
   description:
     "Creator, builder, and storyteller. Explore products, journals, research, and ready-to-use templates.",
   openGraph: {
-    title: "Once Upon a Techie",
+    title: "Essy Udeme",
     description: "Products, people, and the stories that connect them.",
   },
 };
@@ -27,7 +27,7 @@ export default function Home() {
       <Manifesto />
       <Projects />
       <FromTheDesk />
-      <FAQ />
+      <GotQuestions />
       <Footer />
     </main>
   );

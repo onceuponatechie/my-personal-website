@@ -93,9 +93,9 @@ export function ContactView() {
             transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
             className="flex flex-col gap-4"
           >
-            <ContactCard Icon={Mail} title="Write directly" body="hi@onceuponatechie.com" href="mailto:hi@onceuponatechie.com" />
+            <ContactCard Icon={Mail} title="Write directly" body="hello@essy.dev" href="mailto:hello@essy.dev" />
             <ContactCard Icon={Calendar} title="Book a 20-min chat" body="Pick a slot that works for you." href="https://cal.com" />
-            <ContactCard Icon={Coffee} title="In Lagos? Coffee's on me." body="Yaba or Lekki, you pick." href="mailto:hi@onceuponatechie.com" />
+            <ContactCard Icon={Coffee} title="In Lagos? Coffee's on me." body="Yaba or Lekki, you pick." href="mailto:hello@essy.dev" />
             <div className="rounded-[28px] bg-ink p-6 text-white">
               <p className="font-display text-[22px] leading-tight">A small note —</p>
               <p className="mt-2 text-[13px] leading-[1.6] text-white/70">
