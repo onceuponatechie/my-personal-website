@@ -129,21 +129,6 @@ export function Projects() {
         >
           A small set of products built with care — calm interfaces, careful copy, and a quiet bias for shipping.
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25, duration: 0.7, ease: EASE }}
-          className="mt-8 flex justify-center"
-        >
-          <Link
-            href="/projects"
-            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
-          >
-            Explore all projects
-            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
-          </Link>
-        </motion.div>
       </div>
 
       {/* Sticky scroll-stack — same behaviour on mobile and desktop */}
@@ -152,6 +137,23 @@ export function Projects() {
           <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
         ))}
       </div>
+
+      {/* Explore-all sits right under the stack — no scrolling back up to find it. */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: EASE }}
+        className="mt-10 flex justify-center"
+      >
+        <Link
+          href="/projects"
+          className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
+        >
+          Explore all projects
+          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
+        </Link>
+      </motion.div>
     </section>
   );
 }

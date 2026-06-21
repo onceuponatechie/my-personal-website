@@ -135,22 +135,22 @@ function BookNotes({ className = "" }: { className?: string }) {
         className="flex flex-1 flex-col p-6"
       >
         <motion.h3 variants={textChild} className="text-[22px] font-semibold leading-[1.15] tracking-tight text-white">
-          Book notes from the shelf
+          The Builder&apos;s Book Club
         </motion.h3>
 
         <motion.div variants={textChild} className="mt-4 flex items-center gap-3 text-[12px] text-white/55">
-          <span>Updated weekly</span>
+          <span>Application over summary</span>
           <span className="size-1 rounded-full bg-white/40" />
-          <span>14 notes</span>
+          <span>12 books, applied</span>
         </motion.div>
 
         <motion.p variants={textChild} className="mt-3 text-[13px] leading-[1.55] text-white/65">
-          Honest highlights and takeaways from books on product, behaviour, and the craft of building — for the reader in a hurry.
+          Summaries are oversaturated and easy to AI-generate — the gap is application. So I pick one real book (business, law, communication, faith), build a mini-project with its framework, and document the friction honestly.
         </motion.p>
 
         <motion.div variants={textChild} className="relative z-20 mt-5 w-fit">
           <span className="pointer-events-none inline-flex items-center gap-2 rounded-full bg-sage-soft px-5 py-2.5 text-[13px] font-medium text-ink transition group-hover/card:gap-3">
-            Open Book Hub
+            Join the Book Club
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
         </motion.div>
