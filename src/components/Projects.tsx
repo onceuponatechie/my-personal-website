@@ -109,7 +109,7 @@ function ProjectCardSticky({
         >
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-card px-6 py-3 text-[14px] font-medium text-ink shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)] transition hover:bg-ink hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
           >
             Explore all projects
             <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />

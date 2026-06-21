@@ -130,6 +130,19 @@ export const STORIES: Story[] = [
   },
 ];
 
+export function getStory(slug: string) {
+  return STORIES.find((s) => s.slug === slug);
+}
+
+/** Up to `n` other stories to suggest after reading one ("You may like"). */
+export function relatedStories(slug: string, n = 2) {
+  const others = STORIES.filter((s) => s.slug !== slug);
+  // Rotate the start so different posts surface different neighbours.
+  const start = Math.max(0, STORIES.findIndex((s) => s.slug === slug));
+  const ordered = [...others.slice(start), ...others.slice(0, start)];
+  return ordered.slice(0, n);
+}
+
 export type Tool = {
   slug: string;
   name: string;
@@ -144,6 +157,14 @@ export const TOOLS: Tool[] = [
   { slug: "launch-checklist", name: "Launch Checklist", kind: "PDF · Notion", blurb: "Every box I tick before pressing publish.", cover: project3 },
   { slug: "brand-voice-canvas", name: "Brand Voice Canvas", kind: "Workshop", blurb: "Find your brand voice in a single afternoon.", cover: project4 },
 ];
+
+/** A downloadable resource paired with a story — picked so each post points
+ * to a different freebie. Links to the Tools & Templates shelf. */
+export function storyResource(slug: string): Tool & { href: string } {
+  const i = Math.max(0, STORIES.findIndex((s) => s.slug === slug));
+  const tool = TOOLS[i % TOOLS.length];
+  return { ...tool, href: "/resources/tools" };
+}
 
 export type ResearchEntry = {
   slug: string;
