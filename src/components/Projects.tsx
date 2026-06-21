@@ -93,13 +93,7 @@ function ProjectCardSticky({
   return (
     // Each card gets a full viewport of scroll and is pinned near the top, so
     // it reads completely (buttons included) before the next stacks on top.
-    // The last card gets a shorter slot so the CTA below sits right under it
-    // instead of a full empty viewport away.
-    <div
-      className={`sticky top-20 flex items-start justify-center pt-2 md:top-24 ${
-        isLast ? "min-h-[78vh]" : "min-h-screen"
-      }`}
-    >
+    <div className="sticky top-20 flex min-h-screen items-start justify-center pt-2 md:top-24">
       <motion.div style={{ scale, y, zIndex: index + 1 }} className="w-full max-w-6xl">
         <ProjectArticle p={p} />
       </motion.div>
@@ -137,26 +131,21 @@ export function Projects() {
         </motion.p>
       </div>
 
-      {/* Sticky scroll-stack — same behaviour on mobile and desktop. Last card
-          gets a shorter slot (see ProjectCardSticky), so the stack ends right
-          where the final card settles. */}
-      <div
-        ref={ref}
-        className="relative"
-        style={{ height: `${(PROJECTS.length - 1) * 100 + 78}vh` }}
-      >
+      {/* Sticky scroll-stack — same behaviour on mobile and desktop */}
+      <div ref={ref} className="relative" style={{ height: `${PROJECTS.length * 100}vh` }}>
         {PROJECTS.map((p, i) => (
           <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
         ))}
       </div>
 
-      {/* Explore-all sits right under the stack — no scrolling back up to find it. */}
+      {/* Explore-all sits after the full stack — it reads as the end of the
+          section once you've scrolled through every card, on mobile and desktop. */}
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: EASE }}
-        className="mt-6 flex justify-center"
+        className="mt-16 flex justify-center"
       >
         <Link
           href="/projects"
