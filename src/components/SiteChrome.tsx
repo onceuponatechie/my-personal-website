@@ -142,26 +142,22 @@ export function Navbar() {
 }
 
 /**
- * Wordmark for the site. A sage monogram with a butter dot keeps it from
- * reading bland, paired with the name set in the display serif.
+ * Wordmark for the site — just the name, set in the display serif, with a
+ * tiny butter-yellow dot that quietly pulses beside it.
  */
 export function Logo({ onDark = false }: { onDark?: boolean }) {
   return (
     <span className="group inline-flex items-center gap-2.5">
-      <span className="relative grid size-7 shrink-0 place-items-center rounded-full bg-sage text-white shadow-sm transition-transform duration-300 group-hover:-rotate-6">
-        <span className="font-display text-[15px] leading-none">E</span>
-        <span
-          className={`absolute -right-0.5 -top-0.5 size-[7px] rounded-full bg-butter ring-2 ${
-            onDark ? "ring-ink" : "ring-card"
-          }`}
-        />
+      <span className="relative grid size-2.5 shrink-0 place-items-center" aria-hidden>
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-butter opacity-60" />
+        <span className="relative inline-flex size-2 rounded-full bg-butter" />
       </span>
       <span
         className={`font-display text-[19px] leading-none tracking-tight ${
           onDark ? "text-white" : "text-foreground"
         }`}
       >
-        Essy <span className="italic">Udeme</span>
+        Essy Udeme
       </span>
     </span>
   );

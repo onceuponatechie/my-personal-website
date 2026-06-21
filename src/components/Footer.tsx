@@ -3,25 +3,13 @@
 import Link from "next/link";
 import { ArrowUpRight, Twitter, Instagram, Linkedin, Github } from "lucide-react";
 import { Logo } from "@/components/SiteChrome";
+import { Reveal } from "@/components/Reveal";
 
-const COLUMNS = [
-  {
-    heading: "Explore",
-    links: [
-      { label: "Projects", href: "/projects" },
-      { label: "Stories", href: "/stories" },
-      { label: "Resources", href: "/resources" },
-      { label: "About", href: "/about" },
-    ],
-  },
-  {
-    heading: "Free",
-    links: [
-      { label: "Book Hub", href: "/resources/books" },
-      { label: "Tools & Templates", href: "/resources/tools" },
-      { label: "Research Vault", href: "/resources/vault" },
-    ],
-  },
+const NAV = [
+  { label: "Projects", href: "/projects" },
+  { label: "Stories", href: "/stories" },
+  { label: "Resources", href: "/resources" },
+  { label: "About", href: "/about" },
 ];
 
 const SOCIAL_ICONS = [
@@ -38,80 +26,78 @@ export function Footer() {
         {/* Soft sage glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full opacity-30 blur-3xl"
+          className="pointer-events-none absolute -left-32 -top-40 h-[460px] w-[460px] rounded-full opacity-30 blur-3xl"
           style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -right-32 h-[460px] w-[460px] rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
+          className="pointer-events-none absolute -bottom-44 -right-32 h-[480px] w-[480px] rounded-full opacity-25 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--lavender) 0%, transparent 75%)" }}
         />
 
-        {/* Nav columns */}
-        <div className="relative grid gap-10 px-8 py-12 sm:px-14 md:grid-cols-[1.4fr_repeat(2,1fr)_1fr]">
-          <div>
-            <Link href="/" aria-label="Essy Udeme — home" className="inline-flex">
-              <Logo onDark />
-            </Link>
-            <p className="mt-5 max-w-[32ch] text-[13px] leading-[1.65] text-white/55">
-              Researcher, builder, and storyteller. Quiet software and honest notes.
+        {/* Statement + single CTA — the one "let's talk" moment, set big. */}
+        <div className="relative px-8 pt-16 pb-14 sm:px-14 sm:pt-20">
+          <Reveal blur>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-white/40">
+              Let&apos;s make something
             </p>
-            <div className="mt-7 flex items-center gap-2">
-              {SOCIAL_ICONS.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="grid size-9 place-items-center rounded-full border border-white/15 text-white/65 transition hover:border-white/40 hover:text-white"
-                >
-                  <Icon className="size-4" strokeWidth={1.8} />
-                </a>
-              ))}
-            </div>
-          </div>
+            <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02] tracking-tight">
+              Quietly good, <span className="italic text-sage">together.</span>
+            </h2>
+          </Reveal>
 
-          {COLUMNS.map((col) => (
-            <div key={col.heading}>
-              <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">{col.heading}</p>
-              <ul className="mt-5 space-y-3">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className="editorial-underline text-[14px] text-white/80 transition hover:text-white"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">Say hi</p>
+          <Reveal delay={0.12} className="mt-9 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-105"
+            >
+              Start a conversation
+              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
+            </Link>
             <a
               href="mailto:hello@essy.dev"
-              className="editorial-underline mt-5 inline-block text-[14px] text-white/85 transition hover:text-white"
+              className="editorial-underline text-[15px] text-white/70 transition hover:text-white"
             >
               hello@essy.dev
             </a>
-            <Link
-              href="/contact"
-              className="mt-3 inline-flex items-center gap-1 text-[13px] text-sage transition hover:brightness-110"
-            >
-              Open a conversation
-              <ArrowUpRight className="size-3.5" strokeWidth={2.2} />
-            </Link>
+          </Reveal>
+        </div>
+
+        {/* Slim links + socials */}
+        <div className="relative flex flex-col gap-6 border-t border-white/10 px-8 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-14">
+          <nav className="flex flex-wrap items-center gap-x-7 gap-y-3 text-[14px]">
+            {NAV.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="editorial-underline text-white/70 transition hover:text-white"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            {SOCIAL_ICONS.map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noreferrer"
+                className="grid size-9 place-items-center rounded-full border border-white/15 text-white/65 transition hover:border-white/40 hover:text-white"
+              >
+                <Icon className="size-4" strokeWidth={1.8} />
+              </a>
+            ))}
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="relative flex flex-col items-center justify-between gap-3 border-t border-white/10 px-8 py-5 text-[12px] text-white/40 sm:flex-row sm:px-14">
-          <p>© Essy Udeme, 2026 — Made with care, shipped on a Friday.</p>
-          <p className="tracking-[0.18em] uppercase">Product · Research · Story</p>
+          <Link href="/" aria-label="Essy Udeme — home" className="inline-flex">
+            <Logo onDark />
+          </Link>
+          <p>© 2026 — made with care.</p>
         </div>
       </div>
     </footer>

@@ -104,6 +104,29 @@
   :where(.font-display) {
     letter-spacing: -0.01em;
   }
+
+  /* Custom round cursor takes over on fine-pointer devices; hide the native
+     one. Touch devices (coarse pointer) keep their normal cursor and never
+     paint the custom dot. */
+  @media (pointer: fine) {
+    html,
+    body,
+    a,
+    button,
+    [role="button"],
+    [data-cursor="pointer"],
+    input,
+    textarea,
+    select,
+    label {
+      cursor: none;
+    }
+  }
+  @media (pointer: coarse) {
+    [data-round-cursor] {
+      display: none;
+    }
+  }
 }
 
 @layer utilities {
