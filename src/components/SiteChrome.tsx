@@ -28,7 +28,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-4 z-40 mx-auto w-full max-w-3xl px-4">
+    <header id="top" className="sticky top-4 z-40 mx-auto w-full max-w-3xl px-4">
       <nav className="flex items-center justify-between rounded-full border border-black/5 bg-card/90 py-2 pl-5 pr-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md sm:pl-6">
         <Link href="/" aria-label="Essy Udeme — home">
           <Logo />
@@ -142,26 +142,22 @@ export function Navbar() {
 }
 
 /**
- * Wordmark for the site. A sage monogram with a butter dot keeps it from
- * reading bland, paired with the name set in the display serif.
+ * Wordmark — just the name, with a tiny butter dot that softly pulses, like a
+ * quiet "live" light. Kept minimal so it reads premium, not busy.
  */
 export function Logo({ onDark = false }: { onDark?: boolean }) {
   return (
-    <span className="group inline-flex items-center gap-2.5">
-      <span className="relative grid size-7 shrink-0 place-items-center rounded-full bg-sage text-white shadow-sm transition-transform duration-300 group-hover:-rotate-6">
-        <span className="font-display text-[15px] leading-none">E</span>
-        <span
-          className={`absolute -right-0.5 -top-0.5 size-[7px] rounded-full bg-butter ring-2 ${
-            onDark ? "ring-ink" : "ring-card"
-          }`}
-        />
-      </span>
+    <span className="inline-flex items-center gap-2">
       <span
-        className={`font-display text-[19px] leading-none tracking-tight ${
+        className={`font-display text-[20px] leading-none tracking-tight ${
           onDark ? "text-white" : "text-foreground"
         }`}
       >
-        Essy <span className="italic">Udeme</span>
+        Essy Udeme
+      </span>
+      <span className="relative flex size-2 -translate-y-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-butter opacity-75" />
+        <span className="relative inline-flex size-2 rounded-full bg-butter" />
       </span>
     </span>
   );

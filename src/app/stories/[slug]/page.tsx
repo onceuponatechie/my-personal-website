@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { STORIES } from "@/lib/site-data";
+import { STORIES, BOOKS } from "@/lib/site-data";
 import { StoryDetailView } from "./story-detail-view";
 
 export function generateStaticParams() {
@@ -27,7 +27,11 @@ export default async function StoryDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const story = STORIES.find((s) => s.slug === slug);
-  if (!story) notFound();
-  return <StoryDetailView s={story} />;
+  const idx = STORIES.findIndex((s) => s.slug === slug);
+  if (idx === -1) notFound();
+  const story = STORIES[idx];
+  // Next letter in the loop + one book note as the take-away resource.
+  const nextStory = STORIES[(idx + 1) % STORIES.length];
+  const resource = BOOKS[idx % BOOKS.length];
+  return <StoryDetailView s={story} nextStory={nextStory} resource={resource} />;
 }

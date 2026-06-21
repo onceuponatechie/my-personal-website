@@ -131,7 +131,7 @@ export function FromTheDesk() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.6 }}
               transition={{ duration: 0.8, ease: EASE }}
               className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
             >
@@ -140,7 +140,7 @@ export function FromTheDesk() {
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.6 }}
               transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
               className="mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
             >
@@ -182,9 +182,17 @@ export function FromTheDesk() {
           className="-mx-4 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-4 pb-4 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {DESK.map((s, i) => (
-            <div key={i} data-card className="w-[300px] shrink-0 snap-start sm:w-[340px]">
+            <motion.div
+              key={i}
+              data-card
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: EASE }}
+              className="w-[300px] shrink-0 snap-start sm:w-[340px]"
+            >
               <DeskCard s={s} />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

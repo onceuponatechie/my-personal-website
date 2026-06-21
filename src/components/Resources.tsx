@@ -2,8 +2,9 @@
 
 import { ArrowUpRight, ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { EASE } from "@/lib/motion";
 
 const bookNotesImg = "/assets/book-notes.jpg";
 const researchImg = "/assets/research-vault.jpg";
@@ -53,9 +54,19 @@ function AnimatedCount({ to = 20, suffix = "+" }: { to?: number; suffix?: string
 
 /* ---------- Motion presets ---------- */
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 28, scale: 0.98 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: EASE } },
+};
+
+// Directional entrances so the bento builds in from the sides, not just up.
+const fromLeft: Variants = {
+  hidden: { opacity: 0, x: -56 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE } },
+};
+const fromRight: Variants = {
+  hidden: { opacity: 0, x: 56 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
 const containerVariants = {
@@ -78,14 +89,14 @@ export function Resources() {
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-10%" }}
+        viewport={{ once: false, amount: 0.2 }}
       >
         <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:grid-rows-2">
-          <BookNotes className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
-          <ToolsTemplates className="order-3 md:col-start-4 md:col-span-3 md:row-start-1" />
-          <ResearchVault className="order-4 md:col-start-7 md:col-span-6 md:row-start-1" />
-          <ResourcesHeadline className="order-2 md:col-start-4 md:col-span-6 md:row-start-2" />
-          <ProfileCard className="order-5 md:col-start-10 md:col-span-3 md:row-start-2" />
+          <BookNotes className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" variants={fromLeft} />
+          <ToolsTemplates className="order-3 md:col-start-4 md:col-span-3 md:row-start-1" variants={cardVariants} />
+          <ResearchVault className="order-4 md:col-start-7 md:col-span-6 md:row-start-1" variants={fromRight} />
+          <ResourcesHeadline className="order-2 md:col-start-4 md:col-span-6 md:row-start-2" variants={cardVariants} />
+          <ProfileCard className="order-5 md:col-start-10 md:col-span-3 md:row-start-2" variants={fromRight} />
         </div>
       </motion.div>
     </section>
@@ -94,10 +105,10 @@ export function Resources() {
 
 /* ---------- Cards ---------- */
 
-function BookNotes({ className = "" }: { className?: string }) {
+function BookNotes({ className = "", variants = cardVariants }: { className?: string; variants?: Variants }) {
   return (
     <motion.article
-      variants={cardVariants}
+      variants={variants}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-ink text-white`}
@@ -159,9 +170,9 @@ function BookNotes({ className = "" }: { className?: string }) {
   );
 }
 
-function ToolsTemplates({ className = "" }: { className?: string }) {
+function ToolsTemplates({ className = "", variants = cardVariants }: { className?: string; variants?: Variants }) {
   return (
-    <motion.article variants={cardVariants} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-card p-6`}>
+    <motion.article variants={variants} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-card p-6`}>
       <Link href="/resources/tools" aria-label="Explore Tools & Templates" className="absolute inset-0 z-10" />
       <svg
         viewBox="0 0 320 260"
@@ -230,9 +241,9 @@ function ToolsTemplates({ className = "" }: { className?: string }) {
   );
 }
 
-function ResearchVault({ className = "" }: { className?: string }) {
+function ResearchVault({ className = "", variants = cardVariants }: { className?: string; variants?: Variants }) {
   return (
-    <motion.article variants={cardVariants} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-sage-soft`}>
+    <motion.article variants={variants} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-sage-soft`}>
       <Link href="/resources/vault" aria-label="Explore the Research Vault" className="absolute inset-0 z-10" />
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
         <div className="p-2 pr-0 md:w-[44%] md:shrink-0">
@@ -277,10 +288,10 @@ function ResearchVault({ className = "" }: { className?: string }) {
   );
 }
 
-function ResourcesHeadline({ className = "" }: { className?: string }) {
+function ResourcesHeadline({ className = "", variants = cardVariants }: { className?: string; variants?: Variants }) {
   return (
     <motion.article
-      variants={cardVariants}
+      variants={variants}
       className={`${R} ${className} flex flex-col items-center justify-center bg-sage-soft px-6 py-16 text-center`}
     >
       <motion.h2
@@ -305,9 +316,9 @@ function ResourcesHeadline({ className = "" }: { className?: string }) {
   );
 }
 
-function ProfileCard({ className = "" }: { className?: string }) {
+function ProfileCard({ className = "", variants = cardVariants }: { className?: string; variants?: Variants }) {
   return (
-    <motion.article variants={cardVariants} className={`${R} ${className} overflow-hidden bg-card`}>
+    <motion.article variants={variants} className={`${R} ${className} overflow-hidden bg-card`}>
       <motion.img
         src={profileImg}
         alt="Portrait"

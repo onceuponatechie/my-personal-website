@@ -109,7 +109,7 @@ function ProjectCardSticky({
         >
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-card px-6 py-3 text-[14px] font-medium text-ink shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)] transition hover:bg-ink hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
           >
             Explore all projects
             <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -133,7 +133,7 @@ export function Projects() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.6 }}
           transition={{ duration: 0.8, ease: EASE }}
           className="font-display text-[clamp(2.75rem,6vw,4.75rem)] italic leading-none tracking-tight text-ink"
         >
@@ -142,7 +142,7 @@ export function Projects() {
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.6 }}
           transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
           className="mx-auto mt-5 max-w-[44ch] text-[14px] leading-[1.65] text-ink/65"
         >
@@ -151,8 +151,13 @@ export function Projects() {
       </div>
 
       {/* Sticky scroll-stack — same behaviour on mobile and desktop. The CTA
-          rides inside the final card's slot (see ProjectCardSticky). */}
-      <div ref={ref} className="relative" style={{ height: `${PROJECTS.length * 100}vh` }}>
+          rides inside the final card's slot (see ProjectCardSticky). The extra
+          7rem of track gives the CTA clear air before the next section. */}
+      <div
+        ref={ref}
+        className="relative"
+        style={{ height: `calc(${PROJECTS.length * 100}vh + 7rem)` }}
+      >
         {PROJECTS.map((p, i) => (
           <ProjectCardSticky key={p.slug} p={p} index={i} total={PROJECTS.length} progress={scrollYProgress} />
         ))}

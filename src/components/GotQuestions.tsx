@@ -16,7 +16,7 @@ export function GotQuestions() {
       <motion.div
         initial={{ opacity: 0, y: 22 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10%" }}
+        viewport={{ once: false, amount: 0.4 }}
         transition={{ duration: 0.7, ease: EASE }}
         className="relative mx-auto max-w-3xl overflow-hidden rounded-[36px] bg-ink px-8 py-14 text-center text-white"
       >
