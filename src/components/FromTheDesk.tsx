@@ -124,7 +124,7 @@ export function FromTheDesk() {
   };
 
   return (
-    <section id="desk" className="px-4 pb-32 pt-20 sm:px-6 md:pt-32">
+    <section id="desk" className="px-4 pb-32 pt-10 sm:px-6 md:pt-12">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>

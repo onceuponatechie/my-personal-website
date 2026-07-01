@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 
 type NavChild = { href: string; label: string; desc: string };
 type NavLink = { href: string; label: string; children?: NavChild[] };
@@ -25,6 +25,7 @@ const NAV_LINKS: NavLink[] = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const pathname = usePathname();
 
   return (
@@ -106,35 +107,73 @@ export function Navbar() {
 
       <div
         className={`md:hidden transition-all duration-300 ease-out ${
-          open ? "mt-2 max-h-[28rem] opacity-100" : "pointer-events-none mt-0 max-h-0 opacity-0"
+          open ? "mt-2 max-h-[36rem] opacity-100" : "pointer-events-none mt-0 max-h-0 opacity-0"
         } overflow-hidden`}
       >
         <div className="rounded-3xl border border-black/5 bg-card/95 p-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md">
-          {NAV_LINKS.map((l) => (
-            <div key={l.href}>
+          {NAV_LINKS.map((l) => {
+            const isExpanded = expanded === l.href;
+            return l.children ? (
+              <div key={l.href}>
+                {/* Parent row: the label still navigates; the chevron toggles the group. */}
+                <div className="flex items-center gap-1">
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex-1 rounded-2xl px-4 py-3 text-[14px] transition hover:bg-foreground/5 ${
+                      pathname.startsWith(l.href) ? "text-foreground" : "text-foreground/80"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                  <button
+                    type="button"
+                    aria-label={`${isExpanded ? "Collapse" : "Expand"} ${l.label}`}
+                    aria-expanded={isExpanded}
+                    onClick={() => setExpanded(isExpanded ? null : l.href)}
+                    className="mr-1 grid size-9 shrink-0 place-items-center rounded-full text-foreground/55 transition hover:bg-foreground/5 hover:text-foreground"
+                  >
+                    <ChevronRight
+                      className={`size-4 transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}`}
+                      strokeWidth={2}
+                    />
+                  </button>
+                </div>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    isExpanded ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="mb-1 ml-3 mt-0.5 space-y-0.5 border-l border-black/5 pl-3">
+                    {l.children.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        onClick={() => setOpen(false)}
+                        className={`flex flex-col rounded-xl px-3 py-2 transition hover:bg-foreground/5 ${
+                          pathname === c.href ? "bg-foreground/5" : ""
+                        }`}
+                      >
+                        <span className="text-[13px] font-medium text-foreground/80">{c.label}</span>
+                        <span className="text-[11px] text-muted-foreground">{c.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
               <Link
+                key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-2xl px-4 py-3 text-[14px] text-foreground/80 transition hover:bg-foreground/5"
+                className={`block rounded-2xl px-4 py-3 text-[14px] transition hover:bg-foreground/5 ${
+                  pathname === l.href ? "text-foreground" : "text-foreground/80"
+                }`}
               >
                 {l.label}
               </Link>
-              {l.children && (
-                <div className="mb-1 ml-3 space-y-0.5 border-l border-black/5 pl-3">
-                  {l.children.map((c) => (
-                    <Link
-                      key={c.href}
-                      href={c.href}
-                      onClick={() => setOpen(false)}
-                      className="block rounded-xl px-3 py-2 text-[13px] text-foreground/65 transition hover:bg-foreground/5 hover:text-foreground"
-                    >
-                      {c.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </header>
