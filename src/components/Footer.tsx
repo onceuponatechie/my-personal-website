@@ -128,8 +128,8 @@ export function Footer() {
 
         {/* ---------- Oversized wordmark ---------- */}
         <div aria-hidden className="relative select-none px-2 pt-2">
-          <span className="block whitespace-nowrap text-center font-display text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
-            Essy <span className="italic">Udeme</span>
+          <span className="block whitespace-nowrap text-center font-display italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
+            Essy Udeme
           </span>
         </div>
       </div>
