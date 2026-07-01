@@ -1,23 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, ArrowUp, Twitter, Instagram, Linkedin, Github, Mail } from "lucide-react";
-import { Logo } from "@/components/SiteChrome";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { SmileyMark } from "@/components/SmileyMark";
 import { Reveal, RevealText } from "@/components/Reveal";
 
-const LINK_GROUPS: { title: string; links: { label: string; href: string }[] }[] = [
+const NAV_COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
-    title: "Explore",
+    title: "Navigation",
     links: [
-      { label: "Projects", href: "/projects" },
-      { label: "Stories", href: "/stories" },
+      { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Projects", href: "/projects" },
       { label: "Contact", href: "/contact" },
     ],
   },
   {
-    title: "Resources",
+    title: "Explore",
     links: [
+      { label: "Stories", href: "/stories" },
       { label: "Book Hub", href: "/resources/books" },
       { label: "Tools & Templates", href: "/resources/tools" },
       { label: "Research Vault", href: "/resources/vault" },
@@ -25,132 +26,111 @@ const LINK_GROUPS: { title: string; links: { label: string; href: string }[] }[]
   },
 ];
 
-const SOCIALS: { Icon: typeof Twitter; href: string; label: string }[] = [
-  { Icon: Twitter, href: "https://twitter.com", label: "X" },
-  { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { Icon: Github, href: "https://github.com", label: "GitHub" },
+const SOCIALS = [
+  { label: "X", href: "https://twitter.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "GitHub", href: "https://github.com" },
 ];
 
 export function Footer() {
-  const scrollToTop = () =>
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
   return (
     <footer className="px-4 pb-6 sm:px-6">
-      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-ink text-white">
-        {/* Soft accent glows, echoing the site palette */}
+      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-gradient-to-b from-card via-card to-butter-soft/70 ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
+        {/* Warm horizon glow rising from the bottom, echoing the site's accents. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-32 -top-40 h-[460px] w-[460px] rounded-full opacity-30 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
+          style={{ background: "radial-gradient(120% 80% at 50% 130%, oklch(0.72 0.07 145 / 0.20) 0%, transparent 60%)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-44 -right-32 h-[480px] w-[480px] rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--lavender) 0%, transparent 75%)" }}
+          className="pointer-events-none absolute -bottom-24 right-8 h-72 w-72 rounded-full opacity-45 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 75%)" }}
         />
 
-        {/* ---------- CTA band ---------- */}
-        <div className="relative px-8 pt-16 pb-14 sm:px-14 sm:pt-20">
-          <Reveal blur>
-            <p className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.28em] text-white/45">
-              <span className="relative grid size-2 place-items-center">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
-                <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
-              </span>
-              Open to collaborations
-            </p>
-          </Reveal>
-          <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] tracking-tight">
-            <RevealText text="Let's build an" />{" "}
-            <RevealText text="experience." className="italic text-sage" delay={0.28} />
-          </h2>
-
-          <Reveal delay={0.2} className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-105"
-            >
-              Start a conversation
-              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
-            </Link>
-            <a
-              href="mailto:hello@essy.dev"
-              className="editorial-underline inline-flex items-center gap-2 text-[15px] text-white/70 transition hover:text-white"
-            >
-              <Mail className="size-4" strokeWidth={1.8} />
-              hello@essy.dev
-            </a>
-          </Reveal>
+        {/* ---------- Status bar ---------- */}
+        <div className="relative flex items-center justify-between gap-4 border-b border-black/10 px-7 py-5 sm:px-12">
+          <span className="inline-flex items-center gap-2.5 text-[12px] text-ink/70 sm:text-[13px]">
+            <span className="relative grid size-2 place-items-center">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
+            </span>
+            Available for new projects
+          </span>
+          <span className="text-[12px] text-ink/45 sm:text-[13px]">Essy Udeme® — 2026</span>
         </div>
 
-        {/* ---------- Link columns ---------- */}
-        <div className="relative grid grid-cols-2 gap-x-8 gap-y-10 border-t border-white/10 px-8 py-12 sm:grid-cols-[1.5fr_1fr_1fr] sm:px-14">
-          {/* Brand blurb */}
-          <div className="col-span-2 max-w-[36ch] sm:col-span-1">
-            <Logo onDark />
-            <p className="mt-4 text-[13px] leading-[1.7] text-white/55">
-              A calm corner of the internet — products, stories, and the tools behind them, made by one
-              curious person.
-            </p>
-            <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-white/45">
-              <span className="relative grid size-2 place-items-center">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-butter opacity-70" />
-                <span className="relative inline-flex size-1.5 rounded-full bg-butter" />
-              </span>
-              Currently building at <span className="text-white/75">NitHub</span> · Lagos
-            </p>
+        {/* ---------- Middle: nav + statement ---------- */}
+        <div className="relative grid gap-12 px-7 py-14 sm:px-12 sm:py-16 md:grid-cols-2 md:items-end">
+          {/* Nav columns */}
+          <div className="order-2 grid max-w-md grid-cols-2 gap-x-8 md:order-1">
+            {NAV_COLS.map((col) => (
+              <div key={col.title}>
+                <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink/40">{col.title}</p>
+                <ul className="space-y-3">
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link
+                        href={l.href}
+                        className="editorial-underline text-[15px] text-ink/70 transition hover:text-ink"
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
-          {LINK_GROUPS.map((g) => (
-            <div key={g.title}>
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/35">{g.title}</p>
-              <ul className="mt-4 space-y-3">
-                {g.links.map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="editorial-underline text-[14px] text-white/70 transition hover:text-white"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Statement + CTA */}
+          <div className="order-1 md:order-2 md:justify-self-end md:text-right">
+            <div className="mb-6 flex md:justify-end">
+              <SmileyMark />
             </div>
-          ))}
+            <h2 className="font-display text-[clamp(2.25rem,4.6vw,3.6rem)] leading-[1.04] tracking-tight text-ink">
+              <RevealText text="Let's build something" />
+              <br />
+              <RevealText text="people" delay={0.15} />{" "}
+              <RevealText text="remember" className="italic text-sage" delay={0.28} />
+            </h2>
+            <Reveal delay={0.2} className="mt-8 flex md:justify-end">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-125"
+              >
+                Let&apos;s work together
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
+              </Link>
+            </Reveal>
+          </div>
         </div>
 
         {/* ---------- Bottom bar ---------- */}
-        <div className="relative flex flex-col items-center justify-between gap-5 border-t border-white/10 px-8 py-6 sm:flex-row sm:px-14">
-          <p className="order-2 text-[12px] text-white/40 sm:order-1">
-            © 2026 Essy Udeme — made with care.
-          </p>
-
-          <div className="order-1 flex items-center gap-2.5 sm:order-2">
-            {SOCIALS.map(({ Icon, href, label }) => (
+        <div className="relative flex flex-col items-center justify-between gap-4 border-t border-black/10 px-7 py-6 sm:flex-row sm:px-12">
+          <p className="order-2 text-[12px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
+          <nav className="order-1 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:order-2">
+            {SOCIALS.map((s) => (
               <a
-                key={label}
-                href={href}
-                aria-label={label}
+                key={s.label}
+                href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="grid size-9 place-items-center rounded-full border border-white/15 text-white/65 transition hover:border-white/40 hover:bg-white/5 hover:text-white"
+                className="editorial-underline inline-flex items-center gap-1 text-[13px] text-ink/60 transition hover:text-ink"
               >
-                <Icon className="size-4" strokeWidth={1.8} />
+                {s.label}
+                <ArrowUpRight className="size-3 opacity-60" strokeWidth={2} />
               </a>
             ))}
-            <button
-              type="button"
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              className="group ml-1 inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-[12px] font-medium text-white/70 transition hover:border-white/40 hover:text-white"
-            >
-              Top
-              <ArrowUp className="size-3.5 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
-            </button>
-          </div>
+          </nav>
+        </div>
+
+        {/* ---------- Oversized wordmark ---------- */}
+        <div aria-hidden className="relative select-none px-2 pt-2">
+          <span className="block whitespace-nowrap text-center font-display text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
+            Essy <span className="italic">Udeme</span>
+          </span>
         </div>
       </div>
     </footer>

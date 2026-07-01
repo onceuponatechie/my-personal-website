@@ -128,7 +128,7 @@ export function Projects() {
   });
 
   return (
-    <section id="projects" className="px-4 pb-16 sm:px-6 sm:pb-20">
+    <section id="projects" className="px-4 pb-32 sm:px-6 md:pb-20">
       <div className="mx-auto mb-16 max-w-3xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
