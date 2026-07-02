@@ -36,7 +36,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="px-4 pb-6 sm:px-6">
-      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-gradient-to-b from-card via-card to-butter-soft/70 ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
+      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-gradient-to-b from-card via-card to-sage-soft/50 ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
         {/* Warm horizon glow rising from the bottom, echoing the site's accents. */}
         <div
           aria-hidden
@@ -56,7 +56,7 @@ export function Footer() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
             </span>
-            Available for new projects
+            What are we building today?
           </span>
           <span className="text-[12px] text-ink/45 sm:text-[13px]">Essy Udeme® — 2026</span>
         </div>
@@ -90,10 +90,10 @@ export function Footer() {
               <SmileyMark />
             </div>
             <h2 className="font-display text-[clamp(2.25rem,4.6vw,3.6rem)] leading-[1.04] tracking-tight text-ink">
-              <RevealText text="Let's build something" />
+              <RevealText text="Let's build a" />
               <br />
-              <RevealText text="people" delay={0.15} />{" "}
-              <RevealText text="remember" className="italic text-sage" delay={0.28} />
+              <RevealText text="lasting" className="italic text-sage" delay={0.15} />{" "}
+              <RevealText text="experience" delay={0.28} />
             </h2>
             <Reveal delay={0.2} className="mt-8 flex md:justify-end">
               <Link
@@ -124,13 +124,6 @@ export function Footer() {
               </a>
             ))}
           </nav>
-        </div>
-
-        {/* ---------- Oversized wordmark ---------- */}
-        <div aria-hidden className="relative select-none px-2 pt-2">
-          <span className="block whitespace-nowrap text-center font-display italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
-            Essy Udeme
-          </span>
         </div>
       </div>
     </footer>

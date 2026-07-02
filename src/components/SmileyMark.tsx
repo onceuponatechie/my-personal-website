@@ -28,7 +28,7 @@ export function SmileyMark() {
   const reelY = step <= 1 ? 0 : step === 2 ? -100 : step <= 4 ? -100 : -200;
 
   return (
-    <div className="relative size-14 overflow-hidden rounded-full bg-butter shadow-[0_8px_24px_-8px_oklch(0.88_0.13_92/0.55)]">
+    <div className="relative size-14 overflow-hidden rounded-full bg-butter shadow-[0_8px_24px_-8px_oklch(0.92_0.08_95/0.5)]">
       <div
         className="absolute inset-0 flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)]"
         style={{ transform: `translateY(${reelY}%)` }}
@@ -57,7 +57,7 @@ export function SmileyMark() {
             {/* palm */}
             <path
               d="M18 30 v-8 a2.4 2.4 0 0 1 4.8 0 v6 M22.8 28 v-12 a2.4 2.4 0 0 1 4.8 0 v12 M27.6 28 v-13 a2.4 2.4 0 0 1 4.8 0 v13 M32.4 28 v-10 a2.4 2.4 0 0 1 4.8 0 v12 c0 6 -3 12 -9 12 c-4 0 -7 -2 -9 -6 l-3 -6 a2.4 2.4 0 0 1 4.2 -2.4 l2 3"
-              fill="#f4c873"
+              fill="#f3d98f"
               stroke="#1a1a1a"
               strokeWidth="1.6"
               strokeLinejoin="round"

@@ -143,19 +143,125 @@ export function relatedStories(slug: string, n = 2) {
   return ordered.slice(0, n);
 }
 
+export type ToolFormat = "notion" | "figma" | "pdf" | "workshop";
+export type ToolTone = "sage" | "butter" | "lavender";
+
 export type Tool = {
   slug: string;
   name: string;
   kind: string;
   blurb: string;
   cover: string;
+  category: string;
+  format: ToolFormat;
+  /** What you actually get inside the file. */
+  includes: string[];
+  /** Small factual descriptor — page count, boards, session length. */
+  meta: string;
+  tone: ToolTone;
+  featured?: boolean;
 };
 
+export const TOOL_CATEGORIES = ["All", "Plan & run", "Design", "Write & publish", "Launch"] as const;
+
 export const TOOLS: Tool[] = [
-  { slug: "founder-os", name: "Founder OS", kind: "Notion template", blurb: "A weekly operating system for solo founders.", cover: project1 },
-  { slug: "design-review-kit", name: "Design Review Kit", kind: "Figma file", blurb: "Run gentle, useful design reviews in 30 min.", cover: project2 },
-  { slug: "launch-checklist", name: "Launch Checklist", kind: "PDF · Notion", blurb: "Every box I tick before pressing publish.", cover: project3 },
-  { slug: "brand-voice-canvas", name: "Brand Voice Canvas", kind: "Workshop", blurb: "Find your brand voice in a single afternoon.", cover: project4 },
+  {
+    slug: "founder-os",
+    name: "Founder OS",
+    kind: "Notion template",
+    blurb: "A weekly operating system for solo founders — plan the week, log decisions, and watch the numbers that actually matter.",
+    cover: project1,
+    category: "Plan & run",
+    format: "notion",
+    includes: ["Weekly planning dashboard", "Decision log with context", "Metrics-that-matter board", "Energy budget tracker"],
+    meta: "6 linked databases",
+    tone: "sage",
+    featured: true,
+  },
+  {
+    slug: "design-review-kit",
+    name: "Design Review Kit",
+    kind: "Figma file",
+    blurb: "Run gentle, useful design reviews in 30 min.",
+    cover: project2,
+    category: "Design",
+    format: "figma",
+    includes: ["Agenda board", "Feedback stickers", "Severity scale"],
+    meta: "3 boards",
+    tone: "lavender",
+  },
+  {
+    slug: "launch-checklist",
+    name: "Launch Checklist",
+    kind: "PDF · Notion",
+    blurb: "Every box I tick before pressing publish.",
+    cover: project3,
+    category: "Launch",
+    format: "pdf",
+    includes: ["Pre-launch QA sweep", "Announcement copy slots", "Day-one monitoring list"],
+    meta: "47 checkpoints",
+    tone: "butter",
+  },
+  {
+    slug: "brand-voice-canvas",
+    name: "Brand Voice Canvas",
+    kind: "Workshop kit",
+    blurb: "Find your brand voice in a single afternoon.",
+    cover: project4,
+    category: "Write & publish",
+    format: "workshop",
+    includes: ["Voice spectrum sliders", "Word bank builder", "Before/after rewrites"],
+    meta: "90-min session",
+    tone: "sage",
+  },
+  {
+    slug: "content-calendar",
+    name: "Content Calendar",
+    kind: "Notion template",
+    blurb: "A month of content planned in one honest sitting.",
+    cover: inline1,
+    category: "Write & publish",
+    format: "notion",
+    includes: ["Idea inbox", "Channel pipelines", "Repurposing map"],
+    meta: "4 views",
+    tone: "butter",
+  },
+  {
+    slug: "user-interview-script",
+    name: "User Interview Script",
+    kind: "PDF guide",
+    blurb: "Questions that get past polite answers.",
+    cover: inline2,
+    category: "Plan & run",
+    format: "pdf",
+    includes: ["Warm-up script", "Follow-up ladders", "Synthesis worksheet"],
+    meta: "9 pages",
+    tone: "lavender",
+  },
+  {
+    slug: "case-study-skeleton",
+    name: "Case Study Skeleton",
+    kind: "Notion + Figma",
+    blurb: "Tell the story of the work, not just the screens.",
+    cover: inline4,
+    category: "Design",
+    format: "figma",
+    includes: ["Narrative skeleton", "Before/after frames", "Metric callouts"],
+    meta: "2 files",
+    tone: "butter",
+  },
+  {
+    slug: "pricing-page-worksheet",
+    name: "Pricing Page Worksheet",
+    kind: "PDF worksheet",
+    blurb: "Find the leaks in your pricing page in an hour.",
+    cover: project2,
+    category: "Launch",
+    format: "pdf",
+    includes: ["Teardown checklist", "Objection map", "Copy prompts"],
+    meta: "6 pages",
+    tone: "sage",
+  },
 ];
 
 /** A downloadable resource paired with a story — picked so each post points

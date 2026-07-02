@@ -205,7 +205,10 @@ export function Logo({ onDark = false }: { onDark?: boolean }) {
 export function PillBadge({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-card px-3.5 py-1.5 text-[12px] font-medium text-foreground/70 shadow-sm">
-      <span className="size-1.5 rounded-full bg-sage" />
+      <span className="relative grid size-2 place-items-center" aria-hidden>
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
+        <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
+      </span>
       {children}
     </span>
   );
