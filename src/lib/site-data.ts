@@ -255,7 +255,7 @@ export const TOOLS: Tool[] = [
     name: "Pricing Page Worksheet",
     kind: "PDF worksheet",
     blurb: "Find the leaks in your pricing page in an hour.",
-    cover: project2,
+    cover: inline3,
     category: "Launch",
     format: "pdf",
     includes: ["Teardown checklist", "Objection map", "Copy prompts"],
