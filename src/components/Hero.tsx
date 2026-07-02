@@ -85,7 +85,6 @@ export function Hero() {
           <motion.span variants={popIn} className="inline-block align-middle">
             <InlineMedia
               images={setB}
-              shape="blob"
               className="mx-1 h-[0.7em] w-[1.1em] -translate-y-1"
               alt="changing inline media"
             />

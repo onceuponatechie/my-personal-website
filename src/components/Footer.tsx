@@ -107,8 +107,8 @@ export function Footer() {
           </div>
 
           {/* Statement + CTA */}
-          <div className="order-1 flex flex-col items-center text-center md:order-2">
-            <div className="mb-6 flex justify-center">
+          <div className="order-1 md:order-2 md:justify-self-end md:text-right">
+            <div className="mb-6 flex md:justify-end">
               <SmileyMark />
             </div>
             <h2 className="font-display tracking-tight text-white">
@@ -119,7 +119,7 @@ export function Footer() {
                 <RevealText text="Experience" delay={0.15} />
               </span>
             </h2>
-            <Reveal delay={0.2} className="mt-8 flex justify-center">
+            <Reveal delay={0.2} className="mt-8 flex md:justify-end">
               {/* Glass-border pill: a soft white gradient ring wraps the same
                   sage core as the navigation button. */}
               <Link
