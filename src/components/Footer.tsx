@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { SmileyMark } from "@/components/SmileyMark";
 import { Reveal, RevealText } from "@/components/Reveal";
 
@@ -37,23 +37,36 @@ export function Footer() {
   return (
     <footer className="px-4 pb-6 sm:px-6">
       <div className="relative mx-auto overflow-hidden rounded-[44px] bg-ink text-white ring-1 ring-white/10 shadow-[0_24px_70px_-40px_rgba(0,0,0,0.5)]">
-        {/* Spotlight — soft diagonal beams sweeping in from the top-left,
-            like stage light raking across the dark surface. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Sun-ray reflections — a fan of soft parallel rays falling in from
+            the top-left, fading as they travel, like light glancing off the
+            surface. The mask dissolves the whole effect toward the
+            bottom-right so it reads as a reflection rather than stripes. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          style={{ maskImage: "linear-gradient(118deg, black 0%, black 32%, transparent 68%)", WebkitMaskImage: "linear-gradient(118deg, black 0%, black 32%, transparent 68%)" }}
+        >
+          {[
+            { left: "-14%", width: "30%", opacity: 0.11, blur: 52 },
+            { left: "9%", width: "12%", opacity: 0.09, blur: 34 },
+            { left: "19%", width: "5%", opacity: 0.07, blur: 22 },
+            { left: "26%", width: "14%", opacity: 0.055, blur: 40 },
+            { left: "40%", width: "7%", opacity: 0.045, blur: 26 },
+          ].map((ray, i) => (
+            <div
+              key={i}
+              className="absolute -top-[80%] h-[260%] rotate-[34deg]"
+              style={{
+                left: ray.left,
+                width: ray.width,
+                opacity: ray.opacity,
+                background: "linear-gradient(to right, transparent, white 50%, transparent)",
+                filter: `blur(${ray.blur}px)`,
+              }}
+            />
+          ))}
           <div
-            className="absolute -top-[60%] left-[-16%] h-[220%] w-[46%] rotate-[26deg] opacity-[0.2]"
-            style={{ background: "linear-gradient(to right, transparent, white 45%, transparent)", filter: "blur(44px)" }}
-          />
-          <div
-            className="absolute -top-[60%] left-[12%] h-[220%] w-[22%] rotate-[26deg] opacity-[0.13]"
-            style={{ background: "linear-gradient(to right, transparent, white 50%, transparent)", filter: "blur(32px)" }}
-          />
-          <div
-            className="absolute -top-[60%] left-[30%] h-[220%] w-[10%] rotate-[26deg] opacity-[0.08]"
-            style={{ background: "linear-gradient(to right, transparent, white 50%, transparent)", filter: "blur(24px)" }}
-          />
-          <div
-            className="absolute -left-24 -top-24 h-80 w-80 rounded-full opacity-[0.16] blur-3xl"
+            className="absolute -left-28 -top-28 h-96 w-96 rounded-full opacity-[0.14] blur-3xl"
             style={{ background: "radial-gradient(closest-side, white 0%, transparent 75%)" }}
           />
         </div>
@@ -94,26 +107,27 @@ export function Footer() {
           </div>
 
           {/* Statement + CTA */}
-          <div className="order-1 md:order-2 md:justify-self-end md:text-right">
-            <div className="mb-6 flex md:justify-end">
+          <div className="order-1 flex flex-col items-center text-center md:order-2">
+            <div className="mb-6 flex justify-center">
               <SmileyMark />
             </div>
-            <h2 className="font-display text-[clamp(2.25rem,4.6vw,3.6rem)] leading-[1.04] tracking-tight text-white">
-              <RevealText text="Let's build a" />
-              <br />
-              <RevealText text="lasting" className="italic text-sage" delay={0.15} />{" "}
-              <RevealText text="experience" delay={0.28} />
+            <h2 className="font-display tracking-tight text-white">
+              <span className="block text-[clamp(1.4rem,2.4vw,1.9rem)] leading-tight text-white/80">
+                <RevealText text="Let's build an" />
+              </span>
+              <span className="mt-1 block text-[clamp(3rem,6.4vw,5.25rem)] italic leading-[1.05] text-sage">
+                <RevealText text="Experience" delay={0.15} />
+              </span>
             </h2>
-            <Reveal delay={0.2} className="mt-8 flex md:justify-end">
-              {/* Glass-border pill: a soft white gradient ring wraps a slightly
-                  lifted dark core, echoing light catching the button's edge. */}
+            <Reveal delay={0.2} className="mt-8 flex justify-center">
+              {/* Glass-border pill: a soft white gradient ring wraps the same
+                  sage core as the navigation button. */}
               <Link
                 href="/contact"
                 className="group rounded-full bg-gradient-to-b from-white/30 via-white/10 to-white/5 p-[5px] transition hover:from-white/45 hover:via-white/15"
               >
-                <span className="inline-flex items-center gap-2 rounded-full bg-[oklch(0.27_0.005_260)] px-7 py-3.5 text-[14px] font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                <span className="inline-flex items-center rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white transition group-hover:brightness-105">
                   Build With Me
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
                 </span>
               </Link>
             </Reveal>

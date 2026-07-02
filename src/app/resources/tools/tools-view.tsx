@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
   Check,
   FileText,
   Figma,
+  MessageSquarePlus,
   NotebookPen,
   Presentation,
   Sparkles,
+  X,
 } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
@@ -197,8 +198,10 @@ function ToolCard({ tool }: { tool: Tool }) {
       </div>
 
       <div className="flex flex-1 flex-col px-3 pb-3">
-        {/* Format tile straddles the image edge, keeping the "file" identity. */}
-        <span className={`-mt-6 grid size-12 place-items-center rounded-2xl ${TONE_BG[tool.tone]} text-ink/70 ring-4 ring-card`}>
+        {/* Format tile straddles the image edge, keeping the "file" identity.
+            `relative` lifts it into the positioned paint layer so the cover
+            image can't render over its top half. */}
+        <span className={`relative -mt-6 grid size-12 place-items-center rounded-2xl ${TONE_BG[tool.tone]} text-ink/70 ring-4 ring-card`}>
           <Icon className="size-5" strokeWidth={1.9} />
         </span>
 
@@ -228,33 +231,137 @@ function ToolCard({ tool }: { tool: Tool }) {
   );
 }
 
-/* ---------- Request card ---------- */
+/* ---------- Request card + popup ---------- */
 
-function RequestCard() {
+function RequestModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [text, setText] = useState("");
+  const [sent, setSent] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-8%" }}
-      transition={{ duration: 0.6, ease: EASE }}
-      className="flex flex-col items-center justify-between gap-5 rounded-[28px] border border-dashed border-ink/15 bg-card/60 px-7 py-8 text-center sm:flex-row sm:text-left"
-    >
-      <div>
-        <h3 className="font-display text-[22px] leading-tight tracking-tight text-ink">
-          Wish this shelf had something it doesn&apos;t?
-        </h3>
-        <p className="mt-1.5 text-[13px] leading-[1.6] text-ink/60">
-          Tell me what you keep rebuilding from scratch — the best requests become the next template.
-        </p>
-      </div>
-      <Link
-        href="/contact"
-        className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/15 px-5 py-2.5 text-[13px] font-medium text-ink transition hover:border-ink/30"
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50 grid place-items-center px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="absolute inset-0 bg-ink/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Request a template"
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="relative w-full max-w-md rounded-[28px] bg-card p-7 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={onClose}
+              className="absolute right-4 top-4 grid size-9 place-items-center rounded-full text-ink/50 transition hover:bg-ink/5 hover:text-ink"
+            >
+              <X className="size-4" strokeWidth={2} />
+            </button>
+
+            {sent ? (
+              <div className="flex flex-col items-center py-6 text-center">
+                <span className="grid size-12 place-items-center rounded-full bg-sage text-white">
+                  <Check className="size-5" strokeWidth={2.4} />
+                </span>
+                <h3 className="mt-5 font-display text-[24px] leading-tight tracking-tight text-ink">
+                  Got it — thank you.
+                </h3>
+                <p className="mt-2 max-w-[32ch] text-[13px] leading-[1.6] text-ink/60">
+                  If it fits the shelf, it&apos;ll land here in a future drop.
+                </p>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="mt-6 rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition hover:brightness-110"
+                >
+                  Back to the shelf
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (text.trim()) setSent(true);
+                }}
+              >
+                <p className="text-[11px] uppercase tracking-[0.24em] text-ink/45">Request a template</p>
+                <h3 className="mt-3 font-display text-[26px] leading-[1.1] tracking-tight text-ink">
+                  What do you keep <span className="italic">rebuilding?</span>
+                </h3>
+                <textarea
+                  required
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder="e.g. A weekly retro template I can run solo…"
+                  className="mt-5 min-h-32 w-full resize-none rounded-2xl bg-background p-4 text-[14px] leading-[1.6] text-ink ring-1 ring-black/10 transition placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-sage"
+                />
+                <button
+                  type="submit"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:brightness-105"
+                >
+                  Send request
+                  <ArrowRight className="size-4" strokeWidth={2.2} />
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/** Styled after the "A resource for you" pairing card on story pages — the
+ * dark ink panel with a sage glow and pill CTA — so the shelf closes on the
+ * same note the stories do. */
+function RequestCard() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-8%" }}
+        transition={{ duration: 0.6, ease: EASE }}
+        className="relative flex flex-col gap-5 overflow-hidden rounded-[28px] bg-ink p-6 text-white sm:flex-row sm:items-center sm:p-7"
       >
-        Request a template
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
-      </Link>
-    </motion.div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-25 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
+        />
+        <div className="relative flex-1">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/45">Something missing?</p>
+          <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">
+            Wish this shelf had something it doesn&apos;t?
+          </h3>
+          <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">
+            Tell me what you keep rebuilding from scratch — the best requests become the next template.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition hover:brightness-105 sm:self-auto"
+        >
+          <MessageSquarePlus className="size-3.5" strokeWidth={2.2} />
+          Request a template
+        </button>
+      </motion.div>
+
+      <RequestModal open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
 
