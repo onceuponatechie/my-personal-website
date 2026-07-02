@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -46,31 +46,53 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>;
 }
 
-/* ---------- Hero: fanned file stack ---------- */
+/* ---------- Hero: shuffling file deck ---------- */
 
-/** Decorative stack of "files" — sets the tone that this page is a shelf of
- * usable artifacts, not a photo gallery of case studies. */
-function FileStack() {
-  const tiles: { tone: ToolTone; format: ToolFormat; rotate: number; y: number }[] = [
-    { tone: "lavender", format: "figma", rotate: -10, y: 10 },
-    { tone: "butter", format: "pdf", rotate: 4, y: -6 },
-    { tone: "sage", format: "notion", rotate: 14, y: 8 },
-  ];
+const DECK_TILES: { tone: ToolTone; format: ToolFormat }[] = [
+  { tone: "sage", format: "notion" },
+  { tone: "butter", format: "pdf" },
+  { tone: "lavender", format: "figma" },
+];
+
+/** Decorative deck of "files" that continuously shuffles — the front card
+ * slides back and the next one takes its place, like flicking through
+ * templates. Sized in percentages so it scales down beside the title on
+ * mobile instead of disappearing. */
+function FileDeck() {
+  const [front, setFront] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setFront((f) => (f + 1) % DECK_TILES.length), 2400);
+    return () => clearInterval(t);
+  }, []);
+
   return (
-    <div aria-hidden className="pointer-events-none relative hidden h-44 w-56 shrink-0 md:block lg:h-52 lg:w-64">
-      {tiles.map((t, i) => {
+    <div
+      aria-hidden
+      className="pointer-events-none relative h-28 w-36 shrink-0 sm:h-40 sm:w-52 lg:h-48 lg:w-64"
+    >
+      {DECK_TILES.map((t, i) => {
         const Icon = FORMAT_ICON[t.format];
+        // 0 = front card, then each step back sits further right, smaller and
+        // more tilted, so the cycle reads as riffling through a stack.
+        const pos = (i - front + DECK_TILES.length) % DECK_TILES.length;
         return (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 26, rotate: 0 }}
-            animate={{ opacity: 1, y: t.y, rotate: t.rotate }}
-            transition={{ delay: 0.25 + i * 0.12, duration: 0.8, ease: EASE }}
-            className={`absolute top-4 grid place-items-center rounded-[22px] ${TONE_BG[t.tone]} shadow-[0_24px_44px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/[0.06]`}
-            style={{ left: `${i * 26}%`, width: "7rem", height: "8.5rem" }}
+            initial={false}
+            animate={{
+              x: `${pos * 42}%`,
+              y: pos * 4,
+              rotate: pos === 0 ? -5 : pos * 7,
+              scale: 1 - pos * 0.1,
+              opacity: 1 - pos * 0.22,
+              zIndex: DECK_TILES.length - pos,
+            }}
+            transition={{ type: "spring", stiffness: 240, damping: 26 }}
+            className={`absolute left-0 top-0 grid h-full w-[62%] place-items-center rounded-[18px] sm:rounded-[22px] ${TONE_BG[t.tone]} shadow-[0_24px_44px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/[0.06]`}
           >
-            <span className="grid size-11 place-items-center rounded-full bg-white/70 text-ink/70 backdrop-blur">
-              <Icon className="size-5" strokeWidth={1.9} />
+            <span className="grid size-9 place-items-center rounded-full bg-white/70 text-ink/70 backdrop-blur sm:size-11">
+              <Icon className="size-4 sm:size-5" strokeWidth={1.9} />
             </span>
           </motion.div>
         );
@@ -160,37 +182,47 @@ function ToolCard({ tool }: { tool: Tool }) {
         hidden: { opacity: 0, y: 18 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
-      className="group flex h-full flex-col rounded-[28px] bg-card p-6 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
+      className="group flex h-full flex-col rounded-[28px] bg-card p-3 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
     >
-      <div className="flex items-start justify-between">
-        <span className={`grid size-12 place-items-center rounded-2xl ${TONE_BG[tool.tone]} text-ink/70`}>
-          <Icon className="size-5" strokeWidth={1.9} />
-        </span>
-        <span className="rounded-full border border-ink/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink/50">
+      <div className="relative overflow-hidden rounded-[20px]">
+        <img
+          src={tool.cover}
+          alt={tool.name}
+          loading="lazy"
+          className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <span className="absolute right-3 top-3 rounded-full bg-white/85 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink backdrop-blur">
           {FORMAT_LABEL[tool.format]}
         </span>
       </div>
 
-      <h3 className="mt-5 font-display text-[21px] leading-[1.15] tracking-tight text-ink">{tool.name}</h3>
-      <p className="mt-2 text-[13px] leading-[1.55] text-ink/60">{tool.blurb}</p>
-
-      <ul className="mt-4 space-y-1.5">
-        {tool.includes.slice(0, 3).map((item) => (
-          <li key={item} className="flex items-center gap-2 text-[12px] text-ink/55">
-            <Check className="size-3 shrink-0 text-sage" strokeWidth={2.6} />
-            {item}
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-auto flex items-center justify-between border-t border-ink/[0.07] pt-4">
-        <span className="text-[12px] text-ink/50">{tool.meta}</span>
-        <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
-          Free
-          <span className="grid size-7 place-items-center rounded-full bg-ink text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-            <ArrowUpRight className="size-3.5" strokeWidth={2.2} />
-          </span>
+      <div className="flex flex-1 flex-col px-3 pb-3">
+        {/* Format tile straddles the image edge, keeping the "file" identity. */}
+        <span className={`-mt-6 grid size-12 place-items-center rounded-2xl ${TONE_BG[tool.tone]} text-ink/70 ring-4 ring-card`}>
+          <Icon className="size-5" strokeWidth={1.9} />
         </span>
+
+        <h3 className="mt-4 font-display text-[21px] leading-[1.15] tracking-tight text-ink">{tool.name}</h3>
+        <p className="mt-2 text-[13px] leading-[1.55] text-ink/60">{tool.blurb}</p>
+
+        <ul className="mt-4 space-y-1.5">
+          {tool.includes.slice(0, 3).map((item) => (
+            <li key={item} className="flex items-center gap-2 text-[12px] text-ink/55">
+              <Check className="size-3 shrink-0 text-sage" strokeWidth={2.6} />
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto flex items-center justify-between border-t border-ink/[0.07] pt-4">
+          <span className="text-[12px] text-ink/50">{tool.meta}</span>
+          <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
+            Free
+            <span className="grid size-7 place-items-center rounded-full bg-ink text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+              <ArrowUpRight className="size-3.5" strokeWidth={2.2} />
+            </span>
+          </span>
+        </div>
       </div>
     </motion.article>
   );
@@ -265,17 +297,17 @@ export function ToolsView() {
             Resources · Free forever
           </motion.p>
 
-          <div className="mt-5 flex items-end justify-between gap-8">
+          <div className="mt-5 flex items-end justify-between gap-4 sm:gap-8">
             <motion.h1
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE }}
-              className="font-display text-[clamp(3rem,9vw,6.5rem)] leading-[0.94] tracking-[-0.02em] text-ink"
+              className="min-w-0 font-display text-[clamp(2.5rem,9vw,6.5rem)] leading-[0.94] tracking-[-0.02em] text-ink"
             >
               <span className="block">Tools &</span>
               <span className="block italic">Templates</span>
             </motion.h1>
-            <FileStack />
+            <FileDeck />
           </div>
 
           <div className="mt-8 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
