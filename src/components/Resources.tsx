@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowUpRight, ArrowRight, PenLine } from "lucide-react";
 import Link from "next/link";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const bookNotesImg = "/assets/book-notes.jpg";
+const devDiaryImg = "/assets/dev-diary.jpg";
 const researchImg = "/assets/research-vault.jpg";
 const profileImg = "/assets/profile.jpg";
 
@@ -93,7 +93,7 @@ export function Resources() {
         viewport={{ once: true, margin: "-10%" }}
       >
         <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:grid-rows-2">
-          <BookNotes dir="left" className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
+          <BuildDiary dir="left" className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
           <ToolsTemplates dir="up" className="order-3 md:col-start-4 md:col-span-3 md:row-start-1" />
           <ResearchVault dir="right" className="order-4 md:col-start-7 md:col-span-6 md:row-start-1" />
           <ResourcesHeadline dir="up" className="order-2 md:col-start-4 md:col-span-6 md:row-start-2" />
@@ -106,7 +106,7 @@ export function Resources() {
 
 /* ---------- Cards ---------- */
 
-function BookNotes({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
+function BuildDiary({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
     <motion.article
       variants={dirCard(dir)}
@@ -114,11 +114,11 @@ function BookNotes({ dir = "up", className = "" }: { dir?: Dir; className?: stri
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-ink text-white`}
     >
-      <Link href="/resources/books" aria-label="Open Book Hub" className="absolute inset-0 z-10" />
+      <Link href="/stories" aria-label="Open The Build Diary" className="absolute inset-0 z-10" />
       <div className="relative p-2 pb-0">
         <motion.img
-          src={bookNotesImg}
-          alt="Stack of books"
+          src={devDiaryImg}
+          alt="Open notebook beside a keyboard"
           loading="lazy"
           width={768}
           height={960}
@@ -135,7 +135,7 @@ function BookNotes({ dir = "up", className = "" }: { dir?: Dir; className?: stri
           transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
           className="absolute right-5 top-5 grid size-11 place-items-center rounded-full bg-butter text-ink shadow-sm"
         >
-          <BookOpen className="size-5" strokeWidth={1.8} />
+          <PenLine className="size-5" strokeWidth={1.8} />
         </motion.div>
       </div>
 
@@ -147,22 +147,22 @@ function BookNotes({ dir = "up", className = "" }: { dir?: Dir; className?: stri
         className="flex flex-1 flex-col p-6"
       >
         <motion.h3 variants={textChild} className="text-[22px] font-semibold leading-[1.15] tracking-tight text-white">
-          The Book Hub
+          The Build Diary
         </motion.h3>
 
         <motion.div variants={textChild} className="mt-4 flex items-center gap-3 text-[12px] text-white/55">
-          <span>Application over summary</span>
+          <span>Essays &amp; field notes</span>
           <span className="size-1 rounded-full bg-white/40" />
-          <span>12 books</span>
+          <span>Written between builds</span>
         </motion.div>
 
         <motion.p variants={textChild} className="mt-3 text-[13px] leading-[1.55] text-white/65">
-          Summaries are everywhere and easy to fake. So I do the opposite — I take one book&apos;s framework, build something real with it, and write down what actually happened.
+          The blog — honest logs of what I&apos;m making: the decisions, the dead ends, and what actually shipped. No polish, no performance.
         </motion.p>
 
         <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-5 w-fit">
           <span className="inline-flex items-center gap-2 rounded-full bg-sage-soft px-5 py-2.5 text-[13px] font-medium text-ink transition group-hover/card:gap-3">
-            Open Book Hub
+            Open the Diary
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
         </motion.div>

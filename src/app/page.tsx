@@ -4,7 +4,8 @@ import { Hero } from "@/components/Hero";
 import { Resources } from "@/components/Resources";
 import { Manifesto } from "@/components/Manifesto";
 import { Projects } from "@/components/Projects";
-import { FromTheDesk } from "@/components/FromTheDesk";
+import { ChooseAdventure } from "@/components/ChooseAdventure";
+import { HomeNewsletter } from "@/components/HomeNewsletter";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -25,7 +26,8 @@ export default function Home() {
       <Resources />
       <Manifesto />
       <Projects />
-      <FromTheDesk />
+      <ChooseAdventure />
+      <HomeNewsletter />
       <Footer />
     </main>
   );

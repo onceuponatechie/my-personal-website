@@ -7,12 +7,12 @@ import { PageShell } from "@/components/PageShell";
 
 const SECTIONS = [
   {
-    href: "/resources/books",
-    eyebrow: "New",
-    title: "Book Hub",
-    blurb: "Notes from the books shaping how I research, build, and tell stories.",
+    href: "/stories",
+    eyebrow: "The blog",
+    title: "The Build Diary",
+    blurb: "Essays and field notes from the build — what I'm making and what it's teaching me.",
     bg: "bg-ink text-white",
-    count: "12",
+    count: "3",
     accent: "text-white",
   },
   {
