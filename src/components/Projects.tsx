@@ -130,6 +130,15 @@ export function Projects() {
   return (
     <section id="projects" className="px-4 pb-32 sm:px-6 md:pb-20">
       <div className="mx-auto mb-16 max-w-3xl text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-4 text-[12px] uppercase tracking-[0.22em] text-ink/50"
+        >
+          The work · Built &amp; shipped
+        </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
