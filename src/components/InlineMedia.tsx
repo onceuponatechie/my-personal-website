@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
   images: string[];
-  shape?: "pebble" | "pill" | "blob";
+  shape?: "pebble" | "pill";
   className?: string;
   alt?: string;
 }
@@ -17,13 +17,7 @@ export function InlineMedia({ images, shape = "pebble", className = "", alt = ""
     return () => clearInterval(t);
   }, [images.length]);
 
-  // Two organic blob silhouettes (cousins, not twins) plus the plain pill.
-  const radius =
-    shape === "pill"
-      ? "rounded-full"
-      : shape === "blob"
-        ? "rounded-[57%_43%_46%_54%/47%_56%_44%_53%]"
-        : "rounded-[42%_58%_55%_45%/55%_45%_58%_42%]";
+  const radius = shape === "pill" ? "rounded-full" : "rounded-[42%_58%_55%_45%/55%_45%_58%_42%]";
 
   return (
     <span
