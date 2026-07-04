@@ -13,13 +13,12 @@ const NAV_LINKS: NavLink[] = [
     href: "/resources",
     label: "Resources",
     children: [
-      { href: "/resources/books", label: "Book Hub", desc: "Notes from books, applied" },
+      { href: "/stories", label: "The Build Diary", desc: "Blogs from the build" },
       { href: "/resources/tools", label: "Tools & Templates", desc: "Ready-to-use files" },
       { href: "/resources/vault", label: "Research Vault", desc: "Deep dives & reports" },
     ],
   },
   { href: "/projects", label: "Projects" },
-  { href: "/stories", label: "Stories" },
   { href: "/about", label: "About" },
 ];
 
