@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { SmileyMark } from "@/components/SmileyMark";
 import { Reveal, RevealText } from "@/components/Reveal";
 
@@ -36,51 +36,29 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="px-4 pb-6 sm:px-6">
-      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-ink text-white ring-1 ring-white/10 shadow-[0_24px_70px_-40px_rgba(0,0,0,0.5)]">
-        {/* Sun-ray reflections — a fan of soft parallel rays falling in from
-            the top-left, fading as they travel, like light glancing off the
-            surface. The mask dissolves the whole effect toward the
-            bottom-right so it reads as a reflection rather than stripes. */}
+      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-gradient-to-b from-card via-card to-butter-soft/70 ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
+        {/* Warm horizon glow rising from the bottom, echoing the site's accents. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-          style={{ maskImage: "linear-gradient(118deg, black 0%, black 32%, transparent 68%)", WebkitMaskImage: "linear-gradient(118deg, black 0%, black 32%, transparent 68%)" }}
-        >
-          {[
-            { left: "-14%", width: "30%", opacity: 0.11, blur: 52 },
-            { left: "9%", width: "12%", opacity: 0.09, blur: 34 },
-            { left: "19%", width: "5%", opacity: 0.07, blur: 22 },
-            { left: "26%", width: "14%", opacity: 0.055, blur: 40 },
-            { left: "40%", width: "7%", opacity: 0.045, blur: 26 },
-          ].map((ray, i) => (
-            <div
-              key={i}
-              className="absolute -top-[80%] h-[260%] rotate-[34deg]"
-              style={{
-                left: ray.left,
-                width: ray.width,
-                opacity: ray.opacity,
-                background: "linear-gradient(to right, transparent, white 50%, transparent)",
-                filter: `blur(${ray.blur}px)`,
-              }}
-            />
-          ))}
-          <div
-            className="absolute -left-28 -top-28 h-96 w-96 rounded-full opacity-[0.14] blur-3xl"
-            style={{ background: "radial-gradient(closest-side, white 0%, transparent 75%)" }}
-          />
-        </div>
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
+          style={{ background: "radial-gradient(120% 80% at 50% 130%, oklch(0.72 0.07 145 / 0.20) 0%, transparent 60%)" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 right-8 h-72 w-72 rounded-full opacity-45 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 75%)" }}
+        />
 
         {/* ---------- Status bar ---------- */}
-        <div className="relative flex items-center justify-between gap-4 border-b border-white/10 px-7 py-5 sm:px-12">
-          <span className="inline-flex items-center gap-2.5 text-[12px] text-white/70 sm:text-[13px]">
+        <div className="relative flex items-center justify-between gap-4 border-b border-black/10 px-7 py-5 sm:px-12">
+          <span className="inline-flex items-center gap-2.5 text-[12px] text-ink/70 sm:text-[13px]">
             <span className="relative grid size-2 place-items-center">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
             </span>
-            What are we building today?
+            Available for new projects
           </span>
-          <span className="text-[12px] text-white/40 sm:text-[13px]">Essy Udeme® — 2026</span>
+          <span className="text-[12px] text-ink/45 sm:text-[13px]">Essy Udeme® — 2026</span>
         </div>
 
         {/* ---------- Middle: nav + statement ---------- */}
@@ -89,13 +67,13 @@ export function Footer() {
           <div className="order-2 grid max-w-md grid-cols-2 gap-x-8 md:order-1">
             {NAV_COLS.map((col) => (
               <div key={col.title}>
-                <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white/40">{col.title}</p>
+                <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink/40">{col.title}</p>
                 <ul className="space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
                       <Link
                         href={l.href}
-                        className="editorial-underline text-[15px] text-white/65 transition hover:text-white"
+                        className="editorial-underline text-[15px] text-ink/70 transition hover:text-ink"
                       >
                         {l.label}
                       </Link>
@@ -111,32 +89,27 @@ export function Footer() {
             <div className="mb-6 flex md:justify-end">
               <SmileyMark />
             </div>
-            <h2 className="font-display tracking-tight text-white">
-              <span className="block text-[clamp(1.4rem,2.4vw,1.9rem)] leading-tight text-white/80">
-                <RevealText text="Let's build an" />
-              </span>
-              <span className="mt-1 block text-[clamp(3rem,6.4vw,5.25rem)] italic leading-[1.05] text-sage">
-                <RevealText text="Experience" delay={0.15} />
-              </span>
+            <h2 className="font-display text-[clamp(2.25rem,4.6vw,3.6rem)] leading-[1.04] tracking-tight text-ink">
+              <RevealText text="Let's build something" />
+              <br />
+              <RevealText text="people" delay={0.15} />{" "}
+              <RevealText text="remember" className="italic text-sage" delay={0.28} />
             </h2>
             <Reveal delay={0.2} className="mt-8 flex md:justify-end">
-              {/* Glass-border pill: a soft white gradient ring wraps the same
-                  sage core as the navigation button. */}
               <Link
                 href="/contact"
-                className="group rounded-full bg-gradient-to-b from-white/30 via-white/10 to-white/5 p-[5px] transition hover:from-white/45 hover:via-white/15"
+                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-125"
               >
-                <span className="inline-flex items-center rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white transition group-hover:brightness-105">
-                  Build With Me
-                </span>
+                Let&apos;s work together
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
               </Link>
             </Reveal>
           </div>
         </div>
 
         {/* ---------- Bottom bar ---------- */}
-        <div className="relative flex flex-col items-center justify-between gap-4 border-t border-white/10 px-7 py-6 sm:flex-row sm:px-12">
-          <p className="order-2 text-[12px] text-white/40 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
+        <div className="relative flex flex-col items-center justify-between gap-4 border-t border-black/10 px-7 py-6 sm:flex-row sm:px-12">
+          <p className="order-2 text-[12px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
           <nav className="order-1 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:order-2">
             {SOCIALS.map((s) => (
               <a
@@ -144,13 +117,20 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="editorial-underline inline-flex items-center gap-1 text-[13px] text-white/60 transition hover:text-white"
+                className="editorial-underline inline-flex items-center gap-1 text-[13px] text-ink/60 transition hover:text-ink"
               >
                 {s.label}
                 <ArrowUpRight className="size-3 opacity-60" strokeWidth={2} />
               </a>
             ))}
           </nav>
+        </div>
+
+        {/* ---------- Oversized wordmark ---------- */}
+        <div aria-hidden className="relative select-none px-2 pt-2">
+          <span className="block whitespace-nowrap text-center font-display italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
+            Essy Udeme
+          </span>
         </div>
       </div>
     </footer>
