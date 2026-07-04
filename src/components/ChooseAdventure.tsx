@@ -4,10 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Download } from "lucide-react";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
-import { TOOLS, PROJECTS } from "@/lib/site-data";
+import { TOOLS, STORIES } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
-/* One template, one tool, one build — a direct grab from the homepage
+/* One template, one tool, one piece — a direct grab from the homepage
  * without a detour through the section pages. */
 
 type Pick = {
@@ -24,7 +24,7 @@ type Pick = {
 
 const template = TOOLS.find((t) => t.slug === "founder-os") ?? TOOLS[0];
 const tool = TOOLS.find((t) => t.slug === "user-interview-script") ?? TOOLS[1];
-const build = PROJECTS[0];
+const piece = STORIES.find((s) => s.slug === "designing-quiet-software") ?? STORIES[0];
 
 const PICKS: Pick[] = [
   {
@@ -50,14 +50,14 @@ const PICKS: Pick[] = [
     download: true,
   },
   {
-    label: "Build",
+    label: "Piece",
     labelBg: "bg-butter-soft",
-    kind: `${build.year} · ${build.role}`,
-    title: build.title,
-    blurb: build.description,
-    cover: build.image,
-    href: `/projects/${build.slug}`,
-    cta: "See the build",
+    kind: `${piece.category} · ${piece.read}`,
+    title: piece.title,
+    blurb: piece.excerpt,
+    cover: piece.cover,
+    href: `/stories/${piece.slug}`,
+    cta: "Read the piece",
     download: false,
   },
 ];
@@ -122,7 +122,7 @@ export function ChooseAdventure() {
             transition={{ duration: 0.6, ease: EASE }}
             className="text-[12px] uppercase tracking-[0.22em] text-ink/50"
           >
-            Start here · Free &amp; ready
+            Grab &amp; go · Free forever
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -140,7 +140,7 @@ export function ChooseAdventure() {
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
             className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
           >
-            One template, one tool, one build. Pick a lane and take something useful with you — no
+            One template, one tool, one piece. Pick a lane and take something useful with you — no
             digging required.
           </motion.p>
         </div>

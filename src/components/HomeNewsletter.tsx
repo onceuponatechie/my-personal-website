@@ -48,7 +48,7 @@ export function HomeNewsletter() {
           rel="noreferrer"
           className="group relative mt-8 inline-flex items-center gap-2 rounded-full bg-sage py-3 pl-6 pr-2 text-[14px] font-medium text-white transition hover:brightness-105"
         >
-          Subscribe on Substack
+          Get the good stuff
           <span className="grid size-8 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
             <ArrowUpRight className="size-4" strokeWidth={2.4} />
           </span>
