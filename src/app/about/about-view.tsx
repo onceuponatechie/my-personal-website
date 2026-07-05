@@ -7,6 +7,12 @@ import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 
 const profileImg = "/assets/profile.jpg";
+const imgNotebook = "/assets/inline-3.jpg";
+const imgReading = "/assets/dev-diary.jpg";
+const imgCoffee = "/assets/inline-4.jpg";
+const imgDesk = "/assets/research-vault.jpg";
+const imgMouse = "/assets/inline-2.jpg";
+const imgBooks = "/assets/book-notes.jpg";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -53,11 +59,60 @@ const CARES: { label: string; body: string }[] = [
   { label: "Nigeria", body: "The Nigerian startup ecosystem, and what we're building here." },
 ];
 
-const NOTS = [
-  "I'm not trying to be the loudest person in the room.",
-  "I'm not pretending I've got it all figured out.",
-  "And I'm definitely not a “guru.”",
+// Role titles and dates only — the story stays scannable.
+const JOURNEY: { role: string; org: string; period: string }[] = [
+  { role: "Product Manager", org: "Nithub", period: "Apr 2026 — Present" },
+  { role: "AI Conversation Facilitator", org: "Lingtec.AI", period: "Jan — Mar 2026" },
+  { role: "Graphic Designer", org: "Freelance", period: "Mar 2024 — Dec 2025" },
+  { role: "Associate Product Manager", org: "Luminevent", period: "Feb — Apr 2025" },
+  { role: "Product Marketer", org: "Alldiscounts", period: "Mar — Sep 2024" },
+  { role: "Customer Service Representative", org: "Alldiscounts", period: "Sep 2022 — Mar 2024" },
 ];
+
+/**
+ * A small photo card that springs in with a tilt, idly bobs, and straightens
+ * when hovered. `frame` controls the card's shape (polaroid, arch, circle…).
+ */
+function PhotoCard({
+  src,
+  alt = "",
+  rotate = 0,
+  delay = 0,
+  bobDelay = 0,
+  bobDuration = 6,
+  className = "",
+  frame = "rounded-[18px] bg-card p-1.5",
+  imgClass = "rounded-[13px]",
+}: {
+  src: string;
+  alt?: string;
+  rotate?: number;
+  delay?: number;
+  bobDelay?: number;
+  bobDuration?: number;
+  className?: string;
+  frame?: string;
+  imgClass?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotate: rotate * 2.5, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, rotate, scale: 1 }}
+      viewport={{ once: true, margin: "-10%" }}
+      whileHover={{ rotate: 0, scale: 1.06 }}
+      transition={{ type: "spring", stiffness: 210, damping: 20, delay }}
+      className={`relative hover:z-20 ${className}`}
+    >
+      <motion.div
+        animate={{ y: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: bobDuration, delay: bobDelay, ease: "easeInOut" }}
+        className={`h-full w-full overflow-hidden shadow-[0_22px_44px_-22px_rgba(0,0,0,0.4)] ring-1 ring-black/[0.06] ${frame}`}
+      >
+        <img src={src} alt={alt} className={`h-full w-full object-cover ${imgClass}`} />
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export function AboutView() {
   return (
@@ -91,7 +146,7 @@ export function AboutView() {
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-ink"
+                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-butter hover:text-ink"
               >
                 Work with me
                 <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -134,6 +189,35 @@ export function AboutView() {
           >
             Long before I cared about products, I cared about people.
           </motion.p>
+
+          {/* Three little snapshots, fanned like they fell out of a notebook. */}
+          <div className="mt-12 flex items-end justify-center">
+            <PhotoCard
+              src={imgNotebook}
+              alt="A notebook open on a warm desk"
+              rotate={-7}
+              bobDuration={5.5}
+              className="z-[1] h-32 w-28 sm:h-40 sm:w-36"
+            />
+            <PhotoCard
+              src={imgReading}
+              alt="Reading on the couch"
+              rotate={2.5}
+              delay={0.08}
+              bobDelay={0.6}
+              bobDuration={6.5}
+              className="z-[2] -ml-6 mb-5 h-36 w-32 sm:h-48 sm:w-40"
+            />
+            <PhotoCard
+              src={imgCoffee}
+              alt="A warm cup of coffee"
+              rotate={6}
+              delay={0.16}
+              bobDelay={1.1}
+              bobDuration={5}
+              className="z-[1] -ml-6 h-32 w-28 sm:h-40 sm:w-36"
+            />
+          </div>
 
           <motion.ol
             initial="hidden"
@@ -217,63 +301,100 @@ export function AboutView() {
             What I&apos;m up to <span className="italic">these days</span>
           </motion.h2>
 
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-10%" }}
-            variants={stagger}
-            className="mt-8 space-y-5 text-[16px] leading-[1.7] text-ink/70"
-          >
-            <motion.p variants={fadeUp}>
-              I&apos;m a <span className="font-medium text-ink">Product Manager at NitHub</span>, helping build products
-              in education and agritech; and learning, up close, what it actually takes to move from &ldquo;wouldn&apos;t
-              it be nice if&rdquo; to something people can hold and use. It&apos;s one thing to have an idea. It&apos;s
-              another to watch a real person try it and find out you were wrong about half your assumptions. I&apos;ve
-              come to love that part.
-            </motion.p>
-            <motion.p variants={fadeUp}>Outside of work, I&apos;m usually building something.</motion.p>
-          </motion.div>
+          <div className="mt-8 grid gap-10 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-10%" }}
+                variants={stagger}
+                className="space-y-5 text-[16px] leading-[1.7] text-ink/70"
+              >
+                <motion.p variants={fadeUp}>
+                  I&apos;m a <span className="font-medium text-ink">Product Manager at NitHub</span>, helping build products
+                  in education and agritech; and learning, up close, what it actually takes to move from &ldquo;wouldn&apos;t
+                  it be nice if&rdquo; to something people can hold and use. It&apos;s one thing to have an idea. It&apos;s
+                  another to watch a real person try it and find out you were wrong about half your assumptions. I&apos;ve
+                  come to love that part.
+                </motion.p>
+                <motion.p variants={fadeUp}>Outside of work, I&apos;m usually building something.</motion.p>
+              </motion.div>
 
-          <motion.ul
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-10%" }}
-            variants={stagger}
-            className="mt-6 space-y-3"
-          >
-            {BUILDS.map((b) => (
-              <motion.li key={b} variants={fadeUp} className="flex items-baseline gap-3">
-                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-ink/25" aria-hidden />
-                <p className="text-[15px] leading-[1.6] text-ink/70">{b}</p>
-              </motion.li>
-            ))}
-          </motion.ul>
+              <motion.ul
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-10%" }}
+                variants={stagger}
+                className="mt-6 space-y-3"
+              >
+                {BUILDS.map((b) => (
+                  <motion.li key={b} variants={fadeUp} className="flex items-baseline gap-3">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-ink/25" aria-hidden />
+                    <p className="text-[15px] leading-[1.6] text-ink/70">{b}</p>
+                  </motion.li>
+                ))}
+              </motion.ul>
 
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="mt-8 text-[16px] leading-[1.7] text-ink/70"
-          >
-            I&apos;m especially drawn to products, communication, human behaviour, fintech and startups, and the small,
-            hidden stories inside everyday experiences.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: EASE }}
+                className="mt-8 text-[16px] leading-[1.7] text-ink/70"
+              >
+                I&apos;m especially drawn to products, communication, human behaviour, fintech and startups, and the small,
+                hidden stories inside everyday experiences.
+              </motion.p>
+            </div>
+
+            {/* A different pairing here — one arch, one porthole. */}
+            <div className="flex items-center justify-center gap-6 md:flex-col md:gap-8 md:pl-2">
+              <PhotoCard
+                src={imgDesk}
+                alt="A laptop mid-build"
+                rotate={-4}
+                bobDuration={6}
+                frame="rounded-t-[999px] rounded-b-[22px]"
+                imgClass=""
+                className="h-44 w-32 sm:h-52 sm:w-36"
+              />
+              <PhotoCard
+                src={imgMouse}
+                alt="A mouse on a dark desk"
+                rotate={5}
+                delay={0.1}
+                bobDelay={0.8}
+                bobDuration={5}
+                frame="rounded-full"
+                imgClass=""
+                className="size-24 sm:size-28"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Things I care about */}
       <section className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-5xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
-          >
-            Things I <span className="italic">care about</span>
-          </motion.h2>
+          <div className="flex items-end justify-between gap-8">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
+            >
+              Things I <span className="italic">care about</span>
+            </motion.h2>
+            <PhotoCard
+              src={imgBooks}
+              alt="A stack of well-loved books"
+              rotate={5}
+              bobDuration={6.5}
+              className="hidden h-28 w-24 shrink-0 sm:block"
+            />
+          </div>
 
           <motion.div
             initial="hidden"
@@ -307,7 +428,7 @@ export function AboutView() {
         </div>
       </section>
 
-      {/* What I'm not */}
+      {/* The journey so far */}
       <section className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-3xl">
           <motion.h2
@@ -317,30 +438,43 @@ export function AboutView() {
             transition={{ duration: 0.7, ease: EASE }}
             className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
           >
-            What I&apos;m <span className="italic">not</span>
+            The journey <span className="italic">so far…</span>
           </motion.h2>
 
-          <motion.div
+          <motion.ol
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10%" }}
             variants={stagger}
-            className="mt-8 space-y-4"
+            className="mt-10 border-y border-black/[0.08]"
           >
-            {NOTS.map((n) => (
-              <motion.p
-                key={n}
+            {JOURNEY.map((j, i) => (
+              <motion.li
+                key={`${j.role}-${j.period}`}
                 variants={fadeUp}
-                className="border-l border-ink/20 pl-6 font-display text-[clamp(1.15rem,2.2vw,1.45rem)] italic leading-snug tracking-tight text-ink/85"
+                className={`flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 py-5 ${
+                  i > 0 ? "border-t border-black/[0.08]" : ""
+                }`}
               >
-                {n}
-              </motion.p>
+                <div className="flex flex-wrap items-baseline gap-x-3">
+                  <p className="text-[16px] font-medium text-ink">{j.role}</p>
+                  <p className="text-[13px] text-ink/50">{j.org}</p>
+                </div>
+                <p className="font-display text-[13px] italic text-ink/45">{j.period}</p>
+              </motion.li>
             ))}
-            <motion.p variants={fadeUp} className="pt-2 text-[16px] leading-[1.7] text-ink/70">
-              I&apos;m just someone who likes understanding people, making useful things, and sharing what I learn while
-              I&apos;m still learning it.
-            </motion.p>
-          </motion.div>
+          </motion.ol>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="mt-8 text-[16px] leading-[1.7] text-ink/70"
+          >
+            Different rooms, same thread. Support taught me to listen, marketing taught me to translate, design gave me
+            an eye, and product is where they all meet — building things that make people feel understood.
+          </motion.p>
         </div>
       </section>
 
@@ -366,7 +500,7 @@ export function AboutView() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm ring-1 ring-transparent transition hover:bg-ink hover:ring-white/25"
+              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
             >
               <Linkedin className="size-4" strokeWidth={2} />
               LinkedIn
