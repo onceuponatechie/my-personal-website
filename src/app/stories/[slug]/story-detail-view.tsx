@@ -85,7 +85,7 @@ export function StoryDetailView({ s }: { s: Story }) {
                 <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">{resource.name}</h3>
                 <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">{resource.blurb}</p>
               </div>
-              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white ring-1 ring-transparent transition group-hover:gap-3 group-hover:bg-ink group-hover:ring-white/25">
+              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover:gap-3 group-hover:bg-butter group-hover:text-ink">
                 <Download className="size-3.5" strokeWidth={2.2} />
                 Grab it free
               </span>
