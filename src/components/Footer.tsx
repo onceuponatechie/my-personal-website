@@ -125,10 +125,11 @@ export function Footer() {
           </nav>
         </div>
 
-        {/* ---------- Oversized wordmark ---------- */}
-        <div aria-hidden className="relative select-none px-2 pt-2">
+        {/* ---------- Oversized wordmark — rises and de-blurs on scroll,
+             matching the statement's word-by-word reveal ---------- */}
+        <div aria-hidden className="relative select-none overflow-hidden px-2 pt-2">
           <span className="block whitespace-nowrap text-center font-display italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
-            Essy Udeme
+            <RevealText text="Essy Udeme" stagger={0.14} />
           </span>
         </div>
       </div>
