@@ -126,18 +126,6 @@ export function StoriesView() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background pt-6">
-      {/* ambient washes */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full opacity-50 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, var(--butter-soft) 0%, transparent 72%)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-48 top-[28%] h-[560px] w-[560px] rounded-full opacity-50 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
-      />
-
       <Navbar />
 
       {/* ---------- hero: header copy + fanned diary pages ---------- */}
@@ -178,7 +166,7 @@ export function StoriesView() {
               >
                 <a
                   href="#entries"
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+                  className="group inline-flex items-center gap-2 rounded-full btn-ink px-6 py-3 text-[13px] font-medium text-white transition"
                 >
                   Read the latest
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -192,11 +180,6 @@ export function StoriesView() {
 
             {/* fanned diary pages */}
             <div className="relative">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
-                style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 70%)" }}
-              />
               <div className="relative pt-4 pb-2">
                 <DiaryFan stories={STORIES.slice(0, 3)} />
               </div>
@@ -242,7 +225,7 @@ export function StoriesView() {
               </div>
               <div className="mt-10 flex items-center justify-between">
                 <span className="text-[12px] text-ink/50">{featured.date}</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white">
+                <span className="inline-flex items-center gap-1.5 rounded-full btn-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white">
                   Read entry
                   <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5 group-active:translate-x-0.5">
                     <ArrowUpRight className="size-3.5" strokeWidth={2.4} />

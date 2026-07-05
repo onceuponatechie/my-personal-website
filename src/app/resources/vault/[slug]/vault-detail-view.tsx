@@ -117,7 +117,7 @@ export function VaultDetailView({
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full btn-ink px-6 py-3 text-[13px] font-medium text-white transition"
                 >
                   Send it
                   <ArrowRight className="size-4" strokeWidth={2.2} />
@@ -167,7 +167,7 @@ export function VaultDetailView({
             </div>
             <Link
               href="/resources/tools"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full btn-sage px-6 py-3 text-[13px] font-medium text-white transition"
             >
               Browse resources
               <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />

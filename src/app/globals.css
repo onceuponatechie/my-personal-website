@@ -130,6 +130,38 @@
 }
 
 @layer utilities {
+  /* ---------- Button hover language (site-wide) ----------
+     Sage buttons settle into lavender; ink buttons get a sage wipe that
+     sweeps across from the left — a colour change with motion inside the
+     button rather than a flat swap. Both also respond when a wrapping
+     `group` card is hovered, so CTAs inside linked cards join in. */
+  .btn-sage {
+    background-color: var(--sage);
+    transition: background-color 0.45s var(--ease-editorial);
+  }
+  .btn-sage:hover,
+  .btn-sage:focus-visible,
+  .group:hover .btn-sage,
+  .group\/card:hover .btn-sage,
+  .group\/btn:hover .btn-sage {
+    background-color: var(--lavender);
+  }
+
+  .btn-ink {
+    background-color: var(--ink);
+    background-image: linear-gradient(105deg, var(--sage) 0%, var(--sage) 49.5%, var(--ink) 50%, var(--ink) 100%);
+    background-size: 230% 100%;
+    background-position: 100% 0;
+    transition: background-position 0.55s var(--ease-editorial);
+  }
+  .btn-ink:hover,
+  .btn-ink:focus-visible,
+  .group:hover .btn-ink,
+  .group\/card:hover .btn-ink,
+  .group\/btn:hover .btn-ink {
+    background-position: 0% 0;
+  }
+
   /* Editorial link — a hairline underline that wipes in from the left on
      hover/focus. On touch devices (no hover) it rests visible and thickens
      on press, so the interaction is never dead on mobile. */

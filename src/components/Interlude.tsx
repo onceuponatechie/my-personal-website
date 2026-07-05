@@ -66,7 +66,7 @@ export function Interlude() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "center 0.4"],
+    offset: ["start 0.85", "center 0.28"],
   });
 
   return (
