@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { useScroll } from "framer-motion";
 import { InlineMedia } from "@/components/InlineMedia";
-import { wordRevealRange } from "@/lib/motion";
+import { TypeUnit, TypeWord } from "@/components/TypeOn";
 
 const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
@@ -37,25 +37,18 @@ const SEGMENTS: Segment[] = [
   { type: "w", t: "mind." },
 ];
 
-function Reveal({
-  progress,
-  index,
-  total,
-  children,
-}: {
-  progress: MotionValue<number>;
-  index: number;
-  total: number;
-  children: React.ReactNode;
-}) {
-  const [start, end] = wordRevealRange(index, total, { spread: 3.5 });
-  const opacity = useTransform(progress, [start, end], [0.16, 1]);
-  return (
-    <motion.span style={{ opacity }} className="text-ink">
-      {children}
-    </motion.span>
-  );
-}
+/** How many character-steps an inline media chip occupies in the sequence. */
+const MEDIA_SPAN = 3;
+
+// Pre-compute each segment's start index so characters type out in one
+// continuous left-to-right sweep across words and media alike.
+let cursor = 0;
+const TIMED = SEGMENTS.map((seg) => {
+  const start = cursor;
+  cursor += seg.type === "w" ? seg.t.length + 1 : MEDIA_SPAN;
+  return { seg, start };
+});
+const TOTAL = cursor;
 
 export function Manifesto() {
   const ref = useRef<HTMLDivElement>(null);
@@ -68,31 +61,29 @@ export function Manifesto() {
   return (
     <section ref={ref} className="px-4 pt-12 pb-28 sm:pt-16 sm:pb-40">
       <div className="mx-auto max-w-4xl">
-        <p className="text-center font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.3] tracking-tight">
-          {SEGMENTS.map((p, i) => (
-            <Reveal key={i} progress={scrollYProgress} index={i} total={SEGMENTS.length}>
-              {p.type === "w" ? (
-                <>{p.t} </>
-              ) : (
-                <span className="mx-1 inline-block align-middle">
-                  {p.kind === "phone" ? (
-                    <InlineMedia
-                      images={[inline2, inline4]}
-                      shape="pill"
-                      className="h-[0.85em] w-[0.55em] -translate-y-0.5"
-                      alt="phone"
-                    />
-                  ) : (
-                    <InlineMedia
-                      images={[inline1, inline3]}
-                      className="h-[0.85em] w-[0.85em] -translate-y-0.5 rounded-full"
-                      alt="user"
-                    />
-                  )}{" "}
-                </span>
-              )}
-            </Reveal>
-          ))}
+        <p className="text-center font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.3] tracking-tight text-ink">
+          {TIMED.map(({ seg, start }, i) =>
+            seg.type === "w" ? (
+              <TypeWord key={i} progress={scrollYProgress} word={seg.t} startIndex={start} total={TOTAL} />
+            ) : (
+              <TypeUnit key={i} progress={scrollYProgress} index={start} total={TOTAL} className="mx-1 align-middle">
+                {seg.kind === "phone" ? (
+                  <InlineMedia
+                    images={[inline2, inline4]}
+                    shape="pill"
+                    className="h-[0.85em] w-[0.55em] -translate-y-0.5"
+                    alt="phone"
+                  />
+                ) : (
+                  <InlineMedia
+                    images={[inline1, inline3]}
+                    className="h-[0.85em] w-[0.85em] -translate-y-0.5 rounded-full"
+                    alt="user"
+                  />
+                )}{" "}
+              </TypeUnit>
+            )
+          )}
         </p>
       </div>
     </section>
