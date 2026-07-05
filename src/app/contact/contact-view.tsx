@@ -44,23 +44,6 @@ export function ContactView() {
           <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[48ch] text-[15px] leading-[1.65] text-ink/65">
             I take on 2-3 focused projects each quarter. Tell me what you're cooking and I'll get back within two working days — usually faster, sometimes with sketches.
           </motion.p>
-
-          {/* Quiet facts strip — hairlines only, no cards. */}
-          <motion.div
-            variants={fadeUp}
-            className="mx-auto mt-10 flex max-w-xl items-stretch justify-center divide-x divide-black/10"
-          >
-            {[
-              ["Reply time", "< 2 days"],
-              ["This quarter", "2 slots open"],
-              ["Based in", "Lagos · WAT"],
-            ].map(([label, value]) => (
-              <div key={label} className="flex-1 px-4 sm:px-6">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-ink/40">{label}</p>
-                <p className="mt-1.5 font-display text-[17px] leading-none text-ink sm:text-[19px]">{value}</p>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
       </section>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Linkedin, Twitter } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 
@@ -21,17 +21,17 @@ const stagger = {
 };
 
 // The three questions that pulled me toward people, then products.
-const CURIOSITIES: { q: string; bar: string }[] = [
-  { q: "Why do certain ideas stick?", bar: "bg-sage" },
-  { q: "Why do some brands earn trust while others never do?", bar: "bg-lavender" },
-  { q: "Why can one sentence change someone's mind?", bar: "bg-butter" },
+const CURIOSITIES = [
+  "Why do certain ideas stick?",
+  "Why do some brands earn trust while others never do?",
+  "Why can one sentence change someone's mind?",
 ];
 
 // How my toolkit grew, one season at a time.
-const TOOLBOX_STEPS: { label: string; body: string; dot: string }[] = [
-  { label: "First", body: "with no-code tools.", dot: "bg-sage" },
-  { label: "Then", body: "with AI.", dot: "bg-lavender" },
-  { label: "Now", body: "with code, curiosity, and a very healthy amount of trial and error.", dot: "bg-butter" },
+const TOOLBOX_STEPS: { label: string; body: string }[] = [
+  { label: "First", body: "with no-code tools." },
+  { label: "Then", body: "with AI." },
+  { label: "Now", body: "with code, curiosity, and a very healthy amount of trial and error." },
 ];
 
 const BUILDS = [
@@ -41,16 +41,16 @@ const BUILDS = [
   "And sometimes it's just an idea that refused to leave me alone until I made it.",
 ];
 
-// Each card gets a soft accent tint, rotating through the palette.
-const CARES: { icon: string; body: string; tint: string }[] = [
-  { icon: "✨", body: "Products that feel like someone genuinely thought about the people using them.", tint: "bg-sage-soft" },
-  { icon: "🧠", body: "Understanding why people trust, adopt, and come back.", tint: "bg-lavender-soft" },
-  { icon: "📚", body: "Books. Comfortably more than I have shelf space for.", tint: "bg-butter-soft" },
-  { icon: "🚀", body: "Startups, and the people brave (or stubborn) enough to build them.", tint: "bg-sage-soft" },
-  { icon: "💬", body: "Communication and storytelling, treated as serious crafts.", tint: "bg-lavender-soft" },
-  { icon: "⚡", body: "Making technology feel a little more human.", tint: "bg-butter-soft" },
-  { icon: "✝️", body: "My Christian faith — quietly, but fully.", tint: "bg-sage-soft" },
-  { icon: "🇳🇬", body: "The Nigerian startup ecosystem, and what we're building here.", tint: "bg-lavender-soft" },
+// An editorial index — a quiet label above each line instead of icon chips.
+const CARES: { label: string; body: string }[] = [
+  { label: "Considered products", body: "Products that feel like someone genuinely thought about the people using them." },
+  { label: "Human behaviour", body: "Understanding why people trust, adopt, and come back." },
+  { label: "Books", body: "Comfortably more than I have shelf space for." },
+  { label: "Startups", body: "And the people brave (or stubborn) enough to build them." },
+  { label: "Storytelling", body: "Communication and storytelling, treated as serious crafts." },
+  { label: "Human technology", body: "Making technology feel a little more human." },
+  { label: "Faith", body: "My Christian faith — quietly, but fully." },
+  { label: "Nigeria", body: "The Nigerian startup ecosystem, and what we're building here." },
 ];
 
 const NOTS = [
@@ -80,7 +80,7 @@ export function AboutView() {
               variants={fadeUp}
               className="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.04] tracking-tight text-ink"
             >
-              <span className="italic">Curiosity</span> is usually where my projects begin.
+              <span className="italic">Curiosity</span> is where my projects begin.
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-6 max-w-[58ch] text-[16px] leading-[1.7] text-ink/70">
               A random question turns into research. Research becomes sketches. Sketches become websites, products,
@@ -96,8 +96,12 @@ export function AboutView() {
                 Work with me
                 <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
               </Link>
-              <Link href="/projects" className="inline-flex items-center gap-1.5 text-[14px] text-ink underline-offset-4 hover:underline">
+              <Link
+                href="/projects"
+                className="group/link inline-flex items-center gap-1.5 text-[14px] text-foreground underline underline-offset-4 hover:opacity-70"
+              >
                 See the work
+                <ArrowRight className="size-4 transition-transform group-hover/link:translate-x-0.5" />
               </Link>
             </motion.div>
           </div>
@@ -131,24 +135,26 @@ export function AboutView() {
             Long before I cared about products, I cared about people.
           </motion.p>
 
-          <motion.ul
+          <motion.ol
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10%" }}
             variants={stagger}
-            className="mt-8 space-y-4"
+            className="mt-10 border-y border-black/[0.08]"
           >
-            {CURIOSITIES.map((c) => (
+            {CURIOSITIES.map((q, i) => (
               <motion.li
-                key={c.q}
+                key={q}
                 variants={fadeUp}
-                className="flex items-stretch gap-4 rounded-[20px] bg-card p-5 ring-1 ring-black/5"
+                className={`flex items-baseline gap-5 py-6 sm:gap-8 ${i > 0 ? "border-t border-black/[0.08]" : ""}`}
               >
-                <span className={`w-1 shrink-0 rounded-full ${c.bar}`} aria-hidden />
-                <p className="font-display text-[20px] italic leading-snug text-ink">{c.q}</p>
+                <span className="font-display text-[13px] italic text-ink/35">0{i + 1}</span>
+                <p className="font-display text-[clamp(1.35rem,2.8vw,1.9rem)] italic leading-snug tracking-tight text-ink">
+                  {q}
+                </p>
               </motion.li>
             ))}
-          </motion.ul>
+          </motion.ol>
 
           <motion.div
             initial="hidden"
@@ -177,11 +183,9 @@ export function AboutView() {
             className="mt-8 space-y-4"
           >
             {TOOLBOX_STEPS.map((s) => (
-              <motion.li key={s.label} variants={fadeUp} className="flex items-baseline gap-4">
-                <span className={`mt-2 size-2.5 shrink-0 rounded-full ${s.dot}`} aria-hidden />
-                <p className="text-[16px] leading-[1.6] text-ink/75">
-                  <span className="font-display text-[18px] italic text-ink">{s.label}</span> {s.body}
-                </p>
+              <motion.li key={s.label} variants={fadeUp} className="flex items-baseline gap-5">
+                <span className="w-12 shrink-0 font-display text-[18px] italic text-ink">{s.label}</span>
+                <p className="text-[16px] leading-[1.6] text-ink/75">{s.body}</p>
               </motion.li>
             ))}
           </motion.ol>
@@ -239,7 +243,7 @@ export function AboutView() {
           >
             {BUILDS.map((b) => (
               <motion.li key={b} variants={fadeUp} className="flex items-baseline gap-3">
-                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-lavender" aria-hidden />
+                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-ink/25" aria-hidden />
                 <p className="text-[15px] leading-[1.6] text-ink/70">{b}</p>
               </motion.li>
             ))}
@@ -276,18 +280,17 @@ export function AboutView() {
             whileInView="show"
             viewport={{ once: true, margin: "-10%" }}
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
-            className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
+            className="mt-10 grid grid-cols-1 gap-x-14 sm:grid-cols-2"
           >
-            {CARES.map((c) => (
-              <motion.div
-                key={c.body}
-                variants={fadeUp}
-                className="flex items-start gap-4 rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:ring-black/10"
-              >
-                <span className={`grid size-11 shrink-0 place-items-center rounded-full text-[18px] ${c.tint}`}>
-                  {c.icon}
-                </span>
-                <p className="text-[15px] leading-[1.6] text-ink/75">{c.body}</p>
+            {CARES.map((c, i) => (
+              <motion.div key={c.label} variants={fadeUp} className="border-t border-black/[0.08] py-6">
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-ink/45">{c.label}</p>
+                  <span className="font-display text-[12px] italic text-ink/30">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-2.5 text-[15px] leading-[1.65] text-ink/75">{c.body}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -328,7 +331,7 @@ export function AboutView() {
               <motion.p
                 key={n}
                 variants={fadeUp}
-                className="border-l-2 border-butter pl-5 text-[17px] leading-[1.6] text-ink/75"
+                className="border-l border-ink/20 pl-6 font-display text-[clamp(1.15rem,2.2vw,1.45rem)] italic leading-snug tracking-tight text-ink/85"
               >
                 {n}
               </motion.p>
@@ -350,16 +353,6 @@ export function AboutView() {
           transition={{ duration: 0.7, ease: EASE }}
           className="relative mx-auto max-w-3xl overflow-hidden rounded-[36px] bg-ink px-8 py-14 text-center text-white"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-24 -bottom-24 h-72 w-72 rounded-full opacity-25 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, #e09ff1 0%, transparent 75%)" }}
-          />
           <h3 className="relative font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight">
             So, if you&apos;re building <span className="italic">something interesting</span>…
           </h3>
@@ -389,7 +382,7 @@ export function AboutView() {
             </a>
           </div>
           <p className="relative mt-7 text-[14px] text-white/55">
-            Thanks for stopping by. Have a brilliant one. <span className="text-butter">✨</span>
+            Thanks for stopping by. Have a brilliant one.
           </p>
         </motion.div>
       </section>
