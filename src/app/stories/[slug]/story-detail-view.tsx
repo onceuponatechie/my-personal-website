@@ -85,7 +85,7 @@ export function StoryDetailView({ s }: { s: Story }) {
                 <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">{resource.name}</h3>
                 <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">{resource.blurb}</p>
               </div>
-              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover:gap-3">
+              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white ring-1 ring-transparent transition group-hover:gap-3 group-hover:bg-ink group-hover:ring-white/25">
                 <Download className="size-3.5" strokeWidth={2.2} />
                 Grab it free
               </span>
@@ -124,7 +124,7 @@ export function StoryDetailView({ s }: { s: Story }) {
                         <h3 className="line-clamp-2 font-display text-[19px] leading-[1.15] tracking-tight text-ink">
                           {post.title}
                         </h3>
-                        <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-ink text-white transition-all duration-500 group-hover:rotate-45">
+                        <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-ink text-white transition-all duration-500 group-hover:rotate-45 group-hover:bg-sage">
                           <ArrowUpRight className="size-4" strokeWidth={2.2} />
                         </span>
                       </div>

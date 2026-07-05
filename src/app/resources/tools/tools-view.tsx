@@ -135,7 +135,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
-            <span className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:brightness-110">
+            <span className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage">
               Download free
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
             </span>
@@ -221,7 +221,7 @@ function ToolCard({ tool }: { tool: Tool }) {
           <span className="text-[12px] text-ink/50">{tool.meta}</span>
           <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
             Free
-            <span className="grid size-7 place-items-center rounded-full bg-ink text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+            <span className="grid size-7 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">
               <ArrowUpRight className="size-3.5" strokeWidth={2.2} />
             </span>
           </span>
@@ -282,7 +282,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <button
                   type="button"
                   onClick={onClose}
-                  className="mt-6 rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition hover:brightness-110"
+                  className="mt-6 rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage"
                 >
                   Back to the shelf
                 </button>
@@ -307,7 +307,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 />
                 <button
                   type="submit"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:brightness-105"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-ink"
                 >
                   Send request
                   <ArrowRight className="size-4" strokeWidth={2.2} />
@@ -353,7 +353,7 @@ function RequestCard() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition hover:brightness-105 sm:self-auto"
+          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white ring-1 ring-transparent transition hover:bg-ink hover:ring-white/25 sm:self-auto"
         >
           <MessageSquarePlus className="size-3.5" strokeWidth={2.2} />
           Request a template
@@ -382,18 +382,6 @@ export function ToolsView() {
       <Navbar />
 
       <section className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
-        {/* Soft washes in the site's accent tones. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 -top-28 h-[500px] w-[500px] rounded-full opacity-55 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--butter-soft) 0%, transparent 72%)" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 top-32 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
-        />
-
         <div className="relative mx-auto max-w-6xl">
           <motion.p
             initial={{ opacity: 0, y: -8 }}

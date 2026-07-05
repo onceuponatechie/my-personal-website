@@ -50,7 +50,7 @@ function ProjectArticle({ p }: { p: Project }) {
         <div className="relative z-20 mt-1 flex w-fit items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
-            className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white shadow-sm transition hover:brightness-105"
+            className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white shadow-sm transition hover:bg-ink"
           >
             View Case Study
             <ArrowUpRight className="size-3.5 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" strokeWidth={2.2} />

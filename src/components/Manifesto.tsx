@@ -55,7 +55,7 @@ export function Manifesto() {
   const { scrollYProgress } = useScroll({
     target: ref,
     // Calmer, balanced sweep across a longer scroll distance.
-    offset: ["start 0.85", "center 0.4"],
+    offset: ["start 0.88", "center 0.34"],
   });
 
   return (

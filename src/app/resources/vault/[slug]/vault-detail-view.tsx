@@ -29,18 +29,6 @@ export function VaultDetailView({
 
       {/* ---------- Editorial header ---------- */}
       <header className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
-        {/* soft gradient wash, echoing the homepage */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-40 right-0 h-[520px] w-[520px] rounded-full opacity-50 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 72%)" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-40 top-20 h-[460px] w-[460px] rounded-full opacity-50 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
-        />
-
         <div className="relative mx-auto max-w-3xl">
           <Link
             href="/resources/vault"
@@ -117,7 +105,7 @@ export function VaultDetailView({
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-6 py-3 text-[13px] font-medium text-white transition hover:bg-sage"
                 >
                   Send it
                   <ArrowRight className="size-4" strokeWidth={2.2} />
@@ -167,7 +155,7 @@ export function VaultDetailView({
             </div>
             <Link
               href="/resources/tools"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white transition hover:brightness-110"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white ring-1 ring-transparent transition hover:bg-ink hover:ring-white/25"
             >
               Browse resources
               <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />

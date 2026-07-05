@@ -51,7 +51,7 @@ export function ProjectDetailView({ p }: { p: Project }) {
                 href={p.liveHref}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:brightness-105"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-ink"
               >
                 Visit live site
                 <ArrowUpRight className="size-4" strokeWidth={2.2} />

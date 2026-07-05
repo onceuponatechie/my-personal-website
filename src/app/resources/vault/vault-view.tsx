@@ -57,7 +57,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href={`/resources/vault/${entry.slug}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:brightness-110"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage"
             >
               Download free report
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -175,18 +175,6 @@ export function VaultView() {
       <Navbar />
 
       <section className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
-        {/* soft gradient washes, echoing the homepage palette */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-28 -top-32 h-[540px] w-[540px] rounded-full opacity-55 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 72%)" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-36 top-24 h-[480px] w-[480px] rounded-full opacity-55 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
-        />
-
         <div className="relative mx-auto max-w-6xl">
           {/* floating chips */}
           <motion.div
