@@ -61,7 +61,7 @@ export function ResourcesView() {
               </div>
               <div className="mt-12 flex items-end justify-between">
                 <span className={`font-display text-[56px] leading-none ${s.accent} opacity-90`}>{s.count}</span>
-                <span className={`grid size-12 place-items-center rounded-full transition group-hover:scale-105 ${s.accent === "text-white" ? "bg-white text-ink" : "bg-ink text-white"}`}>
+                <span className={`grid size-12 place-items-center rounded-full transition group-hover:scale-105 ${s.accent === "text-white" ? "bg-white text-ink" : "bg-ink text-white group-hover:bg-sage"}`}>
                   <ArrowUpRight className="size-5" strokeWidth={2.2} />
                 </span>
               </div>

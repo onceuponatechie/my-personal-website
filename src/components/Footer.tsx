@@ -55,7 +55,7 @@ export function Footer() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
             </span>
-            Available for new projects
+            What are we building today?
           </span>
           <span className="text-[12px] text-ink/45 sm:text-[13px]">Essy Udeme® — 2026</span>
         </div>
@@ -97,9 +97,9 @@ export function Footer() {
             <Reveal delay={0.2} className="mt-8 flex md:justify-end">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:brightness-125"
+                className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-white shadow-sm transition hover:bg-sage"
               >
-                Let&apos;s work together
+                Build with me
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
               </Link>
             </Reveal>

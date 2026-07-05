@@ -92,7 +92,7 @@ function PickCard({ pick, index }: { pick: Pick; index: number }) {
           <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{pick.blurb}</p>
 
           <div className="mt-auto pt-5">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-ink py-2 pl-5 pr-2 text-[13px] font-medium text-white transition group-hover:brightness-110">
+            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-ink py-2 pl-5 pr-2 text-[13px] font-medium text-white transition group-hover:bg-sage">
               {pick.cta}
               <span className="grid size-7 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5">
                 {pick.download ? (

@@ -230,7 +230,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
             </div>
             <div className="mt-2 text-[12px] text-ink/65">Ready to use</div>
           </div>
-          <span className="pointer-events-none relative z-20 inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5">
+          <span className="pointer-events-none relative z-20 inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage">
             Explore
             <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
               <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
@@ -276,7 +276,7 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           </motion.p>
           <motion.span
             variants={textChild}
-            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5"
+            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage"
           >
             Explore
             <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
