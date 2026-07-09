@@ -9,6 +9,7 @@ type NavChild = { href: string; label: string; desc: string };
 type NavLink = { href: string; label: string; children?: NavChild[] };
 
 const NAV_LINKS: NavLink[] = [
+  { href: "/", label: "Home" },
   {
     href: "/resources",
     label: "Resources",
@@ -22,37 +23,54 @@ const NAV_LINKS: NavLink[] = [
   { href: "/about", label: "About" },
 ];
 
+/* Shared floating-chip surface so the logo, nav pill, and menu button read as
+   one family while sitting apart from each other. */
+const CHIP =
+  "rounded-full border border-black/5 bg-card/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md";
+
+function isActive(pathname: string, l: NavLink) {
+  if (l.href === "/") return pathname === "/";
+  return pathname.startsWith(l.href) || (l.children?.some((c) => pathname.startsWith(c.href)) ?? false);
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-4 z-40 mx-auto w-full max-w-3xl px-4">
-      <nav className="flex items-center justify-between rounded-full border border-black/5 bg-card/90 py-2 pl-5 pr-2 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.12)] backdrop-blur-md sm:pl-6">
-        <Link href="/" aria-label="Essy Udeme — home">
+    <header className="sticky top-4 z-40 mx-auto w-full max-w-6xl px-4 sm:px-6">
+      {/* Three floating pieces — logo chip left, links pill dead-centre, CTA
+          right — instead of one bar holding everything. */}
+      <div className="relative flex items-center justify-between">
+        <Link
+          href="/"
+          aria-label="Essy Udeme — home"
+          className={`${CHIP} inline-flex items-center px-4 py-2.5 sm:px-5`}
+        >
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex">
-          {NAV_LINKS.map((l) =>
-            l.children ? (
+        <nav
+          className={`${CHIP} absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
+        >
+          {NAV_LINKS.map((l) => {
+            const active = isActive(pathname, l);
+            const itemCls = `rounded-full px-4 py-2 transition ${
+              active
+                ? "bg-sage-soft font-medium text-ink shadow-sm"
+                : "hover:bg-foreground/[0.04] hover:text-foreground"
+            }`;
+            return l.children ? (
               <div key={l.href} className="group/nav relative">
-                <div className="flex items-center gap-1">
-                  <Link
-                    href={l.href}
-                    className={`editorial-underline transition hover:text-foreground ${
-                      pathname.startsWith(l.href) ? "text-foreground" : ""
-                    }`}
-                  >
-                    {l.label}
-                  </Link>
+                <Link href={l.href} className={`flex items-center gap-1 ${itemCls}`}>
+                  {l.label}
                   <ChevronDown
                     className="size-3.5 transition-transform duration-300 group-hover/nav:rotate-180"
                     strokeWidth={2}
                     aria-hidden
                   />
-                </div>
+                </Link>
                 {/* Hover-revealed dropdown — pick a page without leaving the bar. */}
                 <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover/nav:visible group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:opacity-100">
                   <div className="rounded-3xl border border-black/5 bg-card/95 p-2 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.22)] backdrop-blur-md">
@@ -72,18 +90,12 @@ export function Navbar() {
                 </div>
               </div>
             ) : (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`editorial-underline transition hover:text-foreground ${
-                  pathname === l.href ? "text-foreground" : ""
-                }`}
-              >
+              <Link key={l.href} href={l.href} className={itemCls}>
                 {l.label}
               </Link>
-            )
-          )}
-        </div>
+            );
+          })}
+        </nav>
 
         <div className="flex items-center gap-2">
           <button
@@ -91,7 +103,7 @@ export function Navbar() {
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid size-9 place-items-center rounded-full border border-black/5 bg-card text-foreground transition hover:bg-foreground/5 md:hidden"
+            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5 md:hidden`}
           >
             {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
           </button>
@@ -102,7 +114,7 @@ export function Navbar() {
             Build With Me
           </Link>
         </div>
-      </nav>
+      </div>
 
       <div
         className={`md:hidden transition-all duration-300 ease-out ${

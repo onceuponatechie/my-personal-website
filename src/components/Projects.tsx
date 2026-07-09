@@ -8,10 +8,12 @@ import { PROJECTS, type Project } from "@/lib/site-data";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
 import { EASE } from "@/lib/motion";
 
-/* Card body — compact on mobile so it fits the screen, full on desktop. */
+/* Card body — compact on mobile so it fits the screen; on desktop it runs
+   nearly full-viewport tall so each card reads like its own scene before the
+   next one stacks over it. */
 function ProjectArticle({ p }: { p: Project }) {
   return (
-    <article className="group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:grid-cols-2 md:rounded-[44px]">
+    <article className="group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:min-h-[72vh] md:grid-cols-2 md:rounded-[44px] lg:min-h-[78vh]">
       {/* Whole-card link — lets you click anywhere on the active card. */}
       <Link
         href={`/projects/${p.slug}`}
@@ -19,14 +21,14 @@ function ProjectArticle({ p }: { p: Project }) {
         className="absolute inset-0 z-10"
       />
       <div className="p-3 md:p-4">
-        <div className="overflow-hidden rounded-[24px] md:rounded-[32px]">
+        <div className="overflow-hidden rounded-[24px] md:h-full md:rounded-[32px]">
           <img
             src={p.image}
             alt={p.title}
             loading="lazy"
             width={1280}
             height={960}
-            className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[1.04] md:aspect-[4/3]"
+            className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] group-active:scale-[1.04] md:aspect-auto"
           />
         </div>
       </div>
@@ -39,7 +41,7 @@ function ProjectArticle({ p }: { p: Project }) {
         <h3 className="font-display text-[clamp(1.7rem,3vw,2.6rem)] leading-[1.04] tracking-tight text-ink">
           {p.title}
         </h3>
-        <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65">{p.description}</p>
+        <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65 md:line-clamp-none md:text-[15px]">{p.description}</p>
         <div className="flex flex-wrap gap-2">
           {p.tags.map((t) => (
             <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[12px] text-ink/70">
