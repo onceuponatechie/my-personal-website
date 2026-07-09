@@ -175,6 +175,8 @@ function FeaturedTool({ tool }: { tool: Tool }) {
 
 /* ---------- Tool file card ---------- */
 
+/* Compact product card — dense like a premium shop grid: cover, format,
+ * name, and the "price" row. The detail lives in the featured card above. */
 function ToolCard({ tool }: { tool: Tool }) {
   const Icon = FORMAT_ICON[tool.format];
   return (
@@ -183,48 +185,43 @@ function ToolCard({ tool }: { tool: Tool }) {
         hidden: { opacity: 0, y: 18 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
-      className="group flex h-full flex-col rounded-[28px] bg-card p-3 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/10"
+      className="group flex h-full flex-col rounded-[20px] bg-card p-2 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-24px_rgba(0,0,0,0.25)] hover:ring-black/10 sm:rounded-[24px] sm:p-2.5"
     >
-      <div className="relative overflow-hidden rounded-[20px]">
+      <div className="relative overflow-hidden rounded-[14px] sm:rounded-[18px]">
         <img
           src={tool.cover}
           alt={tool.name}
           loading="lazy"
-          className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <span className="absolute right-3 top-3 rounded-full bg-white/85 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink backdrop-blur">
+        <span className="absolute right-2 top-2 rounded-full bg-white/85 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-ink backdrop-blur">
           {FORMAT_LABEL[tool.format]}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col px-3 pb-3">
+      <div className="flex flex-1 flex-col px-1.5 pb-1 sm:px-2 sm:pb-1.5">
         {/* Format tile straddles the image edge, keeping the "file" identity.
             `relative` lifts it into the positioned paint layer so the cover
             image can't render over its top half. */}
-        <span className={`relative -mt-6 grid size-12 place-items-center rounded-2xl ${TONE_BG[tool.tone]} text-ink/70 ring-4 ring-card`}>
-          <Icon className="size-5" strokeWidth={1.9} />
+        <span className={`relative -mt-4 grid size-8 place-items-center rounded-xl ${TONE_BG[tool.tone]} text-ink/70 ring-[3px] ring-card sm:-mt-5 sm:size-9`}>
+          <Icon className="size-3.5 sm:size-4" strokeWidth={1.9} />
         </span>
 
-        <h3 className="mt-4 font-display text-[21px] leading-[1.15] tracking-tight text-ink">{tool.name}</h3>
-        <p className="mt-2 text-[13px] leading-[1.55] text-ink/60">{tool.blurb}</p>
+        <h3 className="mt-2 font-display text-[16px] leading-[1.15] tracking-tight text-ink sm:mt-2.5 sm:text-[18px]">
+          {tool.name}
+        </h3>
+        <p className="mt-1 hidden line-clamp-2 text-[12px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
 
-        <ul className="mt-4 space-y-1.5">
-          {tool.includes.slice(0, 3).map((item) => (
-            <li key={item} className="flex items-center gap-2 text-[12px] text-ink/55">
-              <Check className="size-3 shrink-0 text-sage" strokeWidth={2.6} />
-              {item}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-auto flex items-center justify-between border-t border-ink/[0.07] pt-4">
-          <span className="text-[12px] text-ink/50">{tool.meta}</span>
-          <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
-            Free
-            <span className="grid size-7 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">
-              <ArrowUpRight className="size-3.5" strokeWidth={2.2} />
+        <div className="mt-auto pt-3">
+          <div className="flex items-center justify-between border-t border-ink/[0.07] pt-2.5">
+            <span className="truncate pr-2 text-[11px] text-ink/50">{tool.meta}</span>
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-[12px] font-medium text-ink">
+              Free
+              <span className="grid size-6 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">
+                <ArrowUpRight className="size-3" strokeWidth={2.2} />
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </div>
     </motion.article>
@@ -472,7 +469,7 @@ export function ToolsView() {
             <SectionLabel>{active === "All" ? "The shelf" : active}</SectionLabel>
             <motion.div
               key={active}
-              className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4"
               initial="hidden"
               animate="show"
               variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
