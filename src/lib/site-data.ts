@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
       "A real-time analytics dashboard with AI-powered insights for growing startups.",
     longDescription:
       "Streamline is a calm command center for early-stage teams. We replaced six scattered tools with one quiet surface — metrics on the left, intent on the right — and trained a small AI model to surface what changed today and why it matters tomorrow.",
-    tags: ["Supabase", "Canva", "Framer"],
+    tags: ["Web App", "Analytics", "Startups"],
     image: project1,
     year: "2026",
     role: "Product Design · Build",
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
       "An analytics workspace built for product teams who move from data to decision in an afternoon.",
     longDescription:
       "Insight Studio turns event streams into stories. Designers and PMs ask plain-English questions and get a chart, a summary, and a draft of the experiment to run next — no SQL, no waiting on the data team.",
-    tags: ["Next.js", "Tailwind", "Vercel"],
+    tags: ["Web App", "Data & Insights", "Product Teams"],
     image: project2,
     year: "2025",
     role: "Design Engineering",
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
       "A mobile companion for new founders — gentle nudges, structured rituals, quiet space to think.",
     longDescription:
       "Pocket Coach is the friend who texts you the right question at the right time. Morning intentions, mid-week reviews, a Friday wind-down — all in a voice that feels like a sharp friend, not a productivity app.",
-    tags: ["React Native", "Expo", "Stripe"],
+    tags: ["Mobile App", "Coaching", "Founders"],
     image: project3,
     year: "2025",
     role: "Founding Designer",
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
       "A pitch deck system for storytellers — clean templates, brand-aware slides, a voice that lets the work speak.",
     longDescription:
       "Sage Deck is the deck system I always wanted. Type a one-line story, pick a tone, and out comes a brand-aware deck with the right pace — punchy openers, quiet middles, and a closer that lands.",
-    tags: ["Figma", "Keynote", "Notion"],
+    tags: ["Templates", "Storytelling", "Pitch Decks"],
     image: project4,
     year: "2024",
     role: "Design · Story",

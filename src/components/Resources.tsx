@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, PenLine } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Globe, PenLine } from "lucide-react";
 import Link from "next/link";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -319,10 +319,29 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
 
 function ProfileCard({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
-    <motion.article variants={dirCard(dir)} className={`${R} ${className} overflow-hidden bg-card`}>
+    <motion.article
+      variants={dirCard(dir)}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className={`${R} ${className} group/card relative overflow-hidden bg-card`}
+    >
+      {/* The portrait is a doorway — the whole card routes to the About page. */}
+      <Link href="/about" aria-label="More about me" className="absolute inset-0 z-10" />
+      {/* Sage globe badge — the "this is clickable" wink, mirroring the
+          butter pen on the Build Diary card. */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+        className="absolute left-5 top-5 z-20 grid size-11 place-items-center rounded-full bg-sage text-white shadow-sm"
+        aria-hidden
+      >
+        <Globe className="size-5" strokeWidth={1.8} />
+      </motion.div>
       <motion.img
         src={profileImg}
-        alt="Portrait"
+        alt="Portrait — tap to read more about me"
         loading="lazy"
         width={768}
         height={1024}
@@ -330,7 +349,7 @@ function ProfileCard({ dir = "up", className = "" }: { dir?: Dir; className?: st
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }}
-        className="h-full min-h-[260px] w-full object-cover"
+        className="h-full min-h-[260px] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.05]"
       />
     </motion.article>
   );
