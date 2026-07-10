@@ -52,15 +52,15 @@ type Skill = {
 };
 
 const LEFT_SKILLS: Skill[] = [
-  { label: "Product Design", icon: Frame, disc: "bg-sage text-white", rotate: -8, shift: "lg:ml-0" },
-  { label: "UX Research", icon: Search, disc: "bg-lavender text-ink", rotate: 5, shift: "lg:ml-10" },
-  { label: "Prototyping", icon: MousePointerClick, disc: "bg-butter text-ink", rotate: -4, shift: "lg:ml-3" },
+  { label: "Product Design", icon: Frame, disc: "bg-sage text-white", rotate: -8, shift: "xl:ml-0" },
+  { label: "UX Research", icon: Search, disc: "bg-lavender text-ink", rotate: 5, shift: "xl:ml-10" },
+  { label: "Prototyping", icon: MousePointerClick, disc: "bg-butter text-ink", rotate: -4, shift: "xl:ml-3" },
 ];
 
 const RIGHT_SKILLS: Skill[] = [
-  { label: "Design Systems", icon: LayoutGrid, disc: "bg-ink text-white", rotate: 7, shift: "lg:mr-1" },
-  { label: "Storytelling", icon: PenLine, disc: "bg-sage text-white", rotate: -5, shift: "lg:mr-9" },
-  { label: "Animation", icon: Spline, disc: "bg-lavender text-ink", rotate: 4, shift: "lg:mr-2" },
+  { label: "Design Systems", icon: LayoutGrid, disc: "bg-ink text-white", rotate: 7, shift: "xl:mr-1" },
+  { label: "Storytelling", icon: PenLine, disc: "bg-sage text-white", rotate: -5, shift: "xl:mr-9" },
+  { label: "Animation", icon: Spline, disc: "bg-lavender text-ink", rotate: 4, shift: "xl:mr-2" },
 ];
 
 /** One pill — white, softly shadowed, icon on a colored disc. Slides in from
@@ -72,7 +72,10 @@ function SkillPill({ skill, side, index }: { skill: Skill; side: "left" | "right
     <motion.li
       initial={{ opacity: 0, x: side === "left" ? -56 : 56, rotate: skill.rotate * 3, scale: 0.7 }}
       whileInView={{ opacity: 1, x: 0, rotate: skill.rotate, scale: 1 }}
-      viewport={{ margin: "-12%" }}
+      // Vertical-only margin: a horizontal one (e.g. "-12%") shrinks the
+      // trigger zone from the sides too, and these pills hug the viewport
+      // edges — at laptop widths their observers never fired.
+      viewport={{ margin: "-10% 0px -10% 0px" }}
       transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.09 }}
       className={`flex w-fit items-center gap-2.5 rounded-full bg-card py-1.5 pl-2 pr-4 shadow-[0_16px_34px_-14px_rgba(0,0,0,0.22)] ring-1 ring-black/5 ${skill.shift}`}
     >
@@ -108,20 +111,21 @@ export function Manifesto() {
   return (
     <section ref={ref} className="px-4 pt-12 pb-28 sm:pt-16 sm:pb-40">
       <div className="relative mx-auto max-w-6xl">
-        {/* Skill clusters flanking the manifesto on desktop — they hug the
-            text column so the whole block reads as one composition. */}
-        <ul className="absolute left-0 top-1/2 hidden -translate-y-1/2 flex-col items-start gap-3 lg:flex" aria-label="Skills">
+        {/* Skill clusters flanking the manifesto on wide desktops (xl+) —
+            below that the gutters are too narrow and the pills would sit on
+            the headline itself, so they fold under the text instead. */}
+        <ul className="absolute left-0 top-1/2 hidden -translate-y-1/2 flex-col items-start gap-3 xl:flex" aria-label="Skills">
           {LEFT_SKILLS.map((s, i) => (
             <SkillPill key={s.label} skill={s} side="left" index={i} />
           ))}
         </ul>
-        <ul className="absolute right-0 top-1/2 hidden -translate-y-1/2 flex-col items-end gap-3 lg:flex" aria-label="Skills">
+        <ul className="absolute right-0 top-1/2 hidden -translate-y-1/2 flex-col items-end gap-3 xl:flex" aria-label="Skills">
           {RIGHT_SKILLS.map((s, i) => (
             <SkillPill key={s.label} skill={s} side="right" index={i} />
           ))}
         </ul>
 
-        <div className="mx-auto max-w-4xl lg:max-w-3xl">
+        <div className="mx-auto max-w-4xl xl:max-w-3xl">
           <p className="text-center font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.3] tracking-tight text-ink">
             {TIMED.map(({ seg, start }, i) =>
               seg.type === "w" ? (
@@ -148,8 +152,8 @@ export function Manifesto() {
           </p>
         </div>
 
-        {/* Below lg the clusters fold into one loose pile under the text. */}
-        <ul className="mt-9 flex flex-wrap items-center justify-center gap-2.5 lg:hidden" aria-label="Skills">
+        {/* Below xl the clusters fold into one loose pile under the text. */}
+        <ul className="mt-9 flex flex-wrap items-center justify-center gap-2.5 xl:hidden" aria-label="Skills">
           {[...LEFT_SKILLS, ...RIGHT_SKILLS].map((s, i) => (
             <SkillPill key={s.label} skill={s} side={i % 2 ? "right" : "left"} index={i} />
           ))}

@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
-import { TOOLS, STORIES, RESEARCH } from "@/lib/site-data";
+import { TOOLS, STORIES } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
-/* One template, one tool, one piece, one report — a direct grab from the
- * homepage without a detour through the section pages. */
+/* One template, one tool, one piece — a direct grab from the homepage
+ * without a detour through the section pages. */
 
 type Pick = {
   label: string;
@@ -22,7 +22,6 @@ type Pick = {
 const template = TOOLS.find((t) => t.slug === "founder-os") ?? TOOLS[0];
 const tool = TOOLS.find((t) => t.slug === "user-interview-script") ?? TOOLS[1];
 const piece = STORIES.find((s) => s.slug === "designing-quiet-software") ?? STORIES[0];
-const report = RESEARCH[0];
 
 const PICKS: Pick[] = [
   {
@@ -48,14 +47,6 @@ const PICKS: Pick[] = [
     blurb: piece.excerpt,
     cover: piece.cover,
     href: `/stories/${piece.slug}`,
-  },
-  {
-    label: "Research",
-    labelBg: "bg-white/85",
-    title: report.title,
-    blurb: report.summary,
-    cover: report.cover,
-    href: "/resources/vault",
   },
 ];
 
@@ -99,7 +90,7 @@ function PickCard({
             loading="lazy"
             animate={{ scale: active ? 1.07 : 1 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="aspect-[9/10] w-full object-cover"
+            className="aspect-square w-full object-cover md:aspect-[9/10]"
           />
           <span
             className={`absolute left-4 top-4 rounded-full ${pick.labelBg} px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
@@ -109,7 +100,7 @@ function PickCard({
         </motion.div>
 
         <div className="px-2 pt-4 text-left sm:px-3 sm:pt-5">
-          <h3 className="line-clamp-2 font-display text-[21px] leading-[1.12] tracking-tight text-ink">
+          <h3 className="line-clamp-2 text-[19px] font-semibold leading-[1.2] tracking-tight text-ink">
             {pick.title}
           </h3>
           <p className="mt-1.5 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{pick.blurb}</p>
@@ -163,8 +154,8 @@ export function ChooseAdventure() {
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
             className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
           >
-            One template, one tool, one piece, one report. Pick a lane and take something useful
-            with you — no digging required.
+            One template, one tool, one piece. Pick a lane and take something useful with you — no
+            digging required.
           </motion.p>
         </div>
 
@@ -175,7 +166,7 @@ export function ChooseAdventure() {
           whileInView="show"
           viewport={{ once: true, margin: "-10%" }}
           variants={{ hidden: {}, show: {} }}
-          className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-10 md:grid-cols-4"
+          className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-10"
         >
           {PICKS.map((p, i) => (
             <PickCard
