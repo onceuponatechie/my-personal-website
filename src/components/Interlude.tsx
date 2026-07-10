@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { InlineMedia } from "@/components/InlineMedia";
 import { TypeUnit, TypeWord } from "@/components/TypeOn";
 
@@ -49,6 +49,37 @@ const SEGMENTS: Segment[] = [
   { type: "w", t: "keep.", accent: true },
 ];
 
+/* ---------- Fan of photo cards ---------- */
+
+/* Three snapshots of the open build — the templates, the desk, the research.
+ * Stacked flat while off-screen; scrolling in fans them out like a dealt
+ * hand, and scrolling away folds them back (whileInView without `once`). */
+const FAN_CARDS = [
+  { src: "/assets/book-notes.jpg", alt: "Book notes and templates", rotate: -11, x: 44, y: 10 },
+  { src: "/assets/dev-diary.jpg", alt: "Open notebook beside a keyboard", rotate: 2, x: 0, y: 0 },
+  { src: "/assets/research-vault.jpg", alt: "Research pinned to a wall", rotate: 12, x: -44, y: 12 },
+];
+
+function FanCards() {
+  return (
+    <div className="mt-12 flex justify-center sm:mt-14" aria-hidden>
+      {FAN_CARDS.map((c, i) => (
+        <motion.div
+          key={c.src}
+          initial={{ opacity: 0, x: c.x, y: c.y + 18, rotate: 0 }}
+          whileInView={{ opacity: 1, x: 0, y: c.y, rotate: c.rotate }}
+          viewport={{ margin: "-12%" }}
+          transition={{ type: "spring", stiffness: 170, damping: 20, delay: i * 0.1 }}
+          style={{ zIndex: i === 1 ? 2 : 1, transformOrigin: "bottom center" }}
+          className="-mx-4 w-32 shrink-0 overflow-hidden rounded-[18px] bg-card p-1.5 shadow-[0_26px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5 sm:-mx-5 sm:w-40 sm:rounded-[22px]"
+        >
+          <img src={c.src} alt={c.alt} loading="lazy" className="aspect-[3/4] w-full rounded-[13px] object-cover sm:rounded-[16px]" />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 /** How many character-steps an inline media chip occupies in the sequence. */
 const MEDIA_SPAN = 3;
 
@@ -94,6 +125,8 @@ export function Interlude() {
             )
           )}
         </p>
+
+        <FanCards />
       </div>
     </section>
   );

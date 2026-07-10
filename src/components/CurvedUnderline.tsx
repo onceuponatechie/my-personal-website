@@ -5,7 +5,8 @@ import { EASE } from "@/lib/motion";
 
 /**
  * A soft, hand-drawn lavender underline that sweeps beneath a word.
- * Wrap an inline word with it; the stroke draws itself when scrolled into view.
+ * Wrap an inline word with it; the stroke draws itself when scrolled into
+ * view and un-draws when scrolled back out (bidirectional).
  *
  *   From the <CurvedUnderline>Desk</CurvedUnderline>
  */
@@ -33,7 +34,7 @@ export function CurvedUnderline({
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
           whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true, margin: "-10%" }}
+          viewport={{ margin: "-10%" }}
           transition={{ duration: 0.9, ease: EASE }}
         />
       </svg>
