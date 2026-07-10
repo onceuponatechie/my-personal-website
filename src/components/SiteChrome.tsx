@@ -40,8 +40,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-4 z-40 mx-auto w-full max-w-6xl px-4 sm:px-6">
-      {/* Three floating pieces — logo chip left, links pill dead-centre, CTA
-          right — instead of one bar holding everything. */}
+      {/* Wordmark bare on the left; links and the CTA share one pill on the
+          right. */}
       <div className="relative flex items-center justify-between">
         {/* The wordmark sits bare on the page — no chip, no border. */}
         <Link href="/" aria-label="Essy Udeme — home" className="inline-flex items-center py-2.5">
@@ -49,7 +49,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className={`${CHIP} absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
+          className={`${CHIP} hidden items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
         >
           {NAV_LINKS.map((l) => {
             const active = isActive(pathname, l);
@@ -69,7 +69,7 @@ export function Navbar() {
                   />
                 </Link>
                 {/* Hover-revealed dropdown — pick a page without leaving the bar. */}
-                <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover/nav:visible group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:opacity-100">
+                <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-4 opacity-0 transition-all duration-200 group-hover/nav:visible group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:opacity-100">
                   <div className="rounded-3xl border border-black/5 bg-card/95 p-2 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.22)] backdrop-blur-md">
                     {l.children.map((c) => (
                       <Link
@@ -92,15 +92,23 @@ export function Navbar() {
               </Link>
             );
           })}
+          {/* The CTA lives inside the same pill, closing it on the right. */}
+          <Link
+            href="/contact"
+            className="ml-1.5 inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2 font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
+          >
+            Build With Me
+          </Link>
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* Mobile keeps a standalone burger + CTA pair. */}
+        <div className="flex items-center gap-2 md:hidden">
           <button
             type="button"
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5 md:hidden`}
+            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5`}
           >
             {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
           </button>

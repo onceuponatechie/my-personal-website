@@ -51,7 +51,7 @@ function DiaryFan({ stories }: { stories: Story[] }) {
               <img src={s.cover} alt="" className="aspect-[3/4] w-full rounded-[12px] object-cover" />
               <div className="mt-2 px-1">
                 <p className="text-[9px] font-medium uppercase tracking-[0.14em] text-ink/45">{s.category}</p>
-                <p className="mt-0.5 line-clamp-2 font-display text-[13px] leading-[1.2] text-ink">{s.title}</p>
+                <p className="mt-0.5 line-clamp-2 text-[12px] font-medium leading-[1.25] text-ink">{s.title}</p>
               </div>
             </Link>
           </motion.div>
@@ -98,7 +98,7 @@ function StoryCard({ story }: { story: Story }) {
             <span className="size-1 rounded-full bg-ink/30" />
             <span>{story.read}</span>
           </div>
-          <h3 className="mt-2.5 font-display text-[21px] leading-[1.15] tracking-tight text-ink">
+          <h3 className="mt-2.5 text-[18px] font-semibold leading-[1.25] tracking-tight text-ink">
             {story.title}
           </h3>
           <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{story.excerpt}</p>

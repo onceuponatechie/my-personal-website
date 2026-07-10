@@ -45,7 +45,7 @@ export function ProjectsView() {
                   <span className="size-1 rounded-full bg-ink/30" />
                   <span>{p.role}</span>
                 </div>
-                <h3 className="mt-3 font-display text-[28px] leading-[1.05] tracking-tight text-ink">{p.title}</h3>
+                <h3 className="mt-3 text-[23px] font-semibold leading-[1.15] tracking-tight text-ink">{p.title}</h3>
                 <p className="mt-3 text-[14px] leading-[1.6] text-ink/65">{p.description}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-ink">
                   Read case study

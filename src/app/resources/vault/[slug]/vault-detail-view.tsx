@@ -129,7 +129,7 @@ export function VaultDetailView({
                       <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">
                         {r.category}
                       </p>
-                      <h3 className="mt-3 font-display text-[19px] leading-[1.2] tracking-tight text-ink">
+                      <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
                         {r.title}
                       </h3>
                       <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-medium text-ink">

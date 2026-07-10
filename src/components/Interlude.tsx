@@ -68,7 +68,7 @@ function FanCards() {
           key={c.src}
           initial={{ opacity: 0, x: c.x, y: c.y + 18, rotate: 0 }}
           whileInView={{ opacity: 1, x: 0, y: c.y, rotate: c.rotate }}
-          viewport={{ margin: "-12%" }}
+          viewport={{ margin: "-10% 0px -10% 0px" }}
           transition={{ type: "spring", stiffness: 170, damping: 20, delay: i * 0.1 }}
           style={{ zIndex: i === 1 ? 2 : 1, transformOrigin: "bottom center" }}
           className="-mx-4 w-32 shrink-0 overflow-hidden rounded-[18px] bg-card p-1.5 shadow-[0_26px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5 sm:-mx-5 sm:w-40 sm:rounded-[22px]"
