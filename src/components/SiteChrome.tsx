@@ -43,11 +43,8 @@ export function Navbar() {
       {/* Three floating pieces — logo chip left, links pill dead-centre, CTA
           right — instead of one bar holding everything. */}
       <div className="relative flex items-center justify-between">
-        <Link
-          href="/"
-          aria-label="Essy Udeme — home"
-          className={`${CHIP} inline-flex items-center px-4 py-2.5 sm:px-5`}
-        >
+        {/* The wordmark sits bare on the page — no chip, no border. */}
+        <Link href="/" aria-label="Essy Udeme — home" className="inline-flex items-center py-2.5">
           <Logo />
         </Link>
 

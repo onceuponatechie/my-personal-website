@@ -5,18 +5,17 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Download } from "lucide-react";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
-import { TOOLS, STORIES } from "@/lib/site-data";
+import { TOOLS, STORIES, RESEARCH } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
-/* One template, one tool, one piece — a direct grab from the homepage
- * without a detour through the section pages. */
+/* One template, one tool, one piece, one report — a direct grab from the
+ * homepage without a detour through the section pages. */
 
 type Pick = {
   label: string;
   labelBg: string;
   kind: string;
   title: string;
-  blurb: string;
   cover: string;
   href: string;
   cta: string;
@@ -26,6 +25,7 @@ type Pick = {
 const template = TOOLS.find((t) => t.slug === "founder-os") ?? TOOLS[0];
 const tool = TOOLS.find((t) => t.slug === "user-interview-script") ?? TOOLS[1];
 const piece = STORIES.find((s) => s.slug === "designing-quiet-software") ?? STORIES[0];
+const report = RESEARCH[0];
 
 const PICKS: Pick[] = [
   {
@@ -33,7 +33,6 @@ const PICKS: Pick[] = [
     labelBg: "bg-sage-soft",
     kind: template.kind,
     title: template.name,
-    blurb: template.blurb,
     cover: template.cover,
     href: "/resources/tools",
     cta: "Grab it free",
@@ -44,7 +43,6 @@ const PICKS: Pick[] = [
     labelBg: "bg-lavender-soft",
     kind: tool.kind,
     title: tool.name,
-    blurb: tool.blurb,
     cover: tool.cover,
     href: "/resources/tools",
     cta: "Grab it free",
@@ -55,19 +53,29 @@ const PICKS: Pick[] = [
     labelBg: "bg-butter-soft",
     kind: `${piece.category} · ${piece.read}`,
     title: piece.title,
-    blurb: piece.excerpt,
     cover: piece.cover,
     href: `/stories/${piece.slug}`,
     cta: "Read the piece",
+    download: false,
+  },
+  {
+    label: "Research",
+    labelBg: "bg-white/85",
+    kind: report.category,
+    title: report.title,
+    cover: report.cover,
+    href: "/resources/vault",
+    cta: "Open the vault",
     download: false,
   },
 ];
 
 const SPOTLIGHT_MS = 2800;
 
-/* Compact pick card — sized like the Tools & Templates bento card on the
- * homepage. The roving spotlight (active) lifts it, warms its ring, zooms
- * the cover, and flips the CTA to sage — like a cursor hovering, deciding. */
+/* Full-bleed photo card — text sits ON the image over a soft scrim, sized
+ * like the bento cards up in the resources grid. The roving spotlight
+ * (active) lifts it, zooms the cover, and flips the CTA to sage — like a
+ * cursor hovering, deciding. */
 function PickCard({
   pick,
   index,
@@ -86,57 +94,56 @@ function PickCard({
         show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE, delay: index * 0.08 } },
       }}
       onMouseEnter={() => onHover(index)}
-      className="group w-[72%] shrink-0 snap-center sm:w-[46%] md:w-auto md:shrink"
+      className="group w-[62%] shrink-0 snap-center sm:w-[40%] md:w-auto md:shrink"
     >
       {/* Inner wrapper carries the spotlight motion so it can't fight the
           entrance variants on the article above. */}
       <motion.div
         animate={{ y: active ? -8 : 0, scale: active ? 1.02 : 1, opacity: active ? 1 : 0.92 }}
         transition={{ duration: 0.55, ease: EASE }}
-        className={`flex h-full flex-col rounded-[26px] bg-card p-2.5 ring-1 transition-shadow duration-500 ${
+        className={`relative overflow-hidden rounded-[32px] ring-1 transition-shadow duration-500 ${
           active
-            ? "shadow-[0_28px_55px_-26px_rgba(0,0,0,0.3)] ring-black/10"
+            ? "shadow-[0_30px_60px_-26px_rgba(0,0,0,0.4)] ring-black/10"
             : "shadow-none ring-black/5"
         }`}
       >
-        <Link href={pick.href} className="flex h-full flex-col">
-          <div className="relative overflow-hidden rounded-[18px]">
-            <motion.img
-              src={pick.cover}
-              alt={pick.title}
-              loading="lazy"
-              animate={{ scale: active ? 1.07 : 1 }}
-              transition={{ duration: 0.9, ease: EASE }}
-              className="aspect-[16/10] w-full object-cover"
-            />
+        <Link href={pick.href} className="relative flex aspect-[4/5] flex-col justify-end">
+          <motion.img
+            src={pick.cover}
+            alt={pick.title}
+            loading="lazy"
+            animate={{ scale: active ? 1.08 : 1 }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {/* Scrim keeps the copy readable on any photo. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/5" aria-hidden />
+
+          <span
+            className={`absolute left-4 top-4 rounded-full ${pick.labelBg} px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
+          >
+            {pick.label}
+          </span>
+
+          <div className="relative p-5 text-left">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-white/60">{pick.kind}</p>
+            <h3 className="mt-1.5 line-clamp-2 font-display text-[20px] leading-[1.12] tracking-tight text-white">
+              {pick.title}
+            </h3>
             <span
-              className={`absolute left-2.5 top-2.5 rounded-full ${pick.labelBg} px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/75`}
+              className={`mt-3.5 inline-flex w-fit items-center gap-2 rounded-full py-1.5 pl-4 pr-1.5 text-[12px] font-medium text-white transition-colors duration-500 group-hover:bg-sage ${
+                active ? "bg-sage" : "bg-white/15 backdrop-blur-sm"
+              }`}
             >
-              {pick.label}
-            </span>
-          </div>
-
-          <div className="flex flex-1 flex-col px-2 pb-1.5 pt-3 text-left">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-ink/45">{pick.kind}</p>
-            <h3 className="mt-1.5 font-display text-[19px] leading-[1.15] tracking-tight text-ink">{pick.title}</h3>
-            <p className="mt-1.5 line-clamp-2 text-[12px] leading-[1.5] text-ink/60">{pick.blurb}</p>
-
-            <div className="mt-auto pt-4">
-              <span
-                className={`inline-flex w-fit items-center gap-2 rounded-full py-1.5 pl-4 pr-1.5 text-[12px] font-medium text-white transition-colors duration-500 group-hover:bg-sage ${
-                  active ? "bg-sage" : "bg-ink"
-                }`}
-              >
-                {pick.cta}
-                <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5">
-                  {pick.download ? (
-                    <Download className="size-3" strokeWidth={2.2} />
-                  ) : (
-                    <ArrowUpRight className="size-3" strokeWidth={2.2} />
-                  )}
-                </span>
+              {pick.cta}
+              <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5">
+                {pick.download ? (
+                  <Download className="size-3" strokeWidth={2.2} />
+                ) : (
+                  <ArrowUpRight className="size-3" strokeWidth={2.2} />
+                )}
               </span>
-            </div>
+            </span>
           </div>
         </Link>
       </motion.div>
@@ -152,7 +159,8 @@ export function ChooseAdventure() {
   const autoScrolling = useRef(false);
 
   /* The roving spotlight — every few seconds the "cursor" moves to the next
-     card, so the row always looks mid-decision. */
+     card, so the row always looks mid-decision. It never stops for good:
+     interaction only pauses it briefly. */
   useEffect(() => {
     const t = setInterval(() => {
       if (!pausedRef.current) setActive((a) => (a + 1) % PICKS.length);
@@ -201,24 +209,15 @@ export function ChooseAdventure() {
 
   return (
     <section id="adventure" className="px-4 pb-24 pt-8 sm:px-6">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-6xl">
         {/* Centered header, matching the rest of the homepage. */}
         <div className="mx-auto mb-10 max-w-2xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="text-[12px] uppercase tracking-[0.22em] text-ink/50"
-          >
-            Grab &amp; go · Free forever
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="mt-4 font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
+            className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
           >
             choose your <CurvedUnderline className="italic">adventure</CurvedUnderline>
           </motion.h2>
@@ -229,8 +228,8 @@ export function ChooseAdventure() {
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
             className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
           >
-            One template, one tool, one piece. Pick a lane and take something useful with you — no
-            digging required.
+            One template, one tool, one piece, one report. Pick a lane and take something useful
+            with you — no digging required.
           </motion.p>
         </div>
 
@@ -243,7 +242,7 @@ export function ChooseAdventure() {
           whileInView="show"
           viewport={{ once: true, margin: "-10%" }}
           variants={{ hidden: {}, show: {} }}
-          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0"
+          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0"
         >
           {PICKS.map((p, i) => (
             <PickCard
