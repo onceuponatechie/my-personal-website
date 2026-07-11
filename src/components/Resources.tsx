@@ -115,7 +115,8 @@ function BuildDiary({ dir = "up", className = "" }: { dir?: Dir; className?: str
       className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-ink text-white`}
     >
       <Link href="/stories" aria-label="Open The Build Diary" className="absolute inset-0 z-10" />
-      <div className="relative p-2 pb-0">
+      {/* p-3 top/left/right matches the project cards' mobile image inset. */}
+      <div className="relative p-3 pb-0">
         <motion.img
           src={devDiaryImg}
           alt="Open notebook beside a keyboard"
@@ -247,7 +248,9 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
     <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-sage-soft`}>
       <Link href="/resources/vault" aria-label="Explore the Research Vault" className="absolute inset-0 z-10" />
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
-        <div className="p-2 pr-0 md:w-[44%] md:shrink-0">
+        {/* p-3 top/left/right matches the project cards' mobile image inset;
+            on md the right edge stays open so the text column sits close. */}
+        <div className="p-3 pb-0 md:pb-3 md:pr-0 md:w-[44%] md:shrink-0">
           <motion.img
             src={researchImg}
             alt="Research"

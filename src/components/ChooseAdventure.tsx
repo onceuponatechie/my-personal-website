@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
-import { TOOLS, STORIES } from "@/lib/site-data";
+import { TOOLS, STORIES, RESEARCH } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
-/* One template, one tool, one piece — a direct grab from the homepage
- * without a detour through the section pages. */
+/* Five picks from across the site — templates, tools, pieces, research —
+ * flowing past in a continuous marquee (Avenora-style): upward on mobile,
+ * sideways on desktop. */
 
 type Pick = {
   label: string;
@@ -21,7 +22,9 @@ type Pick = {
 
 const template = TOOLS.find((t) => t.slug === "founder-os") ?? TOOLS[0];
 const tool = TOOLS.find((t) => t.slug === "user-interview-script") ?? TOOLS[1];
+const checklist = TOOLS.find((t) => t.slug === "launch-checklist") ?? TOOLS[2];
 const piece = STORIES.find((s) => s.slug === "designing-quiet-software") ?? STORIES[0];
+const report = RESEARCH[0];
 
 const PICKS: Pick[] = [
   {
@@ -48,91 +51,78 @@ const PICKS: Pick[] = [
     cover: piece.cover,
     href: `/stories/${piece.slug}`,
   },
+  {
+    label: "Research",
+    labelBg: "bg-white/85",
+    title: report.title,
+    blurb: report.summary,
+    cover: report.cover,
+    href: "/resources/vault",
+  },
+  {
+    label: "Checklist",
+    labelBg: "bg-sage-soft",
+    title: checklist.name,
+    blurb: checklist.blurb,
+    cover: checklist.cover,
+    href: "/resources/tools",
+  },
 ];
 
-const SPOTLIGHT_MS = 2800;
-
-/* Borderless card in the same language as the profile card up in the
- * resources bento: a rounded-[44px] photo, title and description beneath.
- * The roving spotlight (active) lifts the photo, zooms it, and deepens its
- * shadow — like a cursor hovering, deciding. */
-function PickCard({
-  pick,
-  index,
-  active,
-  onHover,
-}: {
-  pick: Pick;
-  index: number;
-  active: boolean;
-  onHover: (i: number) => void;
-}) {
+/* One pick — image and text living in a single card, same language as the
+ * project cards: soft card surface, inset rounded cover, arrow chip. */
+function PickCard({ pick }: { pick: Pick }) {
   return (
-    <motion.article
-      variants={{
-        hidden: { opacity: 0, y: 22 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE, delay: index * 0.08 } },
-      }}
-      onMouseEnter={() => onHover(index)}
-      className="group"
-    >
-      <Link href={pick.href} className="block">
-        <motion.div
-          animate={{ y: active ? -8 : 0, opacity: active ? 1 : 0.94 }}
-          transition={{ duration: 0.55, ease: EASE }}
-          className={`relative overflow-hidden rounded-[44px] transition-shadow duration-500 ${
-            active ? "shadow-[0_30px_60px_-26px_rgba(0,0,0,0.38)]" : "shadow-none"
-          }`}
-        >
-          <motion.img
+    <Link href={pick.href} className="group block h-full w-full">
+      <article className="flex h-full flex-col rounded-[28px] bg-card p-3 shadow-[0_24px_50px_-30px_rgba(0,0,0,0.3)] ring-1 ring-black/5 transition duration-300 group-hover:ring-black/10">
+        <div className="relative overflow-hidden rounded-[20px]">
+          <img
             src={pick.cover}
             alt={pick.title}
             loading="lazy"
-            animate={{ scale: active ? 1.07 : 1 }}
-            transition={{ duration: 0.9, ease: EASE }}
-            className="aspect-square w-full object-cover md:aspect-[9/10]"
+            className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
           />
           <span
-            className={`absolute left-4 top-4 rounded-full ${pick.labelBg} px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
+            className={`absolute left-3 top-3 rounded-full ${pick.labelBg} px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
           >
             {pick.label}
           </span>
-        </motion.div>
-
-        <div className="px-2 pt-4 text-left sm:px-3 sm:pt-5">
-          <h3 className="line-clamp-2 text-[19px] font-semibold leading-[1.2] tracking-tight text-ink">
-            {pick.title}
-          </h3>
-          <p className="mt-1.5 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{pick.blurb}</p>
         </div>
-      </Link>
-    </motion.article>
+        <div className="flex flex-1 items-start justify-between gap-3 px-2 pb-2 pt-3.5 text-left">
+          <div className="min-w-0">
+            <h3 className="line-clamp-1 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
+              {pick.title}
+            </h3>
+            <p className="mt-1 line-clamp-2 text-[12.5px] leading-[1.5] text-ink/60">{pick.blurb}</p>
+          </div>
+          <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-sage-soft text-ink transition duration-300 group-hover:bg-sage group-hover:text-white">
+            <ArrowUpRight className="size-4" strokeWidth={2.2} />
+          </span>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
+/** The five picks rendered twice back-to-back — the second copy hidden from
+ * assistive tech — so a -50% translate loops seamlessly. */
+function MarqueeContent({ vertical }: { vertical: boolean }) {
+  return (
+    <>
+      {[0, 1].map((copy) => (
+        <div key={copy} aria-hidden={copy === 1} className={vertical ? "flex flex-col" : "flex"}>
+          {PICKS.map((p) => (
+            <div key={p.label} className={vertical ? "pb-5" : "w-[320px] shrink-0 pr-5"}>
+              <PickCard pick={p} />
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
   );
 }
 
 export function ChooseAdventure() {
-  const [active, setActive] = useState(0);
-  const pausedRef = useRef(false);
-  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  /* The roving spotlight — every few seconds the "cursor" moves to the next
-     card, so the row always looks mid-decision. It never stops for good:
-     interaction only pauses it briefly. */
-  useEffect(() => {
-    const t = setInterval(() => {
-      if (!pausedRef.current) setActive((a) => (a + 1) % PICKS.length);
-    }, SPOTLIGHT_MS);
-    return () => clearInterval(t);
-  }, []);
-
-  /* The visitor's own hand wins: touching or hovering pauses the auto-cycle,
-     and it quietly resumes a few seconds after they let go. */
-  const pause = () => {
-    pausedRef.current = true;
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    resumeTimer.current = setTimeout(() => (pausedRef.current = false), 6000);
-  };
-
   return (
     <section id="adventure" className="px-4 pb-24 pt-8 sm:px-6">
       <div className="mx-auto max-w-6xl">
@@ -154,33 +144,27 @@ export function ChooseAdventure() {
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
             className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
           >
-            One template, one tool, one piece. Pick a lane and take something useful with you — no
+            Templates, tools, pieces, research — drifting past. Catch one and take it with you, no
             digging required.
           </motion.p>
         </div>
 
-        <motion.div
-          onMouseEnter={pause}
-          onTouchStart={pause}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={{ hidden: {}, show: {} }}
-          className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-10"
+        {/* Mobile: an endless upward drift of cards, Avenora-style. */}
+        <div
+          className="relative mx-auto h-[560px] max-w-md overflow-hidden md:hidden [mask-image:linear-gradient(to_bottom,transparent,black_7%,black_93%,transparent)]"
+          aria-label="A rotating shelf of free picks"
         >
-          {PICKS.map((p, i) => (
-            <PickCard
-              key={p.label}
-              pick={p}
-              index={i}
-              active={i === active}
-              onHover={(idx) => {
-                pause();
-                setActive(idx);
-              }}
-            />
-          ))}
-        </motion.div>
+          <div className="flex flex-col [animation:adventure-marquee-y_28s_linear_infinite] motion-reduce:[animation:none]">
+            <MarqueeContent vertical />
+          </div>
+        </div>
+
+        {/* Desktop: the same cards glide sideways; hovering pauses the belt. */}
+        <div className="relative hidden overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="flex w-max [animation:adventure-marquee-x_36s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:[animation:none]">
+            <MarqueeContent vertical={false} />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -39,9 +39,9 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-4 z-40 mx-auto w-full max-w-6xl px-4 sm:px-6">
-      {/* Wordmark bare on the left; links and the CTA share one pill on the
-          right. */}
+    <header className="relative z-40 mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6">
+      {/* Three pieces — wordmark bare on the left, links pill dead-centre,
+          CTA on the right. The bar scrolls away with the page (not sticky). */}
       <div className="relative flex items-center justify-between">
         {/* The wordmark sits bare on the page — no chip, no border. */}
         <Link href="/" aria-label="Essy Udeme — home" className="inline-flex items-center py-2.5">
@@ -49,7 +49,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className={`${CHIP} hidden items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
+          className={`${CHIP} absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
         >
           {NAV_LINKS.map((l) => {
             const active = isActive(pathname, l);
@@ -92,23 +92,15 @@ export function Navbar() {
               </Link>
             );
           })}
-          {/* The CTA lives inside the same pill, closing it on the right. */}
-          <Link
-            href="/contact"
-            className="ml-1.5 inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2 font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
-          >
-            Build With Me
-          </Link>
         </nav>
 
-        {/* Mobile keeps a standalone burger + CTA pair. */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2">
           <button
             type="button"
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5`}
+            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5 md:hidden`}
           >
             {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
           </button>
