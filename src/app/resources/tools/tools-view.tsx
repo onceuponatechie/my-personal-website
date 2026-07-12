@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
@@ -111,8 +112,14 @@ function FeaturedTool({ tool }: { tool: Tool }) {
       initial={{ opacity: 0, y: 22 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: EASE }}
-      className="overflow-hidden rounded-[32px] bg-card p-7 ring-1 ring-black/5 sm:p-9"
+      className="relative overflow-hidden rounded-[32px] bg-card p-7 ring-1 ring-black/5 transition duration-300 hover:ring-black/10 sm:p-9"
     >
+      {/* Whole card opens the file's own page. */}
+      <Link
+        href={`/resources/tools/${tool.slug}`}
+        aria-label={`Open ${tool.name}`}
+        className="absolute inset-0 z-10"
+      />
       <div className="grid gap-9 md:grid-cols-[1.15fr_1fr] md:items-center">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full bg-butter-soft px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70">
@@ -185,8 +192,14 @@ function ToolCard({ tool }: { tool: Tool }) {
         hidden: { opacity: 0, y: 18 },
         show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
       }}
-      className="group flex h-full flex-col rounded-[20px] bg-card p-2 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-24px_rgba(0,0,0,0.25)] hover:ring-black/10 sm:rounded-[24px] sm:p-2.5"
+      className="group relative flex h-full flex-col rounded-[20px] bg-card p-2 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-24px_rgba(0,0,0,0.25)] hover:ring-black/10 sm:rounded-[24px] sm:p-2.5"
     >
+      {/* Whole card opens the file's own page. */}
+      <Link
+        href={`/resources/tools/${tool.slug}`}
+        aria-label={`Open ${tool.name}`}
+        className="absolute inset-0 z-10"
+      />
       <div className="relative overflow-hidden rounded-[14px] sm:rounded-[18px]">
         <img
           src={tool.cover}
