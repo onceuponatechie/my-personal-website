@@ -9,8 +9,8 @@ const SECTIONS = [
   {
     href: "/stories",
     eyebrow: "The blog",
-    title: "The Build Diary",
-    blurb: "Essays and field notes from the build — what I'm making and what it's teaching me.",
+    title: "The Rabbit Hole",
+    blurb: "Issues for curious people — simple questions followed wherever they lead.",
     bg: "bg-ink text-white",
     count: "3",
     accent: "text-white",
