@@ -129,6 +129,19 @@
   }
 }
 
+/* Continuous marquee for the choose-your-adventure shelf. The track holds
+   two identical copies of the cards, so -50% lands exactly on the seam. */
+@keyframes adventure-marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes adventure-marquee-y {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
 @layer utilities {
   /* Editorial link — a hairline underline that wipes in from the left on
      hover/focus. On touch devices (no hover) it rests visible and thickens
