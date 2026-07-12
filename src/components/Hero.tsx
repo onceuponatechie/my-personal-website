@@ -97,7 +97,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p variants={fadeUp} className="mt-7 text-[15px] text-muted-foreground">
-          Researcher <span className="mx-2 opacity-50">·</span> Builder
+          Creator <span className="mx-2 opacity-50">·</span> Builder
           <span className="mx-2 opacity-50">·</span> Storyteller
         </motion.p>
 

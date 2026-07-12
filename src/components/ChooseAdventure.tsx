@@ -33,7 +33,7 @@ const PICKS: Pick[] = [
     title: template.name,
     blurb: template.blurb,
     cover: template.cover,
-    href: "/resources/tools",
+    href: `/resources/tools/${template.slug}`,
   },
   {
     label: "Tool",
@@ -41,7 +41,7 @@ const PICKS: Pick[] = [
     title: tool.name,
     blurb: tool.blurb,
     cover: tool.cover,
-    href: "/resources/tools",
+    href: `/resources/tools/${tool.slug}`,
   },
   {
     label: "Piece",
@@ -65,7 +65,7 @@ const PICKS: Pick[] = [
     title: checklist.name,
     blurb: checklist.blurb,
     cover: checklist.cover,
-    href: "/resources/tools",
+    href: `/resources/tools/${checklist.slug}`,
   },
 ];
 

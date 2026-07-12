@@ -262,12 +262,27 @@ export const TOOLS: Tool[] = [
   },
 ];
 
+export function getTool(slug: string) {
+  return TOOLS.find((t) => t.slug === slug);
+}
+
+/** Nearby files for a tool detail page — same category first, then the rest. */
+export function relatedTools(slug: string, n = 3) {
+  const current = getTool(slug);
+  const others = TOOLS.filter((t) => t.slug !== slug);
+  if (!current) return others.slice(0, n);
+  return [
+    ...others.filter((t) => t.category === current.category),
+    ...others.filter((t) => t.category !== current.category),
+  ].slice(0, n);
+}
+
 /** A downloadable resource paired with a story — picked so each post points
- * to a different freebie. Links to the Tools & Templates shelf. */
+ * to a different freebie. Links to that file's own page. */
 export function storyResource(slug: string): Tool & { href: string } {
   const i = Math.max(0, STORIES.findIndex((s) => s.slug === slug));
   const tool = TOOLS[i % TOOLS.length];
-  return { ...tool, href: "/resources/tools" };
+  return { ...tool, href: `/resources/tools/${tool.slug}` };
 }
 
 export type ResearchEntry = {

@@ -17,8 +17,23 @@ const CHANNELS = [
   { Icon: Coffee, title: "In Lagos? Coffee's on me.", body: "Yaba or Lekki, you pick.", href: "mailto:hello@essy.dev" },
 ];
 
+/* The lanes I actually work in — products, converting sites, automation,
+ * behaviour research, and the storytelling around all of it. */
+const SERVICES = [
+  "Web or mobile product",
+  "A website that converts",
+  "Automation & AI workflows",
+  "UX research & behaviour audit",
+  "Product storytelling & content",
+  "Something else / just a chat",
+];
+
 export function ContactView() {
   const [sent, setSent] = useState(false);
+  const [services, setServices] = useState<string[]>([]);
+
+  const toggleService = (s: string) =>
+    setServices((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
 
   return (
     <main className="min-h-screen bg-background pt-6">
@@ -83,21 +98,43 @@ export function ContactView() {
                       <input id="email" type="email" required className={inputCls} placeholder="ada@calm.studio" />
                     </Field>
                   </div>
-                  <Field label="What's the project?" index="03" id="project">
+                  {/* Pick-a-lane chips — multi-select, since projects rarely
+                      stay in one box. */}
+                  <fieldset>
+                    <legend className="mb-3 flex items-baseline gap-2.5">
+                      <span className="font-display text-[12px] italic text-ink/30">03</span>
+                      <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-ink/50">
+                        What are you interested in?
+                      </span>
+                    </legend>
+                    <div className="flex flex-wrap gap-2">
+                      {SERVICES.map((s) => {
+                        const on = services.includes(s);
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            aria-pressed={on}
+                            onClick={() => toggleService(s)}
+                            className={`rounded-full px-4 py-2 text-[13px] transition ${
+                              on
+                                ? "bg-sage font-medium text-white shadow-sm"
+                                : "border border-ink/15 text-ink/70 hover:border-ink/30 hover:text-ink"
+                            }`}
+                          >
+                            {s}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                  <Field label="What's the project?" index="04" id="project">
                     <textarea
                       id="project"
                       required
                       rows={4}
                       className={inputCls + " resize-none"}
                       placeholder="A short paragraph is plenty. Links welcome."
-                    />
-                  </Field>
-                  <Field label="A link to your world (optional)" index="04" id="link">
-                    <input
-                      id="link"
-                      type="text"
-                      className={inputCls}
-                      placeholder="Website, deck, or wherever you live online"
                     />
                   </Field>
 
