@@ -18,7 +18,7 @@ const NAV_COLS: { title: string; links: { label: string; href: string }[] }[] = 
   {
     title: "Explore",
     links: [
-      { label: "The Build Diary", href: "/stories" },
+      { label: "The Rabbit Hole", href: "/stories" },
       { label: "Tools & Templates", href: "/resources/tools" },
       { label: "Research Vault", href: "/resources/vault" },
     ],

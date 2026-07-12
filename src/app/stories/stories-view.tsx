@@ -159,7 +159,7 @@ export function StoriesView() {
                 transition={{ delay: 0.08, duration: 0.8, ease: EASE }}
                 className="mt-3 font-display text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.95] tracking-tight text-ink"
               >
-                The Build <span className="italic">Diary</span>
+                The Rabbit <span className="italic">Hole</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
@@ -167,8 +167,9 @@ export function StoriesView() {
                 transition={{ delay: 0.2, duration: 0.7, ease: EASE }}
                 className="mt-5 max-w-[46ch] text-[14px] leading-[1.7] text-ink/65"
               >
-                Honest logs from the workbench — the decisions, the dead ends, and what actually
-                shipped. Half essays, half field notes, written between builds.
+                Issues for curious people — each one starts with a simple question and follows it
+                wherever it leads, into the ideas, systems, and stories shaping the world around us.
+                Products, law, internet culture, cities, and the odd curiosity in between.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 14 }}

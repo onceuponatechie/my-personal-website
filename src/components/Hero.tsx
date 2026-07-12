@@ -43,7 +43,10 @@ export function Hero() {
   const setB = [inline2, inline4];
 
   return (
-    <section className="relative px-4 pt-4 pb-28 md:pt-6 md:pb-36">
+    // Mobile: equal air above the smiley and below the freebie link, so the
+    // hero sits centred between the nav and the first card. Desktop keeps
+    // its original rhythm.
+    <section className="relative px-4 pt-16 pb-16 md:pt-6 md:pb-36">
       <motion.div
         variants={stagger}
         initial="hidden"

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, Globe, PenLine } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Globe, Rabbit } from "lucide-react";
 import Link from "next/link";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -93,7 +93,7 @@ export function Resources() {
         viewport={{ once: true, margin: "-10%" }}
       >
         <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:grid-rows-2">
-          <BuildDiary dir="left" className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
+          <RabbitHole dir="left" className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
           <ToolsTemplates dir="up" className="order-3 md:col-start-4 md:col-span-3 md:row-start-1" />
           <ResearchVault dir="right" className="order-4 md:col-start-7 md:col-span-6 md:row-start-1" />
           <ResourcesHeadline dir="up" className="order-2 md:col-start-4 md:col-span-6 md:row-start-2" />
@@ -106,68 +106,84 @@ export function Resources() {
 
 /* ---------- Cards ---------- */
 
-function BuildDiary({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
+/** The Rabbit Hole — issues for curious people. Styled like a modern app
+ * notification card: mini header row, big title, the pitch, category chips,
+ * a CTA, and a tilted photo bleeding off the bottom edge. */
+const RABBIT_TOPICS = ["Products", "Law", "Internet culture", "Cities", "Society", "Curiosities"];
+
+function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
     <motion.article
       variants={dirCard(dir)}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-ink text-white`}
+      className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-card`}
     >
-      <Link href="/stories" aria-label="Open The Build Diary" className="absolute inset-0 z-10" />
-      {/* p-3 top/left/right matches the project cards' mobile image inset. */}
-      <div className="relative p-3 pb-0">
-        <motion.img
-          src={devDiaryImg}
-          alt="Open notebook beside a keyboard"
-          loading="lazy"
-          width={768}
-          height={960}
-          initial={{ scale: 1.08 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }}
-          className="aspect-[4/3] w-full rounded-[36px] object-cover md:aspect-[4/5]"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute right-5 top-5 grid size-11 place-items-center rounded-full bg-butter text-ink shadow-sm"
-        >
-          <PenLine className="size-5" strokeWidth={1.8} />
-        </motion.div>
-      </div>
+      <Link href="/stories" aria-label="Open The Rabbit Hole" className="absolute inset-0 z-10" />
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="flex flex-1 flex-col p-6"
+        className="flex flex-col p-6 pb-0"
       >
-        <motion.h3 variants={textChild} className="text-[22px] font-semibold leading-[1.15] tracking-tight text-white">
-          The Build Diary
-        </motion.h3>
-
-        <motion.div variants={textChild} className="mt-4 flex items-center gap-3 text-[12px] text-white/55">
-          <span>Essays &amp; field notes</span>
-          <span className="size-1 rounded-full bg-white/40" />
-          <span>Written between builds</span>
+        {/* Mini header row — like an app notification. */}
+        <motion.div variants={textChild} className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span className="grid size-8 place-items-center rounded-full bg-butter text-ink">
+              <Rabbit className="size-4.5" strokeWidth={1.8} />
+            </span>
+            <span className="text-[12px] font-medium tracking-tight text-ink/70">The Rabbit Hole</span>
+          </div>
+          <span className="text-[11px] text-ink/40">New issue</span>
         </motion.div>
 
-        <motion.p variants={textChild} className="mt-3 text-[13px] leading-[1.55] text-white/65">
-          The blog — honest logs of what I&apos;m making: the decisions, the dead ends, and what actually shipped. No polish, no performance.
+        <motion.h3 variants={textChild} className="mt-5 text-[24px] font-semibold leading-[1.1] tracking-tight text-ink">
+          Follow the question.
+        </motion.h3>
+
+        <motion.p variants={textChild} className="mt-2.5 text-[13px] leading-[1.55] text-ink/60">
+          Issues for curious people — each starts with a simple question and follows it wherever it
+          leads, into the ideas, systems, and stories shaping the world around us.
         </motion.p>
 
+        {/* The lanes a question can fall into. */}
+        <motion.div variants={textChild} className="mt-4 flex flex-wrap gap-1.5">
+          {RABBIT_TOPICS.map((t) => (
+            <span key={t} className="rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] text-ink/65">
+              {t}
+            </span>
+          ))}
+        </motion.div>
+
         <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-5 w-fit">
-          <span className="inline-flex items-center gap-2 rounded-full bg-sage-soft px-5 py-2.5 text-[13px] font-medium text-ink transition group-hover/card:gap-3">
-            Open the Diary
+          <span className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-butter group-hover/card:text-ink">
+            Fall in
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
         </motion.div>
       </motion.div>
+
+      {/* Tilted snapshot drifting off the card's bottom edge — the
+          "backgroundless object" moment from the reference. */}
+      {/* min-h (not h): flex-1's zero basis would otherwise collapse this
+          block on mobile where the card has no surplus height. */}
+      <div className="relative mt-5 min-h-40 flex-1 sm:min-h-44" aria-hidden>
+        <motion.img
+          src={devDiaryImg}
+          alt=""
+          loading="lazy"
+          width={768}
+          height={960}
+          initial={{ opacity: 0, y: 42, rotate: -2 }}
+          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
+          viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+          transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
+          className="absolute left-7 top-3 w-[115%] max-w-none rounded-[26px] object-cover shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
+          style={{ transformOrigin: "bottom left" }}
+        />
+      </div>
     </motion.article>
   );
 }
