@@ -64,7 +64,7 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.03em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}

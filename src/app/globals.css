@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: var(--font-playfair-display), "Playfair Display", serif;
+  --font-display: var(--font-instrument-serif), "Instrument Serif", serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -99,10 +99,10 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
-  /* Playfair set tight — -3% tracking to match Inter; explicit tracking-*
-     utilities still win thanks to :where()'s zero specificity. */
+  /* The serif display face stays gentle; explicit tracking-* utilities
+     still win thanks to :where()'s zero specificity. */
   :where(.font-display) {
-    letter-spacing: -0.03em;
+    letter-spacing: -0.01em;
   }
 
   /* Custom round cursor takes over on fine-pointer devices; hide the native
@@ -134,11 +134,6 @@
 @keyframes adventure-marquee-x {
   to {
     transform: translateX(-50%);
-  }
-}
-@keyframes adventure-marquee-y {
-  to {
-    transform: translateY(-50%);
   }
 }
 

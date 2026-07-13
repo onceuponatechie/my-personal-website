@@ -106,13 +106,13 @@ function PickCard({ pick }: { pick: Pick }) {
 
 /** The five picks rendered twice back-to-back — the second copy hidden from
  * assistive tech — so a -50% translate loops seamlessly. */
-function MarqueeContent({ vertical }: { vertical: boolean }) {
+function MarqueeContent() {
   return (
     <>
       {[0, 1].map((copy) => (
-        <div key={copy} aria-hidden={copy === 1} className={vertical ? "flex flex-col" : "flex"}>
+        <div key={copy} aria-hidden={copy === 1} className="flex">
           {PICKS.map((p) => (
-            <div key={p.label} className={vertical ? "pb-5" : "w-[320px] shrink-0 pr-5"}>
+            <div key={p.label} className="w-[260px] shrink-0 pr-4 sm:w-[320px] sm:pr-5">
               <PickCard pick={p} />
             </div>
           ))}
@@ -149,20 +149,14 @@ export function ChooseAdventure() {
           </motion.p>
         </div>
 
-        {/* Mobile: an endless upward drift of cards, Avenora-style. */}
+        {/* One sideways belt everywhere — a quicker glide on mobile, a touch
+            calmer on desktop. Hovering pauses it. */}
         <div
-          className="relative mx-auto h-[560px] max-w-md overflow-hidden md:hidden [mask-image:linear-gradient(to_bottom,transparent,black_7%,black_93%,transparent)]"
+          className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
           aria-label="A rotating shelf of free picks"
         >
-          <div className="flex flex-col [animation:adventure-marquee-y_28s_linear_infinite] motion-reduce:[animation:none]">
-            <MarqueeContent vertical />
-          </div>
-        </div>
-
-        {/* Desktop: the same cards glide sideways; hovering pauses the belt. */}
-        <div className="relative hidden overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-          <div className="flex w-max [animation:adventure-marquee-x_36s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:[animation:none]">
-            <MarqueeContent vertical={false} />
+          <div className="flex w-max [animation:adventure-marquee-x_16s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:[animation:none] md:[animation-duration:26s]">
+            <MarqueeContent />
           </div>
         </div>
       </div>
