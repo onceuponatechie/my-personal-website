@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { RoundCursor } from "@/components/RoundCursor";
 
@@ -10,10 +10,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "400",
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfairDisplay.variable}`}>
+    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
       <body>
         {children}
         <RoundCursor />
