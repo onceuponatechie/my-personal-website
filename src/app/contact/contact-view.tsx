@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Mail, Calendar, Coffee, type LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Check, ChevronDown, Mail, Calendar, Coffee, type LucideIcon } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 
@@ -96,29 +96,7 @@ export function ContactView() {
                     </Field>
                   </div>
                   <Field label="What are you interested in?" index="03" id="service">
-                    <div className="relative">
-                      <select
-                        id="service"
-                        required
-                        value={service}
-                        onChange={(e) => setService(e.target.value)}
-                        className={`${inputCls} appearance-none pr-8 ${service ? "text-ink" : "text-ink/30"}`}
-                      >
-                        <option value="" disabled>
-                          Pick a lane
-                        </option>
-                        {SERVICES.map((s) => (
-                          <option key={s} value={s} className="text-ink">
-                            {s}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDown
-                        className="pointer-events-none absolute right-0 top-1/2 size-4 -translate-y-1/2 text-ink/40"
-                        strokeWidth={2}
-                        aria-hidden
-                      />
-                    </div>
+                    <ServiceSelect value={service} onChange={setService} />
                   </Field>
                   <Field label="What's the project?" index="04" id="project">
                     <textarea
@@ -133,7 +111,7 @@ export function ContactView() {
                   <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
                     <button
                       type="submit"
-                      className="group inline-flex items-center gap-2 self-start rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-lavender hover:text-ink hover:shadow-[0_10px_24px_-12px_rgba(224,159,241,0.75)]"
+                      className="group inline-flex items-center gap-2 self-start rounded-full bg-sage px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-ink hover:shadow-[0_10px_24px_-12px_rgba(28,28,34,0.45)]"
                     >
                       Send it over
                       <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -187,6 +165,79 @@ export function ContactView() {
 /* Editorial underline inputs — hairline that sharpens to ink on focus. */
 const inputCls =
   "w-full border-b border-black/10 bg-transparent px-0 py-2.5 text-[15px] text-ink placeholder:text-ink/30 outline-none transition-colors focus:border-ink";
+
+/** On-brand replacement for a native select — the trigger reads like the
+ * other underline fields, the options open in the same soft card the nav
+ * dropdown uses. */
+function ServiceSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        id="service"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className={`${inputCls} flex items-center justify-between text-left ${value ? "text-ink" : "text-ink/30"}`}
+      >
+        {value || "Pick a lane"}
+        <ChevronDown
+          className={`size-4 shrink-0 text-ink/40 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          strokeWidth={2}
+          aria-hidden
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            role="listbox"
+            aria-label="Services"
+            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl bg-card p-1.5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.22)] ring-1 ring-black/5"
+          >
+            {SERVICES.map((s) => {
+              const selected = s === value;
+              return (
+                <li key={s}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selected}
+                    onClick={() => {
+                      onChange(s);
+                      setOpen(false);
+                    }}
+                    className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-[14px] transition hover:bg-foreground/5 ${
+                      selected ? "bg-foreground/5 font-medium text-ink" : "text-ink/70"
+                    }`}
+                  >
+                    {s}
+                    {selected && <Check className="size-3.5 shrink-0 text-sage" strokeWidth={2.4} />}
+                  </button>
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 function Field({
   label,
