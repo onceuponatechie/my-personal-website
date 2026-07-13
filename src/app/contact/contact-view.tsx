@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, Calendar, Coffee, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail, Calendar, Coffee, type LucideIcon } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
 
@@ -30,10 +30,7 @@ const SERVICES = [
 
 export function ContactView() {
   const [sent, setSent] = useState(false);
-  const [services, setServices] = useState<string[]>([]);
-
-  const toggleService = (s: string) =>
-    setServices((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
+  const [service, setService] = useState("");
 
   return (
     <main className="min-h-screen bg-background pt-6">
@@ -98,36 +95,31 @@ export function ContactView() {
                       <input id="email" type="email" required className={inputCls} placeholder="ada@calm.studio" />
                     </Field>
                   </div>
-                  {/* Pick-a-lane chips — multi-select, since projects rarely
-                      stay in one box. */}
-                  <fieldset>
-                    <legend className="mb-3 flex items-baseline gap-2.5">
-                      <span className="font-display text-[12px] italic text-ink/30">03</span>
-                      <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-ink/50">
-                        What are you interested in?
-                      </span>
-                    </legend>
-                    <div className="flex flex-wrap gap-2">
-                      {SERVICES.map((s) => {
-                        const on = services.includes(s);
-                        return (
-                          <button
-                            key={s}
-                            type="button"
-                            aria-pressed={on}
-                            onClick={() => toggleService(s)}
-                            className={`rounded-full px-4 py-2 text-[13px] transition ${
-                              on
-                                ? "bg-sage font-medium text-white shadow-sm"
-                                : "border border-ink/15 text-ink/70 hover:border-ink/30 hover:text-ink"
-                            }`}
-                          >
+                  <Field label="What are you interested in?" index="03" id="service">
+                    <div className="relative">
+                      <select
+                        id="service"
+                        required
+                        value={service}
+                        onChange={(e) => setService(e.target.value)}
+                        className={`${inputCls} appearance-none pr-8 ${service ? "text-ink" : "text-ink/30"}`}
+                      >
+                        <option value="" disabled>
+                          Pick a lane
+                        </option>
+                        {SERVICES.map((s) => (
+                          <option key={s} value={s} className="text-ink">
                             {s}
-                          </button>
-                        );
-                      })}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown
+                        className="pointer-events-none absolute right-0 top-1/2 size-4 -translate-y-1/2 text-ink/40"
+                        strokeWidth={2}
+                        aria-hidden
+                      />
                     </div>
-                  </fieldset>
+                  </Field>
                   <Field label="What's the project?" index="04" id="project">
                     <textarea
                       id="project"

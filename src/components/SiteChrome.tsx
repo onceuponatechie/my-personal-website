@@ -104,9 +104,10 @@ export function Navbar() {
           >
             {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
           </button>
+          {/* On mobile the CTA lives inside the hamburger menu instead. */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
+            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink md:inline-flex"
           >
             Build With Me
           </Link>
@@ -182,6 +183,16 @@ export function Navbar() {
               </Link>
             );
           })}
+          {/* The CTA closes the menu — full-width so the thumb can't miss. */}
+          <div className="border-t border-black/[0.06] p-2 pt-2.5">
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
+            >
+              Build With Me
+            </Link>
+          </div>
         </div>
       </div>
     </header>

@@ -9,7 +9,10 @@ const devDiaryImg = "/assets/dev-diary.jpg";
 const researchImg = "/assets/research-vault.jpg";
 const profileImg = "/assets/profile.jpg";
 
-const R = "rounded-[44px]";
+/* One quiet surface for every bento cell — tighter radius, hairline ring,
+   and a barely-there shadow instead of loud color blocks. */
+const R = "rounded-[26px]";
+const SURFACE = "ring-1 ring-black/[0.05] shadow-[0_1px_2px_rgba(0,0,0,0.03),0_24px_44px_-32px_rgba(0,0,0,0.14)]";
 
 /* ---------- Custom icons ---------- */
 
@@ -92,7 +95,7 @@ export function Resources() {
         whileInView="show"
         viewport={{ once: true, margin: "-10%" }}
       >
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-12 md:grid-rows-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:grid-rows-2">
           <RabbitHole dir="left" className="order-1 md:col-start-1 md:col-span-3 md:row-span-2" />
           <ToolsTemplates dir="up" className="order-3 md:col-start-4 md:col-span-3 md:row-start-1" />
           <ResearchVault dir="right" className="order-4 md:col-start-7 md:col-span-6 md:row-start-1" />
@@ -117,7 +120,7 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
       variants={dirCard(dir)}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className={`${R} ${className} group/card relative flex flex-col overflow-hidden bg-card`}
+      className={`${R} ${SURFACE} ${className} group/card relative flex flex-col overflow-hidden bg-card`}
     >
       <Link href="/stories" aria-label="Open The Rabbit Hole" className="absolute inset-0 z-10" />
 
@@ -126,24 +129,24 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="flex flex-col p-6 pb-0"
+        className="flex flex-col p-6 pb-0 sm:p-7 sm:pb-0"
       >
         {/* Mini header row — like an app notification. */}
         <motion.div variants={textChild} className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="grid size-8 place-items-center rounded-full bg-butter text-ink">
-              <Rabbit className="size-4.5" strokeWidth={1.8} />
+          <div className="flex items-center gap-2">
+            <span className="grid size-7 place-items-center rounded-full bg-butter-soft text-ink/80">
+              <Rabbit className="size-4" strokeWidth={1.8} />
             </span>
-            <span className="text-[12px] font-medium tracking-tight text-ink/70">The Rabbit Hole</span>
+            <span className="text-[11px] font-medium tracking-tight text-ink/60">The Rabbit Hole</span>
           </div>
-          <span className="text-[11px] text-ink/40">New issue</span>
+          <span className="text-[10px] uppercase tracking-[0.14em] text-ink/35">New issue</span>
         </motion.div>
 
-        <motion.h3 variants={textChild} className="mt-5 text-[24px] font-semibold leading-[1.1] tracking-tight text-ink">
+        <motion.h3 variants={textChild} className="mt-5 text-[18px] font-semibold leading-[1.2] tracking-tight text-ink">
           Follow the question.
         </motion.h3>
 
-        <motion.p variants={textChild} className="mt-2.5 text-[13px] leading-[1.55] text-ink/60">
+        <motion.p variants={textChild} className="mt-2 text-[13px] leading-[1.6] text-ink/55">
           Issues for curious people — each starts with a simple question and follows it wherever it
           leads, into the ideas, systems, and stories shaping the world around us.
         </motion.p>
@@ -151,14 +154,14 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
         {/* The lanes a question can fall into. */}
         <motion.div variants={textChild} className="mt-4 flex flex-wrap gap-1.5">
           {RABBIT_TOPICS.map((t) => (
-            <span key={t} className="rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] text-ink/65">
+            <span key={t} className="rounded-full px-2.5 py-0.5 text-[10.5px] text-ink/55 ring-1 ring-ink/10">
               {t}
             </span>
           ))}
         </motion.div>
 
         <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-5 w-fit">
-          <span className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-lavender group-hover/card:text-ink">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-sage px-4 py-2 text-[12px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-lavender group-hover/card:text-ink">
             Fall in
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
@@ -169,7 +172,7 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
           "backgroundless object" moment from the reference. */}
       {/* min-h (not h): flex-1's zero basis would otherwise collapse this
           block on mobile where the card has no surplus height. */}
-      <div className="relative mt-5 min-h-40 flex-1 sm:min-h-44" aria-hidden>
+      <div className="relative mt-5 min-h-36 flex-1 sm:min-h-40" aria-hidden>
         <motion.img
           src={devDiaryImg}
           alt=""
@@ -177,10 +180,10 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
           width={768}
           height={960}
           initial={{ opacity: 0, y: 42, rotate: -2 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
+          whileInView={{ opacity: 1, y: 0, rotate: -7 }}
           viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
           transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute left-7 top-3 w-[115%] max-w-none rounded-[26px] object-cover shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
+          className="absolute left-8 top-4 w-[112%] max-w-none rounded-[18px] object-cover shadow-[0_22px_44px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/[0.06]"
           style={{ transformOrigin: "bottom left" }}
         />
       </div>
@@ -190,64 +193,33 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
 
 function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
-    <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-card p-6`}>
+    <motion.article
+      variants={dirCard(dir)}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className={`${R} ${SURFACE} ${className} group/card relative overflow-hidden bg-card p-6 sm:p-7`}
+    >
       <Link href="/resources/tools" aria-label="Explore Tools & Templates" className="absolute inset-0 z-10" />
-      <svg
-        viewBox="0 0 320 260"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        preserveAspectRatio="none"
-        aria-hidden
-      >
-        <path
-          d="M-20 200 C 60 130, 170 100, 230 145 C 290 190, 330 230, 340 270 L -20 270 Z"
-          fill="oklch(0.93 0.035 140)"
-          opacity="0.55"
-        />
-      </svg>
-
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <motion.div
-          initial={{ opacity: 0, y: 16, rotate: 0 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 8 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute right-5 top-[42%] h-14 w-11 rounded-lg bg-white shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] ring-1 ring-black/5"
-        >
-          <div className="mx-1.5 mt-1.5 h-1 rounded bg-ink/20" />
-          <div className="mx-1.5 mt-1 h-1 w-6 rounded bg-ink/15" />
-          <div className="mx-1.5 mt-2 h-4 rounded bg-sage/40" />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 18, rotate: 0 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute right-12 top-[58%] h-12 w-10 rounded-lg bg-white shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] ring-1 ring-black/5"
-        >
-          <div className="mx-1.5 mt-1.5 h-1 rounded bg-ink/20" />
-          <div className="mx-1.5 mt-1 h-1 w-5 rounded bg-ink/15" />
-          <div className="mx-1.5 mt-2 h-3 rounded bg-butter/70" />
-        </motion.div>
-      </div>
 
       <div className="relative flex h-full flex-col">
-        <div className="flex items-start gap-3">
-          <div className="grid size-12 shrink-0 place-items-center rounded-full bg-sage-soft">
-            <TemplateIcon className="size-[22px] text-ink" />
-          </div>
-          <h3 className="pt-1 text-[20px] font-semibold leading-[1.1] tracking-tight text-ink">
-            Tools &amp;<br />Templates
-          </h3>
+        <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-sage-soft">
+          <TemplateIcon className="size-[18px] text-ink/80" />
         </div>
+        <h3 className="mt-4 text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+          Tools &amp; Templates
+        </h3>
+        <p className="mt-1.5 text-[13px] leading-[1.6] text-ink/55">
+          Notion systems, Figma files, and checklists — download and ship with them.
+        </p>
 
-        <div className="mt-auto flex items-end justify-between pt-10">
+        <div className="mt-auto flex items-end justify-between pt-8">
           <div>
-            <div className="text-[44px] font-bold leading-none tracking-[-0.02em] text-ink">
+            <div className="text-[28px] font-semibold leading-none tracking-tight text-ink">
               <AnimatedCount to={20} suffix="+" />
             </div>
-            <div className="mt-2 text-[12px] text-ink/65">Ready to use</div>
+            <div className="mt-1.5 text-[11px] text-ink/45">Ready to use</div>
           </div>
-          <span className="pointer-events-none relative z-20 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-sage">
+          <span className="pointer-events-none relative z-20 inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[12px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage">
             Explore
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
@@ -259,7 +231,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
 
 function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
-    <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${className} group/card relative overflow-hidden bg-sage-soft`}>
+    <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${SURFACE} ${className} group/card relative overflow-hidden bg-card`}>
       <Link href="/resources/vault" aria-label="Explore the Research Vault" className="absolute inset-0 z-10" />
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
         {/* p-3 top/left/right matches the project cards' mobile image inset;
@@ -275,7 +247,7 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }}
-            className="aspect-[4/3] h-full w-full rounded-[36px] object-cover md:aspect-auto"
+            className="aspect-[4/3] h-full w-full rounded-[18px] object-cover md:aspect-auto"
           />
         </div>
         <motion.div
@@ -283,17 +255,17 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="flex flex-1 flex-col justify-center p-6 md:p-7"
+          className="flex flex-1 flex-col justify-center p-6 sm:p-7"
         >
-          <motion.h3 variants={textChild} className="text-[26px] font-semibold leading-[1.05] tracking-tight text-ink">
-            Research <br /> Vault
+          <motion.h3 variants={textChild} className="text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+            Research Vault
           </motion.h3>
-          <motion.p variants={textChild} className="mt-4 max-w-[30ch] text-[13px] leading-[1.55] text-ink/70">
+          <motion.p variants={textChild} className="mt-1.5 max-w-[34ch] text-[13px] leading-[1.6] text-ink/55">
             Discover deep dives into human behaviour and insights. Reports, patterns, and all that you need.
           </motion.p>
           <motion.span
             variants={textChild}
-            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-sage"
+            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[12px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage"
           >
             Explore
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
@@ -308,14 +280,14 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
   return (
     <motion.article
       variants={dirCard(dir)}
-      className={`${R} ${className} flex flex-col items-center justify-center bg-sage-soft px-6 py-16 text-center`}
+      className={`${R} ${SURFACE} ${className} flex flex-col items-center justify-center bg-gradient-to-br from-sage-soft via-sage-soft to-[oklch(0.94_0.045_120)] px-6 py-14 text-center`}
     >
       <motion.h2
         initial={{ opacity: 0, y: 24, letterSpacing: "0.04em" }}
         whileInView={{ opacity: 1, y: 0, letterSpacing: "-0.01em" }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-        className="font-display text-[clamp(3.25rem,6vw,5.25rem)] italic leading-none tracking-tight text-ink"
+        className="font-display text-[clamp(2.75rem,5vw,4.25rem)] italic leading-none tracking-tight text-ink"
       >
         resources
       </motion.h2>
@@ -324,7 +296,7 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        className="mt-4 max-w-[34ch] text-[13px] leading-[1.55] text-ink/70"
+        className="mt-3.5 max-w-[34ch] text-[13px] leading-[1.6] text-ink/60"
       >
         You'd want to know my product process, but I too wants to find out.
       </motion.p>
@@ -338,21 +310,20 @@ function ProfileCard({ dir = "up", className = "" }: { dir?: Dir; className?: st
       variants={dirCard(dir)}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className={`${R} ${className} group/card relative overflow-hidden bg-card`}
+      className={`${R} ${SURFACE} ${className} group/card relative overflow-hidden bg-card`}
     >
       {/* The portrait is a doorway — the whole card routes to the About page. */}
       <Link href="/about" aria-label="More about me" className="absolute inset-0 z-10" />
-      {/* Sage globe badge — the "this is clickable" wink, mirroring the
-          butter pen on the Build Diary card. */}
+      {/* Sage globe badge — the "this is clickable" wink. */}
       <motion.div
         initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        className="absolute left-5 top-5 z-20 grid size-11 place-items-center rounded-full bg-sage text-white shadow-sm"
+        className="absolute left-4 top-4 z-20 grid size-9 place-items-center rounded-full bg-sage/90 text-white shadow-sm backdrop-blur-sm"
         aria-hidden
       >
-        <Globe className="size-5" strokeWidth={1.8} />
+        <Globe className="size-4" strokeWidth={1.8} />
       </motion.div>
       <motion.img
         src={profileImg}
