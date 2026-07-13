@@ -49,34 +49,35 @@ const SEGMENTS: Segment[] = [
   { type: "w", t: "keep.", accent: true },
 ];
 
-/* ---------- Fan of photo cards ---------- */
+/* ---------- Inline fan of photo cards ---------- */
 
-/* Three snapshots of the open build — the templates, the desk, the research.
- * Stacked flat while off-screen; scrolling in fans them out like a dealt
- * hand, and scrolling away folds them back (whileInView without `once`). */
+/* Three tiny snapshots of the open build, fanned like a dealt hand and set
+ * inline right after the closing word — punctuation, not centrepiece.
+ * Stacked flat off-screen, fanning open on scroll-in and folding back on
+ * scroll-out (whileInView without `once`). */
 const FAN_CARDS = [
-  { src: "/assets/book-notes.jpg", alt: "Book notes and templates", rotate: -11, x: 44, y: 10 },
-  { src: "/assets/dev-diary.jpg", alt: "Open notebook beside a keyboard", rotate: 2, x: 0, y: 0 },
-  { src: "/assets/research-vault.jpg", alt: "Research pinned to a wall", rotate: 12, x: -44, y: 12 },
+  { src: "/assets/book-notes.jpg", rotate: -14, x: 14 },
+  { src: "/assets/dev-diary.jpg", rotate: 0, x: 0 },
+  { src: "/assets/research-vault.jpg", rotate: 14, x: -14 },
 ];
 
-function FanCards() {
+function MiniFan() {
   return (
-    <div className="mt-12 flex justify-center sm:mt-14" aria-hidden>
+    <span className="ml-2 inline-flex -translate-y-0.5 align-middle" aria-hidden>
       {FAN_CARDS.map((c, i) => (
-        <motion.div
+        <motion.span
           key={c.src}
-          initial={{ opacity: 0, x: c.x, y: c.y + 18, rotate: 0 }}
-          whileInView={{ opacity: 1, x: 0, y: c.y, rotate: c.rotate }}
+          initial={{ opacity: 0, x: c.x, rotate: 0 }}
+          whileInView={{ opacity: 1, x: 0, rotate: c.rotate }}
           viewport={{ margin: "-10% 0px -10% 0px" }}
-          transition={{ type: "spring", stiffness: 170, damping: 20, delay: i * 0.1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 19, delay: i * 0.08 }}
           style={{ zIndex: i === 1 ? 2 : 1, transformOrigin: "bottom center" }}
-          className="-mx-4 w-32 shrink-0 overflow-hidden rounded-[18px] bg-card p-1.5 shadow-[0_26px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5 sm:-mx-5 sm:w-40 sm:rounded-[22px]"
+          className="-mx-[0.14em] inline-block h-[0.95em] w-[0.72em] overflow-hidden rounded-[0.16em] bg-card p-[0.045em] shadow-[0_10px_18px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/10"
         >
-          <img src={c.src} alt={c.alt} loading="lazy" className="aspect-[3/4] w-full rounded-[13px] object-cover sm:rounded-[16px]" />
-        </motion.div>
+          <img src={c.src} alt="" loading="lazy" className="h-full w-full rounded-[0.12em] object-cover" />
+        </motion.span>
       ))}
-    </div>
+    </span>
   );
 }
 
@@ -124,9 +125,8 @@ export function Interlude() {
               </TypeUnit>
             )
           )}
+          <MiniFan />
         </p>
-
-        <FanCards />
       </div>
     </section>
   );
