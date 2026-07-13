@@ -146,7 +146,7 @@ export function AboutView() {
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-butter hover:text-ink"
+                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-lavender hover:text-ink"
               >
                 Work with me
                 <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -500,7 +500,7 @@ export function AboutView() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
+              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
             >
               <Linkedin className="size-4" strokeWidth={2} />
               LinkedIn

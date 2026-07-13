@@ -110,7 +110,7 @@ export function ToolDetailView({
           >
             <a
               href="#download"
-              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
+              className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
             >
               <Download className="size-4" strokeWidth={2.2} />
               Download free
@@ -194,7 +194,7 @@ export function ToolDetailView({
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <button
                 type="button"
-                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-butter hover:text-ink"
+                className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-lavender hover:text-ink"
               >
                 <Download className="size-4" strokeWidth={2.2} />
                 Download {tool.name}

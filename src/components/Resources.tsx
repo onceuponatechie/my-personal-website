@@ -158,7 +158,7 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
         </motion.div>
 
         <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-5 w-fit">
-          <span className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-butter group-hover/card:text-ink">
+          <span className="inline-flex items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-lavender group-hover/card:text-ink">
             Fall in
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
@@ -247,11 +247,9 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
             </div>
             <div className="mt-2 text-[12px] text-ink/65">Ready to use</div>
           </div>
-          <span className="pointer-events-none relative z-20 inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage">
+          <span className="pointer-events-none relative z-20 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-sage">
             Explore
-            <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
-              <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
-            </span>
+            <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
         </div>
       </div>
@@ -295,12 +293,10 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           </motion.p>
           <motion.span
             variants={textChild}
-            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[13px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-sage"
+            className="pointer-events-none relative z-20 mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition group-hover/card:gap-3 group-hover/card:bg-sage"
           >
             Explore
-            <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
-              <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
-            </span>
+            <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </motion.span>
         </motion.div>
       </div>
