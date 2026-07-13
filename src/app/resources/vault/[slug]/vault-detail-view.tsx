@@ -155,7 +155,7 @@ export function VaultDetailView({
             </div>
             <Link
               href="/resources/tools"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white transition hover:bg-butter hover:text-ink"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white transition hover:bg-lavender hover:text-ink"
             >
               Browse resources
               <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />

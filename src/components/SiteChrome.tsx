@@ -106,7 +106,7 @@ export function Navbar() {
           </button>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-butter hover:text-ink"
+            className="inline-flex items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
           >
             Build With Me
           </Link>

@@ -75,8 +75,8 @@ const TAGS: Tag[] = [
   },
   {
     label: "@builder",
-    face: "bg-gradient-to-b from-[#ecc4f7] to-[var(--lavender)] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_14px_26px_-10px_rgba(224,159,241,0.6)]",
-    tailBg: "bg-[#ecc4f7]",
+    face: "bg-gradient-to-b from-[oklch(0.95_0.06_93)] to-[oklch(0.87_0.13_93)] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55),0_14px_26px_-10px_oklch(0.87_0.13_93/0.65)]",
+    tailBg: "bg-[oklch(0.95_0.06_93)]",
     pos: "-bottom-8 right-[8%] sm:-bottom-10 sm:right-[14%]",
     tail: "up",
     rotate: 5,

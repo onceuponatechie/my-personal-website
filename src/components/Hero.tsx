@@ -64,7 +64,7 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.03em] text-foreground"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
@@ -104,7 +104,7 @@ export function Hero() {
         <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-butter hover:text-ink hover:shadow-[0_10px_24px_-12px_oklch(0.9_0.105_93/0.8)]"
+            className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-lavender hover:text-ink hover:shadow-[0_10px_24px_-12px_rgba(224,159,241,0.75)]"
           >
             Explore My Work
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
