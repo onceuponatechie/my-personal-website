@@ -317,7 +317,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 />
                 <button
                   type="submit"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-lavender hover:text-ink"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-ink"
                 >
                   Send request
                   <ArrowRight className="size-4" strokeWidth={2.2} />
@@ -363,7 +363,7 @@ function RequestCard() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-lavender hover:text-ink sm:self-auto"
+          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-ink sm:self-auto"
         >
           <MessageSquarePlus className="size-3.5" strokeWidth={2.2} />
           Request a template

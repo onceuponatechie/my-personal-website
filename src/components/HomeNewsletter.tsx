@@ -172,7 +172,7 @@ export function HomeNewsletter() {
             />
             <button
               type="submit"
-              className="group mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white transition hover:bg-lavender hover:text-ink"
+              className="group mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white transition hover:bg-ink"
             >
               Get the good stuff
               <Send className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />

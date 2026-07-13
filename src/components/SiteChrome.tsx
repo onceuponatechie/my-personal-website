@@ -107,7 +107,7 @@ export function Navbar() {
           {/* On mobile the CTA lives inside the hamburger menu instead. */}
           <Link
             href="/contact"
-            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink md:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-ink md:inline-flex"
           >
             Build With Me
           </Link>
@@ -188,7 +188,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-lavender hover:text-ink"
+              className="flex items-center justify-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink"
             >
               Build With Me
             </Link>
