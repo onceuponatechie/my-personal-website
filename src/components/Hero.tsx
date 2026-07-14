@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { SmileyMark } from "@/components/SmileyMark";
+import { HeroVideo } from "@/components/HeroVideo";
 import { InlineMedia } from "@/components/InlineMedia";
 import { PillBadge, ArrowRight } from "@/components/SiteChrome";
 import { EASE } from "@/lib/motion";
@@ -46,7 +47,12 @@ export function Hero() {
     // Mobile: equal air above the smiley and below the freebie link, so the
     // hero sits centred between the nav and the first card. Desktop keeps
     // its original rhythm.
-    <section className="relative px-4 pt-16 pb-16 md:pt-6 md:pb-36">
+    // `isolate` gives the hero its own stacking context, so the -z-10 video
+    // layers behind the hero content but ABOVE main's background paint.
+    <section className="relative isolate px-4 pt-16 pb-16 md:pt-6 md:pb-36">
+      {/* Ambient curtain loop behind everything — dissolves into the page
+          background at its edges and fades out entirely on scroll. */}
+      <HeroVideo />
       <motion.div
         variants={stagger}
         initial="hidden"
