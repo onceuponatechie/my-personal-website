@@ -79,7 +79,7 @@ export function Hero() {
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
           <motion.span variants={textReveal} custom={0.4} className="inline">
-            <span className="italic">Products</span>, people,
+            <span className="font-display-serif italic">Products</span>, people,
           </motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={textReveal} custom={0.51} className="inline">and the</motion.span>{" "}

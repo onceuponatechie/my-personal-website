@@ -321,7 +321,7 @@ function renderBlock(block: VaultBlock, i: number) {
       return (
         <Block key={i}>
           <figure className="border-l-2 border-sage pl-6">
-            <blockquote className="font-display text-[clamp(1.5rem,3vw,2.1rem)] italic leading-[1.3] tracking-tight text-ink">
+            <blockquote className="font-display-serif text-[clamp(1.5rem,3vw,2.1rem)] italic leading-[1.3] tracking-tight text-ink">
               “{block.text}”
             </blockquote>
             {block.cite && <figcaption className="mt-3 text-[14px] text-ink/55">— {block.cite}</figcaption>}

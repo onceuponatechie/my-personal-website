@@ -306,7 +306,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
               >
                 <p className="text-[12px] uppercase tracking-[0.24em] text-ink/45">Request a template</p>
                 <h3 className="mt-3 font-display text-[26px] leading-[1.1] tracking-tight text-ink">
-                  What do you keep <span className="italic">rebuilding?</span>
+                  What do you keep <span className="font-display-serif italic">rebuilding?</span>
                 </h3>
                 <textarea
                   required

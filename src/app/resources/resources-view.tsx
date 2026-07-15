@@ -39,7 +39,7 @@ export function ResourcesView() {
   return (
     <PageShell
       eyebrow="Take what helps"
-      title={<><span className="italic">resources</span> & rituals</>}
+      title={<><span className="font-display-serif italic">resources</span> & rituals</>}
       intro="Free things first. The kind of files I wish I had when I started — none of them are perfect, all of them are useful."
     >
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">

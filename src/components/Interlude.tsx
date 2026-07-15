@@ -113,7 +113,7 @@ export function Interlude() {
                 word={seg.t}
                 startIndex={start}
                 total={TOTAL}
-                className={seg.accent ? "italic text-sage" : ""}
+                className={seg.accent ? "font-display-serif italic text-sage" : ""}
               />
             ) : (
               <TypeUnit key={i} progress={scrollYProgress} index={start} total={TOTAL} className="mx-1 align-middle">

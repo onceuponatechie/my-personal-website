@@ -111,7 +111,7 @@ function ProjectCardSticky({
         >
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-[14px] font-medium text-white transition hover:bg-white hover:text-ink"
           >
             Explore all projects
             <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -130,14 +130,14 @@ export function Projects() {
   });
 
   return (
-    <section id="projects" className="px-4 pb-32 sm:px-6 md:pb-20">
+    <section id="projects" className="bg-ink px-4 pb-32 pt-20 sm:px-6 sm:pt-24 md:pb-20">
       <div className="mx-auto mb-16 max-w-3xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="font-display text-[clamp(2.75rem,6vw,4.75rem)] italic leading-none tracking-tight text-ink"
+          className="font-display-serif text-[clamp(2.75rem,6vw,4.75rem)] italic leading-none tracking-tight text-white"
         >
           <CurvedUnderline>projects</CurvedUnderline>
         </motion.h2>
@@ -146,7 +146,7 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-          className="mx-auto mt-5 max-w-[44ch] text-[14px] leading-[1.65] text-ink/65"
+          className="mx-auto mt-5 max-w-[44ch] text-[14px] leading-[1.65] text-white/60"
         >
           A small set of products built with care — calm interfaces, careful copy, and a quiet bias for shipping.
         </motion.p>

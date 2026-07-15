@@ -99,7 +99,7 @@ export function StoryDetailView({ s }: { s: Story }) {
         <div className="mx-auto max-w-4xl">
           <Reveal blur>
             <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight tracking-tight text-ink">
-              You may <span className="italic">like</span>
+              You may <span className="font-display-serif italic">like</span>
             </h2>
           </Reveal>
           <div className="mt-8 grid gap-5 sm:grid-cols-2">

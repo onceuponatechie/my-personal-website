@@ -298,7 +298,7 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
         whileInView={{ opacity: 1, y: 0, letterSpacing: "-0.01em" }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-        className="font-display text-[clamp(2.75rem,5vw,4.25rem)] italic leading-none tracking-tight text-ink"
+        className="font-display-serif text-[clamp(2.75rem,5vw,4.25rem)] italic leading-none tracking-tight text-ink"
       >
         resources
       </motion.h2>

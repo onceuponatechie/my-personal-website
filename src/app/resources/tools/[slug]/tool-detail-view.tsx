@@ -216,7 +216,7 @@ export function ToolDetailView({
             transition={{ duration: 0.6, ease: EASE }}
             className="font-display text-[clamp(1.5rem,3vw,2rem)] leading-tight tracking-tight text-ink"
           >
-            More from the <span className="italic">shelf</span>
+            More from the <span className="font-display-serif italic">shelf</span>
           </motion.h2>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {related.map((r, i) => (

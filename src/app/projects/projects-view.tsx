@@ -15,7 +15,7 @@ export function ProjectsView() {
   return (
     <PageShell
       eyebrow="The work"
-      title={<>Projects, <span className="italic">expanded</span></>}
+      title={<>Projects, <span className="font-display-serif italic">expanded</span></>}
       intro="Case studies of products I've designed, built, and shipped. Each one taught me something I now refuse to unlearn."
     >
       <motion.div

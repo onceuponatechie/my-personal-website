@@ -119,7 +119,7 @@ export function HomeNewsletter() {
             <h2 className="mt-6 font-display text-[clamp(2.1rem,4.4vw,3.4rem)] leading-[1.05] tracking-tight">
               Good things, straight
               <br />
-              <span className="italic text-sage">to your inbox</span>
+              <span className="font-display-serif italic text-sage">to your inbox</span>
             </h2>
 
             <p className="mt-5 max-w-[46ch] text-[14px] leading-[1.7] text-white/65">

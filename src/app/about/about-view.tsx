@@ -135,7 +135,7 @@ export function AboutView() {
               variants={fadeUp}
               className="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.04] tracking-tight text-ink"
             >
-              <span className="italic">Curiosity</span> is where my projects begin.
+              <span className="font-display-serif italic">Curiosity</span> is where my projects begin.
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-6 max-w-[58ch] text-[16px] leading-[1.7] text-ink/70">
               A random question turns into research. Research becomes sketches. Sketches become websites, products,
@@ -177,7 +177,7 @@ export function AboutView() {
             transition={{ duration: 0.7, ease: EASE }}
             className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
           >
-            How I <span className="italic">got here</span>
+            How I <span className="font-display-serif italic">got here</span>
           </motion.h2>
 
           <motion.p
@@ -232,8 +232,8 @@ export function AboutView() {
                 variants={fadeUp}
                 className={`flex items-baseline gap-5 py-6 sm:gap-8 ${i > 0 ? "border-t border-black/[0.08]" : ""}`}
               >
-                <span className="font-display text-[14px] italic text-ink/35">0{i + 1}</span>
-                <p className="font-display text-[clamp(1.35rem,2.8vw,1.9rem)] italic leading-snug tracking-tight text-ink">
+                <span className="font-display-serif text-[14px] italic text-ink/35">0{i + 1}</span>
+                <p className="font-display-serif text-[clamp(1.35rem,2.8vw,1.9rem)] italic leading-snug tracking-tight text-ink">
                   {q}
                 </p>
               </motion.li>
@@ -268,7 +268,7 @@ export function AboutView() {
           >
             {TOOLBOX_STEPS.map((s) => (
               <motion.li key={s.label} variants={fadeUp} className="flex items-baseline gap-5">
-                <span className="w-12 shrink-0 font-display text-[18px] italic text-ink">{s.label}</span>
+                <span className="w-12 shrink-0 font-display-serif text-[18px] italic text-ink">{s.label}</span>
                 <p className="text-[16px] leading-[1.6] text-ink/75">{s.body}</p>
               </motion.li>
             ))}
@@ -298,7 +298,7 @@ export function AboutView() {
             transition={{ duration: 0.7, ease: EASE }}
             className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
           >
-            What I&apos;m up to <span className="italic">these days</span>
+            What I&apos;m up to <span className="font-display-serif italic">these days</span>
           </motion.h2>
 
           <div className="mt-8 grid gap-10 md:grid-cols-[1fr_auto] md:items-center">
@@ -385,7 +385,7 @@ export function AboutView() {
               transition={{ duration: 0.7, ease: EASE }}
               className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
             >
-              Things I <span className="italic">care about</span>
+              Things I <span className="font-display-serif italic">care about</span>
             </motion.h2>
             <PhotoCard
               src={imgBooks}
@@ -407,7 +407,7 @@ export function AboutView() {
               <motion.div key={c.label} variants={fadeUp} className="border-t border-black/[0.08] py-6">
                 <div className="flex items-baseline justify-between gap-4">
                   <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{c.label}</p>
-                  <span className="font-display text-[14px] italic text-ink/30">
+                  <span className="font-display-serif text-[14px] italic text-ink/30">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -438,7 +438,7 @@ export function AboutView() {
             transition={{ duration: 0.7, ease: EASE }}
             className="font-display text-[clamp(2rem,4vw,3rem)] leading-tight tracking-tight text-ink"
           >
-            The journey <span className="italic">so far…</span>
+            The journey <span className="font-display-serif italic">so far…</span>
           </motion.h2>
 
           <motion.ol
@@ -460,7 +460,7 @@ export function AboutView() {
                   <p className="text-[16px] font-medium text-ink">{j.role}</p>
                   <p className="text-[14px] text-ink/50">{j.org}</p>
                 </div>
-                <p className="font-display text-[14px] italic text-ink/45">{j.period}</p>
+                <p className="font-display-serif text-[14px] italic text-ink/45">{j.period}</p>
               </motion.li>
             ))}
           </motion.ol>
@@ -488,7 +488,7 @@ export function AboutView() {
           className="relative mx-auto max-w-3xl overflow-hidden rounded-[36px] bg-ink px-8 py-14 text-center text-white"
         >
           <h3 className="relative font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight">
-            So, if you&apos;re building <span className="italic">something interesting</span>…
+            So, if you&apos;re building <span className="font-display-serif italic">something interesting</span>…
           </h3>
           <p className="relative mx-auto mt-4 max-w-[52ch] text-[14px] leading-[1.65] text-white/65">
             I&apos;d love to hear about it. Products, startups, ideas, books, a fascinating problem you can&apos;t put

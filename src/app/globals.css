@@ -4,7 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: var(--font-instrument-serif), "Instrument Serif", serif;
+  /* Display type is tight Instrument Sans; the serif face survives only in
+     the italicized accents via font-display-serif. */
+  --font-display: var(--font-instrument-sans), "Instrument Sans", sans-serif;
+  --font-display-serif: var(--font-instrument-serif), "Instrument Serif", serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -100,10 +103,17 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
-  /* The serif display face stays gentle; explicit tracking-* utilities
-     still win thanks to :where()'s zero specificity. */
+  /* Display sans runs tight and a touch heavier; explicit tracking-* and
+     font-weight utilities still win thanks to :where()'s zero specificity. */
   :where(.font-display) {
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  /* The serif accents keep their gentle 400 italic voice even when nested
+     inside a heavier sans heading. */
+  :where(.font-display-serif) {
     letter-spacing: -0.01em;
+    font-weight: 400;
   }
 
   /* Custom round cursor takes over on fine-pointer devices; hide the native

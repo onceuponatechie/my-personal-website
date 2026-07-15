@@ -135,7 +135,7 @@ export function ChooseAdventure() {
             transition={{ duration: 0.8, ease: EASE }}
             className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.02] tracking-tight text-ink"
           >
-            choose your <CurvedUnderline className="italic">adventure</CurvedUnderline>
+            choose your <CurvedUnderline className="font-display-serif italic">adventure</CurvedUnderline>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 14 }}

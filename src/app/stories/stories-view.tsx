@@ -159,7 +159,7 @@ export function StoriesView() {
                 transition={{ delay: 0.08, duration: 0.8, ease: EASE }}
                 className="mt-3 font-display text-[clamp(2.8rem,8vw,5.5rem)] leading-[0.95] tracking-tight text-ink"
               >
-                The Rabbit <span className="italic">Hole</span>
+                The Rabbit <span className="font-display-serif italic">Hole</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}

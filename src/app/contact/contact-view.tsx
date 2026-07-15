@@ -50,7 +50,7 @@ export function ContactView() {
             variants={fadeUp}
             className="mt-4 font-display text-[clamp(2.75rem,7vw,5rem)] leading-[1] tracking-tight text-ink"
           >
-            Let's <span className="italic">build</span> something <br className="hidden sm:block" />
+            Let's <span className="font-display-serif italic">build</span> something <br className="hidden sm:block" />
             you'll be proud of.
           </motion.h1>
           <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[48ch] text-[15px] leading-[1.65] text-ink/65">
@@ -149,7 +149,7 @@ export function ContactView() {
                 I read every message myself, usually with a coffee in hand. I only keep a few projects on the bench at once, so I&apos;m honest fast about fit — and if we&apos;re not right for each other, I&apos;ll gladly point you toward someone who is.
               </p>
               <div className="mt-6 flex items-end justify-between border-t border-white/10 pt-5">
-                <span className="font-display text-[18px] italic leading-none">— Essy</span>
+                <span className="font-display-serif text-[18px] italic leading-none">— Essy</span>
                 <LagosClock />
               </div>
             </div>
@@ -253,7 +253,7 @@ function Field({
   return (
     <label htmlFor={id} className="group/field block">
       <span className="mb-2 flex items-baseline gap-2.5">
-        <span className="font-display text-[14px] italic text-ink/30">{index}</span>
+        <span className="font-display-serif text-[14px] italic text-ink/30">{index}</span>
         <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-ink/50">{label}</span>
       </span>
       {children}

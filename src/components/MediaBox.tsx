@@ -40,6 +40,12 @@ export function MediaBox({ images, offset = 0, alt = "" }: Props) {
             className="absolute inset-0 h-full w-full object-cover"
           />
         ))}
+        {/* Light 3D finish — a top sheen, an inner rim highlight, and a soft
+            bottom shade, all quiet enough to read as texture, not chrome. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/20 via-white/[0.03] to-black/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_2px_rgba(0,0,0,0.25)]"
+        />
       </span>
     </span>
   );

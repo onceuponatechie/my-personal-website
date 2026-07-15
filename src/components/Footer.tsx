@@ -92,7 +92,7 @@ export function Footer() {
               <RevealText text="Let's build something" />
               <br />
               <RevealText text="people" delay={0.15} />{" "}
-              <RevealText text="remember" className="italic text-sage" delay={0.28} />
+              <RevealText text="remember" className="font-display-serif italic text-sage" delay={0.28} />
             </h2>
             <Reveal delay={0.2} className="mt-8 flex md:justify-end">
               <Link
@@ -128,7 +128,7 @@ export function Footer() {
         {/* ---------- Oversized wordmark — rises and de-blurs on scroll,
              matching the statement's word-by-word reveal ---------- */}
         <div aria-hidden className="relative select-none overflow-hidden px-2 pt-2">
-          <span className="block whitespace-nowrap text-center font-display italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
+          <span className="block whitespace-nowrap text-center font-display-serif italic text-[clamp(3.5rem,18vw,15rem)] leading-[0.78] tracking-tight text-ink/[0.07]">
             <RevealText text="Essy Udeme" stagger={0.14} />
           </span>
         </div>
