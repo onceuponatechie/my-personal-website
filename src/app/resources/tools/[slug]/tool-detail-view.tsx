@@ -64,7 +64,7 @@ export function ToolDetailView({
           >
             <Link
               href="/resources/tools"
-              className="inline-flex items-center gap-1.5 text-[13px] text-ink/55 transition hover:text-ink"
+              className="inline-flex items-center gap-1.5 text-[14px] text-ink/55 transition hover:text-ink"
             >
               <ArrowLeft className="size-3.5" /> Tools &amp; Templates
             </Link>
@@ -76,10 +76,10 @@ export function ToolDetailView({
             transition={{ delay: 0.06, duration: 0.7, ease: EASE }}
             className="mt-6 flex flex-wrap items-center gap-2.5"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink ring-1 ring-black/5">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-[12px] font-medium uppercase tracking-[0.14em] text-ink ring-1 ring-black/5">
               <Icon className="size-3.5" strokeWidth={2} /> {FORMAT_LABEL[tool.format]}
             </span>
-            <span className="text-[12px] text-ink/50">
+            <span className="text-[14px] text-ink/50">
               {tool.kind} · {tool.meta} · Free forever
             </span>
           </motion.div>
@@ -115,7 +115,7 @@ export function ToolDetailView({
               <Download className="size-4" strokeWidth={2.2} />
               Download free
             </a>
-            <span className="text-[12px] text-ink/50">{content.ctaNote}</span>
+            <span className="text-[14px] text-ink/50">{content.ctaNote}</span>
           </motion.div>
         </div>
       </section>
@@ -183,11 +183,11 @@ export function ToolDetailView({
             style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
           />
           <div className="relative">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-white/45">Take it with you</p>
+            <p className="text-[12px] uppercase tracking-[0.2em] text-white/45">Take it with you</p>
             <h2 className="mt-2 font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight tracking-tight">
               Ready when you are.
             </h2>
-            <p className="mt-2.5 max-w-[46ch] text-[13px] leading-[1.65] text-white/65">
+            <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.65] text-white/65">
               {tool.kind} · {tool.meta}. Free to download, remix, and ship with — just don&apos;t
               resell it as-is.
             </p>
@@ -200,7 +200,7 @@ export function ToolDetailView({
                 Download {tool.name}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
               </button>
-              <span className="text-[12px] text-white/50">{content.ctaNote}</span>
+              <span className="text-[14px] text-white/50">{content.ctaNote}</span>
             </div>
           </div>
         </motion.div>
@@ -238,7 +238,7 @@ export function ToolDetailView({
                     <div className="flex flex-1 flex-col px-2 pb-2 pt-3">
                       <h3 className="text-[15px] font-semibold leading-[1.25] tracking-tight text-ink">{r.name}</h3>
                       <div className="mt-auto flex items-center justify-between pt-3">
-                        <span className="text-[11px] text-ink/50">{r.meta}</span>
+                        <span className="text-[12px] text-ink/50">{r.meta}</span>
                         <span className="grid size-6 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">
                           <ArrowUpRight className="size-3" strokeWidth={2.2} />
                         </span>

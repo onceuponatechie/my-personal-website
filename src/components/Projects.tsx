@@ -33,7 +33,7 @@ function ProjectArticle({ p }: { p: Project }) {
         </div>
       </div>
       <div className="flex flex-col justify-center gap-3.5 p-6 md:gap-5 md:p-12">
-        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-ink/45 md:text-[12px]">
+        <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/45 md:text-[13px]">
           <span>{p.year}</span>
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{p.role}</span>
@@ -44,7 +44,7 @@ function ProjectArticle({ p }: { p: Project }) {
         <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65 md:line-clamp-none md:text-[15px]">{p.description}</p>
         <div className="flex flex-wrap gap-2">
           {p.tags.map((t) => (
-            <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[12px] text-ink/70">
+            <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[14px] text-ink/70">
               {t}
             </span>
           ))}
@@ -52,7 +52,7 @@ function ProjectArticle({ p }: { p: Project }) {
         <div className="relative z-20 mt-1 flex w-fit items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
-            className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white shadow-sm transition hover:bg-ink"
+            className="group/btn inline-flex items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink"
           >
             View Case Study
             <ArrowUpRight className="size-3.5 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" strokeWidth={2.2} />
@@ -61,7 +61,7 @@ function ProjectArticle({ p }: { p: Project }) {
             href={p.liveHref}
             target="_blank"
             rel="noreferrer"
-            className="group/live inline-flex items-center gap-1 text-[13px] text-ink underline-offset-4 hover:underline"
+            className="group/live inline-flex items-center gap-1 text-[14px] text-ink underline-offset-4 hover:underline"
           >
             Go live
             <ArrowUpRight className="size-3.5 transition-transform group-hover/live:-translate-y-0.5 group-hover/live:translate-x-0.5" strokeWidth={2.2} />

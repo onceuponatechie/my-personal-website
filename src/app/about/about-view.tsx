@@ -128,7 +128,7 @@ export function AboutView() {
           className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[1.2fr_1fr]"
         >
           <div>
-            <motion.p variants={fadeUp} className="text-[12px] uppercase tracking-[0.22em] text-ink/50">
+            <motion.p variants={fadeUp} className="text-[13px] uppercase tracking-[0.22em] text-ink/50">
               About
             </motion.p>
             <motion.h1
@@ -232,7 +232,7 @@ export function AboutView() {
                 variants={fadeUp}
                 className={`flex items-baseline gap-5 py-6 sm:gap-8 ${i > 0 ? "border-t border-black/[0.08]" : ""}`}
               >
-                <span className="font-display text-[13px] italic text-ink/35">0{i + 1}</span>
+                <span className="font-display text-[14px] italic text-ink/35">0{i + 1}</span>
                 <p className="font-display text-[clamp(1.35rem,2.8vw,1.9rem)] italic leading-snug tracking-tight text-ink">
                   {q}
                 </p>
@@ -406,8 +406,8 @@ export function AboutView() {
             {CARES.map((c, i) => (
               <motion.div key={c.label} variants={fadeUp} className="border-t border-black/[0.08] py-6">
                 <div className="flex items-baseline justify-between gap-4">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-ink/45">{c.label}</p>
-                  <span className="font-display text-[12px] italic text-ink/30">
+                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{c.label}</p>
+                  <span className="font-display text-[14px] italic text-ink/30">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -458,9 +458,9 @@ export function AboutView() {
               >
                 <div className="flex flex-wrap items-baseline gap-x-3">
                   <p className="text-[16px] font-medium text-ink">{j.role}</p>
-                  <p className="text-[13px] text-ink/50">{j.org}</p>
+                  <p className="text-[14px] text-ink/50">{j.org}</p>
                 </div>
-                <p className="font-display text-[13px] italic text-ink/45">{j.period}</p>
+                <p className="font-display text-[14px] italic text-ink/45">{j.period}</p>
               </motion.li>
             ))}
           </motion.ol>

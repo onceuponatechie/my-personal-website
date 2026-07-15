@@ -43,7 +43,7 @@ export function ContactView() {
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.p variants={fadeUp} className="text-[12px] uppercase tracking-[0.22em] text-ink/50">
+          <motion.p variants={fadeUp} className="text-[13px] uppercase tracking-[0.22em] text-ink/50">
             Hi, hello, howdy 👋
           </motion.p>
           <motion.h1
@@ -83,7 +83,7 @@ export function ContactView() {
               <>
                 <div className="mb-8 flex items-baseline justify-between gap-4 border-b border-black/[0.07] pb-6">
                   <h2 className="font-display text-[24px] leading-none tracking-tight text-ink">The brief</h2>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-ink/40">No pitch deck needed</p>
+                  <p className="text-[12px] uppercase tracking-[0.18em] text-ink/40">No pitch deck needed</p>
                 </div>
 
                 <div className="space-y-8">
@@ -116,7 +116,7 @@ export function ContactView() {
                       Send it over
                       <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
                     </button>
-                    <p className="text-[12px] leading-[1.5] text-ink/45 sm:max-w-[24ch] sm:text-right">
+                    <p className="text-[14px] leading-[1.5] text-ink/45 sm:max-w-[24ch] sm:text-right">
                       Plain words are perfect. Replies within two working days.
                     </p>
                   </div>
@@ -133,7 +133,7 @@ export function ContactView() {
           >
             {/* Three doors, one quiet card. */}
             <div className="overflow-hidden rounded-[36px] bg-card ring-1 ring-black/5">
-              <p className="border-b border-black/[0.07] px-6 pb-4 pt-6 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+              <p className="border-b border-black/[0.07] px-6 pb-4 pt-6 text-[12px] uppercase tracking-[0.2em] text-ink/40">
                 Other doors in
               </p>
               <div className="divide-y divide-black/[0.06]">
@@ -145,7 +145,7 @@ export function ContactView() {
 
             <div className="rounded-[36px] bg-ink p-7 text-white">
               <p className="font-display text-[22px] leading-tight">A small note —</p>
-              <p className="mt-3 text-[13px] leading-[1.7] text-white/70">
+              <p className="mt-3 text-[14px] leading-[1.7] text-white/70">
                 I read every message myself, usually with a coffee in hand. I only keep a few projects on the bench at once, so I&apos;m honest fast about fit — and if we&apos;re not right for each other, I&apos;ll gladly point you toward someone who is.
               </p>
               <div className="mt-6 flex items-end justify-between border-t border-white/10 pt-5">
@@ -253,8 +253,8 @@ function Field({
   return (
     <label htmlFor={id} className="group/field block">
       <span className="mb-2 flex items-baseline gap-2.5">
-        <span className="font-display text-[12px] italic text-ink/30">{index}</span>
-        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-ink/50">{label}</span>
+        <span className="font-display text-[14px] italic text-ink/30">{index}</span>
+        <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-ink/50">{label}</span>
       </span>
       {children}
     </label>
@@ -269,7 +269,7 @@ function ContactRow({ Icon, title, body, href }: { Icon: LucideIcon; title: stri
       </span>
       <div className="min-w-0 flex-1">
         <p className="text-[14px] font-medium text-ink">{title}</p>
-        <p className="mt-0.5 truncate text-[13px] text-ink/55">{body}</p>
+        <p className="mt-0.5 truncate text-[14px] text-ink/55">{body}</p>
       </div>
       <ArrowUpRight
         className="size-4 shrink-0 text-ink/25 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
@@ -297,7 +297,7 @@ function LagosClock() {
   }, []);
 
   return (
-    <span className="text-[12px] tabular-nums text-white/50">
+    <span className="text-[14px] tabular-nums text-white/50">
       Lagos {time ? `· ${time.toUpperCase()}` : ""}
     </span>
   );

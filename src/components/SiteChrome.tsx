@@ -49,7 +49,7 @@ export function Navbar() {
         </Link>
 
         <nav
-          className={`${CHIP} absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 p-1.5 text-[13px] text-muted-foreground md:flex`}
+          className={`${CHIP} absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 p-1.5 text-[14px] text-muted-foreground md:flex`}
         >
           {NAV_LINKS.map((l) => {
             const active = isActive(pathname, l);
@@ -79,8 +79,8 @@ export function Navbar() {
                           pathname === c.href ? "bg-foreground/5" : ""
                         }`}
                       >
-                        <span className="text-[13px] font-medium text-foreground">{c.label}</span>
-                        <span className="text-[11px] text-muted-foreground">{c.desc}</span>
+                        <span className="text-[14px] font-medium text-foreground">{c.label}</span>
+                        <span className="text-[12px] text-muted-foreground">{c.desc}</span>
                       </Link>
                     ))}
                   </div>
@@ -107,7 +107,7 @@ export function Navbar() {
           {/* On mobile the CTA lives inside the hamburger menu instead. */}
           <Link
             href="/contact"
-            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[13px] font-medium text-white shadow-sm transition hover:bg-ink md:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink md:inline-flex"
           >
             Build With Me
           </Link>
@@ -163,8 +163,8 @@ export function Navbar() {
                           pathname === c.href ? "bg-foreground/5" : ""
                         }`}
                       >
-                        <span className="text-[13px] font-medium text-foreground/80">{c.label}</span>
-                        <span className="text-[11px] text-muted-foreground">{c.desc}</span>
+                        <span className="text-[14px] font-medium text-foreground/80">{c.label}</span>
+                        <span className="text-[12px] text-muted-foreground">{c.desc}</span>
                       </Link>
                     ))}
                   </div>
@@ -223,7 +223,7 @@ export function Logo({ onDark = false }: { onDark?: boolean }) {
 
 export function PillBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-card px-3.5 py-1.5 text-[12px] font-medium text-foreground/70 shadow-sm">
+    <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-card px-4 py-2 text-[14px] font-medium text-foreground/70 shadow-sm">
       <span className="relative grid size-2 place-items-center" aria-hidden>
         <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
         <span className="relative inline-flex size-1.5 rounded-full bg-sage" />

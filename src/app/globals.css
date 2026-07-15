@@ -54,7 +54,8 @@
   --background: oklch(0.975 0.004 90);
   --foreground: oklch(0.18 0.01 260);
 
-  --card: #FDFDFD;
+  /* Card surface — warm off-white, never stark white */
+  --card: #fcfcfb;
   --card-foreground: oklch(0.18 0.01 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.01 260);

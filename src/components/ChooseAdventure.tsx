@@ -83,7 +83,7 @@ function PickCard({ pick }: { pick: Pick }) {
             className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
           />
           <span
-            className={`absolute left-3 top-3 rounded-full ${pick.labelBg} px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
+            className={`absolute left-3 top-3 rounded-full ${pick.labelBg} px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink/80 backdrop-blur-sm`}
           >
             {pick.label}
           </span>
@@ -93,7 +93,7 @@ function PickCard({ pick }: { pick: Pick }) {
             <h3 className="line-clamp-1 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
               {pick.title}
             </h3>
-            <p className="mt-1 line-clamp-2 text-[12.5px] leading-[1.5] text-ink/60">{pick.blurb}</p>
+            <p className="mt-1 line-clamp-2 text-[14px] leading-[1.5] text-ink/60">{pick.blurb}</p>
           </div>
           <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-sage-soft text-ink transition duration-300 group-hover:bg-sage group-hover:text-white">
             <ArrowUpRight className="size-4" strokeWidth={2.2} />
