@@ -146,7 +146,7 @@ export function HomeNewsletter() {
                     <Star key={i} className="size-3.5" fill="currentColor" strokeWidth={0} />
                   ))}
                 </div>
-                <p className="mt-1 text-[12px] text-white/55">My fave brands</p>
+                <p className="mt-1 text-[14px] text-white/55">My fave brands</p>
               </div>
             </div>
           </div>

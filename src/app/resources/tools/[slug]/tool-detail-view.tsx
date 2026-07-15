@@ -187,7 +187,7 @@ export function ToolDetailView({
             <h2 className="mt-2 font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight tracking-tight">
               Ready when you are.
             </h2>
-            <p className="mt-2.5 max-w-[46ch] text-[13px] leading-[1.65] text-white/65">
+            <p className="mt-2.5 max-w-[46ch] text-[15px] leading-[1.65] text-white/65">
               {tool.kind} · {tool.meta}. Free to download, remix, and ship with — just don&apos;t
               resell it as-is.
             </p>

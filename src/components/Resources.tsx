@@ -109,9 +109,9 @@ export function Resources() {
 
 /* ---------- Cards ---------- */
 
-/** The Rabbit Hole — issues for curious people. Styled like a modern app
- * notification card: mini header row, big title, the pitch, category chips,
- * a CTA, and a tilted photo bleeding off the bottom edge. */
+/** The Rabbit Hole — issues for curious people. The photo leads, framed
+ * inside the card like the other cells, then the masthead row, title, pitch,
+ * category chips, and a CTA pinned to the foot. */
 const RABBIT_TOPICS = ["Products", "Law", "Internet culture", "Cities", "Society", "Curiosities"];
 
 function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
@@ -124,29 +124,51 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
     >
       <Link href="/stories" aria-label="Open The Rabbit Hole" className="absolute inset-0 z-10" />
 
+      {/* Cover photo first — same p-3 inset frame as the other image cards. */}
+      <div className="p-3 pb-0">
+        <div className="relative overflow-hidden rounded-[18px]">
+          <motion.img
+            src={devDiaryImg}
+            alt=""
+            loading="lazy"
+            width={768}
+            height={960}
+            initial={{ scale: 1.08 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }}
+            className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.04]"
+          />
+          {/* Hairline inner ring + a whisper of grade at the foot keep the
+              photo sitting "in" the card rather than printed on it. */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[18px] ring-1 ring-inset ring-black/10" />
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-16 rounded-b-[18px] bg-gradient-to-t from-black/25 to-transparent" />
+          <span className="absolute left-3 top-3 rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-ink/70 shadow-sm backdrop-blur-sm">
+            New issue
+          </span>
+        </div>
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="flex flex-col p-6 pb-0 sm:p-7 sm:pb-0"
+        className="flex flex-1 flex-col p-6 pt-5 sm:p-7 sm:pt-5"
       >
-        {/* Mini header row — like an app notification. */}
-        <motion.div variants={textChild} className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="grid size-8 place-items-center rounded-full bg-butter text-ink">
-              <Rabbit className="size-4" strokeWidth={1.8} />
-            </span>
-            <span className="text-[12px] font-medium tracking-tight text-ink/70">The Rabbit Hole</span>
-          </div>
-          <span className="text-[10px] uppercase tracking-[0.14em] text-ink/35">New issue</span>
+        {/* Masthead row. */}
+        <motion.div variants={textChild} className="flex items-center gap-2">
+          <span className="grid size-8 place-items-center rounded-full bg-butter text-ink">
+            <Rabbit className="size-4" strokeWidth={1.8} />
+          </span>
+          <span className="text-[12px] font-medium tracking-tight text-ink/70">The Rabbit Hole</span>
         </motion.div>
 
-        <motion.h3 variants={textChild} className="mt-5 text-[20px] font-semibold leading-[1.18] tracking-tight text-ink">
+        <motion.h3 variants={textChild} className="mt-4 text-[20px] font-semibold leading-[1.18] tracking-tight text-ink">
           Every issue starts with a product.
         </motion.h3>
 
-        <motion.p variants={textChild} className="mt-2 text-[13px] leading-[1.6] text-ink/60">
+        <motion.p variants={textChild} className="mt-2 text-[15px] leading-[1.6] text-ink/60">
           Where it ends is anyone&apos;s guess. Follow the trail into the ideas, decisions, and
           hidden systems shaping the world around us.
         </motion.p>
@@ -160,33 +182,13 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
           ))}
         </motion.div>
 
-        <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-5 w-fit">
+        <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-auto w-fit pt-5">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-sage px-4 py-2 text-[12px] font-medium text-white transition group-hover/card:gap-2.5 group-hover/card:bg-ink">
             Fall in
             <ArrowRight className="size-3.5" strokeWidth={2.2} />
           </span>
         </motion.div>
       </motion.div>
-
-      {/* Tilted snapshot drifting off the card's bottom edge — the
-          "backgroundless object" moment from the reference. */}
-      {/* min-h (not h): flex-1's zero basis would otherwise collapse this
-          block on mobile where the card has no surplus height. */}
-      <div className="relative mt-5 min-h-40 flex-1 sm:min-h-44" aria-hidden>
-        <motion.img
-          src={devDiaryImg}
-          alt=""
-          loading="lazy"
-          width={768}
-          height={960}
-          initial={{ opacity: 0, y: 42, rotate: -2 }}
-          whileInView={{ opacity: 1, y: 0, rotate: -10 }}
-          viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-          transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
-          className="absolute left-7 top-3 w-[115%] max-w-none rounded-[26px] object-cover shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
-          style={{ transformOrigin: "bottom left" }}
-        />
-      </div>
     </motion.article>
   );
 }
@@ -234,7 +236,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
         <h3 className="mt-4 text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
           Tools &amp; Templates
         </h3>
-        <p className="mt-1.5 max-w-[24ch] text-[13px] leading-[1.6] text-ink/55">
+        <p className="mt-1.5 max-w-[24ch] text-[15px] leading-[1.6] text-ink/55">
           Notion systems, Figma files, and checklists — download and ship with them.
         </p>
 
@@ -286,7 +288,7 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           <motion.h3 variants={textChild} className="text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
             Research Vault
           </motion.h3>
-          <motion.p variants={textChild} className="mt-1.5 max-w-[34ch] text-[13px] leading-[1.6] text-ink/55">
+          <motion.p variants={textChild} className="mt-1.5 max-w-[34ch] text-[15px] leading-[1.6] text-ink/55">
             Discover deep dives into human behaviour and insights. Reports, patterns, and all that you need.
           </motion.p>
           <motion.span
@@ -322,7 +324,7 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        className="mt-3.5 max-w-[34ch] text-[13px] leading-[1.6] text-ink/60"
+        className="mt-3.5 max-w-[34ch] text-[15px] leading-[1.6] text-ink/60"
       >
         You'd want to know my product process, but I too wants to find out.
       </motion.p>

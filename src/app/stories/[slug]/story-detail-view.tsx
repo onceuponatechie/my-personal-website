@@ -83,7 +83,7 @@ export function StoryDetailView({ s }: { s: Story }) {
               <div className="relative flex-1">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-white/45">{resource.kind}</p>
                 <h3 className="mt-1.5 text-[19px] font-semibold leading-tight tracking-tight">{resource.name}</h3>
-                <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">{resource.blurb}</p>
+                <p className="mt-1.5 text-[15px] leading-[1.55] text-white/65">{resource.blurb}</p>
               </div>
               <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover:gap-3 group-hover:bg-ink">
                 <Download className="size-3.5" strokeWidth={2.2} />

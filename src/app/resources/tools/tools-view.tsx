@@ -132,7 +132,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
 
           <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
             {tool.includes.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-[13px] text-ink/70">
+              <li key={item} className="flex items-center gap-2.5 text-[15px] text-ink/70">
                 <span className="grid size-5 shrink-0 place-items-center rounded-full bg-sage-soft text-ink/70">
                   <Check className="size-3" strokeWidth={2.6} />
                 </span>
@@ -223,7 +223,7 @@ function ToolCard({ tool }: { tool: Tool }) {
         <h3 className="mt-2 text-[15px] font-semibold leading-[1.25] tracking-tight text-ink sm:mt-2.5 sm:text-[16px]">
           {tool.name}
         </h3>
-        <p className="mt-1 hidden line-clamp-2 text-[12px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
+        <p className="mt-1 hidden line-clamp-2 text-[14px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
 
         <div className="mt-auto pt-3">
           <div className="flex items-center justify-between border-t border-ink/[0.07] pt-2.5">
@@ -286,7 +286,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <h3 className="mt-5 font-display text-[24px] leading-tight tracking-tight text-ink">
                   Got it — thank you.
                 </h3>
-                <p className="mt-2 max-w-[32ch] text-[13px] leading-[1.6] text-ink/60">
+                <p className="mt-2 max-w-[32ch] text-[15px] leading-[1.6] text-ink/60">
                   If it fits the shelf, it&apos;ll land here in a future drop.
                 </p>
                 <button
@@ -356,7 +356,7 @@ function RequestCard() {
           <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">
             Wish this shelf had something it doesn&apos;t?
           </h3>
-          <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">
+          <p className="mt-1.5 text-[15px] leading-[1.55] text-white/65">
             Tell me what you keep rebuilding from scratch — the best requests become the next template.
           </p>
         </div>

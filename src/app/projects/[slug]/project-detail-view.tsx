@@ -68,7 +68,7 @@ export function ProjectDetailView({ p }: { p: Project }) {
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.2em] text-ink/45">Outcomes</p>
-                <ul className="mt-3 space-y-2 text-[13px] text-ink/70">
+                <ul className="mt-3 space-y-2 text-[15px] text-ink/70">
                   {p.outcomes.map((o) => (
                     <li key={o} className="flex gap-2"><span className="text-sage">→</span>{o}</li>
                   ))}

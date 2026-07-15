@@ -101,7 +101,7 @@ function StoryCard({ story }: { story: Story }) {
           <h3 className="mt-2.5 text-[18px] font-semibold leading-[1.25] tracking-tight text-ink">
             {story.title}
           </h3>
-          <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/60">{story.excerpt}</p>
+          <p className="mt-2 line-clamp-2 text-[15px] leading-[1.55] text-ink/60">{story.excerpt}</p>
           <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[13px] font-medium text-ink">
             Read entry
             <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1" strokeWidth={2.2} />

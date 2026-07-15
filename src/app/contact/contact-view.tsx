@@ -116,7 +116,7 @@ export function ContactView() {
                       Send it over
                       <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />
                     </button>
-                    <p className="text-[12px] leading-[1.5] text-ink/45 sm:max-w-[24ch] sm:text-right">
+                    <p className="text-[14px] leading-[1.5] text-ink/45 sm:max-w-[24ch] sm:text-right">
                       Plain words are perfect. Replies within two working days.
                     </p>
                   </div>
@@ -145,7 +145,7 @@ export function ContactView() {
 
             <div className="rounded-[36px] bg-ink p-7 text-white">
               <p className="font-display text-[22px] leading-tight">A small note —</p>
-              <p className="mt-3 text-[13px] leading-[1.7] text-white/70">
+              <p className="mt-3 text-[15px] leading-[1.7] text-white/70">
                 I read every message myself, usually with a coffee in hand. I only keep a few projects on the bench at once, so I&apos;m honest fast about fit — and if we&apos;re not right for each other, I&apos;ll gladly point you toward someone who is.
               </p>
               <div className="mt-6 flex items-end justify-between border-t border-white/10 pt-5">
@@ -269,7 +269,7 @@ function ContactRow({ Icon, title, body, href }: { Icon: LucideIcon; title: stri
       </span>
       <div className="min-w-0 flex-1">
         <p className="text-[14px] font-medium text-ink">{title}</p>
-        <p className="mt-0.5 truncate text-[13px] text-ink/55">{body}</p>
+        <p className="mt-0.5 truncate text-[15px] text-ink/55">{body}</p>
       </div>
       <ArrowUpRight
         className="size-4 shrink-0 text-ink/25 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"

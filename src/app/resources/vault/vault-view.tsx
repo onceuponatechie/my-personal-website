@@ -110,7 +110,7 @@ function VaultCard({ entry }: { entry: VaultEntry }) {
         <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
           {entry.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/55">{entry.summary}</p>
+        <p className="mt-2 line-clamp-2 text-[15px] leading-[1.55] text-ink/55">{entry.summary}</p>
         <div className="mt-4 flex items-center gap-2 text-[12px] text-ink/50">
           <span>{entry.readTime}</span>
           <span className="size-1 rounded-full bg-ink/30" />

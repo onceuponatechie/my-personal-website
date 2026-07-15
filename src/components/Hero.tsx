@@ -64,12 +64,12 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] font-semibold leading-[1.08] tracking-[-0.01em] text-foreground"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
           <motion.span variants={blurIn} className="inline">
-            <span className="italic">Products</span>, <span className="italic">people</span>,
+            <span className="italic">Products</span>, people,
           </motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={blurIn} className="inline">and the</motion.span>{" "}
@@ -81,7 +81,7 @@ export function Hero() {
               alt="changing inline media"
             />
           </motion.span>{" "}
-          <motion.span variants={blurIn} className="inline"><span className="italic">stories</span></motion.span>{" "}
+          <motion.span variants={blurIn} className="inline">stories</motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={blurIn} className="inline">that connect</motion.span>{" "}
           <br className="hidden md:block" />
@@ -96,7 +96,7 @@ export function Hero() {
           <motion.span variants={blurIn} className="inline">them.</motion.span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="mt-7 text-[15px] text-muted-foreground">
+        <motion.p variants={fadeUp} className="mt-7 text-[17px] text-muted-foreground">
           Creator <span className="mx-2 opacity-50">·</span> Builder
           <span className="mx-2 opacity-50">·</span> Storyteller
         </motion.p>

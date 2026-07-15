@@ -87,7 +87,7 @@ function Bars({
         })}
       </div>
       {block.caption && (
-        <p className="mt-5 text-[12px] leading-[1.5] text-ink/45">{block.caption}</p>
+        <p className="mt-5 text-[14px] leading-[1.5] text-ink/45">{block.caption}</p>
       )}
     </figure>
   );
@@ -157,7 +157,7 @@ function Donut({
         </ul>
       </div>
       {block.caption && (
-        <p className="mt-6 text-[12px] leading-[1.5] text-ink/45">{block.caption}</p>
+        <p className="mt-6 text-[14px] leading-[1.5] text-ink/45">{block.caption}</p>
       )}
     </figure>
   );
@@ -189,7 +189,7 @@ function Persona({
         />
         <div>
           <h4 className="font-display text-[24px] leading-tight tracking-tight text-ink">{block.name}</h4>
-          <p className="text-[13px] text-ink/55">{block.role}</p>
+          <p className="text-[15px] text-ink/55">{block.role}</p>
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
             {block.meta.map((m) => (
               <div key={m.label}>
@@ -198,7 +198,7 @@ function Persona({
               </div>
             ))}
           </div>
-          <p className="mt-4 max-w-[52ch] text-[13px] leading-[1.65] text-ink/65">{block.bio}</p>
+          <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.65] text-ink/65">{block.bio}</p>
         </div>
       </div>
 
@@ -240,7 +240,7 @@ function Persona({
               <Eyebrow>Goals</Eyebrow>
               <ul className="mt-4 space-y-2.5">
                 {block.goals.map((g) => (
-                  <li key={g} className="flex gap-2.5 text-[13px] leading-[1.5] text-ink/70">
+                  <li key={g} className="flex gap-2.5 text-[15px] leading-[1.5] text-ink/70">
                     <span className="mt-0.5 text-sage">→</span>
                     {g}
                   </li>
@@ -296,7 +296,7 @@ function renderBlock(block: VaultBlock, i: number) {
                 <div className="font-display text-[clamp(2rem,4vw,2.75rem)] leading-none tracking-tight text-ink">
                   {s.value}
                 </div>
-                <div className="mt-2 text-[13px] leading-[1.4] text-ink/60">{s.label}</div>
+                <div className="mt-2 text-[15px] leading-[1.4] text-ink/60">{s.label}</div>
               </div>
             ))}
           </div>
@@ -324,7 +324,7 @@ function renderBlock(block: VaultBlock, i: number) {
             <blockquote className="font-display text-[clamp(1.5rem,3vw,2.1rem)] italic leading-[1.3] tracking-tight text-ink">
               “{block.text}”
             </blockquote>
-            {block.cite && <figcaption className="mt-3 text-[13px] text-ink/55">— {block.cite}</figcaption>}
+            {block.cite && <figcaption className="mt-3 text-[15px] text-ink/55">— {block.cite}</figcaption>}
           </figure>
         </Block>
       );
@@ -386,7 +386,7 @@ function renderBlock(block: VaultBlock, i: number) {
           <figure className="overflow-hidden rounded-[28px]">
             <img src={block.src} alt={block.caption ?? ""} loading="lazy" className="w-full object-cover" />
             {block.caption && (
-              <figcaption className="mt-3 text-[12px] text-ink/45">{block.caption}</figcaption>
+              <figcaption className="mt-3 text-[14px] text-ink/45">{block.caption}</figcaption>
             )}
           </figure>
         </Block>
@@ -407,7 +407,7 @@ function renderBlock(block: VaultBlock, i: number) {
                   />
                 </div>
                 {img.caption && (
-                  <figcaption className="mt-2.5 text-[12px] leading-[1.45] text-ink/50">
+                  <figcaption className="mt-2.5 text-[14px] leading-[1.45] text-ink/50">
                     {img.caption}
                   </figcaption>
                 )}

@@ -108,7 +108,7 @@ export function Footer() {
 
         {/* ---------- Bottom bar ---------- */}
         <div className="relative flex flex-col items-center justify-between gap-4 border-t border-black/10 px-7 py-6 sm:flex-row sm:px-12">
-          <p className="order-2 text-[12px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
+          <p className="order-2 text-[14px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
           <nav className="order-1 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:order-2">
             {SOCIALS.map((s) => (
               <a

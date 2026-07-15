@@ -458,7 +458,7 @@ export function AboutView() {
               >
                 <div className="flex flex-wrap items-baseline gap-x-3">
                   <p className="text-[16px] font-medium text-ink">{j.role}</p>
-                  <p className="text-[13px] text-ink/50">{j.org}</p>
+                  <p className="text-[15px] text-ink/50">{j.org}</p>
                 </div>
                 <p className="font-display text-[13px] italic text-ink/45">{j.period}</p>
               </motion.li>
