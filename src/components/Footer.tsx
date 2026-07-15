@@ -50,14 +50,14 @@ export function Footer() {
 
         {/* ---------- Status bar ---------- */}
         <div className="relative flex items-center justify-between gap-4 border-b border-black/10 px-7 py-5 sm:px-12">
-          <span className="inline-flex items-center gap-2.5 text-[12px] text-ink/70 sm:text-[13px]">
+          <span className="inline-flex items-center gap-2.5 text-[14px] text-ink/70">
             <span className="relative grid size-2 place-items-center">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-sage opacity-70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-sage" />
             </span>
             What are we building today?
           </span>
-          <span className="text-[12px] text-ink/45 sm:text-[13px]">Essy Udeme® — 2026</span>
+          <span className="text-[14px] text-ink/45">Essy Udeme® — 2026</span>
         </div>
 
         {/* ---------- Middle: nav + statement ---------- */}
@@ -66,7 +66,7 @@ export function Footer() {
           <div className="order-2 grid max-w-md grid-cols-2 gap-x-8 md:order-1">
             {NAV_COLS.map((col) => (
               <div key={col.title}>
-                <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink/40">{col.title}</p>
+                <p className="mb-4 text-[12px] font-medium uppercase tracking-[0.2em] text-ink/40">{col.title}</p>
                 <ul className="space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
@@ -108,7 +108,7 @@ export function Footer() {
 
         {/* ---------- Bottom bar ---------- */}
         <div className="relative flex flex-col items-center justify-between gap-4 border-t border-black/10 px-7 py-6 sm:flex-row sm:px-12">
-          <p className="order-2 text-[12px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
+          <p className="order-2 text-[14px] text-ink/45 sm:order-1">© 2026 Essy Udeme. All rights reserved.</p>
           <nav className="order-1 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:order-2">
             {SOCIALS.map((s) => (
               <a
@@ -116,7 +116,7 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="editorial-underline inline-flex items-center gap-1 text-[13px] text-ink/60 transition hover:text-ink"
+                className="editorial-underline inline-flex items-center gap-1 text-[14px] text-ink/60 transition hover:text-ink"
               >
                 {s.label}
                 <ArrowUpRight className="size-3 opacity-60" strokeWidth={2} />

@@ -19,7 +19,7 @@ export function StoryDetailView({ s }: { s: Story }) {
       <Navbar />
       <article className="px-4 pt-16 pb-20 sm:px-6">
         <div className="mx-auto max-w-2xl">
-          <Link href="/stories" className="inline-flex items-center gap-1.5 text-[13px] text-ink/60 transition hover:text-ink">
+          <Link href="/stories" className="inline-flex items-center gap-1.5 text-[14px] text-ink/60 transition hover:text-ink">
             <ArrowLeft className="size-3.5" /> All stories
           </Link>
 
@@ -29,7 +29,7 @@ export function StoryDetailView({ s }: { s: Story }) {
             transition={{ duration: 0.7, ease: EASE }}
             className="mt-8"
           >
-            <div className="flex items-center gap-3 text-[12px] text-ink/50">
+            <div className="flex items-center gap-3 text-[14px] text-ink/50">
               <span>{s.date}</span>
               <span className="size-1 rounded-full bg-ink/30" />
               <span>{s.read}</span>
@@ -63,7 +63,7 @@ export function StoryDetailView({ s }: { s: Story }) {
       <section className="px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-2xl">
           <Reveal blur>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-ink/45">A resource for you</p>
+            <p className="text-[12px] uppercase tracking-[0.24em] text-ink/45">A resource for you</p>
           </Reveal>
           <Reveal delay={0.08} className="mt-4">
             <Link
@@ -81,11 +81,11 @@ export function StoryDetailView({ s }: { s: Story }) {
                 className="aspect-[16/10] w-full rounded-[20px] object-cover sm:h-28 sm:w-44 sm:shrink-0"
               />
               <div className="relative flex-1">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-white/45">{resource.kind}</p>
+                <p className="text-[12px] uppercase tracking-[0.18em] text-white/45">{resource.kind}</p>
                 <h3 className="mt-1.5 text-[19px] font-semibold leading-tight tracking-tight">{resource.name}</h3>
-                <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">{resource.blurb}</p>
+                <p className="mt-1.5 text-[14px] leading-[1.55] text-white/65">{resource.blurb}</p>
               </div>
-              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition group-hover:gap-3 group-hover:bg-ink">
+              <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition group-hover:gap-3 group-hover:bg-ink">
                 <Download className="size-3.5" strokeWidth={2.2} />
                 Grab it free
               </span>
@@ -115,7 +115,7 @@ export function StoryDetailView({ s }: { s: Story }) {
                       />
                     </div>
                     <div className="flex flex-1 flex-col px-3 pb-2 pt-3.5">
-                      <div className="flex items-center gap-2 text-[11px] text-ink/50">
+                      <div className="flex items-center gap-2 text-[12px] text-ink/50">
                         <span>{post.date}</span>
                         <span className="size-1 rounded-full bg-ink/30" />
                         <span>{post.read}</span>

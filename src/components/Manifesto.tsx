@@ -102,7 +102,7 @@ function ToolTag({ tag }: { tag: Tag }) {
         className="relative inline-block"
       >
         <span
-          className={`relative inline-block rounded-[14px] px-3.5 py-1.5 text-[12px] font-medium tracking-tight sm:px-4 sm:py-2 sm:text-[13px] ${tag.face}`}
+          className={`relative inline-block rounded-[14px] px-3.5 py-1.5 text-[14px] font-medium tracking-tight sm:px-4 sm:py-2 ${tag.face}`}
         >
           {tag.label}
           {/* Bubble tail — a rotated rounded square peeking out of the face. */}

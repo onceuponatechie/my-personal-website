@@ -14,7 +14,7 @@ const researchImg = "/assets/research-vault.jpg";
 function HeroChip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full bg-card/80 px-3.5 py-1.5 text-[12px] text-ink/70 ring-1 ring-black/5 backdrop-blur ${className}`}
+      className={`inline-flex items-center rounded-full bg-card/80 px-3.5 py-1.5 text-[14px] text-ink/70 ring-1 ring-black/5 backdrop-blur ${className}`}
     >
       {children}
     </span>
@@ -23,7 +23,7 @@ function HeroChip({ children, className = "" }: { children: React.ReactNode; cla
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-ink/15 px-3 py-1 text-[12px] text-ink/65">
+    <span className="rounded-full border border-ink/15 px-3 py-1 text-[14px] text-ink/65">
       {children}
     </span>
   );
@@ -31,7 +31,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>
+    <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>
   );
 }
 
@@ -47,7 +47,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
     >
       <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70">
+          <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3 py-1 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
             {entry.readTime}
           </span>
           <h3 className="mt-5 text-[clamp(1.35rem,2.3vw,1.7rem)] font-semibold leading-[1.2] tracking-tight text-ink">
@@ -57,7 +57,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href={`/resources/vault/${entry.slug}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white transition hover:bg-sage"
             >
               Download free report
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
@@ -71,7 +71,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
           aria-hidden
           className="flex w-full flex-col gap-3 rounded-[22px] bg-sage-soft p-5 md:w-40"
         >
-          <div className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+          <div className="flex items-center gap-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/55">
             <LineChart className="size-3.5" strokeWidth={2} /> Inside
           </div>
           <div className="flex h-16 items-end gap-2">
@@ -87,7 +87,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
               />
             ))}
           </div>
-          <div className="text-[11px] leading-[1.4] text-ink/55">Charts, a persona &amp; the data.</div>
+          <div className="text-[12px] leading-[1.4] text-ink/55">Charts, a persona &amp; the data.</div>
         </div>
       </div>
     </motion.article>
@@ -110,8 +110,8 @@ function VaultCard({ entry }: { entry: VaultEntry }) {
         <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
           {entry.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-[13px] leading-[1.55] text-ink/55">{entry.summary}</p>
-        <div className="mt-4 flex items-center gap-2 text-[12px] text-ink/50">
+        <p className="mt-2 line-clamp-2 text-[14px] leading-[1.55] text-ink/55">{entry.summary}</p>
+        <div className="mt-4 flex items-center gap-2 text-[14px] text-ink/50">
           <span>{entry.readTime}</span>
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{entry.access}</span>
@@ -143,7 +143,7 @@ function GatedCard({ entry }: { entry: VaultEntry }) {
         <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
           {entry.title}
         </h3>
-        <div className="mt-3 flex items-center gap-2 text-[12px] text-ink/50">
+        <div className="mt-3 flex items-center gap-2 text-[14px] text-ink/50">
           <span>{entry.readTime}</span>
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{entry.access}</span>
@@ -209,7 +209,7 @@ export function VaultView() {
             >
               <div className="relative h-full w-full overflow-hidden rounded-[26px] shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10">
                 <img src={researchImg} alt="" className="h-full w-full object-cover" />
-                <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[11px] font-medium text-ink backdrop-blur">
+                <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[12px] font-medium text-ink backdrop-blur">
                   Insights
                 </span>
                 <span className="absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-white/90 text-ink backdrop-blur">
@@ -238,11 +238,11 @@ export function VaultView() {
             >
               <div>
                 <div className="font-display text-[28px] leading-none tracking-tight text-ink">{VAULT.length}</div>
-                <div className="mt-1.5 text-[12px] text-ink/50">Live pieces</div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Live pieces</div>
               </div>
               <div>
                 <div className="font-display text-[28px] leading-none tracking-tight text-ink">100%</div>
-                <div className="mt-1.5 text-[12px] text-ink/50">Free to read</div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Free to read</div>
               </div>
             </motion.div>
           </div>
@@ -253,7 +253,7 @@ export function VaultView() {
               <button
                 key={f.label}
                 onClick={() => setActive(i)}
-                className={`rounded-full px-4 py-2 text-[13px] font-medium transition ${
+                className={`rounded-full px-4 py-2 text-[14px] font-medium transition ${
                   active === i
                     ? "bg-ink text-white"
                     : "border border-ink/15 text-ink/70 hover:border-ink/30 hover:text-ink"

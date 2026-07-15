@@ -112,7 +112,7 @@ export function HomeNewsletter() {
         <div className="relative grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-14">
           {/* Copy + proof */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-ink/75">
+            <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3.5 py-1.5 text-[12px] font-medium uppercase tracking-[0.2em] text-ink/75">
               <Sparkles className="size-3.5" strokeWidth={2} /> The Letter
             </span>
 
@@ -146,7 +146,7 @@ export function HomeNewsletter() {
                     <Star key={i} className="size-3.5" fill="currentColor" strokeWidth={0} />
                   ))}
                 </div>
-                <p className="mt-1 text-[12px] text-white/55">My fave brands</p>
+                <p className="mt-1 text-[14px] text-white/55">My fave brands</p>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ export function HomeNewsletter() {
               Get the good stuff
               <Send className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </button>
-            <p className="mt-4 text-center text-[11px] leading-[1.6] text-white/40">
+            <p className="mt-4 text-center text-[12px] leading-[1.6] text-white/40">
               You&apos;ll be signed up to my free letter on Substack.
               <br />
               No spam, just value. Unsubscribe anytime.

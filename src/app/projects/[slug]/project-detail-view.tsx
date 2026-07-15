@@ -13,7 +13,7 @@ export function ProjectDetailView({ p }: { p: Project }) {
       <Navbar />
       <article className="px-4 pt-16 pb-24 sm:px-6">
         <div className="mx-auto max-w-4xl">
-          <Link href="/projects" className="inline-flex items-center gap-1.5 text-[13px] text-ink/60 transition hover:text-ink">
+          <Link href="/projects" className="inline-flex items-center gap-1.5 text-[14px] text-ink/60 transition hover:text-ink">
             <ArrowLeft className="size-3.5" /> All projects
           </Link>
 
@@ -23,7 +23,7 @@ export function ProjectDetailView({ p }: { p: Project }) {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
             className="mt-8"
           >
-            <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.2em] text-ink/45">
+            <div className="flex items-center gap-3 text-[13px] uppercase tracking-[0.2em] text-ink/45">
               <span>{p.year}</span>
               <span className="size-1 rounded-full bg-ink/30" />
               <span>{p.role}</span>
@@ -59,16 +59,16 @@ export function ProjectDetailView({ p }: { p: Project }) {
             </div>
             <aside className="space-y-6">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-ink/45">Stack</p>
+                <p className="text-[12px] uppercase tracking-[0.2em] text-ink/45">Stack</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
-                    <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[12px] text-ink/70">{t}</span>
+                    <span key={t} className="rounded-full bg-foreground/5 px-3 py-1 text-[14px] text-ink/70">{t}</span>
                   ))}
                 </div>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-ink/45">Outcomes</p>
-                <ul className="mt-3 space-y-2 text-[13px] text-ink/70">
+                <p className="text-[12px] uppercase tracking-[0.2em] text-ink/45">Outcomes</p>
+                <ul className="mt-3 space-y-2 text-[14px] text-ink/70">
                   {p.outcomes.map((o) => (
                     <li key={o} className="flex gap-2"><span className="text-sage">→</span>{o}</li>
                   ))}

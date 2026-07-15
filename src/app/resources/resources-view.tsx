@@ -55,7 +55,7 @@ export function ResourcesView() {
               className={`group flex h-full flex-col justify-between rounded-[36px] p-8 ring-1 ring-black/5 transition hover:-translate-y-1 ${s.bg}`}
             >
               <div>
-                <p className={`text-[11px] uppercase tracking-[0.22em] ${s.accent} opacity-60`}>{s.eyebrow}</p>
+                <p className={`text-[12px] uppercase tracking-[0.22em] ${s.accent} opacity-60`}>{s.eyebrow}</p>
                 <h3 className={`mt-4 text-[26px] font-semibold leading-[1.08] tracking-tight ${s.accent}`}>{s.title}</h3>
                 <p className={`mt-3 max-w-[34ch] text-[14px] leading-[1.6] ${s.accent} opacity-70`}>{s.blurb}</p>
               </div>

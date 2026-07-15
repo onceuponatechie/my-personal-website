@@ -45,7 +45,7 @@ const TONE_BG: Record<ToolTone, string> = {
 /* ---------- Small chrome ---------- */
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>;
+  return <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>;
 }
 
 /* ---------- Hero: shuffling file deck ---------- */
@@ -122,7 +122,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
       />
       <div className="grid gap-9 md:grid-cols-[1.15fr_1fr] md:items-center">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-butter-soft px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70">
+          <span className="inline-flex items-center gap-2 rounded-full bg-butter-soft px-3.5 py-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
             <Sparkles className="size-3.5" strokeWidth={2} /> Most downloaded
           </span>
           <h3 className="mt-5 text-[clamp(1.4rem,2.4vw,1.8rem)] font-semibold leading-[1.15] tracking-tight text-ink">
@@ -132,7 +132,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
 
           <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
             {tool.includes.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-[13px] text-ink/70">
+              <li key={item} className="flex items-center gap-2.5 text-[14px] text-ink/70">
                 <span className="grid size-5 shrink-0 place-items-center rounded-full bg-sage-soft text-ink/70">
                   <Check className="size-3" strokeWidth={2.6} />
                 </span>
@@ -142,11 +142,11 @@ function FeaturedTool({ tool }: { tool: Tool }) {
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
-            <span className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage">
+            <span className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white transition hover:bg-sage">
               Download free
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
             </span>
-            <span className="text-[12px] text-ink/50">
+            <span className="text-[14px] text-ink/50">
               {tool.kind} · {tool.meta}
             </span>
           </div>
@@ -154,7 +154,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
 
         {/* Mock "inside the file" panel — shows structure, not screenshots. */}
         <div aria-hidden className={`rounded-[24px] ${TONE_BG[tool.tone]} p-5 sm:p-6`}>
-          <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-ink/55">
+          <div className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/55">
             <Icon className="size-3.5" strokeWidth={2} /> Inside the file
           </div>
           <div className="mt-4 space-y-2.5">
@@ -170,7 +170,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
                 <span className="grid size-5 shrink-0 place-items-center rounded-full bg-ink text-white">
                   <Check className="size-3" strokeWidth={2.6} />
                 </span>
-                <span className="truncate text-[12px] text-ink/75">{item}</span>
+                <span className="truncate text-[14px] text-ink/75">{item}</span>
               </motion.div>
             ))}
           </div>
@@ -207,7 +207,7 @@ function ToolCard({ tool }: { tool: Tool }) {
           loading="lazy"
           className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <span className="absolute right-2 top-2 rounded-full bg-white/85 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] text-ink backdrop-blur">
+        <span className="absolute right-2 top-2 rounded-full bg-white/85 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-ink backdrop-blur">
           {FORMAT_LABEL[tool.format]}
         </span>
       </div>
@@ -223,12 +223,12 @@ function ToolCard({ tool }: { tool: Tool }) {
         <h3 className="mt-2 text-[15px] font-semibold leading-[1.25] tracking-tight text-ink sm:mt-2.5 sm:text-[16px]">
           {tool.name}
         </h3>
-        <p className="mt-1 hidden line-clamp-2 text-[12px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
+        <p className="mt-1 hidden line-clamp-2 text-[14px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
 
         <div className="mt-auto pt-3">
           <div className="flex items-center justify-between border-t border-ink/[0.07] pt-2.5">
-            <span className="truncate pr-2 text-[11px] text-ink/50">{tool.meta}</span>
-            <span className="inline-flex shrink-0 items-center gap-1.5 text-[12px] font-medium text-ink">
+            <span className="truncate pr-2 text-[12px] text-ink/50">{tool.meta}</span>
+            <span className="inline-flex shrink-0 items-center gap-1.5 text-[14px] font-medium text-ink">
               Free
               <span className="grid size-6 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">
                 <ArrowUpRight className="size-3" strokeWidth={2.2} />
@@ -286,13 +286,13 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <h3 className="mt-5 font-display text-[24px] leading-tight tracking-tight text-ink">
                   Got it — thank you.
                 </h3>
-                <p className="mt-2 max-w-[32ch] text-[13px] leading-[1.6] text-ink/60">
+                <p className="mt-2 max-w-[32ch] text-[14px] leading-[1.6] text-ink/60">
                   If it fits the shelf, it&apos;ll land here in a future drop.
                 </p>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="mt-6 rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition hover:bg-sage"
+                  className="mt-6 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white transition hover:bg-sage"
                 >
                   Back to the shelf
                 </button>
@@ -304,7 +304,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                   if (text.trim()) setSent(true);
                 }}
               >
-                <p className="text-[11px] uppercase tracking-[0.24em] text-ink/45">Request a template</p>
+                <p className="text-[12px] uppercase tracking-[0.24em] text-ink/45">Request a template</p>
                 <h3 className="mt-3 font-display text-[26px] leading-[1.1] tracking-tight text-ink">
                   What do you keep <span className="italic">rebuilding?</span>
                 </h3>
@@ -352,18 +352,18 @@ function RequestCard() {
           style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
         />
         <div className="relative flex-1">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-white/45">Something missing?</p>
+          <p className="text-[12px] uppercase tracking-[0.18em] text-white/45">Something missing?</p>
           <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">
             Wish this shelf had something it doesn&apos;t?
           </h3>
-          <p className="mt-1.5 text-[13px] leading-[1.55] text-white/65">
+          <p className="mt-1.5 text-[14px] leading-[1.55] text-white/65">
             Tell me what you keep rebuilding from scratch — the best requests become the next template.
           </p>
         </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-5 py-2.5 text-[13px] font-medium text-white transition hover:bg-ink sm:self-auto"
+          className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition hover:bg-ink sm:self-auto"
         >
           <MessageSquarePlus className="size-3.5" strokeWidth={2.2} />
           Request a template
@@ -397,7 +397,7 @@ export function ToolsView() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="text-[12px] uppercase tracking-[0.22em] text-ink/50"
+            className="text-[13px] uppercase tracking-[0.22em] text-ink/50"
           >
             Resources · Free forever
           </motion.p>
@@ -433,11 +433,11 @@ export function ToolsView() {
             >
               <div>
                 <div className="font-display text-[28px] leading-none tracking-tight text-ink">{TOOLS.length}</div>
-                <div className="mt-1.5 text-[12px] text-ink/50">Files on the shelf</div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Files on the shelf</div>
               </div>
               <div>
                 <div className="font-display text-[28px] leading-none tracking-tight text-ink">100%</div>
-                <div className="mt-1.5 text-[12px] text-ink/50">Free to download</div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Free to download</div>
               </div>
             </motion.div>
           </div>
@@ -453,14 +453,14 @@ export function ToolsView() {
               <button
                 key={c}
                 onClick={() => setActive(c)}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium transition ${
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[14px] font-medium transition ${
                   active === c
                     ? "bg-ink text-white"
                     : "border border-ink/15 text-ink/70 hover:border-ink/30 hover:text-ink"
                 }`}
               >
                 {c}
-                <span className={`text-[11px] ${active === c ? "text-white/60" : "text-ink/40"}`}>
+                <span className={`text-[12px] ${active === c ? "text-white/60" : "text-ink/40"}`}>
                   {countFor(c)}
                 </span>
               </button>
