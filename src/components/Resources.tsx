@@ -161,7 +161,8 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
         </motion.h3>
 
         <motion.p variants={textChild} className="mt-2 text-[14px] leading-[1.6] text-ink/55">
-          Where it ends is anyone&apos;s guess.
+          Where it ends is anyone&apos;s guess. Follow the trail into the stories hiding in
+          plain sight.
         </motion.p>
 
         <motion.div variants={textChild} className="pointer-events-none relative z-20 mt-auto w-fit pt-6">

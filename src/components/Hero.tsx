@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from "framer-motion";
 import { SmileyMark } from "@/components/SmileyMark";
-import { InlineMedia } from "@/components/InlineMedia";
+import { MediaBox } from "@/components/MediaBox";
 import { PillBadge, ArrowRight } from "@/components/SiteChrome";
 import { EASE } from "@/lib/motion";
 
@@ -10,6 +10,10 @@ const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
 const inline3 = "/assets/inline-3.jpg";
 const inline4 = "/assets/inline-4.jpg";
+
+/* Both media boxes cycle this same array; their `offset` prop staggers the
+   starting frame so they show different images at the same time. */
+const thumbnails = [inline1, inline2, inline3, inline4];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 22 },
@@ -21,27 +25,33 @@ const stagger: Variants = {
   show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
 };
 
-// The headline cascades its own pieces: words de-blur in, the inline media
-// pops up from small. A slightly slower stagger gives the line a felt rhythm.
+// The headline choreographs its pieces on explicit delays: the media boxes
+// pop in early (0.14s / 0.18s) so the images "land" before the words, then
+// the text spans blur in behind them (0.4s–0.84s).
 const headline: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.09 } },
+  show: {},
 };
 
-const blurIn: Variants = {
+const textReveal: Variants = {
   hidden: { opacity: 0, filter: "blur(6px)" },
-  show: { opacity: 1, filter: "blur(0px)", transition: { duration: 0.55, ease: EASE } },
+  show: (delay: number) => ({
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.55, ease: EASE, delay },
+  }),
 };
 
-const popIn: Variants = {
+const mediaReveal: Variants = {
   hidden: { opacity: 0, scale: 0.6 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE } },
+  show: (delay: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.45, ease: EASE, delay },
+  }),
 };
 
 export function Hero() {
-  const setA = [inline1, inline3];
-  const setB = [inline2, inline4];
-
   return (
     // Mobile: equal air above the smiley and below the freebie link, so the
     // hero sits centred between the nav and the first card. Desktop keeps
@@ -68,32 +78,24 @@ export function Hero() {
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
-          <motion.span variants={blurIn} className="inline">
+          <motion.span variants={textReveal} custom={0.4} className="inline">
             <span className="italic">Products</span>, people,
           </motion.span>{" "}
           <br className="md:hidden" />
-          <motion.span variants={blurIn} className="inline">and the</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.51} className="inline">and the</motion.span>{" "}
           <br className="hidden md:block" />
-          <motion.span variants={popIn} className="inline-block align-middle">
-            <InlineMedia
-              images={setA}
-              className="mx-1 h-[0.85em] w-[1.05em] -translate-y-1"
-              alt="changing inline media"
-            />
+          <motion.span variants={mediaReveal} custom={0.14} className="inline-flex align-middle">
+            <MediaBox images={thumbnails} offset={0} alt="changing inline media" />
           </motion.span>{" "}
-          <motion.span variants={blurIn} className="inline">stories</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.62} className="inline">stories</motion.span>{" "}
           <br className="md:hidden" />
-          <motion.span variants={blurIn} className="inline">that connect</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.73} className="inline">that connect</motion.span>{" "}
           <br className="hidden md:block" />
-          <motion.span variants={popIn} className="inline-block align-middle">
-            <InlineMedia
-              images={setB}
-              className="mx-1 h-[0.85em] w-[1.05em] -translate-y-1"
-              alt="changing inline media"
-            />
+          <motion.span variants={mediaReveal} custom={0.18} className="inline-flex align-middle">
+            <MediaBox images={thumbnails} offset={2} alt="changing inline media" />
           </motion.span>{" "}
           <br className="md:hidden" />
-          <motion.span variants={blurIn} className="inline">them.</motion.span>
+          <motion.span variants={textReveal} custom={0.84} className="inline">them.</motion.span>
         </motion.h1>
 
         <motion.p variants={fadeUp} className="mt-7 text-[16px] text-muted-foreground">
