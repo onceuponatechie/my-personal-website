@@ -61,7 +61,7 @@ export function Hero() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-5xl flex-col items-start text-left"
+        className="mx-auto flex max-w-5xl flex-col items-center text-center"
       >
         <motion.div variants={fadeUp}>
           <SmileyMark />
@@ -103,7 +103,7 @@ export function Hero() {
           <span className="mx-2 opacity-50">·</span> Storyteller
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+        <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
             href="#projects"
             className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-ink hover:shadow-[0_10px_24px_-12px_rgba(28,28,34,0.45)]"
@@ -111,7 +111,10 @@ export function Hero() {
             Explore My Work
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
-          <a href="#resources" className="group inline-flex items-center gap-1.5 text-[14px] text-foreground underline underline-offset-4 hover:opacity-70">
+          <a
+            href="#resources"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
+          >
             Or grab a freebie
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>

@@ -100,14 +100,14 @@ export function Navbar() {
             aria-label="Open menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className={`${CHIP} grid size-11 place-items-center text-foreground transition hover:bg-foreground/5 md:hidden`}
+            className="grid size-11 place-items-center rounded-full bg-ink text-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.3)] transition hover:bg-ink/85 md:hidden"
           >
             {open ? <X className="size-4" strokeWidth={2} /> : <Menu className="size-4" strokeWidth={2} />}
           </button>
           {/* On mobile the CTA lives inside the hamburger menu instead. */}
           <Link
             href="/contact"
-            className="hidden items-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink md:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink/85 md:inline-flex"
           >
             Build With Me
           </Link>
@@ -188,7 +188,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-1.5 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink"
+              className="flex items-center justify-center gap-1.5 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white shadow-sm transition hover:bg-ink/85"
             >
               Build With Me
             </Link>
