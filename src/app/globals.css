@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: var(--font-instrument-serif), "Instrument Serif", serif;
+  --font-display: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -100,12 +100,6 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
-  /* The serif display face stays gentle; explicit tracking-* utilities
-     still win thanks to :where()'s zero specificity. */
-  :where(.font-display) {
-    letter-spacing: -0.01em;
-  }
-
   /* Custom round cursor takes over on fine-pointer devices; hide the native
      one. Touch devices (coarse pointer) keep their normal cursor and never
      paint the custom dot. */
@@ -128,6 +122,13 @@
       display: none;
     }
   }
+}
+
+/* Display text is Inter Regular, tracked at a tight -3px. Unlayered so it
+   beats the tracking-* utility classes still present in the markup. */
+.font-display {
+  font-weight: 400;
+  letter-spacing: -3px;
 }
 
 /* Continuous marquee for the choose-your-adventure shelf. The track holds
