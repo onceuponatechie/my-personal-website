@@ -216,7 +216,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
         <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-sage-soft">
           <TemplateIcon className="size-[18px] text-ink/80" />
         </div>
-        <h3 className="mt-4 text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+        <h3 className="mt-4 text-[18px] font-semibold leading-[1.25] tracking-[-0.04em] text-ink">
           Tools &amp; Templates
         </h3>
         <p className="mt-2 max-w-[22ch] text-[14px] leading-[1.6] text-ink/55">

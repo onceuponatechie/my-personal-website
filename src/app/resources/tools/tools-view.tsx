@@ -125,7 +125,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
           <span className="inline-flex items-center gap-2 rounded-full bg-butter-soft px-3.5 py-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
             <Sparkles className="size-3.5" strokeWidth={2} /> Most downloaded
           </span>
-          <h3 className="mt-5 text-[clamp(1.4rem,2.4vw,1.8rem)] font-semibold leading-[1.15] tracking-tight text-ink">
+          <h3 className="mt-5 text-[clamp(1.55rem,2.6vw,2rem)] font-semibold leading-[1.15] tracking-[-0.04em] text-ink">
             {tool.name}
           </h3>
           <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-ink/65">{tool.blurb}</p>
@@ -220,7 +220,7 @@ function ToolCard({ tool }: { tool: Tool }) {
           <Icon className="size-3.5 sm:size-4" strokeWidth={1.9} />
         </span>
 
-        <h3 className="mt-2 text-[15px] font-semibold leading-[1.25] tracking-tight text-ink sm:mt-2.5 sm:text-[16px]">
+        <h3 className="mt-2 text-[17px] font-semibold leading-[1.25] tracking-[-0.04em] text-ink sm:mt-2.5 sm:text-[18px]">
           {tool.name}
         </h3>
         <p className="mt-1 hidden line-clamp-2 text-[14px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>

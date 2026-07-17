@@ -100,10 +100,10 @@
     letter-spacing: -0.03em;
     -webkit-font-smoothing: antialiased;
   }
-  /* The serif display face stays gentle; explicit tracking-* utilities
+  /* Lora runs wide by default — tighten it. Explicit tracking-* utilities
      still win thanks to :where()'s zero specificity. */
   :where(.font-display) {
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 
   /* Custom round cursor takes over on fine-pointer devices; hide the native

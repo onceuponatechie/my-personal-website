@@ -38,7 +38,7 @@ function ProjectArticle({ p }: { p: Project }) {
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{p.role}</span>
         </div>
-        <h3 className="text-[clamp(1.45rem,2.4vw,2rem)] font-semibold leading-[1.1] tracking-tight text-ink">
+        <h3 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-[1.1] tracking-[-0.04em] text-ink">
           {p.title}
         </h3>
         <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65 md:line-clamp-none md:text-[15px]">{p.description}</p>

@@ -98,7 +98,7 @@ function StoryCard({ story }: { story: Story }) {
             <span className="size-1 rounded-full bg-ink/30" />
             <span>{story.read}</span>
           </div>
-          <h3 className="mt-2.5 text-[18px] font-semibold leading-[1.25] tracking-tight text-ink">
+          <h3 className="mt-2.5 text-[20px] font-semibold leading-[1.25] tracking-[-0.04em] text-ink">
             {story.title}
           </h3>
           <p className="mt-2 line-clamp-2 text-[14px] leading-[1.55] text-ink/60">{story.excerpt}</p>

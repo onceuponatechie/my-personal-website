@@ -90,7 +90,7 @@ function PickCard({ pick }: { pick: Pick }) {
         </div>
         <div className="flex flex-1 items-start justify-between gap-3 px-2 pb-2 pt-3.5 text-left">
           <div className="min-w-0">
-            <h3 className="line-clamp-1 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
+            <h3 className="line-clamp-1 text-[19px] font-semibold leading-[1.25] tracking-[-0.04em] text-ink">
               {pick.title}
             </h3>
             <p className="mt-1 line-clamp-2 text-[14px] leading-[1.5] text-ink/60">{pick.blurb}</p>
