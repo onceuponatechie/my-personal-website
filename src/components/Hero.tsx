@@ -61,7 +61,7 @@ export function Hero() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-5xl flex-col items-center text-center"
+        className="mx-auto flex max-w-5xl flex-col items-start text-left"
       >
         <motion.div variants={fadeUp}>
           <SmileyMark />
@@ -74,12 +74,12 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.35rem,5.4vw,4.25rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
           <motion.span variants={textReveal} custom={0.4} className="inline">
-            <span className="italic">Products</span>, people,
+            Products, people,
           </motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={textReveal} custom={0.51} className="inline">and the</motion.span>{" "}
@@ -89,7 +89,7 @@ export function Hero() {
           </motion.span>{" "}
           <motion.span variants={textReveal} custom={0.62} className="inline">stories</motion.span>{" "}
           <br className="md:hidden" />
-          <motion.span variants={textReveal} custom={0.73} className="inline">that connect</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.73} className="inline">between</motion.span>{" "}
           <br className="hidden md:block" />
           <motion.span variants={mediaReveal} custom={0.18} className="inline-flex align-middle">
             <MediaBox images={thumbnails} offset={2} alt="changing inline media" />
@@ -103,7 +103,7 @@ export function Hero() {
           <span className="mx-2 opacity-50">·</span> Storyteller
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+        <motion.div variants={fadeUp} className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
           <a
             href="#projects"
             className="group inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_oklch(0.72_0.07_145/0.7)] transition hover:bg-ink hover:shadow-[0_10px_24px_-12px_rgba(28,28,34,0.45)]"

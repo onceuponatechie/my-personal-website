@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Essy Udeme — Products, people, and the stories that connect them",
+  title: "Essy Udeme — Products, people, and the stories between them",
   description:
     "Creator, builder, and storyteller. Explore products, journals, research, and ready-to-use templates.",
 };
