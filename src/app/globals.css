@@ -96,8 +96,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    /* Inter body copy tracked tight at a fixed -1.5px. */
-    letter-spacing: -1.5px;
+    /* Inter body copy tracked tight at a fixed -0.8px. */
+    letter-spacing: -0.8px;
     -webkit-font-smoothing: antialiased;
   }
   /* Custom round cursor takes over on fine-pointer devices; hide the native

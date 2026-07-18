@@ -31,7 +31,7 @@ export function ProjectDetailView({ p }: { p: Project }) {
             <h1 className="mt-4 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02] tracking-tight text-ink">
               {p.title}
             </h1>
-            <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.65] text-ink/65">{p.description}</p>
+            <p className="mt-5 max-w-[52ch] text-[18px] leading-[1.65] text-ink/65">{p.description}</p>
           </motion.div>
 
           <motion.div

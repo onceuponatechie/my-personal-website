@@ -142,7 +142,7 @@ export function ChooseAdventure() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-            className="mx-auto mt-4 max-w-[46ch] text-[16px] leading-[1.65] text-ink/65"
+            className="mx-auto mt-4 max-w-[46ch] text-[18px] leading-[1.65] text-ink/65"
           >
             Templates, tools, pieces, research — drifting past. Catch one and take it with you, no
             digging required.

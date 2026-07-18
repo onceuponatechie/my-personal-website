@@ -286,7 +286,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <h3 className="mt-5 font-display text-[24px] leading-tight text-ink">
                   Got it — thank you.
                 </h3>
-                <p className="mt-2 max-w-[32ch] text-[16px] leading-[1.6] text-ink/60">
+                <p className="mt-2 max-w-[32ch] text-[18px] leading-[1.6] text-ink/60">
                   If it fits the shelf, it&apos;ll land here in a future drop.
                 </p>
                 <button
@@ -313,7 +313,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="e.g. A weekly retro template I can run solo…"
-                  className="mt-5 min-h-32 w-full resize-none rounded-2xl bg-background p-4 text-[16px] leading-[1.6] text-ink ring-1 ring-black/10 transition placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-sage"
+                  className="mt-5 min-h-32 w-full resize-none rounded-2xl bg-background p-4 text-[18px] leading-[1.6] text-ink ring-1 ring-black/10 transition placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-sage"
                 />
                 <button
                   type="submit"

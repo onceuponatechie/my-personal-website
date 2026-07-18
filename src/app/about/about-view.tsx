@@ -269,7 +269,7 @@ export function AboutView() {
             {TOOLBOX_STEPS.map((s) => (
               <motion.li key={s.label} variants={fadeUp} className="flex items-baseline gap-5">
                 <span className="w-12 shrink-0 font-display text-[18px] italic text-ink">{s.label}</span>
-                <p className="text-[16px] leading-[1.6] text-ink/75">{s.body}</p>
+                <p className="text-[18px] leading-[1.6] text-ink/75">{s.body}</p>
               </motion.li>
             ))}
           </motion.ol>
@@ -330,7 +330,7 @@ export function AboutView() {
                 {BUILDS.map((b) => (
                   <motion.li key={b} variants={fadeUp} className="flex items-baseline gap-3">
                     <span className="mt-2 size-1.5 shrink-0 rounded-full bg-ink/25" aria-hidden />
-                    <p className="text-[16px] leading-[1.6] text-ink/70">{b}</p>
+                    <p className="text-[18px] leading-[1.6] text-ink/70">{b}</p>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -411,7 +411,7 @@ export function AboutView() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <p className="mt-2.5 text-[16px] leading-[1.65] text-ink/75">{c.body}</p>
+                <p className="mt-2.5 text-[18px] leading-[1.65] text-ink/75">{c.body}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -490,7 +490,7 @@ export function AboutView() {
           <h3 className="relative font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight">
             So, if you&apos;re building <span className="italic">something interesting</span>…
           </h3>
-          <p className="relative mx-auto mt-4 max-w-[52ch] text-[16px] leading-[1.65] text-white/65">
+          <p className="relative mx-auto mt-4 max-w-[52ch] text-[18px] leading-[1.65] text-white/65">
             I&apos;d love to hear about it. Products, startups, ideas, books, a fascinating problem you can&apos;t put
             down; I&apos;m always up for a good conversation. Or wander through the rest of the site and see what
             I&apos;ve been making.

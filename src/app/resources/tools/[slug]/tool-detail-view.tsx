@@ -154,7 +154,7 @@ export function ToolDetailView({
               {s.bullets && (
                 <ul className="mt-4 space-y-2.5">
                   {s.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-[16px] leading-[1.6] text-ink/75">
+                    <li key={b} className="flex items-start gap-3 text-[18px] leading-[1.6] text-ink/75">
                       <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-sage-soft text-ink/70">
                         <Check className="size-3" strokeWidth={2.6} />
                       </span>
@@ -187,7 +187,7 @@ export function ToolDetailView({
             <h2 className="mt-2 font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight tracking-tight">
               Ready when you are.
             </h2>
-            <p className="mt-2.5 max-w-[46ch] text-[16px] leading-[1.65] text-white/65">
+            <p className="mt-2.5 max-w-[46ch] text-[18px] leading-[1.65] text-white/65">
               {tool.kind} · {tool.meta}. Free to download, remix, and ship with — just don&apos;t
               resell it as-is.
             </p>

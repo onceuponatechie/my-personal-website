@@ -43,7 +43,7 @@ export function PageShell({
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-              className="mx-auto mt-6 max-w-[52ch] text-[16px] leading-[1.65] text-ink/65"
+              className="mx-auto mt-6 max-w-[52ch] text-[18px] leading-[1.65] text-ink/65"
             >
               {intro}
             </motion.p>

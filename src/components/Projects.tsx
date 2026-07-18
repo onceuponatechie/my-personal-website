@@ -52,7 +52,7 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{p.role}</span>
         </div>
-        <p className="line-clamp-3 max-w-[44ch] text-[16px] leading-[1.6] text-ink/65 md:line-clamp-none">{p.description}</p>
+        <p className="line-clamp-3 max-w-[44ch] text-[18px] leading-[1.6] text-ink/65 md:line-clamp-none">{p.description}</p>
         <div className="relative z-20 mt-1 flex w-fit items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
@@ -210,7 +210,7 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-          className="mx-auto mt-5 max-w-[44ch] text-[16px] leading-[1.65] text-ink/65"
+          className="mx-auto mt-5 max-w-[44ch] text-[18px] leading-[1.65] text-ink/65"
         >
           A small set of products built with care — calm interfaces, careful copy, and a quiet bias for shipping.
         </motion.p>

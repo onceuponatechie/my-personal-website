@@ -35,7 +35,7 @@ export function StoryDetailView({ s }: { s: Story }) {
               <span>{s.read}</span>
             </div>
             <h1 className="mt-4 font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] tracking-tight text-ink">{s.title}</h1>
-            <p className="mt-5 text-[17px] leading-[1.65] text-ink/70">{s.excerpt}</p>
+            <p className="mt-5 text-[18px] leading-[1.65] text-ink/70">{s.excerpt}</p>
           </motion.div>
 
           <motion.img

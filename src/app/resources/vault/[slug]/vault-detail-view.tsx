@@ -52,7 +52,7 @@ export function VaultDetailView({
             <h1 className="mt-5 font-display text-[clamp(2.1rem,5.5vw,3.6rem)] leading-[1.04] tracking-tight text-ink">
               {entry.title}
             </h1>
-            <p className="mt-5 max-w-[60ch] text-[17px] leading-[1.65] text-ink/70">{entry.summary}</p>
+            <p className="mt-5 max-w-[60ch] text-[18px] leading-[1.65] text-ink/70">{entry.summary}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {entry.tags.map((t) => (
                 <span key={t} className="rounded-full border border-ink/15 px-3 py-1 text-[14px] text-ink/65">
@@ -89,7 +89,7 @@ export function VaultDetailView({
               <h2 className="mt-5 font-display text-[26px] tracking-tight text-ink">
                 Read the full report
               </h2>
-              <p className="mx-auto mt-2 max-w-[42ch] text-[16px] leading-[1.6] text-ink/60">
+              <p className="mx-auto mt-2 max-w-[42ch] text-[18px] leading-[1.6] text-ink/60">
                 The charts, the method, and the full breakdown are in the PDF. It&apos;s free — drop your
                 email and it lands in your inbox.
               </p>

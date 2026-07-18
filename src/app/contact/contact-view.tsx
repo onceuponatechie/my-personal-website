@@ -53,7 +53,7 @@ export function ContactView() {
             Let's <span className="italic">build</span> something <br className="hidden sm:block" />
             you'll be proud of.
           </motion.h1>
-          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[48ch] text-[16px] leading-[1.65] text-ink/65">
+          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[48ch] text-[18px] leading-[1.65] text-ink/65">
             I take on 2-3 focused projects each quarter. Tell me what you're cooking and I'll get back within two working days — usually faster, sometimes with sketches.
           </motion.p>
         </motion.div>

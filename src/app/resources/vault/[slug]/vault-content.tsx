@@ -198,7 +198,7 @@ function Persona({
               </div>
             ))}
           </div>
-          <p className="mt-4 max-w-[52ch] text-[16px] leading-[1.65] text-ink/65">{block.bio}</p>
+          <p className="mt-4 max-w-[52ch] text-[18px] leading-[1.65] text-ink/65">{block.bio}</p>
         </div>
       </div>
 
@@ -347,7 +347,7 @@ function renderBlock(block: VaultBlock, i: number) {
           {block.title && <Eyebrow>{block.title}</Eyebrow>}
           <ul className="mt-4 space-y-3">
             {block.items.map((it) => (
-              <li key={it} className="flex gap-3 text-[16px] leading-[1.6] text-ink/75">
+              <li key={it} className="flex gap-3 text-[18px] leading-[1.6] text-ink/75">
                 <span className="mt-1 text-sage">→</span>
                 {it}
               </li>
@@ -372,7 +372,7 @@ function renderBlock(block: VaultBlock, i: number) {
                 </span>
                 <div>
                   <h4 className="font-display text-[16px] text-ink">{step.title}</h4>
-                  <p className="mt-1.5 text-[16px] leading-[1.6] text-ink/65">{step.text}</p>
+                  <p className="mt-1.5 text-[18px] leading-[1.6] text-ink/65">{step.text}</p>
                 </div>
               </div>
             ))}
@@ -437,7 +437,7 @@ function renderBlock(block: VaultBlock, i: number) {
                   <span className="font-display text-[20px] leading-none text-sage">
                     {String(n + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[16px] leading-[1.6] text-white/85">{t}</span>
+                  <span className="text-[18px] leading-[1.6] text-white/85">{t}</span>
                 </li>
               ))}
             </ol>
