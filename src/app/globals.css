@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-display: var(--font-playfair), "Playfair Display", serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -124,8 +124,8 @@
   }
 }
 
-/* Display text is Inter Regular, tracked at a tight -3px. Unlayered so it
-   beats the tracking-* utility classes still present in the markup. */
+/* Display text is Playfair Display Regular, tracked at a tight -3px.
+   Unlayered so it beats the tracking-* utility classes in the markup. */
 .font-display {
   font-weight: 400;
   letter-spacing: -3px;
