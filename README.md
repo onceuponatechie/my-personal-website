@@ -13,7 +13,7 @@ in Next.js for full control over performance, SEO, and conversion.
 - **Styling:** Tailwind CSS v4 (CSS-based `@theme`, OKLCH design tokens)
 - **Animation:** framer-motion
 - **Icons:** lucide-react
-- **Fonts:** Inter (sans) + Instrument Serif (display) via `next/font`
+- **Fonts:** Inter via `next/font` (display text uses Inter Regular, -3px tracking)
 
 ## Getting started
 

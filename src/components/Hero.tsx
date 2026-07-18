@@ -74,12 +74,12 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.6rem,6vw,4.75rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.35rem,5.4vw,4.25rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
               and hidden-md:block breaks swap which line ends where. */}
           <motion.span variants={textReveal} custom={0.4} className="inline">
-            <span className="italic">Products</span>, people,
+            Products, people,
           </motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={textReveal} custom={0.51} className="inline">and the</motion.span>{" "}
@@ -89,7 +89,7 @@ export function Hero() {
           </motion.span>{" "}
           <motion.span variants={textReveal} custom={0.62} className="inline">stories</motion.span>{" "}
           <br className="md:hidden" />
-          <motion.span variants={textReveal} custom={0.73} className="inline">that connect</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.73} className="inline">between</motion.span>{" "}
           <br className="hidden md:block" />
           <motion.span variants={mediaReveal} custom={0.18} className="inline-flex align-middle">
             <MediaBox images={thumbnails} offset={2} alt="changing inline media" />
@@ -111,7 +111,10 @@ export function Hero() {
             Explore My Work
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
-          <a href="#resources" className="group inline-flex items-center gap-1.5 text-[14px] text-foreground underline underline-offset-4 hover:opacity-70">
+          <a
+            href="#resources"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[14px] font-medium text-ink transition hover:bg-ink hover:text-white"
+          >
             Or grab a freebie
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
