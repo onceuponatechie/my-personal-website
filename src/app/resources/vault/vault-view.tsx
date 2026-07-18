@@ -50,7 +50,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
           <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3 py-1 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
             {entry.readTime}
           </span>
-          <h3 className="mt-5 text-[clamp(1.35rem,2.3vw,1.7rem)] font-semibold leading-[1.2] tracking-tight text-ink">
+          <h3 className="mt-5 font-display text-[clamp(1.35rem,2.3vw,1.7rem)] leading-[1.2] text-ink">
             {entry.title}
           </h3>
           <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-ink/65">{entry.summary}</p>
@@ -107,7 +107,7 @@ function VaultCard({ entry }: { entry: VaultEntry }) {
         className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10"
       >
         <SectionLabel>{entry.category}</SectionLabel>
-        <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+        <h3 className="mt-3 font-display text-[17px] leading-[1.3] text-ink">
           {entry.title}
         </h3>
         <p className="mt-2 line-clamp-2 text-[14px] leading-[1.55] text-ink/55">{entry.summary}</p>
@@ -140,7 +140,7 @@ function GatedCard({ entry }: { entry: VaultEntry }) {
           <Lock className="size-3.5" strokeWidth={2} />
           <SectionLabel>{entry.category} · Email gate</SectionLabel>
         </div>
-        <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+        <h3 className="mt-3 font-display text-[17px] leading-[1.3] text-ink">
           {entry.title}
         </h3>
         <div className="mt-3 flex items-center gap-2 text-[14px] text-ink/50">

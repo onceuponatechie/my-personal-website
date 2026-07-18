@@ -45,8 +45,8 @@ export function ProjectsView() {
                   <span className="size-1 rounded-full bg-ink/30" />
                   <span>{p.role}</span>
                 </div>
-                <h3 className="mt-3 text-[23px] font-semibold leading-[1.15] tracking-tight text-ink">{p.title}</h3>
-                <p className="mt-3 text-[14px] leading-[1.6] text-ink/65">{p.description}</p>
+                <h3 className="mt-3 font-display text-[23px] leading-[1.15] text-ink">{p.title}</h3>
+                <p className="mt-3 text-[16px] leading-[1.6] text-ink/65">{p.description}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-medium text-ink">
                   Read case study
                   <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2.2} />

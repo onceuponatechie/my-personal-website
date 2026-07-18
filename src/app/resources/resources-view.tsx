@@ -57,7 +57,7 @@ export function ResourcesView() {
               <div>
                 <p className={`text-[12px] uppercase tracking-[0.22em] ${s.accent} opacity-60`}>{s.eyebrow}</p>
                 <h3 className={`mt-4 text-[26px] font-semibold leading-[1.08] tracking-tight ${s.accent}`}>{s.title}</h3>
-                <p className={`mt-3 max-w-[34ch] text-[14px] leading-[1.6] ${s.accent} opacity-70`}>{s.blurb}</p>
+                <p className={`mt-3 max-w-[34ch] text-[16px] leading-[1.6] ${s.accent} opacity-70`}>{s.blurb}</p>
               </div>
               <div className="mt-12 flex items-end justify-between">
                 <span className={`font-display text-[56px] leading-none ${s.accent} opacity-90`}>{s.count}</span>

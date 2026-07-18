@@ -30,7 +30,7 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
 
   return (
     <article
-      className={`group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] ${tint} shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:min-h-[72vh] md:grid-cols-2 md:rounded-[44px] lg:min-h-[78vh]`}
+      className={`group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] ${tint} shadow-[0_16px_40px_-28px_rgba(0,0,0,0.12)] ring-1 ring-black/5 md:min-h-[72vh] md:grid-cols-2 md:rounded-[44px] lg:min-h-[78vh]`}
     >
       {/* Whole-card link — lets you click anywhere on the active card. */}
       <Link
@@ -52,7 +52,7 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
           <span className="size-1 rounded-full bg-ink/30" />
           <span>{p.role}</span>
         </div>
-        <p className="line-clamp-3 max-w-[44ch] text-[14px] leading-[1.6] text-ink/65 md:line-clamp-none md:text-[15px]">{p.description}</p>
+        <p className="line-clamp-3 max-w-[44ch] text-[16px] leading-[1.6] text-ink/65 md:line-clamp-none">{p.description}</p>
         <div className="relative z-20 mt-1 flex w-fit items-center gap-5 md:mt-3">
           <Link
             href={`/projects/${p.slug}`}
@@ -87,10 +87,15 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
           </div>
 
           {/* Floating stat chip — the project's lead outcome, tilted like a
-              sticker dropped on the photo. */}
-          <div
-            className={`absolute left-4 top-4 flex max-w-[60%] items-center gap-3 rounded-2xl p-3.5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.35)] md:left-6 md:top-6 md:p-4 ${
-              darkChip ? "-rotate-3 bg-ink text-white" : "rotate-2 bg-card text-ink"
+              sticker dropped on the photo. It pops in once the card scrolls
+              into view. */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: 12, rotate: darkChip ? -14 : 12 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0, rotate: darkChip ? -3 : 2 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.25, duration: 0.55, ease: EASE }}
+            className={`absolute left-4 top-4 flex max-w-[60%] items-center gap-3 rounded-2xl p-3.5 shadow-[0_14px_30px_-14px_rgba(0,0,0,0.25)] md:left-6 md:top-6 md:p-4 ${
+              darkChip ? "bg-ink text-white" : "bg-card text-ink"
             }`}
           >
             <div>
@@ -106,18 +111,25 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
                 <span key={h} className="w-1 rounded-full bg-current opacity-50" style={{ height: h }} />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Round action marks in the photo's corner, echoing the whole-card
               link (decorative — the real link covers the card). */}
-          <div className="absolute bottom-4 right-4 flex items-center gap-1.5 md:bottom-6 md:right-6" aria-hidden>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.4, duration: 0.5, ease: EASE }}
+            className="absolute bottom-4 right-4 flex items-center gap-1.5 md:bottom-6 md:right-6"
+            aria-hidden
+          >
             <span className="grid size-9 place-items-center rounded-full bg-card/85 text-ink shadow-sm backdrop-blur-sm transition-colors duration-300 group-hover:bg-card">
               <ArrowUpRight className="size-4" strokeWidth={2.2} />
             </span>
             <span className="grid size-9 place-items-center rounded-full bg-ink text-white shadow-sm">
               <span className="text-[11px] font-medium">0{index + 1}</span>
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </article>
@@ -198,7 +210,7 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-          className="mx-auto mt-5 max-w-[44ch] text-[14px] leading-[1.65] text-ink/65"
+          className="mx-auto mt-5 max-w-[44ch] text-[16px] leading-[1.65] text-ink/65"
         >
           A small set of products built with care — calm interfaces, careful copy, and a quiet bias for shipping.
         </motion.p>

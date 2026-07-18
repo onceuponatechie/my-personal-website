@@ -125,7 +125,7 @@ function FeaturedTool({ tool }: { tool: Tool }) {
           <span className="inline-flex items-center gap-2 rounded-full bg-butter-soft px-3.5 py-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
             <Sparkles className="size-3.5" strokeWidth={2} /> Most downloaded
           </span>
-          <h3 className="mt-5 text-[clamp(1.4rem,2.4vw,1.8rem)] font-semibold leading-[1.15] tracking-tight text-ink">
+          <h3 className="mt-5 font-display text-[clamp(1.4rem,2.4vw,1.8rem)] leading-[1.15] text-ink">
             {tool.name}
           </h3>
           <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-ink/65">{tool.blurb}</p>
@@ -220,7 +220,7 @@ function ToolCard({ tool }: { tool: Tool }) {
           <Icon className="size-3.5 sm:size-4" strokeWidth={1.9} />
         </span>
 
-        <h3 className="mt-2 text-[15px] font-semibold leading-[1.25] tracking-tight text-ink sm:mt-2.5 sm:text-[16px]">
+        <h3 className="mt-2 font-display text-[15px] leading-[1.25] text-ink sm:mt-2.5 sm:text-[16px]">
           {tool.name}
         </h3>
         <p className="mt-1 hidden line-clamp-2 text-[14px] leading-[1.5] text-ink/60 sm:block">{tool.blurb}</p>
@@ -283,10 +283,10 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 <span className="grid size-12 place-items-center rounded-full bg-sage text-white">
                   <Check className="size-5" strokeWidth={2.4} />
                 </span>
-                <h3 className="mt-5 font-display text-[24px] leading-tight tracking-tight text-ink">
+                <h3 className="mt-5 font-display text-[24px] leading-tight text-ink">
                   Got it — thank you.
                 </h3>
-                <p className="mt-2 max-w-[32ch] text-[14px] leading-[1.6] text-ink/60">
+                <p className="mt-2 max-w-[32ch] text-[16px] leading-[1.6] text-ink/60">
                   If it fits the shelf, it&apos;ll land here in a future drop.
                 </p>
                 <button
@@ -305,7 +305,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                 }}
               >
                 <p className="text-[12px] uppercase tracking-[0.24em] text-ink/45">Request a template</p>
-                <h3 className="mt-3 font-display text-[26px] leading-[1.1] tracking-tight text-ink">
+                <h3 className="mt-3 font-display text-[26px] leading-[1.1] text-ink">
                   What do you keep <span className="italic">rebuilding?</span>
                 </h3>
                 <textarea
@@ -313,7 +313,7 @@ function RequestModal({ open, onClose }: { open: boolean; onClose: () => void })
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="e.g. A weekly retro template I can run solo…"
-                  className="mt-5 min-h-32 w-full resize-none rounded-2xl bg-background p-4 text-[14px] leading-[1.6] text-ink ring-1 ring-black/10 transition placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-sage"
+                  className="mt-5 min-h-32 w-full resize-none rounded-2xl bg-background p-4 text-[16px] leading-[1.6] text-ink ring-1 ring-black/10 transition placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-sage"
                 />
                 <button
                   type="submit"
@@ -353,7 +353,7 @@ function RequestCard() {
         />
         <div className="relative flex-1">
           <p className="text-[12px] uppercase tracking-[0.18em] text-white/45">Something missing?</p>
-          <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">
+          <h3 className="mt-1.5 font-display text-[22px] leading-tight">
             Wish this shelf had something it doesn&apos;t?
           </h3>
           <p className="mt-1.5 text-[14px] leading-[1.55] text-white/65">

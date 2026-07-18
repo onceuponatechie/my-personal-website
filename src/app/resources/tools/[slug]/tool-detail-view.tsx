@@ -154,7 +154,7 @@ export function ToolDetailView({
               {s.bullets && (
                 <ul className="mt-4 space-y-2.5">
                   {s.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3 text-[14px] leading-[1.6] text-ink/75">
+                    <li key={b} className="flex items-start gap-3 text-[16px] leading-[1.6] text-ink/75">
                       <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-sage-soft text-ink/70">
                         <Check className="size-3" strokeWidth={2.6} />
                       </span>
@@ -187,7 +187,7 @@ export function ToolDetailView({
             <h2 className="mt-2 font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight tracking-tight">
               Ready when you are.
             </h2>
-            <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.65] text-white/65">
+            <p className="mt-2.5 max-w-[46ch] text-[16px] leading-[1.65] text-white/65">
               {tool.kind} · {tool.meta}. Free to download, remix, and ship with — just don&apos;t
               resell it as-is.
             </p>
@@ -236,7 +236,7 @@ export function ToolDetailView({
                       className="aspect-[16/10] w-full rounded-[16px] object-cover"
                     />
                     <div className="flex flex-1 flex-col px-2 pb-2 pt-3">
-                      <h3 className="text-[15px] font-semibold leading-[1.25] tracking-tight text-ink">{r.name}</h3>
+                      <h3 className="font-display text-[15px] leading-[1.25] text-ink">{r.name}</h3>
                       <div className="mt-auto flex items-center justify-between pt-3">
                         <span className="text-[12px] text-ink/50">{r.meta}</span>
                         <span className="grid size-6 place-items-center rounded-full bg-ink text-white transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-sage">

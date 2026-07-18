@@ -96,8 +96,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    /* Inter set tighter — -3% tracking (per Figma). */
-    letter-spacing: -0.03em;
+    /* Inter body copy tracked tight at a fixed -1.5px. */
+    letter-spacing: -1.5px;
     -webkit-font-smoothing: antialiased;
   }
   /* Custom round cursor takes over on fine-pointer devices; hide the native
@@ -124,11 +124,11 @@
   }
 }
 
-/* Display text is Playfair Display Regular, tracked at a tight -3px.
+/* Display text is Playfair Display Regular, tracked at a tight -1.5px.
    Unlayered so it beats the tracking-* utility classes in the markup. */
 .font-display {
   font-weight: 400;
-  letter-spacing: -3px;
+  letter-spacing: -1.5px;
 }
 
 /* Continuous marquee for the choose-your-adventure shelf. The track holds

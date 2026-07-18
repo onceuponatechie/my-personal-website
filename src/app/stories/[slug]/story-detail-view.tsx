@@ -82,7 +82,7 @@ export function StoryDetailView({ s }: { s: Story }) {
               />
               <div className="relative flex-1">
                 <p className="text-[12px] uppercase tracking-[0.18em] text-white/45">{resource.kind}</p>
-                <h3 className="mt-1.5 text-[19px] font-semibold leading-tight tracking-tight">{resource.name}</h3>
+                <h3 className="mt-1.5 font-display text-[19px] leading-tight">{resource.name}</h3>
                 <p className="mt-1.5 text-[14px] leading-[1.55] text-white/65">{resource.blurb}</p>
               </div>
               <span className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-sage px-6 py-3 text-[14px] font-medium text-white transition group-hover:gap-3 group-hover:bg-ink">
@@ -121,7 +121,7 @@ export function StoryDetailView({ s }: { s: Story }) {
                         <span>{post.read}</span>
                       </div>
                       <div className="mt-1.5 flex items-start justify-between gap-3">
-                        <h3 className="line-clamp-2 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+                        <h3 className="line-clamp-2 font-display text-[17px] leading-[1.3] text-ink">
                           {post.title}
                         </h3>
                         <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full bg-ink text-white transition-all duration-500 group-hover:rotate-45 group-hover:bg-sage">

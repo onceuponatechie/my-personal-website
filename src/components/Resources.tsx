@@ -156,11 +156,11 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
           </span>
         </motion.div>
 
-        <motion.h3 variants={textChild} className="mt-4 text-[19px] font-semibold leading-[1.22] tracking-tight text-ink">
+        <motion.h3 variants={textChild} className="mt-4 font-display text-[30px] leading-[1.15] text-ink">
           Every issue starts with a product.
         </motion.h3>
 
-        <motion.p variants={textChild} className="mt-2 text-[14px] leading-[1.6] text-ink/55">
+        <motion.p variants={textChild} className="mt-2 text-[16px] leading-[1.6] text-ink/55">
           Where it ends is anyone&apos;s guess. Follow the trail into the stories hiding in
           plain sight.
         </motion.p>
@@ -216,10 +216,10 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
         <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-sage-soft">
           <TemplateIcon className="size-[18px] text-ink/80" />
         </div>
-        <h3 className="mt-4 text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+        <h3 className="mt-4 font-display text-[30px] leading-[1.15] text-ink">
           Tools &amp; Templates
         </h3>
-        <p className="mt-2 max-w-[22ch] text-[14px] leading-[1.6] text-ink/55">
+        <p className="mt-2 max-w-[22ch] text-[16px] leading-[1.6] text-ink/55">
           Notion systems, Figma files, and checklists.
         </p>
 
@@ -268,10 +268,10 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           viewport={{ once: true }}
           className="flex flex-1 flex-col justify-center p-6 sm:p-7"
         >
-          <motion.h3 variants={textChild} className="text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+          <motion.h3 variants={textChild} className="font-display text-[30px] leading-[1.15] text-ink">
             Research Vault
           </motion.h3>
-          <motion.p variants={textChild} className="mt-2 max-w-[32ch] text-[14px] leading-[1.6] text-ink/55">
+          <motion.p variants={textChild} className="mt-2 max-w-[32ch] text-[16px] leading-[1.6] text-ink/55">
             Deep dives into human behaviour — reports, patterns, and insights.
           </motion.p>
           <motion.span
@@ -307,7 +307,7 @@ function ResourcesHeadline({ dir = "up", className = "" }: { dir?: Dir; classNam
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.25, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        className="mt-3.5 max-w-[34ch] text-[14px] leading-[1.6] text-ink/60"
+        className="mt-3.5 max-w-[34ch] text-[16px] leading-[1.6] text-ink/60"
       >
         You'd want to know my product process, but I too wants to find out.
       </motion.p>

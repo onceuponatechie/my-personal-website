@@ -89,7 +89,7 @@ export function VaultDetailView({
               <h2 className="mt-5 font-display text-[26px] tracking-tight text-ink">
                 Read the full report
               </h2>
-              <p className="mx-auto mt-2 max-w-[42ch] text-[14px] leading-[1.6] text-ink/60">
+              <p className="mx-auto mt-2 max-w-[42ch] text-[16px] leading-[1.6] text-ink/60">
                 The charts, the method, and the full breakdown are in the PDF. It&apos;s free — drop your
                 email and it lands in your inbox.
               </p>
@@ -129,7 +129,7 @@ export function VaultDetailView({
                       <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">
                         {r.category}
                       </p>
-                      <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+                      <h3 className="mt-3 font-display text-[17px] leading-[1.3] text-ink">
                         {r.title}
                       </h3>
                       <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-medium text-ink">

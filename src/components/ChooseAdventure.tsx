@@ -90,7 +90,7 @@ function PickCard({ pick }: { pick: Pick }) {
         </div>
         <div className="flex flex-1 items-start justify-between gap-3 px-2 pb-2 pt-3.5 text-left">
           <div className="min-w-0">
-            <h3 className="line-clamp-1 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
+            <h3 className="line-clamp-1 font-display text-[17px] leading-[1.25] text-ink">
               {pick.title}
             </h3>
             <p className="mt-1 line-clamp-2 text-[14px] leading-[1.5] text-ink/60">{pick.blurb}</p>
@@ -142,7 +142,7 @@ export function ChooseAdventure() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
-            className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
+            className="mx-auto mt-4 max-w-[46ch] text-[16px] leading-[1.65] text-ink/65"
           >
             Templates, tools, pieces, research — drifting past. Catch one and take it with you, no
             digging required.
