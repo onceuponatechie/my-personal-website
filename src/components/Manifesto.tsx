@@ -131,7 +131,7 @@ export function Manifesto() {
           <ToolTag key={t.label} tag={t} />
         ))}
 
-        <p className="text-center font-display text-[clamp(1.9rem,4.4vw,3.25rem)] leading-[1.3] tracking-tight text-ink">
+        <p className="text-center font-display text-[clamp(1.7rem,4vw,2.9rem)] leading-[1.3] tracking-tight text-ink">
           {TIMED.map(({ word, start }, i) => (
             <TypeWord key={i} progress={scrollYProgress} word={word} startIndex={start} total={TOTAL} />
           ))}
