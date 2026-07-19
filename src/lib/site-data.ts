@@ -3,7 +3,6 @@ const project2 = "/assets/project-2.jpg";
 const project3 = "/assets/project-3.jpg";
 const project4 = "/assets/project-4.jpg";
 const devDiaryImg = "/assets/dev-diary.jpg";
-const researchImg = "/assets/research-vault.jpg";
 const inline1 = "/assets/inline-1.jpg";
 const inline2 = "/assets/inline-2.jpg";
 const inline3 = "/assets/inline-3.jpg";
@@ -285,20 +284,6 @@ export function storyResource(slug: string): Tool & { href: string } {
   return { ...tool, href: `/resources/tools/${tool.slug}` };
 }
 
-export type ResearchEntry = {
-  slug: string;
-  title: string;
-  category: string;
-  summary: string;
-  cover: string;
-};
-
-export const RESEARCH: ResearchEntry[] = [
-  { slug: "patterns-of-trust", title: "Patterns of trust in onboarding", category: "UX research", summary: "Seven small moves that turn a stranger into a believer.", cover: researchImg },
-  { slug: "why-pricing-pages-fail", title: "Why pricing pages fail (and a fix)", category: "Conversion", summary: "Most pricing pages sell features. They should sell relief.", cover: project2 },
-  { slug: "calm-notifications", title: "Calm notifications: a field study", category: "Behaviour", summary: "What 14 days of opt-in notifications taught me about attention.", cover: project3 },
-];
-
 export type Faq = { q: string; a: string };
 
 export const FAQS: Faq[] = [
@@ -317,14 +302,53 @@ export const SOCIALS = [
   { label: "GitHub", href: "https://github.com" },
 ];
 
-/* ---------- Research Vault ---------- */
+/* ---------- The Product Lab ---------- */
 
 export type VaultCategory =
-  | "Report"
-  | "Case study"
-  | "Insight brief"
-  | "Trend watch"
-  | "Teardown";
+  | "Product Thinking"
+  | "Opportunity Finder"
+  | "Product Teardowns";
+
+export type LabPillar = {
+  category: VaultCategory;
+  /** The progression verb: Think → Find → Analyze. */
+  verb: string;
+  emoji: string;
+  description: string;
+  tagline: string;
+  tone: "sage" | "butter" | "lavender";
+};
+
+/** The three drawers of the lab — each with its own icon and color accent. */
+export const LAB_PILLARS: LabPillar[] = [
+  {
+    category: "Product Thinking",
+    verb: "Think",
+    emoji: "🧠",
+    description:
+      "Frameworks, mental models, product strategy, user psychology, prioritization, positioning, growth.",
+    tagline: "How I think about building products.",
+    tone: "sage",
+  },
+  {
+    category: "Opportunity Finder",
+    verb: "Find",
+    emoji: "🔎",
+    description:
+      "Everyday frustrations, market gaps, customer pain points, startup ideas, unmet needs, and “someone should build this” moments.",
+    tagline: "Where product ideas begin.",
+    tone: "butter",
+  },
+  {
+    category: "Product Teardowns",
+    verb: "Analyze",
+    emoji: "🔍",
+    description:
+      "Breaking down apps, onboarding, pricing, landing pages, retention loops, and marketing campaigns to understand what works and what doesn't.",
+    tagline: "Learning from products already in the wild.",
+    tone: "lavender",
+  },
+];
 
 export type VaultEntry = {
   slug: string;
@@ -341,32 +365,121 @@ export type VaultEntry = {
   featured?: boolean;
 };
 
-/** Filter labels shown as tabs, mapped to a category (or all). */
-export const VAULT_FILTERS: { label: string; category: VaultCategory | "All" }[] = [
-  { label: "All", category: "All" },
-  { label: "Reports", category: "Report" },
-  { label: "Case studies", category: "Case study" },
-  { label: "Insight briefs", category: "Insight brief" },
-  { label: "Trend watches", category: "Trend watch" },
-  { label: "Teardowns", category: "Teardown" },
+/* Product Thinking — compact mental models and frameworks, not articles.
+   Each card is self-contained: the idea, and when to reach for it. */
+
+export type ThinkingModel = {
+  /** "Mental model" | "Framework" | "Principle" — shown as the card's chip. */
+  tag: string;
+  title: string;
+  oneLiner: string;
+  useWhen: string;
+};
+
+export const THINKING_MODELS: ThinkingModel[] = [
+  {
+    tag: "Principle",
+    title: "Value before verification",
+    oneLiner:
+      "Let people feel the product working before you ask them for anything heavy — trust is earned first, then requested.",
+    useWhen: "Designing onboarding, sign-up, or any flow that asks before it gives.",
+  },
+  {
+    tag: "Mental model",
+    title: "Own, don't rent",
+    oneLiner:
+      "An audience on someone else's platform is rented reach. An email list and a product you sell are owned distribution.",
+    useWhen: "Choosing where growth effort goes — platforms change rules, lists don't.",
+  },
+  {
+    tag: "Framework",
+    title: "Depth before breadth",
+    oneLiner:
+      "Your first $1,000 comes from a thousand people who trust you, not a hundred thousand who scrolled past.",
+    useWhen: "Deciding between making the audience bigger and serving it deeper.",
+  },
+  {
+    tag: "Mental model",
+    title: "Reorder, don't remove",
+    oneLiner:
+      "Good flows rarely have fewer steps — they sequence the same steps so trust is built before it's spent.",
+    useWhen: "A funnel leaks and the obvious fix is deleting steps you actually need.",
+  },
+  {
+    tag: "Principle",
+    title: "Constraint is a moat",
+    oneLiner:
+      "Products built under real constraints — cost, power, patchy networks — come out leaner and travel further.",
+    useWhen: "Tempted to treat limited resources as the reason the work can't be great.",
+  },
+  {
+    tag: "Framework",
+    title: "Default-alive first",
+    oneLiner:
+      "Lead with traction and runway, not vision. The strongest position in any negotiation is not needing the outcome.",
+    useWhen: "Pitching investors, partners, or stakeholders in a disciplined market.",
+  },
+];
+
+/* Opportunity Finder — a running log of gaps and "someone should build this"
+   moments, each with the observed frustration and a signal-strength read. */
+
+export type OpportunitySignal = "Early" | "Growing" | "Strong";
+
+export type Opportunity = {
+  title: string;
+  /** The everyday frustration or pain point that surfaced it. */
+  frustration: string;
+  /** Why it stays unbuilt — the market gap. */
+  gap: string;
+  audience: string;
+  signal: OpportunitySignal;
+};
+
+export const OPPORTUNITIES: Opportunity[] = [
+  {
+    title: "Monetization rails for African creators",
+    frustration:
+      "Six in ten African creators earn under $100 a month — not for lack of audience, but for lack of simple ways to sell to it.",
+    gap:
+      "Storefront, payout, and pricing tools assume US cards and US price points; almost nothing is designed around local rails and local buying power.",
+    audience: "Creators & solo builders",
+    signal: "Strong",
+  },
+  {
+    title: "Validation before the build",
+    frustration:
+      "Most founders validate after building — 73% of the ones I interviewed — because structured validation feels like a consultancy-sized job.",
+    gap:
+      "No lightweight tool walks a founder from hunch to evidence in a week, with the exact questions to ask before a single line of code.",
+    audience: "Early-stage founders",
+    signal: "Growing",
+  },
+  {
+    title: "Pricing architecture for digital products",
+    frustration:
+      "Template and course sellers guess their price, then wonder why conversion dies at checkout.",
+    gap:
+      "The data on what converts — the ~$27 sweet spot, laddered bundles — exists, but no product turns it into a pricing page you can copy.",
+    audience: "Digital product sellers",
+    signal: "Growing",
+  },
+  {
+    title: "Onboarding that respects slow networks",
+    frustration:
+      "Apps shipped for Lagos and Nairobi still assume fast, cheap, always-on data — and lose users at the first heavy screen.",
+    gap:
+      "A testing tool that previews flows under real local network conditions before launch, instead of after the drop-off shows up.",
+    audience: "Teams shipping to emerging markets",
+    signal: "Early",
+  },
 ];
 
 export const VAULT: VaultEntry[] = [
   {
-    slug: "african-creator-economy-report-2026",
-    title: "The African Creator Economy Report — what's really working in 2026",
-    category: "Report",
-    readTime: "Flagship report · 2026",
-    access: "Free download",
-    tags: ["Creator economy", "Africa"],
-    summary:
-      "6 in 10 African creators earn less than $100/month. This report asks why — and what the ones earning more are actually doing differently.",
-    featured: true,
-  },
-  {
     slug: "paystack-onboarding-teardown",
     title: "How Paystack onboards its users — a UX research teardown",
-    category: "Case study",
+    category: "Product Teardowns",
     readTime: "5 min read",
     access: "Free",
     tags: ["Fintech", "UX research"],
@@ -374,56 +487,14 @@ export const VAULT: VaultEntry[] = [
       "A frame-by-frame look at how Paystack turns a nervous first-time user into a confident one — and the three moments that do the heavy lifting.",
   },
   {
-    slug: "african-startup-funding-2026",
-    title: "African startup funding — what the 2026 rebound means for founders",
-    category: "Trend watch",
-    readTime: "4 min read",
-    access: "Free",
-    tags: ["Startups", "Africa"],
-    summary:
-      "After two slow years, the cheques are coming back. Here's where the money is moving, and what it quietly expects of you in return.",
-  },
-  {
     slug: "claude-ai-research-tool-teardown",
     title: "Claude AI as a research tool — a power user teardown",
-    category: "Teardown",
+    category: "Product Teardowns",
     readTime: "6 min read",
     access: "Free",
     tags: ["AI", "Research tools"],
     summary:
       "How I actually use Claude for product research — the prompts, the guardrails, and the places it still needs a human in the loop.",
-  },
-  {
-    slug: "woman-who-builds-in-nigeria",
-    title: "On being a woman who builds things in Nigeria",
-    category: "Insight brief",
-    readTime: "4 min read",
-    access: "Free",
-    tags: ["Girl boss", "Founders"],
-    summary:
-      "A short, honest brief on the particular friction — and the particular advantage — of building software as a woman in Lagos.",
-  },
-  {
-    slug: "are-african-founders-building-right",
-    title: "Are African founders building the right things? A validation study",
-    category: "Report",
-    readTime: "12 min read",
-    access: "Free download",
-    tags: ["Startups", "Validation"],
-    summary:
-      "I interviewed 40 founders about how they decide what to build. Most are guessing well — but a few have a system. This is the system.",
-    gated: true,
-  },
-  {
-    slug: "digital-product-income-study",
-    title: "Digital product income — who's earning, what they sell, how",
-    category: "Report",
-    readTime: "10 min read",
-    access: "Free download",
-    tags: ["Creator economy", "Income"],
-    summary:
-      "Templates, courses, communities, briefs — a breakdown of what digital products actually earn, and the price points that convert.",
-    gated: true,
   },
 ];
 

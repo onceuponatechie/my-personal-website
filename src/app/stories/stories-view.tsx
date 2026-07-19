@@ -30,12 +30,8 @@ function StoryCard({ story }: { story: Story }) {
             alt={story.title}
             className="aspect-[4/3] w-full object-cover transition-transform duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-active:scale-[1.06]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100" />
           <span className="absolute left-3 top-3 rounded-full bg-card/85 px-3 py-1 text-[12px] font-medium uppercase tracking-[0.14em] text-ink/70 ring-1 ring-black/5 backdrop-blur">
             {story.category}
-          </span>
-          <span className="absolute bottom-3 right-3 grid size-9 translate-y-2 place-items-center rounded-full bg-card text-ink opacity-0 shadow-sm transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-active:translate-y-0 group-active:opacity-100">
-            <ArrowUpRight className="size-4" strokeWidth={2.2} />
           </span>
         </div>
 
@@ -50,10 +46,11 @@ function StoryCard({ story }: { story: Story }) {
             {story.title}
           </h3>
           <p className="mt-2 line-clamp-2 text-[14px] leading-[1.55] text-ink/60">{story.excerpt}</p>
-          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[14px] font-medium text-ink">
-            Read entry
-            <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1 group-active:translate-x-1" strokeWidth={2.2} />
-          </span>
+          <div className="mt-auto flex justify-end pt-5">
+            <span className="grid size-9 place-items-center rounded-full bg-sage-soft text-ink transition duration-300 group-hover:bg-sage group-hover:text-white">
+              <ArrowUpRight className="size-4" strokeWidth={2.2} />
+            </span>
+          </div>
         </div>
       </Link>
     </motion.li>
@@ -74,18 +71,6 @@ export function StoriesView() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background pt-6">
-      {/* ambient washes */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full opacity-50 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, var(--butter-soft) 0%, transparent 72%)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-48 top-[28%] h-[560px] w-[560px] rounded-full opacity-50 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, var(--sage-soft) 0%, transparent 72%)" }}
-      />
-
       <Navbar />
 
       {/* ---------- hero: header copy ---------- */}
@@ -170,18 +155,16 @@ export function StoriesView() {
                   <span className="size-1 rounded-full bg-ink/30" />
                   <span>{featured.read}</span>
                 </div>
-                <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[1.05] tracking-tight text-ink">
+                <h2 className="mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.2] tracking-tight text-ink">
                   {featured.title}
                 </h2>
                 <p className="mt-5 text-[15px] leading-[1.7] text-ink/65">{featured.excerpt}</p>
               </div>
               <div className="mt-10 flex items-center justify-between">
                 <span className="text-[14px] text-ink/50">{featured.date}</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-ink py-2 pl-4 pr-1.5 text-[14px] font-medium text-white transition group-hover:bg-sage">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-sage px-5 py-2.5 text-[14px] font-medium text-white transition group-hover:gap-2.5 group-hover:bg-ink">
                   Read entry
-                  <span className="grid size-6 place-items-center rounded-full bg-white text-ink transition-transform duration-300 group-hover:translate-x-0.5 group-active:translate-x-0.5">
-                    <ArrowUpRight className="size-3.5" strokeWidth={2.4} />
-                  </span>
+                  <ArrowRight className="size-3.5" strokeWidth={2.2} />
                 </span>
               </div>
             </div>

@@ -20,7 +20,7 @@ const NAV_COLS: { title: string; links: { label: string; href: string }[] }[] = 
     links: [
       { label: "The Rabbit Hole", href: "/stories" },
       { label: "Tools & Templates", href: "/resources/tools" },
-      { label: "Research Vault", href: "/resources/vault" },
+      { label: "The Product Lab", href: "/resources/lab" },
     ],
   },
 ];
@@ -35,19 +35,7 @@ const SOCIALS = [
 export function Footer() {
   return (
     <footer className="px-4 pb-6 sm:px-6">
-      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-gradient-to-b from-card via-card to-butter-soft/70 ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
-        {/* Warm horizon glow rising from the bottom, echoing the site's accents. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
-          style={{ background: "radial-gradient(120% 80% at 50% 130%, oklch(0.72 0.07 145 / 0.20) 0%, transparent 60%)" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 right-8 h-72 w-72 rounded-full opacity-45 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--lavender-soft) 0%, transparent 75%)" }}
-        />
-
+      <div className="relative mx-auto overflow-hidden rounded-[44px] bg-card ring-1 ring-black/[0.06] shadow-[0_24px_70px_-40px_rgba(0,0,0,0.3)]">
         {/* ---------- Status bar ---------- */}
         <div className="relative flex items-center justify-between gap-4 border-b border-black/10 px-7 py-5 sm:px-12">
           <span className="inline-flex items-center gap-2.5 text-[14px] text-ink/70">

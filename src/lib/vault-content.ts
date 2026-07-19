@@ -1,5 +1,5 @@
 /**
- * Rich, structured content for each Research Vault entry.
+ * Rich, structured content for each Product Lab entry.
  *
  * Instead of a wall of prose, every report is composed of typed "blocks" —
  * stat grids, charts, pull quotes, personas, galleries — so a reader can scan
@@ -61,106 +61,11 @@ export type VaultBlock =
   /** Closing key takeaways. */
   | { kind: "takeaways"; items: string[] };
 
-const profileImg = "/assets/profile.jpg";
-const research = "/assets/research-vault.jpg";
 const project1 = "/assets/project-1.jpg";
 const project2 = "/assets/project-2.jpg";
 const project3 = "/assets/project-3.jpg";
 
 export const VAULT_CONTENT: Record<string, VaultBlock[]> = {
-  "african-creator-economy-report-2026": [
-    {
-      kind: "lead",
-      text: "6 in 10 African creators earn less than $100 a month. The ones earning more aren't more talented — they're playing a different game. This report breaks down what that game looks like.",
-    },
-    {
-      kind: "stats",
-      items: [
-        { value: "1,240", label: "Creators surveyed", tone: "sage" },
-        { value: "11", label: "Countries", tone: "lavender" },
-        { value: "62%", label: "Earn under $100/mo", tone: "butter" },
-      ],
-    },
-    {
-      kind: "heading",
-      eyebrow: "The income gap",
-      text: "Most creators are stuck. A few have broken out.",
-    },
-    {
-      kind: "paragraph",
-      text: "When you plot monthly income across the sample, it isn't a smooth curve — it's a cliff. The vast majority cluster under $100, a thin middle hovers around $500, and a small top band clears $2,000. The interesting question isn't who's at the top. It's what changed for the people who climbed out of the bottom.",
-    },
-    {
-      kind: "donut",
-      title: "Monthly income distribution",
-      caption: "Share of surveyed creators by monthly earnings band.",
-      segments: [
-        { label: "Under $100", value: 62, tone: "ink" },
-        { label: "$100–$500", value: 24, tone: "butter" },
-        { label: "$500–$2k", value: 10, tone: "sage" },
-        { label: "Over $2k", value: 4, tone: "lavender" },
-      ],
-    },
-    {
-      kind: "heading",
-      eyebrow: "What the earners do differently",
-      text: "Three habits separate the top 14% from everyone else.",
-    },
-    {
-      kind: "bars",
-      title: "Adoption of growth habits, top earners vs. the rest",
-      caption: "Percentage of each group that consistently does the thing.",
-      items: [
-        { label: "Sell their own product (not just ads)", value: 81, display: "81%", tone: "sage" },
-        { label: "Email list over rented audience", value: 68, display: "68%", tone: "lavender" },
-        { label: "Publish on a fixed schedule", value: 74, display: "74%", tone: "butter" },
-        { label: "Reinvest earnings into tools", value: 57, display: "57%", tone: "ink" },
-      ],
-    },
-    {
-      kind: "persona",
-      name: "Amara O.",
-      role: "Newsletter creator · Lagos",
-      image: profileImg,
-      quote: "The month I stopped chasing virality and started selling a $9 template, everything changed.",
-      meta: [
-        { label: "Audience", value: "9,400" },
-        { label: "Channel", value: "Email + IG" },
-        { label: "Monthly", value: "$1,900" },
-      ],
-      bio: "Amara spent two years posting daily for reach that never paid. Her turnaround came from owning the relationship — a small email list and one paid product — rather than renting attention on a platform that could change the rules overnight.",
-      traits: [
-        { left: "Reach", right: "Depth", value: 72 },
-        { left: "Free", right: "Paid", value: 80 },
-        { left: "Trends", right: "System", value: 66 },
-      ],
-      goals: [
-        "Own the audience relationship, not rent it",
-        "One flagship product before ten small ones",
-        "Predictable income over viral spikes",
-      ],
-    },
-    {
-      kind: "quote",
-      text: "The creators who win in Africa aren't the loudest. They're the ones who turned 1,000 real fans into a business before they chased the next 100,000 strangers.",
-    },
-    {
-      kind: "callout",
-      title: "What to do with this",
-      text: "If you're under $100/month, don't optimise your posting more. Pick one product your existing audience would pay for, and put it in front of the people who already trust you. Distribution you own beats reach you rent — every single time.",
-      tone: "sage",
-    },
-    {
-      kind: "takeaways",
-      items: [
-        "The income curve is a cliff, not a slope — the gap is structural, not about talent.",
-        "Top earners sell products and own their audience; the rest rent reach and sell attention.",
-        "Consistency compounds: a fixed schedule shows up in 74% of earners vs. a minority of the rest.",
-        "Your first $1,000 comes from depth with 1,000 fans, not breadth with 100,000.",
-      ],
-    },
-  ],
-
   "paystack-onboarding-teardown": [
     {
       kind: "lead",
@@ -240,60 +145,6 @@ export const VAULT_CONTENT: Record<string, VaultBlock[]> = {
     },
   ],
 
-  "african-startup-funding-2026": [
-    {
-      kind: "lead",
-      text: "After two slow years, the cheques are coming back — but they're landing in different places, and they expect more of founders than they did in 2021.",
-    },
-    {
-      kind: "stats",
-      items: [
-        { value: "+34%", label: "YoY deal volume", tone: "sage" },
-        { value: "$2.1B", label: "Deployed, H1 2026", tone: "lavender" },
-        { value: "18mo", label: "Avg. runway expected", tone: "butter" },
-      ],
-    },
-    {
-      kind: "heading",
-      eyebrow: "Where the money is moving",
-      text: "Fintech still leads, but climate and AI tooling are the fast risers.",
-    },
-    {
-      kind: "bars",
-      title: "Share of H1 2026 funding by sector",
-      caption: "Across tracked African startup rounds.",
-      items: [
-        { label: "Fintech", value: 38, display: "38%", tone: "sage" },
-        { label: "Climate / energy", value: 21, display: "21%", tone: "butter" },
-        { label: "AI tooling", value: 17, display: "17%", tone: "lavender" },
-        { label: "Logistics", value: 13, display: "13%", tone: "ink" },
-        { label: "Health", value: 11, display: "11%", tone: "sage" },
-      ],
-    },
-    {
-      kind: "paragraph",
-      text: "The rebound is real but disciplined. Investors are writing cheques again, just with sharper questions: show me revenue, show me a path to default-alive, show me you can do more with less. The era of growth-at-all-costs financing isn't back — and it probably isn't coming back.",
-    },
-    {
-      kind: "quote",
-      text: "The money returned with a memory. It remembers 2022, and it's pricing discipline as a feature, not a constraint.",
-    },
-    {
-      kind: "callout",
-      title: "What it quietly expects of you",
-      text: "Raise like the round is harder than it looks. Lead with traction, not vision; show 18 months of runway and a credible route to default-alive. The founders getting termsheets in 2026 are the ones who sound like they don't strictly need the money.",
-      tone: "butter",
-    },
-    {
-      kind: "takeaways",
-      items: [
-        "Funding is up ~34% YoY, but it's concentrated and disciplined, not exuberant.",
-        "Fintech leads; climate and AI tooling are the fastest-rising sectors to watch.",
-        "Investors price runway and revenue over narrative — default-alive is the new pitch.",
-      ],
-    },
-  ],
-
   "claude-ai-research-tool-teardown": [
     {
       kind: "lead",
@@ -356,109 +207,6 @@ export const VAULT_CONTENT: Record<string, VaultBlock[]> = {
         "Always attach verbatim quotes to themes so every claim is traceable to a source.",
         "Verify every fact before it ships; the model is a junior researcher, not an oracle.",
       ],
-    },
-  ],
-
-  "woman-who-builds-in-nigeria": [
-    {
-      kind: "lead",
-      text: "A short, honest brief on the particular friction — and the particular advantage — of building software as a woman in Lagos.",
-    },
-    {
-      kind: "image",
-      src: research,
-      caption: "Lagos, where the constraints are real and so is the resourcefulness they breed.",
-    },
-    {
-      kind: "paragraph",
-      text: "Some of the friction is exactly what you'd expect: being the only woman in the room, having your technical answer double-checked, the unspoken maths of who gets taken seriously. None of it is news. What's less talked about is the second, stranger thing — that the same constraints quietly compound into an edge.",
-    },
-    {
-      kind: "quote",
-      text: "You learn early to over-prepare, to ship proof instead of promises. That habit doesn't go away — it just turns into a moat.",
-    },
-    {
-      kind: "heading",
-      eyebrow: "The advantage nobody markets",
-      text: "Building under constraint makes you legible to your users.",
-    },
-    {
-      kind: "paragraph",
-      text: "Building here means designing for unreliable power, expensive data, and a hundred small frictions a Valley founder never models. You build leaner because you have to — and lean, resilient products travel well. The constraint that looks like a disadvantage on a pitch deck is the thing that makes the work durable.",
-    },
-    {
-      kind: "callout",
-      title: "If this is you",
-      text: "Keep the receipts. Ship the proof. The over-preparation that the room forces on you is the same discipline that makes great product people — let it become your signature, not your burden.",
-      tone: "lavender",
-    },
-    {
-      kind: "takeaways",
-      items: [
-        "The friction is real — and naming it plainly is more useful than pretending it isn't.",
-        "Designing under constraint produces leaner, more resilient products that travel.",
-        "Over-preparation, forced by the room, compounds into genuine craft over time.",
-      ],
-    },
-  ],
-
-  "are-african-founders-building-right": [
-    {
-      kind: "lead",
-      text: "I interviewed 40 founders about how they decide what to build. Most are guessing — guessing well, but guessing. A few have a system. This report is that system.",
-    },
-    {
-      kind: "stats",
-      items: [
-        { value: "40", label: "Founders interviewed", tone: "sage" },
-        { value: "73%", label: "Validate after building", tone: "butter" },
-        { value: "4", label: "Steps in the system", tone: "lavender" },
-      ],
-    },
-    {
-      kind: "donut",
-      title: "How founders decide what to build next",
-      caption: "Primary decision input, self-reported.",
-      segments: [
-        { label: "Gut / founder intuition", value: 45, tone: "ink" },
-        { label: "Loudest customer request", value: 28, tone: "butter" },
-        { label: "Structured validation", value: 18, tone: "sage" },
-        { label: "Competitor moves", value: 9, tone: "lavender" },
-      ],
-    },
-    {
-      kind: "paragraph",
-      text: "The gap between the founders who validate before building and the ones who validate after is the gap between two months saved and two months lost — repeated every quarter. The full report walks through the four-step system the validators use, with the exact questions they ask before a single line of code.",
-    },
-  ],
-
-  "digital-product-income-study": [
-    {
-      kind: "lead",
-      text: "Templates, courses, communities, briefs — a breakdown of what digital products actually earn, and the price points that quietly convert best.",
-    },
-    {
-      kind: "stats",
-      items: [
-        { value: "$27", label: "Best-converting price", tone: "sage" },
-        { value: "320", label: "Products analysed", tone: "lavender" },
-        { value: "5x", label: "Spread, top vs. median", tone: "butter" },
-      ],
-    },
-    {
-      kind: "bars",
-      title: "Median monthly revenue by product type",
-      caption: "Across the products analysed (indexed).",
-      items: [
-        { label: "Cohort courses", value: 100, display: "Highest", tone: "sage" },
-        { label: "Communities", value: 78, display: "High", tone: "lavender" },
-        { label: "Templates", value: 54, display: "Mid", tone: "butter" },
-        { label: "One-off guides", value: 31, display: "Low", tone: "ink" },
-      ],
-    },
-    {
-      kind: "paragraph",
-      text: "The headline isn't the product type — it's the price architecture underneath it. The full report breaks down the price points that convert, the bundles that lift average order value, and the ladder that moves a $9 buyer to a $290 one.",
     },
   ],
 };

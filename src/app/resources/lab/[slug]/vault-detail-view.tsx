@@ -31,10 +31,10 @@ export function VaultDetailView({
       <header className="relative overflow-hidden px-4 pt-14 pb-12 sm:px-6 sm:pt-16">
         <div className="relative mx-auto max-w-3xl">
           <Link
-            href="/resources/vault"
+            href="/resources/lab"
             className="inline-flex items-center gap-1.5 text-[14px] text-ink/60 transition hover:text-ink"
           >
-            <ArrowLeft className="size-3.5" /> Research Vault
+            <ArrowLeft className="size-3.5" /> The Product Lab
           </Link>
 
           <motion.div
@@ -74,7 +74,7 @@ export function VaultDetailView({
             <div className="space-y-6 text-[16px] leading-[1.85] text-ink/75">
               <p>{entry.summary}</p>
               <p>
-                This is the kind of piece the Vault is built for — a single, data-backed idea, written to
+                This is the kind of piece the Lab is built for — a single, data-backed idea, written to
                 change one decision you&apos;ll make this quarter.
               </p>
             </div>
@@ -124,7 +124,7 @@ export function VaultDetailView({
               <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">Keep reading</p>
               <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 {related.map((r) => (
-                  <Link key={r.slug} href={`/resources/vault/${r.slug}`} className="group block h-full">
+                  <Link key={r.slug} href={`/resources/lab/${r.slug}`} className="group block h-full">
                     <article className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10">
                       <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">
                         {r.category}

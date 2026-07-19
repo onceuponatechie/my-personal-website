@@ -177,11 +177,6 @@ export function ToolDetailView({
           transition={{ duration: 0.7, ease: EASE }}
           className="relative mx-auto max-w-3xl overflow-hidden rounded-[32px] bg-ink p-8 text-white sm:p-10"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-25 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
-          />
           <div className="relative">
             <p className="text-[12px] uppercase tracking-[0.2em] text-white/45">Take it with you</p>
             <h2 className="mt-2 font-display text-[clamp(1.6rem,3.4vw,2.2rem)] leading-tight tracking-tight">
