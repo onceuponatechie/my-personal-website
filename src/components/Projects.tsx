@@ -30,7 +30,7 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
 
   return (
     <article
-      className={`group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] ${tint} shadow-[0_30px_80px_-30px_rgba(0,0,0,0.35)] ring-1 ring-black/5 md:min-h-[72vh] md:grid-cols-2 md:rounded-[44px] lg:min-h-[78vh]`}
+      className={`group relative grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[32px] ${tint} shadow-[0_1px_2px_rgba(0,0,0,0.03),0_24px_44px_-32px_rgba(0,0,0,0.14)] ring-1 ring-black/5 md:min-h-[72vh] md:grid-cols-2 md:rounded-[44px] lg:min-h-[78vh]`}
     >
       {/* Whole-card link — lets you click anywhere on the active card. */}
       <Link
