@@ -62,7 +62,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
           <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-ink/65">{entry.summary}</p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
-              href={`/resources/vault/${entry.slug}`}
+              href={`/resources/lab/${entry.slug}`}
               className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white transition hover:bg-sage"
             >
               Download free report
@@ -104,7 +104,7 @@ function FeaturedCard({ entry }: { entry: VaultEntry }) {
 
 function VaultCard({ entry }: { entry: VaultEntry }) {
   return (
-    <Link href={`/resources/vault/${entry.slug}`} className="group block h-full">
+    <Link href={`/resources/lab/${entry.slug}`} className="group block h-full">
       <motion.article
         variants={{
           hidden: { opacity: 0, y: 18 },
@@ -134,7 +134,7 @@ function VaultCard({ entry }: { entry: VaultEntry }) {
 
 function GatedCard({ entry }: { entry: VaultEntry }) {
   return (
-    <Link href={`/resources/vault/${entry.slug}`} className="group block h-full">
+    <Link href={`/resources/lab/${entry.slug}`} className="group block h-full">
       <motion.article
         variants={{
           hidden: { opacity: 0, y: 18 },

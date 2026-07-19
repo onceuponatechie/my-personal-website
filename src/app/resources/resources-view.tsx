@@ -25,7 +25,7 @@ const SECTIONS = [
     accent: "text-ink",
   },
   {
-    href: "/resources/vault",
+    href: "/resources/lab",
     eyebrow: "Members",
     title: "The Product Lab",
     blurb: "Product thinking, opportunity finding, and teardowns of products in the wild.",

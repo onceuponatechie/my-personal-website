@@ -57,7 +57,7 @@ const PICKS: Pick[] = [
     title: report.title,
     blurb: report.summary,
     cover: report.cover,
-    href: "/resources/vault",
+    href: "/resources/lab",
   },
   {
     label: "Checklist",

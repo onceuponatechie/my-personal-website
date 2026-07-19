@@ -243,7 +243,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
 function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
     <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${SURFACE} ${className} group/card relative overflow-hidden bg-card`}>
-      <Link href="/resources/vault" aria-label="Explore The Product Lab" className="absolute inset-0 z-10" />
+      <Link href="/resources/lab" aria-label="Explore The Product Lab" className="absolute inset-0 z-10" />
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
         {/* p-3 top/left/right matches the project cards' mobile image inset;
             on md the right edge stays open so the text column sits close. */}
