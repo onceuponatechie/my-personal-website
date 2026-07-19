@@ -9,58 +9,6 @@ import { Footer } from "@/components/Footer";
 import { STORIES, type Story } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
-/* ---------- hero: diary pages that fan out together ---------- */
-
-/** Story covers fan out from a closed stack like loose diary pages,
- * re-fanning whenever the hero scrolls back into view. */
-function DiaryFan({ stories }: { stories: Story[] }) {
-  const n = stories.length;
-  const mid = (n - 1) / 2;
-  return (
-    <div className="group relative mx-auto h-[280px] w-[280px] sm:h-[330px] sm:w-[340px]">
-      {stories.map((s, i) => {
-        const offset = i - mid;
-        const angle = offset * 14;
-        const x = offset * 72;
-        const y = Math.abs(offset) * 18;
-        return (
-          <motion.div
-            key={s.slug}
-            variants={{
-              closed: { rotate: 0, x: 0, y: 0, opacity: 0 },
-              open: {
-                rotate: angle,
-                x,
-                y,
-                opacity: 1,
-                transition: { delay: 0.15 + i * 0.1, duration: 0.9, ease: EASE },
-              },
-            }}
-            initial="closed"
-            whileInView="open"
-            viewport={{ once: false, amount: 0.4 }}
-            whileHover={{ y: y - 22, scale: 1.04, zIndex: 50 }}
-            style={{ transformOrigin: "bottom center", zIndex: 10 - Math.abs(offset) }}
-            className="absolute inset-x-0 bottom-0 mx-auto w-[150px] sm:w-[168px]"
-          >
-            <Link
-              href={`/stories/${s.slug}`}
-              aria-label={s.title}
-              className="block rounded-[18px] bg-card p-2 pb-3 shadow-[0_24px_45px_-22px_rgba(0,0,0,0.4)] ring-1 ring-black/[0.07] transition hover:ring-black/[0.14]"
-            >
-              <img src={s.cover} alt="" className="aspect-[3/4] w-full rounded-[12px] object-cover" />
-              <div className="mt-2 px-1">
-                <p className="text-[9px] font-medium uppercase tracking-[0.14em] text-ink/45">{s.category}</p>
-                <p className="mt-0.5 line-clamp-2 text-[14px] font-medium leading-[1.25] text-ink">{s.title}</p>
-              </div>
-            </Link>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-}
-
 /* ---------- entry card ---------- */
 
 function StoryCard({ story }: { story: Story }) {
@@ -140,11 +88,10 @@ export function StoriesView() {
 
       <Navbar />
 
-      {/* ---------- hero: header copy + fanned diary pages ---------- */}
+      {/* ---------- hero: header copy ---------- */}
       <section className="relative px-4 pt-16 pb-10 sm:px-6 sm:pt-20">
         <div className="mx-auto max-w-6xl">
-          <div className="grid items-center gap-12 md:grid-cols-[1.05fr_0.95fr]">
-            <div>
+          <div className="max-w-[52rem]">
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -189,14 +136,6 @@ export function StoriesView() {
                   {STORIES.length} entries and counting
                 </span>
               </motion.div>
-            </div>
-
-            {/* fanned diary pages */}
-            <div className="relative">
-              <div className="relative pt-4 pb-2">
-                <DiaryFan stories={STORIES.slice(0, 3)} />
-              </div>
-            </div>
           </div>
         </div>
       </section>

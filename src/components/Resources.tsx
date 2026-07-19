@@ -156,7 +156,7 @@ function RabbitHole({ dir = "up", className = "" }: { dir?: Dir; className?: str
           </span>
         </motion.div>
 
-        <motion.h3 variants={textChild} className="mt-4 text-[19px] font-semibold leading-[1.22] tracking-tight text-ink">
+        <motion.h3 variants={textChild} className="mt-4 text-[20px] font-semibold leading-[1.22] tracking-tight text-ink">
           Every issue starts with a product.
         </motion.h3>
 
@@ -216,7 +216,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
         <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-sage-soft">
           <TemplateIcon className="size-[18px] text-ink/80" />
         </div>
-        <h3 className="mt-4 text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+        <h3 className="mt-4 text-[20px] font-semibold leading-[1.25] tracking-tight text-ink">
           Tools &amp; Templates
         </h3>
         <p className="mt-2 max-w-[22ch] text-[14px] leading-[1.6] text-ink/55">
@@ -268,7 +268,7 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           viewport={{ once: true }}
           className="flex flex-1 flex-col justify-center p-6 sm:p-7"
         >
-          <motion.h3 variants={textChild} className="text-[16px] font-semibold leading-[1.25] tracking-tight text-ink">
+          <motion.h3 variants={textChild} className="text-[20px] font-semibold leading-[1.25] tracking-tight text-ink">
             Research Vault
           </motion.h3>
           <motion.p variants={textChild} className="mt-2 max-w-[32ch] text-[14px] leading-[1.6] text-ink/55">
