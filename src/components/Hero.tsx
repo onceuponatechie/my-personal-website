@@ -74,20 +74,26 @@ export function Hero() {
             media pops in — while keeping the original layout and line breaks. */}
         <motion.h1
           variants={headline}
-          className="mt-8 font-display text-[clamp(2.35rem,5.4vw,4.25rem)] leading-[1.08] tracking-[-0.01em] text-foreground"
+          className="mt-8 font-display text-[clamp(2.35rem,5.4vw,4.25rem)] leading-[1.08] tracking-[-0.01em] text-foreground/55"
         >
           {/* Mobile reads in four lines; desktop keeps its three. The md:hidden
-              and hidden-md:block breaks swap which line ends where. */}
-          <motion.span variants={textReveal} custom={0.4} className="inline">
+              and hidden-md:block breaks swap which line ends where.
+              The first mobile line breaks via max-md:block instead of a <br>;
+              its mb matches the extra descent the 44px media chips add to the
+              other lines, so all four gaps read equal. */}
+          <motion.span
+            variants={textReveal}
+            custom={0.4}
+            className="block text-foreground max-md:mb-[0.14em] md:inline"
+          >
             Products, people,
           </motion.span>{" "}
-          <br className="md:hidden" />
           <motion.span variants={textReveal} custom={0.51} className="inline">and the</motion.span>{" "}
           <br className="hidden md:block" />
           <motion.span variants={mediaReveal} custom={0.14} className="inline-flex align-middle">
             <MediaBox images={thumbnails} offset={0} alt="changing inline media" />
           </motion.span>{" "}
-          <motion.span variants={textReveal} custom={0.62} className="inline">stories</motion.span>{" "}
+          <motion.span variants={textReveal} custom={0.62} className="inline text-foreground">stories</motion.span>{" "}
           <br className="md:hidden" />
           <motion.span variants={textReveal} custom={0.73} className="inline">between</motion.span>{" "}
           <br className="hidden md:block" />

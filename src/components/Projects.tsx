@@ -86,11 +86,15 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
             />
           </div>
 
-          {/* Floating stat chip — the project's lead outcome, tilted like a
-              sticker dropped on the photo. */}
-          <div
+          {/* Floating stat chip — the project's lead outcome, dropped onto the
+              photo like a sticker when the card scrolls into view. */}
+          <motion.div
+            initial={{ opacity: 0, y: 16, scale: 0.75, rotate: 0 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: darkChip ? -3 : 2 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ delay: 0.25, type: "spring", stiffness: 260, damping: 20 }}
             className={`absolute left-4 top-4 flex max-w-[60%] items-center gap-3 rounded-2xl p-3.5 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.35)] md:left-6 md:top-6 md:p-4 ${
-              darkChip ? "-rotate-3 bg-ink text-white" : "rotate-2 bg-card text-ink"
+              darkChip ? "bg-ink text-white" : "bg-card text-ink"
             }`}
           >
             <div>
@@ -106,7 +110,7 @@ function ProjectArticle({ p, index }: { p: Project; index: number }) {
                 <span key={h} className="w-1 rounded-full bg-current opacity-50" style={{ height: h }} />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Round action marks in the photo's corner, echoing the whole-card
               link (decorative — the real link covers the card). */}

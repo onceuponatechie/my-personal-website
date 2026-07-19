@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: var(--font-playfair), "Playfair Display", serif;
+  --font-display: var(--font-hanken), "Hanken Grotesk", sans-serif;
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -124,11 +124,11 @@
   }
 }
 
-/* Display text is Playfair Display Regular, tracked at a tight -1.5px.
+/* Display text is Hanken Grotesk Regular, tracked at a tight -3px.
    Unlayered so it beats the tracking-* utility classes in the markup. */
 .font-display {
   font-weight: 400;
-  letter-spacing: -1.5px;
+  letter-spacing: -3px;
 }
 
 /* Continuous marquee for the choose-your-adventure shelf. The track holds
