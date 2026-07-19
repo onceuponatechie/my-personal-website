@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowRight, LineChart, Lock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
-import { VAULT, LAB_PILLARS, type VaultEntry, type VaultCategory } from "@/lib/site-data";
+import {
+  VAULT,
+  LAB_PILLARS,
+  THINKING_MODELS,
+  OPPORTUNITIES,
+  type LabPillar,
+  type VaultEntry,
+  type VaultCategory,
+  type OpportunitySignal,
+} from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
 const researchImg = "/assets/research-vault.jpg";
@@ -15,6 +23,19 @@ const TONE_BG: Record<"sage" | "butter" | "lavender", string> = {
   sage: "bg-sage-soft",
   butter: "bg-butter-soft",
   lavender: "bg-lavender-soft",
+};
+
+/** Anchor targets for the three drawers. */
+const PILLAR_IDS: Record<VaultCategory, string> = {
+  "Product Thinking": "thinking",
+  "Opportunity Finder": "opportunities",
+  "Product Teardowns": "teardowns",
+};
+
+const SIGNAL_BG: Record<OpportunitySignal, string> = {
+  Strong: "bg-sage-soft",
+  Growing: "bg-butter-soft",
+  Early: "bg-lavender-soft",
 };
 
 function HeroChip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -35,84 +56,105 @@ function Tag({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">{children}</p>
-  );
-}
+/* ---------- Drawer scaffolding ---------- */
 
-/* ---------- Featured flagship ---------- */
-
-function FeaturedCard({ entry }: { entry: VaultEntry }) {
+/** Section header for a drawer — the pillar's icon, verb, name, and tagline. */
+function DrawerHeader({ pillar }: { pillar: LabPillar }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 22 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: EASE }}
-      className="overflow-hidden rounded-[28px] bg-card p-7 ring-1 ring-black/5 sm:p-9"
-    >
-      <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-lavender-soft px-3 py-1 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/70">
-            {entry.readTime}
-          </span>
-          <h3 className="mt-5 text-[clamp(1.35rem,2.3vw,1.7rem)] font-semibold leading-[1.2] tracking-tight text-ink">
-            {entry.title}
-          </h3>
-          <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-ink/65">{entry.summary}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
-              href={`/resources/lab/${entry.slug}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-white transition hover:bg-sage"
-            >
-              Download free report
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.2} />
-            </Link>
-            {entry.tags.map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
-          </div>
-        </div>
-        <div
+    <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+      <div className="flex items-center gap-3.5">
+        <span
+          className={`grid size-11 place-items-center rounded-2xl text-[20px] ${TONE_BG[pillar.tone]}`}
           aria-hidden
-          className="flex w-full flex-col gap-3 rounded-[22px] bg-sage-soft p-5 md:w-40"
         >
-          <div className="flex items-center gap-1.5 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/55">
-            <LineChart className="size-3.5" strokeWidth={2} /> Inside
-          </div>
-          <div className="flex h-16 items-end gap-2">
-            {[42, 70, 28, 88, 54].map((h, i) => (
-              <motion.span
-                key={i}
-                initial={{ height: 0 }}
-                whileInView={{ height: `${h}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, ease: EASE, delay: i * 0.07 }}
-                className="w-3 rounded-full bg-ink/70"
-                style={{ minHeight: 6 }}
-              />
-            ))}
-          </div>
-          <div className="text-[12px] leading-[1.4] text-ink/55">Charts, a persona &amp; the data.</div>
+          {pillar.emoji}
+        </span>
+        <div>
+          <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/45">
+            {pillar.verb}
+          </p>
+          <h2 className="mt-1 text-[22px] font-semibold leading-none tracking-tight text-ink">
+            {pillar.category}
+          </h2>
         </div>
       </div>
-    </motion.article>
+      <p className="text-[14px] italic text-ink/45">“{pillar.tagline}”</p>
+    </div>
   );
 }
 
-/* ---------- Cards ---------- */
+const drawerReveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-8%" },
+  transition: { duration: 0.7, ease: EASE },
+} as const;
 
-function VaultCard({ entry }: { entry: VaultEntry }) {
+/* ---------- Think: mental-model cards ---------- */
+
+function ThinkingCard({ model }: { model: (typeof THINKING_MODELS)[number] }) {
+  return (
+    <article className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5">
+      <span className="w-fit rounded-full bg-sage-soft px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink/70">
+        {model.tag}
+      </span>
+      <h3 className="mt-4 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+        {model.title}
+      </h3>
+      <p className="mt-2 text-[14px] leading-[1.6] text-ink/55">{model.oneLiner}</p>
+      <p className="mt-auto pt-4 text-[13px] leading-[1.55] text-ink/45">
+        <span className="font-medium text-ink/60">Use it when: </span>
+        {model.useWhen}
+      </p>
+    </article>
+  );
+}
+
+/* ---------- Find: the opportunity log ---------- */
+
+function OpportunityRow({
+  opportunity,
+  index,
+}: {
+  opportunity: (typeof OPPORTUNITIES)[number];
+  index: number;
+}) {
+  return (
+    <article className="grid gap-4 p-6 sm:p-8 md:grid-cols-[auto_1fr_auto]">
+      <span className="font-display text-[24px] leading-none text-ink/30" aria-hidden>
+        0{index + 1}
+      </span>
+      <div className="max-w-[62ch]">
+        <h3 className="text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
+          {opportunity.title}
+        </h3>
+        <p className="mt-2 text-[14px] leading-[1.65] text-ink/60">{opportunity.frustration}</p>
+        <p className="mt-2 text-[14px] leading-[1.65] text-ink/60">
+          <span className="font-medium text-ink">The gap: </span>
+          {opportunity.gap}
+        </p>
+        <p className="mt-3 text-[12px] font-medium uppercase tracking-[0.16em] text-ink/40">
+          For {opportunity.audience}
+        </p>
+      </div>
+      <span
+        className={`h-fit w-fit rounded-full px-3 py-1 text-[12px] font-medium text-ink/70 ${SIGNAL_BG[opportunity.signal]} md:justify-self-end`}
+      >
+        Signal · {opportunity.signal}
+      </span>
+    </article>
+  );
+}
+
+/* ---------- Analyze: teardown cards (unchanged format) ---------- */
+
+function TeardownCard({ entry }: { entry: VaultEntry }) {
   return (
     <Link href={`/resources/lab/${entry.slug}`} className="group block h-full">
-      <motion.article
-        variants={{
-          hidden: { opacity: 0, y: 18 },
-          show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-        }}
-        className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10"
-      >
-        <SectionLabel>{entry.category}</SectionLabel>
+      <article className="flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 group-hover:-translate-y-1 group-hover:ring-black/10">
+        <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-ink/45">
+          {entry.category}
+        </p>
         <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
           {entry.title}
         </h3>
@@ -127,39 +169,7 @@ function VaultCard({ entry }: { entry: VaultEntry }) {
             <Tag key={t}>{t}</Tag>
           ))}
         </div>
-      </motion.article>
-    </Link>
-  );
-}
-
-function GatedCard({ entry }: { entry: VaultEntry }) {
-  return (
-    <Link href={`/resources/lab/${entry.slug}`} className="group block h-full">
-      <motion.article
-        variants={{
-          hidden: { opacity: 0, y: 18 },
-          show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-        }}
-        className="flex h-full flex-col rounded-[24px] border border-dashed border-ink/15 bg-card/60 p-6 transition duration-300 group-hover:-translate-y-1 group-hover:border-ink/25"
-      >
-        <div className="flex items-center gap-2 text-ink/45">
-          <Lock className="size-3.5" strokeWidth={2} />
-          <SectionLabel>{entry.category} · Email gate</SectionLabel>
-        </div>
-        <h3 className="mt-3 text-[17px] font-semibold leading-[1.3] tracking-tight text-ink">
-          {entry.title}
-        </h3>
-        <div className="mt-3 flex items-center gap-2 text-[14px] text-ink/50">
-          <span>{entry.readTime}</span>
-          <span className="size-1 rounded-full bg-ink/30" />
-          <span>{entry.access}</span>
-        </div>
-        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-          {entry.tags.map((t) => (
-            <Tag key={t}>{t}</Tag>
-          ))}
-        </div>
-      </motion.article>
+      </article>
     </Link>
   );
 }
@@ -167,14 +177,6 @@ function GatedCard({ entry }: { entry: VaultEntry }) {
 /* ---------- Page ---------- */
 
 export function VaultView() {
-  const [active, setActive] = useState<VaultCategory | "All">("All");
-
-  const matches = (e: VaultEntry) => active === "All" || e.category === active;
-  const featured = VAULT.find((e) => e.featured);
-  const showFeatured = featured && matches(featured);
-  const latest = VAULT.filter((e) => !e.featured && !e.gated && matches(e));
-  const gated = VAULT.filter((e) => e.gated && matches(e));
-
   return (
     <main className="min-h-screen bg-background pt-6">
       <Navbar />
@@ -188,7 +190,7 @@ export function VaultView() {
             transition={{ duration: 0.7, ease: EASE }}
             className="flex flex-wrap items-center justify-between gap-3"
           >
-            <HeroChip>Original research</HeroChip>
+            <HeroChip>Not another blog</HeroChip>
             <HeroChip className="hidden sm:inline-flex">Backed by data · built to make you think</HeroChip>
           </motion.div>
 
@@ -232,9 +234,9 @@ export function VaultView() {
               transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
               className="max-w-[52ch] text-[15px] leading-[1.7] text-ink/65"
             >
-              Think, find, analyze. How I think about building products, where product ideas begin,
-              and what products already in the wild can teach us — backed by data, grounded in
-              practice, and written to make you think, not just scroll.
+              Think, find, analyze. The mental models I build with, the gaps that look like unbuilt
+              products, and teardowns of products already in the wild — a working lab bench, not
+              another feed of posts.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -243,105 +245,100 @@ export function VaultView() {
               className="flex shrink-0 gap-7"
             >
               <div>
-                <div className="font-display text-[28px] leading-none tracking-tight text-ink">{VAULT.length}</div>
-                <div className="mt-1.5 text-[14px] text-ink/50">Live pieces</div>
+                <div className="font-display text-[28px] leading-none tracking-tight text-ink">
+                  {THINKING_MODELS.length}
+                </div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Mental models</div>
               </div>
               <div>
-                <div className="font-display text-[28px] leading-none tracking-tight text-ink">100%</div>
-                <div className="mt-1.5 text-[14px] text-ink/50">Free to read</div>
+                <div className="font-display text-[28px] leading-none tracking-tight text-ink">
+                  {OPPORTUNITIES.length}
+                </div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Open gaps</div>
+              </div>
+              <div>
+                <div className="font-display text-[28px] leading-none tracking-tight text-ink">
+                  {VAULT.length}
+                </div>
+                <div className="mt-1.5 text-[14px] text-ink/50">Teardowns</div>
               </div>
             </motion.div>
           </div>
 
-          {/* The three drawers of the lab — each pillar doubles as a filter.
-              Click a drawer to open it; click it again to see everything. */}
+          {/* The three drawers of the lab — each card jumps to its section. */}
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {LAB_PILLARS.map((p) => {
-              const isOpen = active === p.category;
-              return (
-                <button
-                  key={p.category}
-                  type="button"
-                  onClick={() => setActive(isOpen ? "All" : p.category)}
-                  aria-pressed={isOpen}
-                  className={`group flex h-full flex-col rounded-[24px] bg-card p-6 text-left ring-1 transition duration-300 hover:-translate-y-1 ${
-                    isOpen ? "ring-2 ring-ink/40" : "ring-black/5 hover:ring-black/15"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span
-                      className={`grid size-10 place-items-center rounded-xl text-[18px] ${TONE_BG[p.tone]}`}
-                      aria-hidden
-                    >
-                      {p.emoji}
-                    </span>
-                    <span className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/40">
-                      {p.verb}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
-                    {p.category}
-                  </h3>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-ink/55">{p.description}</p>
-                  <p className="mt-auto pt-4 text-[14px] italic leading-[1.5] text-ink/45">
-                    “{p.tagline}”
-                  </p>
-                </button>
-              );
-            })}
+            {LAB_PILLARS.map((p) => (
+              <a
+                key={p.category}
+                href={`#${PILLAR_IDS[p.category]}`}
+                className="group flex h-full flex-col rounded-[24px] bg-card p-6 ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:ring-black/15"
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`grid size-10 place-items-center rounded-xl text-[18px] ${TONE_BG[p.tone]}`}
+                    aria-hidden
+                  >
+                    {p.emoji}
+                  </span>
+                  <span className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/40">
+                    {p.verb}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
+                  {p.category}
+                </h3>
+                <p className="mt-2 text-[14px] leading-[1.6] text-ink/55">{p.description}</p>
+                <p className="mt-auto pt-4 text-[14px] italic leading-[1.5] text-ink/45">
+                  “{p.tagline}”
+                </p>
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-5xl space-y-16 px-4 pb-24 sm:px-6">
-        {/* Featured */}
-        {showFeatured && (
-          <section className="space-y-5">
-            <SectionLabel>Featured</SectionLabel>
-            <FeaturedCard entry={featured} />
-          </section>
-        )}
+      <div className="mx-auto max-w-5xl space-y-20 px-4 pb-24 sm:px-6">
+        {/* ---------- Drawer 1 · Think ---------- */}
+        <motion.section
+          id={PILLAR_IDS["Product Thinking"]}
+          className="scroll-mt-24 space-y-6"
+          {...drawerReveal}
+        >
+          <DrawerHeader pillar={LAB_PILLARS[0]} />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {THINKING_MODELS.map((m) => (
+              <ThinkingCard key={m.title} model={m} />
+            ))}
+          </div>
+        </motion.section>
 
-        {/* Latest */}
-        {latest.length > 0 && (
-          <section className="space-y-5">
-            <SectionLabel>Latest</SectionLabel>
-            <motion.div
-              className="grid grid-cols-1 gap-5 sm:grid-cols-2"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-8%" }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-            >
-              {latest.map((e) => (
-                <VaultCard key={e.slug} entry={e} />
-              ))}
-            </motion.div>
-          </section>
-        )}
+        {/* ---------- Drawer 2 · Find ---------- */}
+        <motion.section
+          id={PILLAR_IDS["Opportunity Finder"]}
+          className="scroll-mt-24 space-y-6"
+          {...drawerReveal}
+        >
+          <DrawerHeader pillar={LAB_PILLARS[1]} />
+          <div className="divide-y divide-black/5 overflow-hidden rounded-[28px] bg-card ring-1 ring-black/5">
+            {OPPORTUNITIES.map((o, i) => (
+              <OpportunityRow key={o.title} opportunity={o} index={i} />
+            ))}
+          </div>
+        </motion.section>
 
-        {/* Gated reports */}
-        {gated.length > 0 && (
-          <section className="space-y-5">
-            <SectionLabel>Reports (gated)</SectionLabel>
-            <motion.div
-              className="grid grid-cols-1 gap-5 sm:grid-cols-2"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-8%" }}
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
-            >
-              {gated.map((e) => (
-                <GatedCard key={e.slug} entry={e} />
-              ))}
-            </motion.div>
-          </section>
-        )}
-
-        {latest.length === 0 && gated.length === 0 && !showFeatured && (
-          <p className="py-10 text-center text-[14px] text-ink/50">Nothing here yet — check back soon.</p>
-        )}
-
+        {/* ---------- Drawer 3 · Analyze ---------- */}
+        <motion.section
+          id={PILLAR_IDS["Product Teardowns"]}
+          className="scroll-mt-24 space-y-6"
+          {...drawerReveal}
+        >
+          <DrawerHeader pillar={LAB_PILLARS[2]} />
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {VAULT.map((e) => (
+              <TeardownCard key={e.slug} entry={e} />
+            ))}
+          </div>
+        </motion.section>
       </div>
 
       <Footer />

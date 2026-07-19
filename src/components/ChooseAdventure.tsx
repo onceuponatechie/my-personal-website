@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { CurvedUnderline } from "@/components/CurvedUnderline";
-import { TOOLS, STORIES, RESEARCH } from "@/lib/site-data";
+import { TOOLS, STORIES, VAULT } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
 /* Five picks from across the site — templates, tools, pieces, research —
@@ -24,7 +24,7 @@ const template = TOOLS.find((t) => t.slug === "founder-os") ?? TOOLS[0];
 const tool = TOOLS.find((t) => t.slug === "user-interview-script") ?? TOOLS[1];
 const checklist = TOOLS.find((t) => t.slug === "launch-checklist") ?? TOOLS[2];
 const piece = STORIES.find((s) => s.slug === "designing-quiet-software") ?? STORIES[0];
-const report = RESEARCH[0];
+const teardown = VAULT.find((v) => v.slug === "paystack-onboarding-teardown") ?? VAULT[0];
 
 const PICKS: Pick[] = [
   {
@@ -52,12 +52,12 @@ const PICKS: Pick[] = [
     href: `/stories/${piece.slug}`,
   },
   {
-    label: "Research",
+    label: "Teardown",
     labelBg: "bg-white/85",
-    title: report.title,
-    blurb: report.summary,
-    cover: report.cover,
-    href: "/resources/lab",
+    title: teardown.title,
+    blurb: teardown.summary,
+    cover: "/assets/research-vault.jpg",
+    href: `/resources/lab/${teardown.slug}`,
   },
   {
     label: "Checklist",
@@ -144,7 +144,7 @@ export function ChooseAdventure() {
             transition={{ delay: 0.15, duration: 0.7, ease: EASE }}
             className="mx-auto mt-4 max-w-[46ch] text-[14px] leading-[1.65] text-ink/65"
           >
-            Templates, tools, pieces, research — drifting past. Catch one and take it with you, no
+            Templates, tools, pieces, teardowns — drifting past. Catch one and take it with you, no
             digging required.
           </motion.p>
         </div>
