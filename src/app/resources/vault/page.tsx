@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { VaultView } from "./vault-view";
 
 export const metadata: Metadata = {
-  title: "Research Vault — Resources",
-  description: "Deep dives into human behaviour and product research.",
+  title: "The Product Lab — Resources",
+  description: "Product thinking, opportunity finding, and product teardowns.",
 };
 
 export default function VaultPage() {

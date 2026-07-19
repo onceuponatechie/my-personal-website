@@ -70,11 +70,6 @@ export function StoryDetailView({ s }: { s: Story }) {
               href={resource.href}
               className="group relative flex flex-col gap-5 overflow-hidden rounded-[28px] bg-ink p-5 text-white sm:flex-row sm:items-center"
             >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-25 blur-3xl"
-                style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
-              />
               <img
                 src={resource.cover}
                 alt={resource.name}

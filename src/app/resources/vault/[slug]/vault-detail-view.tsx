@@ -34,7 +34,7 @@ export function VaultDetailView({
             href="/resources/vault"
             className="inline-flex items-center gap-1.5 text-[14px] text-ink/60 transition hover:text-ink"
           >
-            <ArrowLeft className="size-3.5" /> Research Vault
+            <ArrowLeft className="size-3.5" /> The Product Lab
           </Link>
 
           <motion.div
@@ -74,7 +74,7 @@ export function VaultDetailView({
             <div className="space-y-6 text-[16px] leading-[1.85] text-ink/75">
               <p>{entry.summary}</p>
               <p>
-                This is the kind of piece the Vault is built for — a single, data-backed idea, written to
+                This is the kind of piece the Lab is built for — a single, data-backed idea, written to
                 change one decision you&apos;ll make this quarter.
               </p>
             </div>

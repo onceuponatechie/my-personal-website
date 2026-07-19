@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight, Globe, Rabbit } from "lucide-react";
+import { ArrowRight, Globe, Rabbit } from "lucide-react";
 import Link from "next/link";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -243,7 +243,7 @@ function ToolsTemplates({ dir = "up", className = "" }: { dir?: Dir; className?:
 function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: string }) {
   return (
     <motion.article variants={dirCard(dir)} whileHover={{ y: -4 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className={`${R} ${SURFACE} ${className} group/card relative overflow-hidden bg-card`}>
-      <Link href="/resources/vault" aria-label="Explore the Research Vault" className="absolute inset-0 z-10" />
+      <Link href="/resources/vault" aria-label="Explore The Product Lab" className="absolute inset-0 z-10" />
       <div className="flex h-full flex-col md:flex-row md:items-stretch">
         {/* p-3 top/left/right matches the project cards' mobile image inset;
             on md the right edge stays open so the text column sits close. */}
@@ -269,10 +269,10 @@ function ResearchVault({ dir = "up", className = "" }: { dir?: Dir; className?: 
           className="flex flex-1 flex-col justify-center p-6 sm:p-7"
         >
           <motion.h3 variants={textChild} className="text-[20px] font-semibold leading-[1.25] tracking-tight text-ink">
-            Research Vault
+            The Product Lab
           </motion.h3>
           <motion.p variants={textChild} className="mt-2 max-w-[32ch] text-[14px] leading-[1.6] text-ink/55">
-            Deep dives into human behaviour — reports, patterns, and insights.
+            Product thinking, opportunity finding, and teardowns of products in the wild.
           </motion.p>
           <motion.span
             variants={textChild}

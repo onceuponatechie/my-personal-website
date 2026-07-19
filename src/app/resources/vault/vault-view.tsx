@@ -6,10 +6,16 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowRight, LineChart, Lock } from "lucide-react";
 import { Navbar } from "@/components/SiteChrome";
 import { Footer } from "@/components/Footer";
-import { VAULT, VAULT_FILTERS, type VaultEntry } from "@/lib/site-data";
+import { VAULT, LAB_PILLARS, type VaultEntry, type VaultCategory } from "@/lib/site-data";
 import { EASE } from "@/lib/motion";
 
 const researchImg = "/assets/research-vault.jpg";
+
+const TONE_BG: Record<"sage" | "butter" | "lavender", string> = {
+  sage: "bg-sage-soft",
+  butter: "bg-butter-soft",
+  lavender: "bg-lavender-soft",
+};
 
 function HeroChip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -161,10 +167,9 @@ function GatedCard({ entry }: { entry: VaultEntry }) {
 /* ---------- Page ---------- */
 
 export function VaultView() {
-  const [active, setActive] = useState(0);
-  const filter = VAULT_FILTERS[active].category;
+  const [active, setActive] = useState<VaultCategory | "All">("All");
 
-  const matches = (e: VaultEntry) => filter === "All" || e.category === filter;
+  const matches = (e: VaultEntry) => active === "All" || e.category === active;
   const featured = VAULT.find((e) => e.featured);
   const showFeatured = featured && matches(featured);
   const latest = VAULT.filter((e) => !e.featured && !e.gated && matches(e));
@@ -195,8 +200,8 @@ export function VaultView() {
               transition={{ duration: 0.8, ease: EASE }}
               className="font-display text-[clamp(3.25rem,13vw,9rem)] leading-[0.9] tracking-[-0.02em] text-ink"
             >
-              <span className="block">Research</span>
-              <span className="block">Vault</span>
+              <span className="block">The Product</span>
+              <span className="block">Lab</span>
             </motion.h1>
 
             {/* Floating tile — decorative, kept on the right at every size. */}
@@ -210,7 +215,7 @@ export function VaultView() {
               <div className="relative h-full w-full overflow-hidden rounded-[26px] shadow-[0_30px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/10">
                 <img src={researchImg} alt="" className="h-full w-full object-cover" />
                 <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1 text-[12px] font-medium text-ink backdrop-blur">
-                  Insights
+                  Lab notes
                 </span>
                 <span className="absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-white/90 text-ink backdrop-blur">
                   <ArrowUpRight className="size-4" strokeWidth={2.2} />
@@ -227,8 +232,9 @@ export function VaultView() {
               transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
               className="max-w-[52ch] text-[15px] leading-[1.7] text-ink/65"
             >
-              Product teardowns, trend watches, and insight briefs. Everything here is backed by data,
-              grounded in practice, and written to make you think — not just scroll.
+              Think, find, analyze. How I think about building products, where product ideas begin,
+              and what products already in the wild can teach us — backed by data, grounded in
+              practice, and written to make you think, not just scroll.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -247,21 +253,42 @@ export function VaultView() {
             </motion.div>
           </div>
 
-          {/* Filters */}
-          <div className="mt-10 flex flex-wrap gap-2.5">
-            {VAULT_FILTERS.map((f, i) => (
-              <button
-                key={f.label}
-                onClick={() => setActive(i)}
-                className={`rounded-full px-4 py-2 text-[14px] font-medium transition ${
-                  active === i
-                    ? "bg-ink text-white"
-                    : "border border-ink/15 text-ink/70 hover:border-ink/30 hover:text-ink"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
+          {/* The three drawers of the lab — each pillar doubles as a filter.
+              Click a drawer to open it; click it again to see everything. */}
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {LAB_PILLARS.map((p) => {
+              const isOpen = active === p.category;
+              return (
+                <button
+                  key={p.category}
+                  type="button"
+                  onClick={() => setActive(isOpen ? "All" : p.category)}
+                  aria-pressed={isOpen}
+                  className={`group flex h-full flex-col rounded-[24px] bg-card p-6 text-left ring-1 transition duration-300 hover:-translate-y-1 ${
+                    isOpen ? "ring-2 ring-ink/40" : "ring-black/5 hover:ring-black/15"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`grid size-10 place-items-center rounded-xl text-[18px] ${TONE_BG[p.tone]}`}
+                      aria-hidden
+                    >
+                      {p.emoji}
+                    </span>
+                    <span className="text-[12px] font-medium uppercase tracking-[0.2em] text-ink/40">
+                      {p.verb}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-[17px] font-semibold leading-[1.25] tracking-tight text-ink">
+                    {p.category}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-[1.6] text-ink/55">{p.description}</p>
+                  <p className="mt-auto pt-4 text-[14px] italic leading-[1.5] text-ink/45">
+                    “{p.tagline}”
+                  </p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>

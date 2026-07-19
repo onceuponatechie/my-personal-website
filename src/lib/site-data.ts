@@ -317,14 +317,53 @@ export const SOCIALS = [
   { label: "GitHub", href: "https://github.com" },
 ];
 
-/* ---------- Research Vault ---------- */
+/* ---------- The Product Lab ---------- */
 
 export type VaultCategory =
-  | "Report"
-  | "Case study"
-  | "Insight brief"
-  | "Trend watch"
-  | "Teardown";
+  | "Product Thinking"
+  | "Opportunity Finder"
+  | "Product Teardowns";
+
+export type LabPillar = {
+  category: VaultCategory;
+  /** The progression verb: Think → Find → Analyze. */
+  verb: string;
+  emoji: string;
+  description: string;
+  tagline: string;
+  tone: "sage" | "butter" | "lavender";
+};
+
+/** The three drawers of the lab — each with its own icon and color accent. */
+export const LAB_PILLARS: LabPillar[] = [
+  {
+    category: "Product Thinking",
+    verb: "Think",
+    emoji: "🧠",
+    description:
+      "Frameworks, mental models, product strategy, user psychology, prioritization, positioning, growth.",
+    tagline: "How I think about building products.",
+    tone: "sage",
+  },
+  {
+    category: "Opportunity Finder",
+    verb: "Find",
+    emoji: "🔎",
+    description:
+      "Everyday frustrations, market gaps, customer pain points, startup ideas, unmet needs, and “someone should build this” moments.",
+    tagline: "Where product ideas begin.",
+    tone: "butter",
+  },
+  {
+    category: "Product Teardowns",
+    verb: "Analyze",
+    emoji: "🔍",
+    description:
+      "Breaking down apps, onboarding, pricing, landing pages, retention loops, and marketing campaigns to understand what works and what doesn't.",
+    tagline: "Learning from products already in the wild.",
+    tone: "lavender",
+  },
+];
 
 export type VaultEntry = {
   slug: string;
@@ -341,21 +380,19 @@ export type VaultEntry = {
   featured?: boolean;
 };
 
-/** Filter labels shown as tabs, mapped to a category (or all). */
+/** Filter labels shown as tabs, mapped to a pillar (or all). */
 export const VAULT_FILTERS: { label: string; category: VaultCategory | "All" }[] = [
   { label: "All", category: "All" },
-  { label: "Reports", category: "Report" },
-  { label: "Case studies", category: "Case study" },
-  { label: "Insight briefs", category: "Insight brief" },
-  { label: "Trend watches", category: "Trend watch" },
-  { label: "Teardowns", category: "Teardown" },
+  { label: "Product Thinking", category: "Product Thinking" },
+  { label: "Opportunity Finder", category: "Opportunity Finder" },
+  { label: "Product Teardowns", category: "Product Teardowns" },
 ];
 
 export const VAULT: VaultEntry[] = [
   {
     slug: "african-creator-economy-report-2026",
     title: "The African Creator Economy Report — what's really working in 2026",
-    category: "Report",
+    category: "Opportunity Finder",
     readTime: "Flagship report · 2026",
     access: "Free download",
     tags: ["Creator economy", "Africa"],
@@ -366,7 +403,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "paystack-onboarding-teardown",
     title: "How Paystack onboards its users — a UX research teardown",
-    category: "Case study",
+    category: "Product Teardowns",
     readTime: "5 min read",
     access: "Free",
     tags: ["Fintech", "UX research"],
@@ -376,7 +413,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "african-startup-funding-2026",
     title: "African startup funding — what the 2026 rebound means for founders",
-    category: "Trend watch",
+    category: "Opportunity Finder",
     readTime: "4 min read",
     access: "Free",
     tags: ["Startups", "Africa"],
@@ -386,7 +423,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "claude-ai-research-tool-teardown",
     title: "Claude AI as a research tool — a power user teardown",
-    category: "Teardown",
+    category: "Product Teardowns",
     readTime: "6 min read",
     access: "Free",
     tags: ["AI", "Research tools"],
@@ -396,7 +433,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "woman-who-builds-in-nigeria",
     title: "On being a woman who builds things in Nigeria",
-    category: "Insight brief",
+    category: "Product Thinking",
     readTime: "4 min read",
     access: "Free",
     tags: ["Girl boss", "Founders"],
@@ -406,7 +443,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "are-african-founders-building-right",
     title: "Are African founders building the right things? A validation study",
-    category: "Report",
+    category: "Product Thinking",
     readTime: "12 min read",
     access: "Free download",
     tags: ["Startups", "Validation"],
@@ -417,7 +454,7 @@ export const VAULT: VaultEntry[] = [
   {
     slug: "digital-product-income-study",
     title: "Digital product income — who's earning, what they sell, how",
-    category: "Report",
+    category: "Opportunity Finder",
     readTime: "10 min read",
     access: "Free download",
     tags: ["Creator economy", "Income"],

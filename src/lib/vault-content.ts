@@ -1,5 +1,5 @@
 /**
- * Rich, structured content for each Research Vault entry.
+ * Rich, structured content for each Product Lab entry.
  *
  * Instead of a wall of prose, every report is composed of typed "blocks" —
  * stat grids, charts, pull quotes, personas, galleries — so a reader can scan

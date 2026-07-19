@@ -97,18 +97,6 @@ export function HomeNewsletter() {
         transition={{ duration: 0.8, ease: EASE }}
         className="relative mx-auto max-w-5xl overflow-hidden rounded-[44px] bg-ink px-8 py-12 text-white sm:px-12 sm:py-16"
       >
-        {/* Soft accent glows in the site's palette. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full opacity-35 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-28 -right-24 h-72 w-72 rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--lavender) 0%, transparent 75%)" }}
-        />
-
         <div className="relative grid items-center gap-10 md:grid-cols-[1.15fr_1fr] md:gap-14">
           {/* Copy + proof */}
           <div>

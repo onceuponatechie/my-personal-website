@@ -15,9 +15,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const entry = getVaultEntry(slug);
-  if (!entry) return { title: "Research Vault" };
+  if (!entry) return { title: "The Product Lab" };
   return {
-    title: `${entry.title} — Research Vault`,
+    title: `${entry.title} — The Product Lab`,
     description: entry.summary,
   };
 }

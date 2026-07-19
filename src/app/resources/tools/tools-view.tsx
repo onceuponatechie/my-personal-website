@@ -346,11 +346,6 @@ function RequestCard() {
         transition={{ duration: 0.6, ease: EASE }}
         className="relative flex flex-col gap-5 overflow-hidden rounded-[28px] bg-ink p-6 text-white sm:flex-row sm:items-center sm:p-7"
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, oklch(0.72 0.07 145) 0%, transparent 75%)" }}
-        />
         <div className="relative flex-1">
           <p className="text-[12px] uppercase tracking-[0.18em] text-white/45">Something missing?</p>
           <h3 className="mt-1.5 font-display text-[22px] leading-tight tracking-tight">
